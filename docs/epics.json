@@ -6,9 +6,64 @@
           "Epics"
         ],
         "summary": "Get a list of epics",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project to filter by"
+            }
+          },
+          {
+            "name": "ownerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user who owns the epic"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
+              "description": "The ID of the group which the epic belongs to"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of epics"
+            "description": "A list of epics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "./entities/epic.json#/components/schemas/Epic"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -33,7 +88,7 @@
                     "description": "The epic description"
                   },
                   "projectId": {
-                    "type": "string",
+                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
                     "description": "The ID of the project which the epic belongs to"
                   }
                 },
@@ -64,7 +119,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+              "description": "The ID of the epic to retrieve"
             }
           }
         ],

@@ -7,18 +7,10 @@
   },
   "servers": [
     {
-      "url": "https://api.lighttrack.com/v1"
+      "url": "https://localhost:3000/api"
     }
   ],
   "tags": [
-    {
-      "name": "Users",
-      "description": "API related to users"
-    },
-    {
-      "name": "Groups",
-      "description": "API related to groups"
-    },
     {
       "name": "Projects",
       "description": "API related to projects"

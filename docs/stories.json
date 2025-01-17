@@ -12,7 +12,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project to filter by"
             }
           },
           {
@@ -52,7 +53,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user who owns the story"
             }
           },
           {
@@ -60,7 +62,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
+              "description": "The ID of the group which the story belongs to"
             }
           }
         ],
@@ -72,7 +75,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "./entities/story.json#/components/schemas/Story"
+                    "$ref": "./entities/story.json#/components/schemas/Story",
+                    "description": "The story details"
                   }
                 }
               }
@@ -101,12 +105,12 @@
                     "description": "The story description"
                   },
                   "projectId": {
-                    "type": "string",
-                    "description": "The ID of the project which is the story belongs to"
+                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+                    "description": "The ID of the project the story belongs to"
                   },
                   "epicId": {
-                    "type": "string",
-                    "description": "The ID of the epic which the story belongs to"
+                    "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+                    "description": "The ID of the epic the story belongs to"
                   }
                 },
                 "required": [
@@ -119,7 +123,7 @@
         },
         "responses": {
           "201": {
-            "description": "story created"
+            "description": "Story created"
           },
           "400": {
             "description": "Invalid input"
@@ -139,17 +143,19 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
+              "description": "The ID of the story"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "story details",
+            "description": "Story details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/story.json#/components/schemas/Story"
+                  "$ref": "./entities/story.json#/components/schemas/Story",
+                  "description": "The story details"
                 }
               }
             }

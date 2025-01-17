@@ -1,0 +1,10 @@
+{
+    "components": {
+        "schemas": {
+            "StoryId": {
+                "type": "number",
+                "description": "The unique identifier for the story"
+            }
+        }
+    }
+}

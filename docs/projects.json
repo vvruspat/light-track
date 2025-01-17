@@ -10,7 +10,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
+              "description": "The ID of the group to filter by"
             }
           },
           {
@@ -18,7 +19,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user who owns the project"
             }
           },
           {
@@ -46,7 +48,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "./entities/project.json#/components/schemas/Project"
+                    "$ref": "./entities/project.json#/components/schemas/Project",
+                    "description": "The project details"
                   }
                 }
               }
@@ -73,7 +76,7 @@
                     "description": "The project description"
                   },
                   "groupId": {
-                    "type": "string",
+                    "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
                     "description": "The ID of the group the project belongs to"
                   }
                 },
@@ -88,7 +91,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/project.json#/components/schemas/Project"
+                  "$ref": "./entities/project.json#/components/schemas/Project",
+                  "description": "The project details"
                 }
               }
             }
@@ -109,7 +113,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project"
             }
           }
         ],
@@ -119,7 +124,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/project.json#/components/schemas/Project"
+                  "$ref": "./entities/project.json#/components/schemas/Project",
+                  "description": "The project details"
                 }
               }
             }

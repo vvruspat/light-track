@@ -12,9 +12,9 @@ export default defineNuxtConfig({
   scalar: {
     configurations: [
       {
-        spec: {
-          url: 'http://localhost:3000/openapi.json',
-        },
+        // spec: {
+        //   url: '/openapi.json',
+        // },
         pathRouting: {
           basePath: '/docs',
         },

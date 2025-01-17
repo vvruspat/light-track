@@ -5,8 +5,8 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
-                        "description": "The unique identifier for an epic"
+                        "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
+                        "description": "The unique identifier for the epic"
                     },
                     "title": {
                         "type": "string",
@@ -17,12 +17,12 @@
                         "description": "The epic description"
                     },
                     "ownerId": {
-                        "type": "string",
+                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
                         "description": "The ID of the user who owns the epic"
                     },
                     "projectId": {
-                        "type": "string",
-                        "description": "The ID of the project which the epic belongs to"
+                        "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
+                        "description": "The ID of the project the epic belongs to"
                     },
                     "createdAt": {
                         "type": "string",

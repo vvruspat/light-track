@@ -5,7 +5,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
+                        "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
                         "description": "The unique identifier for the story"
                     },
                     "title": {
@@ -17,15 +17,15 @@
                         "description": "The story description"
                     },
                     "projectId": {
-                        "type": "string",
-                        "description": "The ID of the project which the story belongs to"
+                        "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
+                        "description": "The ID of the project the story belongs to"
                     },
                     "epicId": {
-                        "type": "string",
-                        "description": "The ID of the epic which the story belongs to"
+                        "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
+                        "description": "The ID of the epic the story belongs to"
                     },
                     "ownerId": {
-                        "type": "string",
+                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
                         "description": "The ID of the user who owns the story"
                     },
                     "createdAt": {

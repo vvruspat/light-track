@@ -7,18 +7,10 @@
   },
   "servers": [
     {
-      "url": "https://api.lighttrack.com/v1"
+      "url": "https://localhost:3000/api"
     }
   ],
   "tags": [
-    {
-      "name": "Users",
-      "description": "API related to users"
-    },
-    {
-      "name": "Groups",
-      "description": "API related to groups"
-    },
     {
       "name": "Projects",
       "description": "API related to projects"
@@ -49,7 +41,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/2/schema",
+              "description": "The ID of the group to filter by"
             }
           },
           {
@@ -57,7 +50,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/1/schema",
+              "description": "The ID of the user who owns the project"
             }
           },
           {
@@ -85,7 +79,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/paths/~1projects/post/responses/201/content/application~1json/schema"
+                    "$ref": "#/paths/~1projects/post/responses/201/content/application~1json/schema",
+                    "description": "The project details"
                   }
                 }
               }
@@ -114,7 +109,7 @@
                     "description": "The project description"
                   },
                   "groupId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1epics/get/parameters/2/schema",
                     "description": "The ID of the group the project belongs to"
                   }
                 },
@@ -132,10 +127,11 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "The project details",
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/0/schema",
                       "description": "The unique identifier for the project"
                     },
                     "title": {
@@ -147,11 +143,11 @@
                       "description": "The project description"
                     },
                     "ownerId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/1/schema",
                       "description": "The ID of the project owner"
                     },
                     "groupId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/2/schema",
                       "description": "The ID of the group the project belongs to"
                     }
                   },
@@ -181,7 +177,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/0/schema",
+              "description": "The ID of the project"
             }
           }
         ],
@@ -191,7 +188,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1projects/post/responses/201/content/application~1json/schema"
+                  "$ref": "#/paths/~1projects/post/responses/201/content/application~1json/schema",
+                  "description": "The project details"
                 }
               }
             }
@@ -211,9 +209,103 @@
           "Epics"
         ],
         "summary": "Get a list of epics",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "The ID of the project to filter by",
+              "type": "number"
+            }
+          },
+          {
+            "name": "ownerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "The ID of the user who owns the epic",
+              "type": "number"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "The ID of the group which the epic belongs to",
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of epics"
+            "description": "A list of epics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/epicId",
+                        "description": "The unique identifier for the epic"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "The title of the epic"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The epic description"
+                      },
+                      "ownerId": {
+                        "$ref": "#/paths/~1epics/get/parameters/1/schema",
+                        "description": "The ID of the user who owns the epic"
+                      },
+                      "projectId": {
+                        "$ref": "#/paths/~1epics/get/parameters/0/schema",
+                        "description": "The ID of the project the epic belongs to"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date and time when the epic was created"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date and time when the epic was last updated"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "projectId",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -238,7 +330,7 @@
                     "description": "The epic description"
                   },
                   "projectId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1epics/get/parameters/0/schema",
                     "description": "The ID of the project which the epic belongs to"
                   }
                 },
@@ -269,7 +361,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/0/schema",
+              "description": "The ID of the project to filter by"
             }
           },
           {
@@ -309,7 +402,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/1/schema",
+              "description": "The ID of the user who owns the story"
             }
           },
           {
@@ -317,7 +411,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1epics/get/parameters/2/schema",
+              "description": "The ID of the group which the story belongs to"
             }
           }
         ],
@@ -329,10 +424,11 @@
                 "schema": {
                   "type": "array",
                   "items": {
+                    "description": "The story details",
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string",
+                        "$ref": "#/paths/~1epics/get/parameters/2/schema",
                         "description": "The unique identifier for the story"
                       },
                       "title": {
@@ -344,15 +440,15 @@
                         "description": "The story description"
                       },
                       "projectId": {
-                        "type": "string",
-                        "description": "The ID of the project which the story belongs to"
+                        "$ref": "#/paths/~1epics/get/parameters/0/schema",
+                        "description": "The ID of the project the story belongs to"
                       },
                       "epicId": {
-                        "type": "string",
-                        "description": "The ID of the epic which the story belongs to"
+                        "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/epicId",
+                        "description": "The ID of the epic the story belongs to"
                       },
                       "ownerId": {
-                        "type": "string",
+                        "$ref": "#/paths/~1epics/get/parameters/1/schema",
                         "description": "The ID of the user who owns the story"
                       },
                       "createdAt": {
@@ -402,12 +498,12 @@
                     "description": "The story description"
                   },
                   "projectId": {
-                    "type": "string",
-                    "description": "The ID of the project which is the story belongs to"
+                    "$ref": "#/paths/~1epics/get/parameters/0/schema",
+                    "description": "The ID of the project the story belongs to"
                   },
                   "epicId": {
-                    "type": "string",
-                    "description": "The ID of the epic which the story belongs to"
+                    "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/epicId",
+                    "description": "The ID of the epic the story belongs to"
                   }
                 },
                 "required": [
@@ -420,7 +516,7 @@
         },
         "responses": {
           "201": {
-            "description": "story created"
+            "description": "Story created"
           },
           "400": {
             "description": "Invalid input"
@@ -442,7 +538,8 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema"
+                    "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema",
+                    "description": "A task object"
                   }
                 }
               }
@@ -471,20 +568,20 @@
                     "description": "The task description"
                   },
                   "projectId": {
-                    "type": "string",
-                    "description": "The ID of the user who owns the task"
+                    "$ref": "#/paths/~1epics/get/parameters/0/schema",
+                    "description": "The project ID the task belongs to"
                   },
                   "storyId": {
-                    "type": "string",
-                    "description": "The ID of the story the task belongs to"
+                    "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/storyId",
+                    "description": "The story ID the task belongs to"
                   },
                   "epicId": {
-                    "type": "string",
-                    "description": "The ID of the epic the task belongs to"
+                    "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/epicId",
+                    "description": "The epic ID the task belongs to"
                   },
                   "assigneeId": {
-                    "type": "string",
-                    "description": "The ID of the user assigned to the task"
+                    "$ref": "#/paths/~1epics/get/parameters/1/schema",
+                    "description": "The user ID the task is assigned to"
                   },
                   "estimation": {
                     "type": "integer",
@@ -497,7 +594,7 @@
                 },
                 "required": [
                   "title",
-                  "ownerId",
+                  "projectId",
                   "status"
                 ]
               }
@@ -510,10 +607,11 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "The created task object",
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/2/schema",
                       "description": "The unique identifier for the task"
                     },
                     "title": {
@@ -525,23 +623,23 @@
                       "description": "The task description"
                     },
                     "projectId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/0/schema",
                       "description": "The ID of the project the task belongs to"
                     },
                     "storyId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/storyId",
                       "description": "The ID of the story the task belongs to"
                     },
                     "epicId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1tasks/put/requestBody/content/application~1json/schema/properties/epicId",
                       "description": "The ID of the epic the task belongs to"
                     },
                     "assigneeId": {
-                      "type": "string",
+                      "$ref": "#/paths/~1epics/get/parameters/1/schema",
                       "description": "The ID of the user assigned to the task"
                     },
                     "estimation": {
-                      "type": "integer",
+                      "type": "number",
                       "description": "The estimated effort for the task"
                     },
                     "status": {
@@ -571,7 +669,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "description": "The task ID",
+              "type": "number"
             }
           }
         ],
@@ -591,20 +690,20 @@
                     "description": "The task description"
                   },
                   "projectId": {
-                    "type": "string",
-                    "description": "The ID of the user who owns the task"
+                    "$ref": "#/paths/~1epics/get/parameters/0/schema",
+                    "description": "The project ID the task belongs to"
                   },
                   "storyId": {
-                    "type": "string",
-                    "description": "The ID of the story the task belongs to"
+                    "description": "The story ID the task belongs to",
+                    "type": "number"
                   },
                   "epicId": {
-                    "type": "string",
-                    "description": "The ID of the epic the task belongs to"
+                    "description": "The epic ID the task belongs to",
+                    "type": "number"
                   },
                   "assigneeId": {
-                    "type": "string",
-                    "description": "The ID of the user assigned to the task"
+                    "$ref": "#/paths/~1epics/get/parameters/1/schema",
+                    "description": "The user ID the task is assigned to"
                   },
                   "estimation": {
                     "type": "integer",
@@ -624,7 +723,8 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema"
+                    "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema",
+                    "description": "The updated task object"
                   }
                 }
               }
@@ -648,7 +748,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1tasks/put/parameters/0/schema",
+              "description": "The task ID"
             }
           }
         ],
@@ -658,7 +759,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema"
+                  "$ref": "#/paths/~1tasks/post/responses/201/content/application~1json/schema",
+                  "description": "The task object"
                 }
               }
             }
@@ -679,7 +781,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/paths/~1tasks/put/parameters/0/schema",
+              "description": "The task ID"
             }
           }
         ],
@@ -707,11 +810,11 @@
                 "type": "object",
                 "properties": {
                   "taskId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1tasks/put/parameters/0/schema",
                     "description": "The ID of the task to watch"
                   },
                   "userId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1epics/get/parameters/1/schema",
                     "description": "The ID of the user who will be watching the task"
                   }
                 },
@@ -742,11 +845,11 @@
                 "type": "object",
                 "properties": {
                   "taskId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1tasks/put/parameters/0/schema",
                     "description": "The ID of the task"
                   },
                   "userId": {
-                    "type": "string",
+                    "$ref": "#/paths/~1epics/get/parameters/1/schema",
                     "description": "The ID of the user"
                   }
                 },

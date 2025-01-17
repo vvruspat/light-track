@@ -1,0 +1,10 @@
+{
+    "components": {
+        "schemas": {
+            "GroupId": {
+                "type": "number",
+                "description": "The unique identifier for the group"
+            }
+        }
+    }
+}

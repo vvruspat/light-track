@@ -14,11 +14,11 @@
                 "type": "object",
                 "properties": {
                   "taskId": {
-                    "type": "string",
+                    "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
                     "description": "The ID of the task to watch"
                   },
                   "userId": {
-                    "type": "string",
+                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
                     "description": "The ID of the user who will be watching the task"
                   }
                 },
@@ -49,11 +49,11 @@
                 "type": "object",
                 "properties": {
                   "taskId": {
-                    "type": "string",
+                    "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
                     "description": "The ID of the task"
                   },
                   "userId": {
-                    "type": "string",
+                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
                     "description": "The ID of the user"
                   }
                 },

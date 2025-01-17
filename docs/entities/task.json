@@ -5,7 +5,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
+                        "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
                         "description": "The unique identifier for the task"
                     },
                     "title": {
@@ -17,23 +17,23 @@
                         "description": "The task description"
                     },
                     "projectId": {
-                        "type": "string",
+                        "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
                         "description": "The ID of the project the task belongs to"
                     },
                     "storyId": {
-                        "type": "string",
+                        "$ref": "../atoms/storyId.json#/components/schemas/StoryId",
                         "description": "The ID of the story the task belongs to"
                     },
                     "epicId": {
-                        "type": "string",
+                        "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
                         "description": "The ID of the epic the task belongs to"
                     },
                     "assigneeId": {
-                        "type": "string",
+                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
                         "description": "The ID of the user assigned to the task"
                     },
                     "estimation": {
-                        "type": "integer",
+                        "type": "number",
                         "description": "The estimated effort for the task"
                     },
                     "status": {

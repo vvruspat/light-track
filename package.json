@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "openapi": "swagger-cli bundle docs/index.json -o public/openapi.json"
+    "openapi": "swagger-cli bundle docs/index.json -o public/_openapi.json"
   },
   "dependencies": {
     "@nuxt/ui": "^2.21.0",

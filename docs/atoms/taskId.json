@@ -1,0 +1,10 @@
+{
+    "components": {
+        "schemas": {
+            "TaskId": {
+                "type": "number",
+                "description": "The unique identifier for the task"
+            }
+        }
+    }
+}

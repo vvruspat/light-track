@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LightTrack API",
+    "description": "API for the LightTrack task-tracking system.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.lighttrack.com/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API related to users"
+    },
+    {
+      "name": "Groups",
+      "description": "API related to groups"
+    },
+    {
+      "name": "Projects",
+      "description": "API related to projects"
+    },
+    {
+      "name": "Epics",
+      "description": "API related to tasks"
+    },
+    {
+      "name": "Stories",
+      "description": "API related to tasks"
+    },
+    {
+      "name": "Tasks",
+      "description": "API related to tasks"
+    }
+  ],
+  "paths": {
+    "/projects": {
+      "$ref": "./projects.json#/paths/~1projects"
+    },
+    "/projects/{id}": {
+      "$ref": "./projects.json#/paths/~1projects~1{id}"
+    },
+    "/epics": {
+      "$ref": "./epics.json#/paths/~1epics"
+    },
+    "/stories": {
+      "$ref": "./stories.json#/paths/~1stories"
+    },
+    "/tasks": {
+      "$ref": "./tasks.json#/paths/~1tasks"
+    },
+    "/tasks/{id}": {
+      "$ref": "./tasks.json#/paths/~1tasks~1{id}"
+    },
+    "/taskwatchers": {
+      "$ref": "./taskwatchers.json#/paths/~1taskwatchers"
+    }
+  }
+}

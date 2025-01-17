@@ -1,0 +1,76 @@
+{
+  "paths": {
+    "/taskwatchers": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Add a task watcher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": {
+                    "type": "string",
+                    "description": "The ID of the task to watch"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The ID of the user who will be watching the task"
+                  }
+                },
+                "required": [
+                  "taskId",
+                  "userId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task watcher added"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Remove a task watcher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": {
+                    "type": "string",
+                    "description": "The ID of the task"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The ID of the user"
+                  }
+                },
+                "required": [
+                  "taskId",
+                  "userId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Task watcher removed"
+          }
+        }
+      }
+    }
+  }
+}

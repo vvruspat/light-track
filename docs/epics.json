@@ -1,0 +1,79 @@
+{
+  "paths": {
+    "/epics": {
+      "get": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Get a list of epics",
+        "responses": {
+          "200": {
+            "description": "A list of epics"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Create a new epic",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  },
+                  "ownerId": {
+                    "type": "string",
+                    "description": "The ID of the user who owns the epic"
+                  }
+                },
+                "required": [
+                  "title",
+                  "ownerId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Epic created"
+          }
+        }
+      }
+    },
+    "/epics/{id}": {
+      "get": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Get an epic by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Epic details"
+          }
+        }
+      }
+    }
+  }
+}

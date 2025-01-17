@@ -1,0 +1,413 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LightTrack API",
+    "description": "API for the LightTrack task-tracking system.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.lighttrack.com/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API related to users"
+    },
+    {
+      "name": "Groups",
+      "description": "API related to groups"
+    },
+    {
+      "name": "Projects",
+      "description": "API related to projects"
+    },
+    {
+      "name": "Epics",
+      "description": "API related to tasks"
+    },
+    {
+      "name": "Stories",
+      "description": "API related to tasks"
+    },
+    {
+      "name": "Tasks",
+      "description": "API related to tasks"
+    }
+  ],
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get a list of projects",
+        "responses": {
+          "200": {
+            "description": "A list of projects"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Create a new project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the project"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The project description"
+                  },
+                  "groupId": {
+                    "type": "string",
+                    "description": "The ID of the group the project belongs to"
+                  }
+                },
+                "required": [
+                  "title",
+                  "groupId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier for the project"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the project"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The project description"
+                    },
+                    "ownerId": {
+                      "type": "string",
+                      "description": "The ID of the project owner"
+                    },
+                    "groupId": {
+                      "type": "string",
+                      "description": "The ID of the group the project belongs to"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "groupId"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get a project by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project details"
+          }
+        }
+      }
+    },
+    "/epics": {
+      "get": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Get a list of epics",
+        "responses": {
+          "200": {
+            "description": "A list of epics"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Create a new epic",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  },
+                  "ownerId": {
+                    "type": "string",
+                    "description": "The ID of the user who owns the epic"
+                  }
+                },
+                "required": [
+                  "title",
+                  "ownerId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Epic created"
+          }
+        }
+      }
+    },
+    "/stories": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get a list of stories",
+        "responses": {
+          "200": {
+            "description": "A list of stories"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Create a new story",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the story"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The story description"
+                  },
+                  "ownerId": {
+                    "type": "string",
+                    "description": "The ID of the user who owns the story"
+                  }
+                },
+                "required": [
+                  "title",
+                  "ownerId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "story created"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get a list of tasks",
+        "responses": {
+          "200": {
+            "description": "A list of tasks"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Create a new task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "ownerId": {
+                    "type": "string",
+                    "description": "The ID of the user who owns the task"
+                  },
+                  "assigneeId": {
+                    "type": "string",
+                    "description": "The ID of the user assigned to the task"
+                  },
+                  "estimation": {
+                    "type": "integer",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                },
+                "required": [
+                  "title",
+                  "ownerId",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task created"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get a task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details"
+          }
+        }
+      }
+    },
+    "/taskwatchers": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Add a task watcher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": {
+                    "type": "string",
+                    "description": "The ID of the task to watch"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The ID of the user who will be watching the task"
+                  }
+                },
+                "required": [
+                  "taskId",
+                  "userId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task watcher added"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Remove a task watcher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": {
+                    "type": "string",
+                    "description": "The ID of the task"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The ID of the user"
+                  }
+                },
+                "required": [
+                  "taskId",
+                  "userId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Task watcher removed"
+          }
+        }
+      }
+    }
+  }
+}

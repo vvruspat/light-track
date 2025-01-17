@@ -8,7 +8,17 @@
         "summary": "Get a list of tasks",
         "responses": {
           "200": {
-            "description": "A list of tasks"
+            "description": "A list of tasks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "./entities/task.json#/components/schemas/Task"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -32,9 +42,17 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "ownerId": {
+                  "projectId": {
                     "type": "string",
                     "description": "The ID of the user who owns the task"
+                  },
+                  "storyId": {
+                    "type": "string",
+                    "description": "The ID of the story the task belongs to"
+                  },
+                  "epicId": {
+                    "type": "string",
+                    "description": "The ID of the epic the task belongs to"
                   },
                   "assigneeId": {
                     "type": "string",
@@ -60,7 +78,89 @@
         },
         "responses": {
           "201": {
-            "description": "Task created"
+            "description": "Task created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./entities/task.json#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update a task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the user who owns the task"
+                  },
+                  "storyId": {
+                    "type": "string",
+                    "description": "The ID of the story the task belongs to"
+                  },
+                  "epicId": {
+                    "type": "string",
+                    "description": "The ID of the epic the task belongs to"
+                  },
+                  "assigneeId": {
+                    "type": "string",
+                    "description": "The ID of the user assigned to the task"
+                  },
+                  "estimation": {
+                    "type": "integer",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Task updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "./entities/task.json#/components/schemas/Task"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Task not found"
+            }
           }
         }
       }
@@ -83,7 +183,41 @@
         ],
         "responses": {
           "200": {
-            "description": "Task details"
+            "description": "Task details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./entities/task.json#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Delete a task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Task deleted"
+          },
+          "404": {
+            "description": "Task not found"
           }
         }
       }

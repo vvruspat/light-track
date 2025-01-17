@@ -66,7 +66,17 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of stories"
+            "description": "A list of stories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "./entities/story.json#/components/schemas/Story"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -90,14 +100,18 @@
                     "type": "string",
                     "description": "The story description"
                   },
-                  "ownerId": {
+                  "projectId": {
                     "type": "string",
-                    "description": "The ID of the user who owns the story"
+                    "description": "The ID of the project which is the story belongs to"
+                  },
+                  "epicId": {
+                    "type": "string",
+                    "description": "The ID of the epic which the story belongs to"
                   }
                 },
                 "required": [
                   "title",
-                  "ownerId"
+                  "projectId"
                 ]
               }
             }
@@ -106,6 +120,9 @@
         "responses": {
           "201": {
             "description": "story created"
+          },
+          "400": {
+            "description": "Invalid input"
           }
         }
       }
@@ -128,7 +145,17 @@
         ],
         "responses": {
           "200": {
-            "description": "story details"
+            "description": "story details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./entities/story.json#/components/schemas/Story"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "story not found"
           }
         }
       }

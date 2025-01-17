@@ -1,0 +1,52 @@
+{
+    "components": {
+        "schemas": {
+            "Task": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier for the task"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "The title of the task"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The task description"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "The ID of the project the task belongs to"
+                    },
+                    "storyId": {
+                        "type": "string",
+                        "description": "The ID of the story the task belongs to"
+                    },
+                    "epicId": {
+                        "type": "string",
+                        "description": "The ID of the epic the task belongs to"
+                    },
+                    "assigneeId": {
+                        "type": "string",
+                        "description": "The ID of the user assigned to the task"
+                    },
+                    "estimation": {
+                        "type": "integer",
+                        "description": "The estimated effort for the task"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The status of the task"
+                    }
+                },
+                "required": [
+                    "title",
+                    "projectId",
+                    "status"
+                ]
+            }
+        }
+    }
+}

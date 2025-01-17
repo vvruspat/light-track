@@ -32,14 +32,14 @@
                     "type": "string",
                     "description": "The epic description"
                   },
-                  "ownerId": {
+                  "projectId": {
                     "type": "string",
-                    "description": "The ID of the user who owns the epic"
+                    "description": "The ID of the project which the epic belongs to"
                   }
                 },
                 "required": [
                   "title",
-                  "ownerId"
+                  "projectId"
                 ]
               }
             }

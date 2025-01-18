@@ -1,7 +1,8 @@
 import { defineEventHandler, readBody } from 'h3'
+import { components } from '../../types/schema';
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  const body = await readBody<components["schemas"]["Project"]>(event);
 
   // Validate the request body
   if (!body.title) {
@@ -24,7 +25,6 @@ export default defineEventHandler(async (event) => {
   const newProject = {
     title: body.title,
     description: body.description || '',
-    ownerId: body.ownerId,
     groupId: body.groupId,
   }
 

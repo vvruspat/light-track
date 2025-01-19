@@ -41,7 +41,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "#/paths/~1epics/get/parameters/2/schema",
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
               "description": "The ID of the group to filter by"
             }
           },
@@ -50,24 +50,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "#/paths/~1epics/get/parameters/1/schema",
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
               "description": "The ID of the user who owns the project"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
             }
           }
         ],
@@ -77,14 +61,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/paths/~1projects/post/responses/201/content/application~1json/schema",
-                    "description": "The project details"
+                  "description": "The list of projects",
+                  "properties": {
+                    "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./entities/project.json#/components/schemas/Project",
+                        "description": "The project details"
+                      }
+                    }
                   }
                 }
               }
             }
+          }
+        },
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Number of items to return",
+            "default": 10
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of items to skip",
+            "default": 0
           }
         }
       },
@@ -225,7 +228,7 @@
             "required": false,
             "schema": {
               "description": "The ID of the user who owns the epic",
-              "type": "number"
+              "type": "string"
             }
           },
           {

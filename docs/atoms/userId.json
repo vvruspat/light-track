@@ -2,7 +2,7 @@
     "components": {
         "schemas": {
             "UserId": {
-                "type": "number",
+                "type": "string",
                 "description": "The unique identifier for the User"
             }
         }

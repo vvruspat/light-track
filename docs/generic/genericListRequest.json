@@ -1,0 +1,21 @@
+{
+    "components": {
+        "schemas": {
+            "GenericListRequest": {
+                "type": "object",
+                "properties": {
+                    "limit": {
+                        "type": "integer",
+                        "description": "Number of items to return",
+                        "default": 10
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "description": "Number of items to skip",
+                        "default": 0
+                    }
+                }
+            }
+        }
+    }
+}

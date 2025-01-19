@@ -4,6 +4,7 @@
       "get": {
         "tags": ["Projects"],
         "summary": "Get a list of projects",
+        "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest",
         "parameters": [
           {
             "name": "groupId",
@@ -22,22 +23,6 @@
               "$ref": "./atoms/userId.json#/components/schemas/UserId",
               "description": "The ID of the user who owns the project"
             }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
           }
         ],
         "responses": {
@@ -46,10 +31,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "./entities/project.json#/components/schemas/Project",
-                    "description": "The project details"
+                  "description": "The list of projects",
+                  "properties": {
+                    "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./entities/project.json#/components/schemas/Project",
+                        "description": "The project details"
+                      }
+                    }
                   }
                 }
               }
@@ -91,8 +82,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/project.json#/components/schemas/Project",
-                  "description": "The project details"
+
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                  "data": {
+                    "$ref": "./entities/project.json#/components/schemas/Project",
+                    "description": "The project details"
+                  }
                 }
               }
             }

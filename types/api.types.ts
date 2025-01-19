@@ -17,8 +17,6 @@ export interface paths {
                 query?: {
                     groupId?: components["schemas"]["GroupId"];
                     ownerId?: components["schemas"]["UserId"];
-                    limit?: number;
-                    offset?: number;
                 };
                 header?: never;
                 path?: never;
@@ -32,7 +30,12 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Project"][];
+                        "application/json": {
+                            data?: components["schemas"]["Project"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
                     };
                 };
             };
@@ -65,7 +68,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Project"];
+                        "application/json": components["schemas"]["properties"];
                     };
                 };
                 /** @description Bad request */
@@ -547,7 +550,7 @@ export interface components {
         /** @description The unique identifier for the group */
         GroupId: number;
         /** @description The unique identifier for the User */
-        UserId: number;
+        UserId: string;
         /** @description The unique identifier for the project */
         ProjectId: number;
         Project: {
@@ -562,6 +565,7 @@ export interface components {
             /** @description The ID of the group the project belongs to */
             groupId: components["schemas"]["GroupId"];
         };
+        properties: unknown;
         /** @description The unique identifier for the epic */
         EpicId: number;
         Epic: {

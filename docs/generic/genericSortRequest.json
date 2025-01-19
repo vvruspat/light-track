@@ -1,0 +1,23 @@
+{
+    "components": {
+        "schemas": {
+            "GenericSortRequest": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "type": "string",
+                        "description": "The field to sort by",
+                        "default": "id",
+                        "required": false
+                    },
+                    "direction": {
+                        "$ref": "../atoms/sortDirection.json#/components/schemas/SortDirection",
+                        "description": "The direction to sort by",
+                        "default": "asc",
+                        "required": false
+                    }
+                }
+            }
+        }
+    }
+}

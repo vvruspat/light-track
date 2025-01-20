@@ -5,14 +5,22 @@
                 "type": "object",
                 "properties": {
                     "limit": {
-                        "type": "integer",
-                        "description": "Number of items to return",
-                        "default": 10
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "description": "Number of items to return",
+                            "default": 10
+                        }
                     },
                     "offset": {
-                        "type": "integer",
-                        "description": "Number of items to skip",
-                        "default": 0
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "description": "Number of items to skip",
+                            "default": 0
+                        }
                     }
                 }
             }

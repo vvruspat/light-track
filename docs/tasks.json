@@ -6,16 +6,82 @@
           "Tasks"
         ],
         "summary": "Get a list of tasks",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project to filter by"
+            }
+          },
+          {
+            "name": "storyId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
+              "description": "The ID of the story to filter by"
+            }
+          },
+          {
+            "name": "epicId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+              "description": "The ID of the epic to filter by"
+            }
+          },
+          {
+            "name": "assigneeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user the task is assigned to"
+            }
+          },
+          {
+            "name": "ownerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user who owns the task"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
+              "description": "The ID of the group which the task belongs to"
+            }
+          },
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
+        ],
         "responses": {
           "200": {
             "description": "A list of tasks",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "./entities/task.json#/components/schemas/Task",
-                    "description": "A task object"
+                  "description": "The list of tasks",
+                  "properties": {
+                    "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./entities/task.json#/components/schemas/Task",
+                        "description": "The task details"
+                      }
+                    }
                   }
                 }
               }
@@ -83,8 +149,76 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/task.json#/components/schemas/Task",
-                  "description": "The created task object"
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get a task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
+              "description": "The task ID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
                 }
               }
             }
@@ -149,57 +283,42 @@
                 }
               }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Task updated",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "./entities/task.json#/components/schemas/Task",
-                    "description": "The updated task object"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Task not found"
-            }
           }
-        }
-      }
-    },
-    "/tasks/{id}": {
-      "get": {
-        "tags": [
-          "Tasks"
-        ],
-        "summary": "Get a task by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
-              "description": "The task ID"
-            }
-          }
-        ],
+        },
         "responses": {
-          "200": {
-            "description": "Task details",
+          "201": {
+            "description": "Task created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/task.json#/components/schemas/Task",
-                  "description": "The task object"
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       },
@@ -221,10 +340,24 @@
         ],
         "responses": {
           "204": {
-            "description": "Task deleted"
+            "description": "Task deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }

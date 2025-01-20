@@ -2,11 +2,18 @@
   "paths": {
     "/stories": {
       "get": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Get a list of stories",
         "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
+              "description": "The ID of the group to filter by"
+            }
+          },
           {
             "name": "projectId",
             "in": "query",
@@ -17,35 +24,12 @@
             }
           },
           {
-            "name": "limit",
+            "name": "epicId",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
+              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+              "description": "The ID of the epic to filter by"
             }
           },
           {
@@ -54,29 +38,30 @@
             "required": false,
             "schema": {
               "$ref": "./atoms/userId.json#/components/schemas/UserId",
-              "description": "The ID of the user who owns the story"
+              "description": "The ID of the user who owns the project"
             }
           },
-          {
-            "name": "groupId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-              "description": "The ID of the group which the story belongs to"
-            }
-          }
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
         ],
         "responses": {
           "200": {
-            "description": "A list of stories",
+            "description": "A list of stories successfully returned",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "./entities/story.json#/components/schemas/Story",
-                    "description": "The story details"
+                  "description": "The list of stories",
+                  "properties": {
+                    "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./entities/story.json#/components/schemas/Story",
+                        "description": "The story details"
+                      }
+                    }
                   }
                 }
               }
@@ -123,10 +108,38 @@
         },
         "responses": {
           "201": {
-            "description": "Story created"
+            "description": "Story created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/story.json#/components/schemas/Story/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "400": {
-            "description": "Invalid input"
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -154,14 +167,34 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/story.json#/components/schemas/Story",
-                  "description": "The story details"
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/story.json#/components/schemas/Story/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
           },
           "404": {
-            "description": "story not found"
+            "description": "story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties"
+                }
+              }
+            }
           }
         }
       }

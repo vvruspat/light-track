@@ -1,52 +1,48 @@
 {
-    "components": {
-        "schemas": {
-            "Task": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
-                        "description": "The unique identifier for the task"
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "The title of the task"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "The task description"
-                    },
-                    "projectId": {
-                        "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
-                        "description": "The ID of the project the task belongs to"
-                    },
-                    "storyId": {
-                        "$ref": "../atoms/storyId.json#/components/schemas/StoryId",
-                        "description": "The ID of the story the task belongs to"
-                    },
-                    "epicId": {
-                        "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
-                        "description": "The ID of the epic the task belongs to"
-                    },
-                    "assigneeId": {
-                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
-                        "description": "The ID of the user assigned to the task"
-                    },
-                    "estimation": {
-                        "type": "number",
-                        "description": "The estimated effort for the task"
-                    },
-                    "status": {
-                        "type": "string",
-                        "description": "The status of the task"
-                    }
-                },
-                "required": [
-                    "title",
-                    "projectId",
-                    "status"
-                ]
-            }
-        }
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
+            "description": "The unique identifier for the task"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the task"
+          },
+          "description": {
+            "type": "string",
+            "description": "The task description"
+          },
+          "projectId": {
+            "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
+            "description": "The ID of the project the task belongs to"
+          },
+          "storyId": {
+            "$ref": "../atoms/storyId.json#/components/schemas/StoryId",
+            "description": "The ID of the story the task belongs to"
+          },
+          "epicId": {
+            "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
+            "description": "The ID of the epic the task belongs to"
+          },
+          "assigneeId": {
+            "$ref": "../atoms/userId.json#/components/schemas/UserId",
+            "description": "The ID of the user assigned to the task"
+          },
+          "estimation": {
+            "type": "number",
+            "description": "The estimated effort for the task"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the task"
+          }
+        },
+        "required": ["title", "projectId", "status"]
+      }
     }
+  }
 }

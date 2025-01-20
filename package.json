@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "gen:openapi": "swagger-cli bundle docs/index.json -o public/_openapi.json",
+    "gen:openapi": "redocly bundle docs/index.json -o public/_openapi.json",
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
     "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts"
   },

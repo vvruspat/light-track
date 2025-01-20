@@ -1,48 +1,42 @@
 {
-    "components": {
-        "schemas": {
-            "Epic": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
-                        "description": "The unique identifier for the epic"
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "The title of the epic"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "The epic description"
-                    },
-                    "ownerId": {
-                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
-                        "description": "The ID of the user who owns the epic"
-                    },
-                    "projectId": {
-                        "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
-                        "description": "The ID of the project the epic belongs to"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "The date and time when the epic was created"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "The date and time when the epic was last updated"
-                    }
-                },
-                "required": [
-                    "id",
-                    "title",
-                    "projectId",
-                    "createdAt",
-                    "updatedAt"
-                ]
-            }
-        }
+  "components": {
+    "schemas": {
+      "Epic": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
+            "description": "The unique identifier for the epic"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the epic"
+          },
+          "description": {
+            "type": "string",
+            "description": "The epic description"
+          },
+          "ownerId": {
+            "$ref": "../atoms/userId.json#/components/schemas/UserId",
+            "description": "The ID of the user who owns the epic"
+          },
+          "projectId": {
+            "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
+            "description": "The ID of the project the epic belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the epic was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the epic was last updated"
+          }
+        },
+        "required": ["id", "title", "projectId", "createdAt", "updatedAt"]
+      }
     }
+  }
 }

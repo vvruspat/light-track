@@ -34,22 +34,11 @@
               "description": "The ID of the group which the epic belongs to"
             }
           },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          }
+
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
         ],
         "responses": {
           "200": {
@@ -57,9 +46,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "./entities/epic.json#/components/schemas/Epic"
+                  "properties": {
+                    "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./entities/epic.json#/components/schemas/Epic",
+                        "description": "The epic details"
+                      }
+                    }
                   }
                 }
               }
@@ -102,7 +97,38 @@
         },
         "responses": {
           "201": {
-            "description": "Epic created"
+            "description": "Epic created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/epic.json#/components/schemas/Epic/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -126,7 +152,38 @@
         ],
         "responses": {
           "200": {
-            "description": "Epic details"
+            "description": "Epic details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/epic.json#/components/schemas/Epic/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }

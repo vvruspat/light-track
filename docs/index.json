@@ -28,6 +28,52 @@
       "description": "API related to tasks"
     }
   ],
+  "components": {
+    "schemas": {
+      "ProjectId": {
+        "$ref": "./atoms/projectId.json#/components/schemas/ProjectId"
+      },
+      "UserId": {
+        "$ref": "./atoms/userId.json#/components/schemas/UserId"
+      },
+      "GroupId": {
+        "$ref": "./atoms/groupId.json#/components/schemas/GroupId"
+      },
+      "EpicId": {
+        "$ref": "./atoms/epicId.json#/components/schemas/EpicId"
+      },
+      "StoryId": {
+        "$ref": "./atoms/storyId.json#/components/schemas/StoryId"
+      },
+      "TaskId": {
+        "$ref": "./atoms/taskId.json#/components/schemas/TaskId"
+      },
+      "SortDirection": {
+        "$ref": "./atoms/sortDirection.json#/components/schemas/SortDirection"
+      },
+      "GenericResponse": {
+        "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+      },
+      "GenericListRequest": {
+        "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest"
+      },
+      "GenericSortRequest": {
+        "$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest"
+      },
+      "Project": {
+        "$ref": "./entities/project.json#/components/schemas/Project"
+      },
+      "Epic": {
+        "$ref": "./entities/epic.json#/components/schemas/Epic"
+      },
+      "Story": {
+        "$ref": "./entities/story.json#/components/schemas/Story"
+      },
+      "Task": {
+        "$ref": "./entities/task.json#/components/schemas/Task"
+      }
+    }
+  },
   "paths": {
     "/projects": {
       "$ref": "./projects.json#/paths/~1projects"

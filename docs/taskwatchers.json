@@ -32,7 +32,24 @@
         },
         "responses": {
           "201": {
-            "description": "Task watcher added"
+            "description": "Task watcher add",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task watcher not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       },
@@ -50,11 +67,11 @@
                 "properties": {
                   "taskId": {
                     "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
-                    "description": "The ID of the task"
+                    "description": "The ID of the task to watch"
                   },
                   "userId": {
                     "$ref": "./atoms/userId.json#/components/schemas/UserId",
-                    "description": "The ID of the user"
+                    "description": "The ID of the user who will be watching the task"
                   }
                 },
                 "required": [
@@ -67,7 +84,24 @@
         },
         "responses": {
           "204": {
-            "description": "Task watcher removed"
+            "description": "Task watcher deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task watcher not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }

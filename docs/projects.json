@@ -4,7 +4,6 @@
       "get": {
         "tags": ["Projects"],
         "summary": "Get a list of projects",
-        "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest",
         "parameters": [
           {
             "name": "groupId",
@@ -23,7 +22,11 @@
               "$ref": "./atoms/userId.json#/components/schemas/UserId",
               "description": "The ID of the user who owns the project"
             }
-          }
+          },
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
+          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
+          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
         ],
         "responses": {
           "200": {
@@ -82,18 +85,34 @@
             "content": {
               "application/json": {
                 "schema": {
-
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties",
-                  "data": {
-                    "$ref": "./entities/project.json#/components/schemas/Project",
-                    "description": "The project details"
-                  }
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/project.json#/components/schemas/Project/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request"
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -119,17 +138,44 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./entities/project.json#/components/schemas/Project",
-                  "description": "The project details"
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/project.json#/components/schemas/Project/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
           },
           "404": {
-            "description": "Project not found"
+            "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad request"
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
           }
         }
       }

@@ -5,16 +5,23 @@
                 "type": "object",
                 "properties": {
                     "sort": {
-                        "type": "string",
-                        "description": "The field to sort by",
-                        "default": "id",
-                        "required": false
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "The field to sort by"
+                        }
                     },
                     "direction": {
-                        "$ref": "../atoms/sortDirection.json#/components/schemas/SortDirection",
-                        "description": "The direction to sort by",
-                        "default": "asc",
-                        "required": false
+                        "name": "direction",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "../atoms/sortDirection.json#/components/schemas/SortDirection",
+                            "description": "The direction to sort by",
+                            "default": "asc"
+                        }
                     }
                 }
             }

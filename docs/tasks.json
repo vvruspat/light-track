@@ -126,7 +126,7 @@
                     "description": "The user ID the task is assigned to"
                   },
                   "estimation": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The estimated effort for the task"
                   },
                   "status": {
@@ -146,6 +146,77 @@
         "responses": {
           "201": {
             "description": "Task created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update task by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
+                    "description": "The task ID"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "assigneeId": {
+                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
+                    "description": "The user ID the task is assigned to"
+                  },
+                  "estimation": {
+                    "type": "number",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -225,103 +296,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Tasks"
-        ],
-        "summary": "Update a task by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
-              "description": "The task ID"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the task"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The task description"
-                  },
-                  "projectId": {
-                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-                    "description": "The project ID the task belongs to"
-                  },
-                  "storyId": {
-                    "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
-                    "description": "The story ID the task belongs to"
-                  },
-                  "epicId": {
-                    "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
-                    "description": "The epic ID the task belongs to"
-                  },
-                  "assigneeId": {
-                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
-                    "description": "The user ID the task is assigned to"
-                  },
-                  "estimation": {
-                    "type": "integer",
-                    "description": "The estimated effort for the task"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the task"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Task created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Task not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Tasks"
@@ -339,7 +313,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Task deleted",
             "content": {
               "application/json": {

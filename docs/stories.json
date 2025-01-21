@@ -142,6 +142,75 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Update story",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
+                    "description": "The ID of the story"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the story"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The story description"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Story updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/story.json#/components/schemas/Story/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/stories/{id}": {
@@ -180,6 +249,49 @@
                           }
                         }
                       }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Delete story by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
+              "description": "The ID of the story"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Story deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
                     }
                   ]
                 }

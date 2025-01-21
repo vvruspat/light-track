@@ -84,8 +84,14 @@
     "/epics": {
       "$ref": "./epics.json#/paths/~1epics"
     },
+    "/epics/{id}": {
+      "$ref": "./epics.json#/paths/~1epics~1{id}"
+    },
     "/stories": {
       "$ref": "./stories.json#/paths/~1stories"
+    },
+    "/stories/{id}": {
+      "$ref": "./stories.json#/paths/~1stories~1{id}"
     },
     "/tasks": {
       "$ref": "./tasks.json#/paths/~1tasks"

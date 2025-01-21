@@ -131,6 +131,75 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Update epic by id",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+                    "description": "The ID of the epic to update"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Epic updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/epic.json#/components/schemas/Epic/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/epics/{id}": {
@@ -169,6 +238,49 @@
                           }
                         }
                       }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Delete an epic by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+              "description": "The ID of the epic to retrieve"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Epic deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
                     }
                   ]
                 }

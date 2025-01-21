@@ -58,32 +58,28 @@
           "Tasks"
         ],
         "summary": "Remove a task watcher",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "taskId": {
-                    "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
-                    "description": "The ID of the task to watch"
-                  },
-                  "userId": {
-                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
-                    "description": "The ID of the user who will be watching the task"
-                  }
-                },
-                "required": [
-                  "taskId",
-                  "userId"
-                ]
-              }
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
+              "description": "The ID of the the task to remove watcher from"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "./atoms/userId.json#/components/schemas/UserId",
+              "description": "The ID of the user to be removed from the task watcher list"
             }
           }
-        },
+        ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Task watcher deleted",
             "content": {
               "application/json": {

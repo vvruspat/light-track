@@ -8,9 +8,11 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "gen:openapi": "redocly bundle docs/index.json -o public/_openapi.json",
+    "cleanup:openapi": "node scripts/cleanup.js",
+    "gen:openapi": "redocly bundle docs/index.json -o public/_openapi.json  --dereferenced",
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
-    "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts"
+    "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts",
+    "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes"
   },
   "dependencies": {
     "@nuxt/ui": "^2.21.0",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "openapi-typescript": "^7.5.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }

@@ -17,6 +17,10 @@ export interface paths {
                 query?: {
                     groupId?: components["schemas"]["GroupId"];
                     ownerId?: components["schemas"]["UserId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
                 };
                 header?: never;
                 path?: never;
@@ -40,7 +44,60 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Update project by ID */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The ID of the project */
+                        id: components["schemas"]["ProjectId"];
+                        /** @description The title of the project */
+                        title?: string;
+                        /** @description The project description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Project updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id?: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title?: string;
+                                /** @description The project description */
+                                description?: string;
+                                /** @description The ID of the project owner */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the group the project belongs to */
+                                groupId?: components["schemas"]["GroupId"];
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         /** Create a new project */
         post: {
             parameters: {
@@ -68,7 +125,20 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["properties"];
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id?: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title?: string;
+                                /** @description The project description */
+                                description?: string;
+                                /** @description The ID of the project owner */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the group the project belongs to */
+                                groupId?: components["schemas"]["GroupId"];
+                            };
+                        };
                     };
                 };
                 /** @description Bad request */
@@ -76,7 +146,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
@@ -111,7 +183,20 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Project"];
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id?: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title?: string;
+                                /** @description The project description */
+                                description?: string;
+                                /** @description The ID of the project owner */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the group the project belongs to */
+                                groupId?: components["schemas"]["GroupId"];
+                            };
+                        };
                     };
                 };
                 /** @description Bad request */
@@ -119,20 +204,55 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
                 /** @description Project not found */
                 404: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
         put?: never;
         post?: never;
-        delete?: never;
+        /** Delete project by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Project deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Project not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -152,8 +272,10 @@ export interface paths {
                     projectId?: components["schemas"]["ProjectId"];
                     ownerId?: components["schemas"]["UserId"];
                     groupId?: components["schemas"]["GroupId"];
-                    limit?: number;
-                    offset?: number;
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
                 };
                 header?: never;
                 path?: never;
@@ -167,12 +289,80 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Epic"][];
+                        "application/json": {
+                            data?: components["schemas"]["Epic"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
                     };
                 };
             };
         };
-        put?: never;
+        /** Update epic by id */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The ID of the epic to update */
+                        id: components["schemas"]["EpicId"];
+                        /** @description The title of the epic */
+                        title?: string;
+                        /** @description The epic description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Epic updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         /** Create a new epic */
         post: {
             parameters: {
@@ -199,11 +389,146 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/epics/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get an epic by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Epic details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                ownerId?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        /** Delete an epic by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Epic deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -220,13 +545,14 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    projectId?: components["schemas"]["ProjectId"];
-                    limit?: number;
-                    offset?: number;
-                    sort?: string;
-                    order?: string;
-                    ownerId?: components["schemas"]["UserId"];
                     groupId?: components["schemas"]["GroupId"];
+                    projectId?: components["schemas"]["ProjectId"];
+                    epicId?: components["schemas"]["EpicId"];
+                    ownerId?: components["schemas"]["UserId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
                 };
                 header?: never;
                 path?: never;
@@ -234,18 +560,88 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description A list of stories */
+                /** @description A list of stories successfully returned */
                 200: {
                     headers: {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Story"][];
+                        "application/json": {
+                            data?: components["schemas"]["Story"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
                     };
                 };
             };
         };
-        put?: never;
+        /** Update story */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The ID of the story */
+                        id: components["schemas"]["StoryId"];
+                        /** @description The title of the story */
+                        title?: string;
+                        /** @description The story description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Story updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the project the story belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the epic the story belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                ownerId?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Invalid input */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         /** Create a new story */
         post: {
             parameters: {
@@ -274,18 +670,150 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the project the story belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the epic the story belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                ownerId?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
                 };
                 /** @description Invalid input */
                 400: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/stories/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get an story by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Story details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the project the story belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the epic the story belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                ownerId?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                createdAt?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updatedAt?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description story not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["properties"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        /** Delete story by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Story deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description story not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["properties"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -301,7 +829,18 @@ export interface paths {
         /** Get a list of tasks */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    projectId?: components["schemas"]["ProjectId"];
+                    storyId?: components["schemas"]["StoryId"];
+                    epicId?: components["schemas"]["EpicId"];
+                    assigneeId?: components["schemas"]["UserId"];
+                    ownerId?: components["schemas"]["UserId"];
+                    groupId?: components["schemas"]["GroupId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -314,34 +853,33 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Task"][];
+                        "application/json": {
+                            data?: components["schemas"]["Task"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
                     };
                 };
             };
         };
-        /** Update a task by ID */
+        /** Update task by ID */
         put: {
             parameters: {
                 query?: never;
                 header?: never;
-                path: {
-                    id: components["schemas"]["TaskId"];
-                };
+                path?: never;
                 cookie?: never;
             };
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The task ID */
+                        id: components["schemas"]["TaskId"];
                         /** @description The title of the task */
                         title?: string;
                         /** @description The task description */
                         description?: string;
-                        /** @description The project ID the task belongs to */
-                        projectId?: components["schemas"]["ProjectId"];
-                        /** @description The story ID the task belongs to */
-                        storyId?: components["schemas"]["StoryId"];
-                        /** @description The epic ID the task belongs to */
-                        epicId?: components["schemas"]["EpicId"];
                         /** @description The user ID the task is assigned to */
                         assigneeId?: components["schemas"]["UserId"];
                         /** @description The estimated effort for the task */
@@ -351,7 +889,38 @@ export interface paths {
                     };
                 };
             };
-            responses: never;
+            responses: {
+                /** @description Task updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the project the task belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the story the task belongs to */
+                                storyId?: components["schemas"]["StoryId"];
+                                /** @description The ID of the epic the task belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user assigned to the task */
+                                assigneeId?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
+                    };
+                };
+            };
         };
         /** Create a new task */
         post: {
@@ -390,7 +959,28 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Task"];
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the project the task belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the story the task belongs to */
+                                storyId?: components["schemas"]["StoryId"];
+                                /** @description The ID of the epic the task belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user assigned to the task */
+                                assigneeId?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
                     };
                 };
             };
@@ -426,7 +1016,28 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Task"];
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the project the task belongs to */
+                                projectId?: components["schemas"]["ProjectId"];
+                                /** @description The ID of the story the task belongs to */
+                                storyId?: components["schemas"]["StoryId"];
+                                /** @description The ID of the epic the task belongs to */
+                                epicId?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user assigned to the task */
+                                assigneeId?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
                     };
                 };
                 /** @description Task not found */
@@ -434,7 +1045,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
@@ -453,18 +1066,22 @@ export interface paths {
             requestBody?: never;
             responses: {
                 /** @description Task deleted */
-                204: {
+                200: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
                 /** @description Task not found */
                 404: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
@@ -501,40 +1118,56 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description Task watcher added */
+                /** @description Task watcher add */
                 201: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Task watcher not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
         /** Remove a task watcher */
         delete: {
             parameters: {
-                query?: never;
+                query?: {
+                    taskId?: components["schemas"]["TaskId"];
+                    userId?: components["schemas"]["UserId"];
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
             };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The ID of the task */
-                        taskId: components["schemas"]["TaskId"];
-                        /** @description The ID of the user */
-                        userId: components["schemas"]["UserId"];
-                    };
-                };
-            };
+            requestBody?: never;
             responses: {
-                /** @description Task watcher removed */
-                204: {
+                /** @description Task watcher deleted */
+                200: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Task watcher not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
                 };
             };
         };
@@ -547,12 +1180,33 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** @description The unique identifier for the group */
-        GroupId: number;
-        /** @description The unique identifier for the User */
-        UserId: string;
         /** @description The unique identifier for the project */
         ProjectId: number;
+        /** @description The unique identifier for the User */
+        UserId: string;
+        /** @description The unique identifier for the group */
+        GroupId: number;
+        /** @description The unique identifier for the epic */
+        EpicId: number;
+        /** @description The unique identifier for the story */
+        StoryId: number;
+        /** @description The unique identifier for the task */
+        TaskId: number;
+        /** @enum {string} */
+        SortDirection: "asc" | "desc";
+        GenericResponse: {
+            statusCode?: number;
+            statusMessage?: string;
+            message?: string | null;
+        };
+        GenericListRequest: {
+            limit?: unknown;
+            offset?: unknown;
+        };
+        GenericSortRequest: {
+            sort?: unknown;
+            direction?: unknown;
+        };
         Project: {
             /** @description The unique identifier for the project */
             id?: components["schemas"]["ProjectId"];
@@ -565,9 +1219,6 @@ export interface components {
             /** @description The ID of the group the project belongs to */
             groupId: components["schemas"]["GroupId"];
         };
-        properties: unknown;
-        /** @description The unique identifier for the epic */
-        EpicId: number;
         Epic: {
             /** @description The unique identifier for the epic */
             id: components["schemas"]["EpicId"];
@@ -614,8 +1265,6 @@ export interface components {
              */
             updatedAt: string;
         };
-        /** @description The unique identifier for the story */
-        StoryId: number;
         Task: {
             /** @description The unique identifier for the task */
             id?: components["schemas"]["GroupId"];
@@ -636,11 +1285,15 @@ export interface components {
             /** @description The status of the task */
             status: string;
         };
-        /** @description The unique identifier for the task */
-        TaskId: number;
+        properties: unknown;
     };
     responses: never;
-    parameters: never;
+    parameters: {
+        limit: number;
+        offset: number;
+        sort: string;
+        direction: components["schemas"]["SortDirection"];
+    };
     requestBodies: never;
     headers: never;
     pathItems: never;

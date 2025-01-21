@@ -58,7 +58,7 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to return",
               "default": 10
             }
@@ -67,7 +67,7 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to skip",
               "default": 0
             }
@@ -266,6 +266,118 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Update project by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The ID of the project",
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the project"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The project description"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the project",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the project"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The project description"
+                            },
+                            "ownerId": {
+                              "description": "The ID of the project owner",
+                              "type": "string"
+                            },
+                            "groupId": {
+                              "description": "The ID of the group the project belongs to",
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/projects/{id}": {
@@ -386,6 +498,73 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Delete project by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the project",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/epics": {
@@ -426,7 +605,7 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to return",
               "default": 10
             }
@@ -435,7 +614,7 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to skip",
               "default": 0
             }
@@ -617,6 +796,303 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Update epic by id",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The ID of the epic to update",
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Epic updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the epic",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the epic"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The epic description"
+                            },
+                            "ownerId": {
+                              "description": "The ID of the user who owns the epic",
+                              "type": "string"
+                            },
+                            "projectId": {
+                              "description": "The ID of the project the epic belongs to",
+                              "type": "number"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was created"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/epics/{id}": {
+      "get": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Get an epic by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the epic to retrieve",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Epic details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the epic",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the epic"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The epic description"
+                            },
+                            "ownerId": {
+                              "description": "The ID of the user who owns the epic",
+                              "type": "string"
+                            },
+                            "projectId": {
+                              "description": "The ID of the project the epic belongs to",
+                              "type": "number"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was created"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Delete an epic by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the epic to retrieve",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Epic deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/stories": {
@@ -666,7 +1142,7 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to return",
               "default": 10
             }
@@ -675,7 +1151,7 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to skip",
               "default": 0
             }
@@ -866,6 +1342,305 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Update story",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The ID of the story",
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the story"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The story description"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Story updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the story",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the story"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The story description"
+                            },
+                            "projectId": {
+                              "description": "The ID of the project the story belongs to",
+                              "type": "number"
+                            },
+                            "epicId": {
+                              "description": "The ID of the epic the story belongs to",
+                              "type": "number"
+                            },
+                            "ownerId": {
+                              "description": "The ID of the user who owns the story",
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was created"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stories/{id}": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get an story by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the story",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Story details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the story",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the story"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The story description"
+                            },
+                            "projectId": {
+                              "description": "The ID of the project the story belongs to",
+                              "type": "number"
+                            },
+                            "epicId": {
+                              "description": "The ID of the epic the story belongs to",
+                              "type": "number"
+                            },
+                            "ownerId": {
+                              "description": "The ID of the user who owns the story",
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was created"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "statusCode": {
+                    "type": "number"
+                  },
+                  "statusMessage": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Delete story by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the story",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Story deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "statusCode": {
+                    "type": "number"
+                  },
+                  "statusMessage": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/tasks": {
@@ -933,7 +1708,7 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to return",
               "default": 10
             }
@@ -942,7 +1717,7 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to skip",
               "default": 0
             }
@@ -1040,7 +1815,7 @@
                     "type": "string"
                   },
                   "estimation": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The estimated effort for the task"
                   },
                   "status": {
@@ -1060,6 +1835,124 @@
         "responses": {
           "201": {
             "description": "Task created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the task",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the task"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The task description"
+                            },
+                            "projectId": {
+                              "description": "The ID of the project the task belongs to",
+                              "type": "number"
+                            },
+                            "storyId": {
+                              "description": "The ID of the story the task belongs to",
+                              "type": "number"
+                            },
+                            "epicId": {
+                              "description": "The ID of the epic the task belongs to",
+                              "type": "number"
+                            },
+                            "assigneeId": {
+                              "description": "The ID of the user assigned to the task",
+                              "type": "string"
+                            },
+                            "estimation": {
+                              "type": "number",
+                              "description": "The estimated effort for the task"
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The status of the task"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update task by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The task ID",
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "assigneeId": {
+                    "description": "The user ID the task is assigned to",
+                    "type": "string"
+                  },
+                  "estimation": {
+                    "type": "number",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -1245,162 +2138,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Tasks"
-        ],
-        "summary": "Update a task by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "description": "The task ID",
-              "type": "number"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the task"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The task description"
-                  },
-                  "projectId": {
-                    "description": "The project ID the task belongs to",
-                    "type": "number"
-                  },
-                  "storyId": {
-                    "description": "The story ID the task belongs to",
-                    "type": "number"
-                  },
-                  "epicId": {
-                    "description": "The epic ID the task belongs to",
-                    "type": "number"
-                  },
-                  "assigneeId": {
-                    "description": "The user ID the task is assigned to",
-                    "type": "string"
-                  },
-                  "estimation": {
-                    "type": "integer",
-                    "description": "The estimated effort for the task"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the task"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Task created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "statusCode": {
-                          "type": "number"
-                        },
-                        "statusMessage": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      }
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the task",
-                              "type": "number"
-                            },
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the task"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The task description"
-                            },
-                            "projectId": {
-                              "description": "The ID of the project the task belongs to",
-                              "type": "number"
-                            },
-                            "storyId": {
-                              "description": "The ID of the story the task belongs to",
-                              "type": "number"
-                            },
-                            "epicId": {
-                              "description": "The ID of the epic the task belongs to",
-                              "type": "number"
-                            },
-                            "assigneeId": {
-                              "description": "The ID of the user assigned to the task",
-                              "type": "string"
-                            },
-                            "estimation": {
-                              "type": "number",
-                              "description": "The estimated effort for the task"
-                            },
-                            "status": {
-                              "type": "string",
-                              "description": "The status of the task"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Task not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {
-                      "type": "number"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Tasks"
@@ -1418,7 +2155,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Task deleted",
             "content": {
               "application/json": {
@@ -1547,32 +2284,28 @@
           "Tasks"
         ],
         "summary": "Remove a task watcher",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "taskId": {
-                    "description": "The ID of the task to watch",
-                    "type": "number"
-                  },
-                  "userId": {
-                    "description": "The ID of the user who will be watching the task",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "taskId",
-                  "userId"
-                ]
-              }
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "The ID of the the task to remove watcher from",
+              "type": "number"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "The ID of the user to be removed from the task watcher list",
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Task watcher deleted",
             "content": {
               "application/json": {
@@ -1675,7 +2408,7 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to return",
               "default": 10
             }
@@ -1684,7 +2417,7 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "type": "integer",
+              "type": "number",
               "description": "Number of items to skip",
               "default": 0
             }
@@ -1882,6 +2615,18 @@
           "projectId",
           "status"
         ]
+      },
+      "properties": {
+        "statusCode": {
+          "type": "number"
+        },
+        "statusMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "nullable": true
+        }
       }
     },
     "parameters": {
@@ -1889,7 +2634,7 @@
         "name": "limit",
         "in": "query",
         "schema": {
-          "type": "integer",
+          "type": "number",
           "description": "Number of items to return",
           "default": 10
         }
@@ -1898,7 +2643,7 @@
         "name": "offset",
         "in": "query",
         "schema": {
-          "type": "integer",
+          "type": "number",
           "description": "Number of items to skip",
           "default": 0
         }

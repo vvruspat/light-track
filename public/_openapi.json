@@ -37,7 +37,7 @@
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -46,7 +46,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -122,18 +122,18 @@
                             "type": "string",
                             "description": "The project description"
                           },
-                          "ownerId": {
+                          "owner_id": {
                             "description": "The ID of the project owner",
                             "type": "string"
                           },
-                          "groupId": {
+                          "group_id": {
                             "description": "The ID of the group the project belongs to",
                             "type": "number"
                           }
                         },
                         "required": [
                           "title",
-                          "groupId"
+                          "group_id"
                         ]
                       }
                     },
@@ -174,14 +174,14 @@
                     "type": "string",
                     "description": "The project description"
                   },
-                  "groupId": {
+                  "group_id": {
                     "description": "The ID of the group the project belongs to",
                     "type": "number"
                   }
                 },
                 "required": [
                   "title",
-                  "groupId"
+                  "group_id"
                 ]
               }
             }
@@ -226,11 +226,11 @@
                               "type": "string",
                               "description": "The project description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the project owner",
                               "type": "string"
                             },
-                            "groupId": {
+                            "group_id": {
                               "description": "The ID of the group the project belongs to",
                               "type": "number"
                             }
@@ -338,11 +338,11 @@
                               "type": "string",
                               "description": "The project description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the project owner",
                               "type": "string"
                             },
-                            "groupId": {
+                            "group_id": {
                               "description": "The ID of the group the project belongs to",
                               "type": "number"
                             }
@@ -436,11 +436,11 @@
                               "type": "string",
                               "description": "The project description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the project owner",
                               "type": "string"
                             },
-                            "groupId": {
+                            "group_id": {
                               "description": "The ID of the group the project belongs to",
                               "type": "number"
                             }
@@ -575,7 +575,7 @@
         "summary": "Get a list of epics",
         "parameters": [
           {
-            "name": "projectId",
+            "name": "project_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -584,7 +584,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -593,7 +593,7 @@
             }
           },
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -694,14 +694,14 @@
                     "type": "string",
                     "description": "The epic description"
                   },
-                  "projectId": {
+                  "project_id": {
                     "description": "The ID of the project which the epic belongs to",
                     "type": "number"
                   }
                 },
                 "required": [
                   "title",
-                  "projectId"
+                  "project_id"
                 ]
               }
             }
@@ -746,11 +746,11 @@
                               "type": "string",
                               "description": "The epic description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the epic",
                               "type": "string"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the epic belongs to",
                               "type": "number"
                             },
@@ -868,11 +868,11 @@
                               "type": "string",
                               "description": "The epic description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the epic",
                               "type": "string"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the epic belongs to",
                               "type": "number"
                             },
@@ -976,11 +976,11 @@
                               "type": "string",
                               "description": "The epic description"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the epic",
                               "type": "string"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the epic belongs to",
                               "type": "number"
                             },
@@ -1103,7 +1103,7 @@
         "summary": "Get a list of stories",
         "parameters": [
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1112,7 +1112,7 @@
             }
           },
           {
-            "name": "projectId",
+            "name": "project_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1121,7 +1121,7 @@
             }
           },
           {
-            "name": "epicId",
+            "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1130,7 +1130,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1232,18 +1232,18 @@
                     "type": "string",
                     "description": "The story description"
                   },
-                  "projectId": {
+                  "project_id": {
                     "description": "The ID of the project the story belongs to",
                     "type": "number"
                   },
-                  "epicId": {
+                  "epic_id": {
                     "description": "The ID of the epic the story belongs to",
                     "type": "number"
                   }
                 },
                 "required": [
                   "title",
-                  "projectId"
+                  "project_id"
                 ]
               }
             }
@@ -1288,15 +1288,15 @@
                               "type": "string",
                               "description": "The story description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the story belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the story belongs to",
                               "type": "number"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
@@ -1414,15 +1414,15 @@
                               "type": "string",
                               "description": "The story description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the story belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the story belongs to",
                               "type": "number"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
@@ -1526,15 +1526,15 @@
                               "type": "string",
                               "description": "The story description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the story belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the story belongs to",
                               "type": "number"
                             },
-                            "ownerId": {
+                            "owner_id": {
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
@@ -1651,7 +1651,7 @@
         "summary": "Get a list of tasks",
         "parameters": [
           {
-            "name": "projectId",
+            "name": "project_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1660,7 +1660,7 @@
             }
           },
           {
-            "name": "storyId",
+            "name": "story_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1669,7 +1669,7 @@
             }
           },
           {
-            "name": "epicId",
+            "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1678,7 +1678,7 @@
             }
           },
           {
-            "name": "assigneeId",
+            "name": "assignee_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1687,7 +1687,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1696,7 +1696,7 @@
             }
           },
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -1798,19 +1798,19 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "projectId": {
+                  "project_id": {
                     "description": "The project ID the task belongs to",
                     "type": "number"
                   },
-                  "storyId": {
+                  "story_id": {
                     "description": "The story ID the task belongs to",
                     "type": "number"
                   },
-                  "epicId": {
+                  "epic_id": {
                     "description": "The epic ID the task belongs to",
                     "type": "number"
                   },
-                  "assigneeId": {
+                  "assignee_id": {
                     "description": "The user ID the task is assigned to",
                     "type": "string"
                   },
@@ -1825,7 +1825,7 @@
                 },
                 "required": [
                   "title",
-                  "projectId",
+                  "project_id",
                   "status"
                 ]
               }
@@ -1871,19 +1871,19 @@
                               "type": "string",
                               "description": "The task description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the task belongs to",
                               "type": "number"
                             },
-                            "storyId": {
+                            "story_id": {
                               "description": "The ID of the story the task belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the task belongs to",
                               "type": "number"
                             },
-                            "assigneeId": {
+                            "assignee_id": {
                               "description": "The ID of the user assigned to the task",
                               "type": "string"
                             },
@@ -1930,7 +1930,7 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "assigneeId": {
+                  "assignee_id": {
                     "description": "The user ID the task is assigned to",
                     "type": "string"
                   },
@@ -1989,19 +1989,19 @@
                               "type": "string",
                               "description": "The task description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the task belongs to",
                               "type": "number"
                             },
-                            "storyId": {
+                            "story_id": {
                               "description": "The ID of the story the task belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the task belongs to",
                               "type": "number"
                             },
-                            "assigneeId": {
+                            "assignee_id": {
                               "description": "The ID of the user assigned to the task",
                               "type": "string"
                             },
@@ -2081,19 +2081,19 @@
                               "type": "string",
                               "description": "The task description"
                             },
-                            "projectId": {
+                            "project_id": {
                               "description": "The ID of the project the task belongs to",
                               "type": "number"
                             },
-                            "storyId": {
+                            "story_id": {
                               "description": "The ID of the story the task belongs to",
                               "type": "number"
                             },
-                            "epicId": {
+                            "epic_id": {
                               "description": "The ID of the epic the task belongs to",
                               "type": "number"
                             },
-                            "assigneeId": {
+                            "assignee_id": {
                               "description": "The ID of the user assigned to the task",
                               "type": "string"
                             },
@@ -2215,7 +2215,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "taskId": {
+                  "task_id": {
                     "description": "The ID of the task to watch",
                     "type": "number"
                   },
@@ -2225,7 +2225,7 @@
                   }
                 },
                 "required": [
-                  "taskId",
+                  "task_id",
                   "userId"
                 ]
               }
@@ -2286,7 +2286,7 @@
         "summary": "Remove a task watcher",
         "parameters": [
           {
-            "name": "taskId",
+            "name": "task_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -2467,18 +2467,18 @@
             "type": "string",
             "description": "The project description"
           },
-          "ownerId": {
+          "owner_id": {
             "description": "The ID of the project owner",
             "type": "string"
           },
-          "groupId": {
+          "group_id": {
             "description": "The ID of the group the project belongs to",
             "type": "number"
           }
         },
         "required": [
           "title",
-          "groupId"
+          "group_id"
         ]
       },
       "Epic": {
@@ -2496,11 +2496,11 @@
             "type": "string",
             "description": "The epic description"
           },
-          "ownerId": {
+          "owner_id": {
             "description": "The ID of the user who owns the epic",
             "type": "string"
           },
-          "projectId": {
+          "project_id": {
             "description": "The ID of the project the epic belongs to",
             "type": "number"
           },
@@ -2518,7 +2518,7 @@
         "required": [
           "id",
           "title",
-          "projectId",
+          "project_id",
           "createdAt",
           "updatedAt"
         ]
@@ -2538,15 +2538,15 @@
             "type": "string",
             "description": "The story description"
           },
-          "projectId": {
+          "project_id": {
             "description": "The ID of the project the story belongs to",
             "type": "number"
           },
-          "epicId": {
+          "epic_id": {
             "description": "The ID of the epic the story belongs to",
             "type": "number"
           },
-          "ownerId": {
+          "owner_id": {
             "description": "The ID of the user who owns the story",
             "type": "string"
           },
@@ -2564,8 +2564,8 @@
         "required": [
           "id",
           "title",
-          "projectId",
-          "ownerId",
+          "project_id",
+          "owner_id",
           "createdAt",
           "updatedAt"
         ]
@@ -2585,19 +2585,19 @@
             "type": "string",
             "description": "The task description"
           },
-          "projectId": {
+          "project_id": {
             "description": "The ID of the project the task belongs to",
             "type": "number"
           },
-          "storyId": {
+          "story_id": {
             "description": "The ID of the story the task belongs to",
             "type": "number"
           },
-          "epicId": {
+          "epic_id": {
             "description": "The ID of the epic the task belongs to",
             "type": "number"
           },
-          "assigneeId": {
+          "assignee_id": {
             "description": "The ID of the user assigned to the task",
             "type": "string"
           },
@@ -2612,7 +2612,7 @@
         },
         "required": [
           "title",
-          "projectId",
+          "project_id",
           "status"
         ]
       },

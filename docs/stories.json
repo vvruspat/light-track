@@ -6,7 +6,7 @@
         "summary": "Get a list of stories",
         "parameters": [
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -15,7 +15,7 @@
             }
           },
           {
-            "name": "projectId",
+            "name": "project_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -24,7 +24,7 @@
             }
           },
           {
-            "name": "epicId",
+            "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -33,7 +33,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -89,18 +89,18 @@
                     "type": "string",
                     "description": "The story description"
                   },
-                  "projectId": {
+                  "project_id": {
                     "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
                     "description": "The ID of the project the story belongs to"
                   },
-                  "epicId": {
+                  "epic_id": {
                     "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
                     "description": "The ID of the epic the story belongs to"
                   }
                 },
                 "required": [
                   "title",
-                  "projectId"
+                  "project_id"
                 ]
               }
             }

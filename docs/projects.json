@@ -6,7 +6,7 @@
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -15,7 +15,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -69,12 +69,12 @@
                     "type": "string",
                     "description": "The project description"
                   },
-                  "groupId": {
+                  "group_id": {
                     "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
                     "description": "The ID of the group the project belongs to"
                   }
                 },
-                "required": ["title", "groupId"]
+                "required": ["title", "group_id"]
               }
             }
           }

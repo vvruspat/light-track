@@ -16,19 +16,19 @@
             "type": "string",
             "description": "The task description"
           },
-          "projectId": {
+          "project_id": {
             "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
             "description": "The ID of the project the task belongs to"
           },
-          "storyId": {
+          "story_id": {
             "$ref": "../atoms/storyId.json#/components/schemas/StoryId",
             "description": "The ID of the story the task belongs to"
           },
-          "epicId": {
+          "epic_id": {
             "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
             "description": "The ID of the epic the task belongs to"
           },
-          "assigneeId": {
+          "assignee_id": {
             "$ref": "../atoms/userId.json#/components/schemas/UserId",
             "description": "The ID of the user assigned to the task"
           },
@@ -41,7 +41,7 @@
             "description": "The status of the task"
           }
         },
-        "required": ["title", "projectId", "status"]
+        "required": ["title", "project_id", "status"]
       }
     }
   }

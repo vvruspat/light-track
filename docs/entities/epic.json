@@ -16,11 +16,11 @@
             "type": "string",
             "description": "The epic description"
           },
-          "ownerId": {
+          "owner_id": {
             "$ref": "../atoms/userId.json#/components/schemas/UserId",
             "description": "The ID of the user who owns the epic"
           },
-          "projectId": {
+          "project_id": {
             "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
             "description": "The ID of the project the epic belongs to"
           },
@@ -35,7 +35,7 @@
             "description": "The date and time when the epic was last updated"
           }
         },
-        "required": ["id", "title", "projectId", "createdAt", "updatedAt"]
+        "required": ["id", "title", "project_id", "createdAt", "updatedAt"]
       }
     }
   }

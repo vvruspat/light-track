@@ -11,36 +11,36 @@ export type Database = {
     Tables: {
       epics: {
         Row: {
-          createdAt: string
+          created_at: string
           description: string | null
           id: number
-          ownerId: number | null
-          projectId: number
+          owner_id: string | null
+          project_id: number
           title: string
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
-          createdAt?: string
+          created_at?: string
           description?: string | null
           id?: number
-          ownerId?: number | null
-          projectId: number
+          owner_id?: string | null
+          project_id: number
           title: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
-          createdAt?: string
+          created_at?: string
           description?: string | null
           id?: number
-          ownerId?: number | null
-          projectId?: number
+          owner_id?: string | null
+          project_id?: number
           title?: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "epics_projectId_fkey"
-            columns: ["projectId"]
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
             referencedColumns: ["id"]
@@ -49,63 +49,63 @@ export type Database = {
       }
       projects: {
         Row: {
-          createdAt: string
+          created_at: string
           description: string
-          groupId: number
+          group_id: number
           id: number
-          ownerId: string
+          owner_id: string
           title: string
         }
         Insert: {
-          createdAt?: string
+          created_at?: string
           description?: string
-          groupId: number
+          group_id: number
           id?: number
-          ownerId: string
+          owner_id: string
           title: string
         }
         Update: {
-          createdAt?: string
+          created_at?: string
           description?: string
-          groupId?: number
+          group_id?: number
           id?: number
-          ownerId?: string
+          owner_id?: string
           title?: string
         }
         Relationships: []
       }
       stories: {
         Row: {
-          createdAt: string
+          created_at: string
           description: string | null
-          epicId: number
+          epic_id: number
           id: number
-          ownerId: number
+          owner_id: string
           title: string
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
-          createdAt?: string
+          created_at?: string
           description?: string | null
-          epicId: number
+          epic_id: number
           id?: number
-          ownerId: number
+          owner_id: string
           title: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
-          createdAt?: string
+          created_at?: string
           description?: string | null
-          epicId?: number
+          epic_id?: number
           id?: number
-          ownerId?: number
+          owner_id?: string
           title?: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "stories_epicId_fkey"
-            columns: ["epicId"]
+            columns: ["epic_id"]
             isOneToOne: false
             referencedRelation: "epics"
             referencedColumns: ["id"]
@@ -114,65 +114,65 @@ export type Database = {
       }
       tasks: {
         Row: {
-          assigneeId: number | null
-          createdAt: string
+          assignee_id: string | null
+          created_at: string
           description: string | null
-          epicId: number | null
+          epic_id: number | null
           estimation: number | null
           id: number
-          ownerId: number
-          projectId: number | null
+          owner_id: string
+          project_id: number | null
           status: string | null
-          storyId: number | null
+          story_id: number | null
           title: string
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
-          assigneeId?: number | null
-          createdAt?: string
+          assignee_id?: string | null
+          created_at?: string
           description?: string | null
-          epicId?: number | null
+          epic_id?: number | null
           estimation?: number | null
           id?: number
-          ownerId: number
-          projectId?: number | null
+          owner_id: string
+          project_id?: number | null
           status?: string | null
-          storyId?: number | null
+          story_id?: number | null
           title: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
-          assigneeId?: number | null
-          createdAt?: string
+          assignee_id?: string | null
+          created_at?: string
           description?: string | null
-          epicId?: number | null
+          epic_id?: number | null
           estimation?: number | null
           id?: number
-          ownerId?: number
-          projectId?: number | null
+          owner_id?: string
+          project_id?: number | null
           status?: string | null
-          storyId?: number | null
+          story_id?: number | null
           title?: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "tasks_epicId_fkey"
-            columns: ["epicId"]
+            columns: ["epic_id"]
             isOneToOne: false
             referencedRelation: "epics"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "tasks_projectId_fkey"
-            columns: ["projectId"]
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "tasks_storyId_fkey"
-            columns: ["storyId"]
+            columns: ["story_id"]
             isOneToOne: false
             referencedRelation: "stories"
             referencedColumns: ["id"]

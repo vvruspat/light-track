@@ -27,7 +27,7 @@ export default defineEventHandler(
       };
     }
 
-    if (!body.groupId) {
+    if (!body.group_id) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -39,8 +39,8 @@ export default defineEventHandler(
     const newProject: Database["public"]["Tables"]["projects"]["Insert"] = {
       title: body.title,
       description: body.description || "",
-      groupId: body.groupId,
-      ownerId: user.id,
+      group_id: body.group_id,
+      owner_id: user.id,
     };
 
     const { data, error } = await client

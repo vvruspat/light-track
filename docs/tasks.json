@@ -8,7 +8,7 @@
         "summary": "Get a list of tasks",
         "parameters": [
           {
-            "name": "projectId",
+            "name": "project_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -17,7 +17,7 @@
             }
           },
           {
-            "name": "storyId",
+            "name": "story_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -26,7 +26,7 @@
             }
           },
           {
-            "name": "epicId",
+            "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -35,7 +35,7 @@
             }
           },
           {
-            "name": "assigneeId",
+            "name": "assignee_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -44,7 +44,7 @@
             }
           },
           {
-            "name": "ownerId",
+            "name": "owner_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -53,7 +53,7 @@
             }
           },
           {
-            "name": "groupId",
+            "name": "group_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -109,19 +109,19 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "projectId": {
+                  "project_id": {
                     "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
                     "description": "The project ID the task belongs to"
                   },
-                  "storyId": {
+                  "story_id": {
                     "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
                     "description": "The story ID the task belongs to"
                   },
-                  "epicId": {
+                  "epic_id": {
                     "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
                     "description": "The epic ID the task belongs to"
                   },
-                  "assigneeId": {
+                  "assignee_id": {
                     "$ref": "./atoms/userId.json#/components/schemas/UserId",
                     "description": "The user ID the task is assigned to"
                   },
@@ -136,7 +136,7 @@
                 },
                 "required": [
                   "title",
-                  "projectId",
+                  "project_id",
                   "status"
                 ]
               }
@@ -194,7 +194,7 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "assigneeId": {
+                  "assignee_id": {
                     "$ref": "./atoms/userId.json#/components/schemas/UserId",
                     "description": "The user ID the task is assigned to"
                   },

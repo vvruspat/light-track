@@ -13,7 +13,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "taskId": {
+                  "task_id": {
                     "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
                     "description": "The ID of the task to watch"
                   },
@@ -23,7 +23,7 @@
                   }
                 },
                 "required": [
-                  "taskId",
+                  "task_id",
                   "userId"
                 ]
               }
@@ -60,7 +60,7 @@
         "summary": "Remove a task watcher",
         "parameters": [
           {
-            "name": "taskId",
+            "name": "task_id",
             "in": "query",
             "required": false,
             "schema": {

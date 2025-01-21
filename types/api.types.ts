@@ -15,8 +15,8 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    groupId?: components["schemas"]["GroupId"];
-                    ownerId?: components["schemas"]["UserId"];
+                    group_id?: components["schemas"]["GroupId"];
+                    owner_id?: components["schemas"]["UserId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -80,9 +80,9 @@ export interface paths {
                                 /** @description The project description */
                                 description?: string;
                                 /** @description The ID of the project owner */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the group the project belongs to */
-                                groupId?: components["schemas"]["GroupId"];
+                                group_id?: components["schemas"]["GroupId"];
                             };
                         };
                     };
@@ -114,7 +114,7 @@ export interface paths {
                         /** @description The project description */
                         description?: string;
                         /** @description The ID of the group the project belongs to */
-                        groupId: components["schemas"]["GroupId"];
+                        group_id: components["schemas"]["GroupId"];
                     };
                 };
             };
@@ -134,9 +134,9 @@ export interface paths {
                                 /** @description The project description */
                                 description?: string;
                                 /** @description The ID of the project owner */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the group the project belongs to */
-                                groupId?: components["schemas"]["GroupId"];
+                                group_id?: components["schemas"]["GroupId"];
                             };
                         };
                     };
@@ -192,9 +192,9 @@ export interface paths {
                                 /** @description The project description */
                                 description?: string;
                                 /** @description The ID of the project owner */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the group the project belongs to */
-                                groupId?: components["schemas"]["GroupId"];
+                                group_id?: components["schemas"]["GroupId"];
                             };
                         };
                     };
@@ -269,9 +269,9 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    projectId?: components["schemas"]["ProjectId"];
-                    ownerId?: components["schemas"]["UserId"];
-                    groupId?: components["schemas"]["GroupId"];
+                    project_id?: components["schemas"]["ProjectId"];
+                    owner_id?: components["schemas"]["UserId"];
+                    group_id?: components["schemas"]["GroupId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -335,9 +335,9 @@ export interface paths {
                                 /** @description The epic description */
                                 description?: string;
                                 /** @description The ID of the user who owns the epic */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the project the epic belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the epic was created
@@ -379,7 +379,7 @@ export interface paths {
                         /** @description The epic description */
                         description?: string;
                         /** @description The ID of the project which the epic belongs to */
-                        projectId: components["schemas"]["ProjectId"];
+                        project_id: components["schemas"]["ProjectId"];
                     };
                 };
             };
@@ -399,9 +399,9 @@ export interface paths {
                                 /** @description The epic description */
                                 description?: string;
                                 /** @description The ID of the user who owns the epic */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the project the epic belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the epic was created
@@ -467,9 +467,9 @@ export interface paths {
                                 /** @description The epic description */
                                 description?: string;
                                 /** @description The ID of the user who owns the epic */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the project the epic belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the epic was created
@@ -545,10 +545,10 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    groupId?: components["schemas"]["GroupId"];
-                    projectId?: components["schemas"]["ProjectId"];
-                    epicId?: components["schemas"]["EpicId"];
-                    ownerId?: components["schemas"]["UserId"];
+                    group_id?: components["schemas"]["GroupId"];
+                    project_id?: components["schemas"]["ProjectId"];
+                    epic_id?: components["schemas"]["EpicId"];
+                    owner_id?: components["schemas"]["UserId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -612,11 +612,11 @@ export interface paths {
                                 /** @description The story description */
                                 description?: string;
                                 /** @description The ID of the project the story belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the epic the story belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user who owns the story */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was created
@@ -658,9 +658,9 @@ export interface paths {
                         /** @description The story description */
                         description?: string;
                         /** @description The ID of the project the story belongs to */
-                        projectId: components["schemas"]["ProjectId"];
+                        project_id: components["schemas"]["ProjectId"];
                         /** @description The ID of the epic the story belongs to */
-                        epicId?: components["schemas"]["EpicId"];
+                        epic_id?: components["schemas"]["EpicId"];
                     };
                 };
             };
@@ -680,11 +680,11 @@ export interface paths {
                                 /** @description The story description */
                                 description?: string;
                                 /** @description The ID of the project the story belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the epic the story belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user who owns the story */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was created
@@ -750,11 +750,11 @@ export interface paths {
                                 /** @description The story description */
                                 description?: string;
                                 /** @description The ID of the project the story belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the epic the story belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user who owns the story */
-                                ownerId?: components["schemas"]["UserId"];
+                                owner_id?: components["schemas"]["UserId"];
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was created
@@ -830,12 +830,12 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    projectId?: components["schemas"]["ProjectId"];
-                    storyId?: components["schemas"]["StoryId"];
-                    epicId?: components["schemas"]["EpicId"];
-                    assigneeId?: components["schemas"]["UserId"];
-                    ownerId?: components["schemas"]["UserId"];
-                    groupId?: components["schemas"]["GroupId"];
+                    project_id?: components["schemas"]["ProjectId"];
+                    story_id?: components["schemas"]["StoryId"];
+                    epic_id?: components["schemas"]["EpicId"];
+                    assignee_id?: components["schemas"]["UserId"];
+                    owner_id?: components["schemas"]["UserId"];
+                    group_id?: components["schemas"]["GroupId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -881,7 +881,7 @@ export interface paths {
                         /** @description The task description */
                         description?: string;
                         /** @description The user ID the task is assigned to */
-                        assigneeId?: components["schemas"]["UserId"];
+                        assignee_id?: components["schemas"]["UserId"];
                         /** @description The estimated effort for the task */
                         estimation?: number;
                         /** @description The status of the task */
@@ -905,13 +905,13 @@ export interface paths {
                                 /** @description The task description */
                                 description?: string;
                                 /** @description The ID of the project the task belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the story the task belongs to */
-                                storyId?: components["schemas"]["StoryId"];
+                                story_id?: components["schemas"]["StoryId"];
                                 /** @description The ID of the epic the task belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user assigned to the task */
-                                assigneeId?: components["schemas"]["UserId"];
+                                assignee_id?: components["schemas"]["UserId"];
                                 /** @description The estimated effort for the task */
                                 estimation?: number;
                                 /** @description The status of the task */
@@ -938,13 +938,13 @@ export interface paths {
                         /** @description The task description */
                         description?: string;
                         /** @description The project ID the task belongs to */
-                        projectId: components["schemas"]["ProjectId"];
+                        project_id: components["schemas"]["ProjectId"];
                         /** @description The story ID the task belongs to */
-                        storyId?: components["schemas"]["StoryId"];
+                        story_id?: components["schemas"]["StoryId"];
                         /** @description The epic ID the task belongs to */
-                        epicId?: components["schemas"]["EpicId"];
+                        epic_id?: components["schemas"]["EpicId"];
                         /** @description The user ID the task is assigned to */
-                        assigneeId?: components["schemas"]["UserId"];
+                        assignee_id?: components["schemas"]["UserId"];
                         /** @description The estimated effort for the task */
                         estimation?: number;
                         /** @description The status of the task */
@@ -968,13 +968,13 @@ export interface paths {
                                 /** @description The task description */
                                 description?: string;
                                 /** @description The ID of the project the task belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the story the task belongs to */
-                                storyId?: components["schemas"]["StoryId"];
+                                story_id?: components["schemas"]["StoryId"];
                                 /** @description The ID of the epic the task belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user assigned to the task */
-                                assigneeId?: components["schemas"]["UserId"];
+                                assignee_id?: components["schemas"]["UserId"];
                                 /** @description The estimated effort for the task */
                                 estimation?: number;
                                 /** @description The status of the task */
@@ -1025,13 +1025,13 @@ export interface paths {
                                 /** @description The task description */
                                 description?: string;
                                 /** @description The ID of the project the task belongs to */
-                                projectId?: components["schemas"]["ProjectId"];
+                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the story the task belongs to */
-                                storyId?: components["schemas"]["StoryId"];
+                                story_id?: components["schemas"]["StoryId"];
                                 /** @description The ID of the epic the task belongs to */
-                                epicId?: components["schemas"]["EpicId"];
+                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user assigned to the task */
-                                assigneeId?: components["schemas"]["UserId"];
+                                assignee_id?: components["schemas"]["UserId"];
                                 /** @description The estimated effort for the task */
                                 estimation?: number;
                                 /** @description The status of the task */
@@ -1111,7 +1111,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The ID of the task to watch */
-                        taskId: components["schemas"]["TaskId"];
+                        task_id: components["schemas"]["TaskId"];
                         /** @description The ID of the user who will be watching the task */
                         userId: components["schemas"]["UserId"];
                     };
@@ -1142,7 +1142,7 @@ export interface paths {
         delete: {
             parameters: {
                 query?: {
-                    taskId?: components["schemas"]["TaskId"];
+                    task_id?: components["schemas"]["TaskId"];
                     userId?: components["schemas"]["UserId"];
                 };
                 header?: never;
@@ -1215,9 +1215,9 @@ export interface components {
             /** @description The project description */
             description?: string;
             /** @description The ID of the project owner */
-            ownerId?: components["schemas"]["UserId"];
+            owner_id?: components["schemas"]["UserId"];
             /** @description The ID of the group the project belongs to */
-            groupId: components["schemas"]["GroupId"];
+            group_id: components["schemas"]["GroupId"];
         };
         Epic: {
             /** @description The unique identifier for the epic */
@@ -1227,9 +1227,9 @@ export interface components {
             /** @description The epic description */
             description?: string;
             /** @description The ID of the user who owns the epic */
-            ownerId?: components["schemas"]["UserId"];
+            owner_id?: components["schemas"]["UserId"];
             /** @description The ID of the project the epic belongs to */
-            projectId: components["schemas"]["ProjectId"];
+            project_id: components["schemas"]["ProjectId"];
             /**
              * Format: date-time
              * @description The date and time when the epic was created
@@ -1249,11 +1249,11 @@ export interface components {
             /** @description The story description */
             description?: string;
             /** @description The ID of the project the story belongs to */
-            projectId: components["schemas"]["ProjectId"];
+            project_id: components["schemas"]["ProjectId"];
             /** @description The ID of the epic the story belongs to */
-            epicId?: components["schemas"]["EpicId"];
+            epic_id?: components["schemas"]["EpicId"];
             /** @description The ID of the user who owns the story */
-            ownerId: components["schemas"]["UserId"];
+            owner_id: components["schemas"]["UserId"];
             /**
              * Format: date-time
              * @description The date and time when the story was created
@@ -1273,13 +1273,13 @@ export interface components {
             /** @description The task description */
             description?: string;
             /** @description The ID of the project the task belongs to */
-            projectId: components["schemas"]["ProjectId"];
+            project_id: components["schemas"]["ProjectId"];
             /** @description The ID of the story the task belongs to */
-            storyId?: components["schemas"]["StoryId"];
+            story_id?: components["schemas"]["StoryId"];
             /** @description The ID of the epic the task belongs to */
-            epicId?: components["schemas"]["EpicId"];
+            epic_id?: components["schemas"]["EpicId"];
             /** @description The ID of the user assigned to the task */
-            assigneeId?: components["schemas"]["UserId"];
+            assignee_id?: components["schemas"]["UserId"];
             /** @description The estimated effort for the task */
             estimation?: number;
             /** @description The status of the task */

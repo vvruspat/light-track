@@ -823,12 +823,9 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    project_id?: components["schemas"]["ProjectId"];
                     story_id?: components["schemas"]["StoryId"];
-                    epic_id?: components["schemas"]["EpicId"];
                     assignee_id?: components["schemas"]["UserId"];
                     owner_id?: components["schemas"]["UserId"];
-                    group_id?: components["schemas"]["GroupId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -856,65 +853,7 @@ export interface paths {
                 };
             };
         };
-        /** Update task by ID */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The task ID */
-                        id: components["schemas"]["TaskId"];
-                        /** @description The title of the task */
-                        title?: string;
-                        /** @description The task description */
-                        description?: string;
-                        /** @description The user ID the task is assigned to */
-                        assignee_id?: components["schemas"]["UserId"];
-                        /** @description The estimated effort for the task */
-                        estimation?: number;
-                        /** @description The status of the task */
-                        status?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description Task updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"] & {
-                            data?: {
-                                /** @description The unique identifier for the task */
-                                id?: components["schemas"]["GroupId"];
-                                /** @description The title of the task */
-                                title?: string;
-                                /** @description The task description */
-                                description?: string;
-                                /** @description The ID of the project the task belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
-                                /** @description The ID of the story the task belongs to */
-                                story_id?: components["schemas"]["StoryId"];
-                                /** @description The ID of the epic the task belongs to */
-                                epic_id?: components["schemas"]["EpicId"];
-                                /** @description The ID of the user assigned to the task */
-                                assignee_id?: components["schemas"]["UserId"];
-                                /** @description The estimated effort for the task */
-                                estimation?: number;
-                                /** @description The status of the task */
-                                status?: string;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        put?: never;
         /** Create a new task */
         post: {
             parameters: {
@@ -930,12 +869,8 @@ export interface paths {
                         title: string;
                         /** @description The task description */
                         description?: string;
-                        /** @description The project ID the task belongs to */
-                        project_id: components["schemas"]["ProjectId"];
                         /** @description The story ID the task belongs to */
                         story_id?: components["schemas"]["StoryId"];
-                        /** @description The epic ID the task belongs to */
-                        epic_id?: components["schemas"]["EpicId"];
                         /** @description The user ID the task is assigned to */
                         assignee_id?: components["schemas"]["UserId"];
                         /** @description The estimated effort for the task */
@@ -960,12 +895,8 @@ export interface paths {
                                 title?: string;
                                 /** @description The task description */
                                 description?: string;
-                                /** @description The ID of the project the task belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the story the task belongs to */
                                 story_id?: components["schemas"]["StoryId"];
-                                /** @description The ID of the epic the task belongs to */
-                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user assigned to the task */
                                 assignee_id?: components["schemas"]["UserId"];
                                 /** @description The estimated effort for the task */
@@ -1017,12 +948,8 @@ export interface paths {
                                 title?: string;
                                 /** @description The task description */
                                 description?: string;
-                                /** @description The ID of the project the task belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the story the task belongs to */
                                 story_id?: components["schemas"]["StoryId"];
-                                /** @description The ID of the epic the task belongs to */
-                                epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user assigned to the task */
                                 assignee_id?: components["schemas"]["UserId"];
                                 /** @description The estimated effort for the task */
@@ -1044,7 +971,61 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Update task by ID */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TaskId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the task */
+                        title?: string;
+                        /** @description The task description */
+                        description?: string;
+                        /** @description The user ID the task is assigned to */
+                        assignee_id?: components["schemas"]["UserId"];
+                        /** @description The estimated effort for the task */
+                        estimation?: number;
+                        /** @description The status of the task */
+                        status?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Task updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the story the task belongs to */
+                                story_id?: components["schemas"]["StoryId"];
+                                /** @description The ID of the user assigned to the task */
+                                assignee_id?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
+                    };
+                };
+            };
+        };
         post?: never;
         /** Delete a task by ID */
         delete: {
@@ -1265,12 +1246,8 @@ export interface components {
             title: string;
             /** @description The task description */
             description?: string;
-            /** @description The ID of the project the task belongs to */
-            project_id: components["schemas"]["ProjectId"];
             /** @description The ID of the story the task belongs to */
             story_id?: components["schemas"]["StoryId"];
-            /** @description The ID of the epic the task belongs to */
-            epic_id?: components["schemas"]["EpicId"];
             /** @description The ID of the user assigned to the task */
             assignee_id?: components["schemas"]["UserId"];
             /** @description The estimated effort for the task */

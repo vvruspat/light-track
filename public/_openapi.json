@@ -1617,29 +1617,11 @@
         "summary": "Get a list of tasks",
         "parameters": [
           {
-            "name": "project_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the project to filter by",
-              "type": "number"
-            }
-          },
-          {
             "name": "story_id",
             "in": "query",
             "required": false,
             "schema": {
               "description": "The ID of the story to filter by",
-              "type": "number"
-            }
-          },
-          {
-            "name": "epic_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the epic to filter by",
               "type": "number"
             }
           },
@@ -1659,15 +1641,6 @@
             "schema": {
               "description": "The ID of the user who owns the task",
               "type": "string"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the group which the task belongs to",
-              "type": "number"
             }
           },
           {
@@ -1764,16 +1737,8 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "project_id": {
-                    "description": "The project ID the task belongs to",
-                    "type": "number"
-                  },
                   "story_id": {
                     "description": "The story ID the task belongs to",
-                    "type": "number"
-                  },
-                  "epic_id": {
-                    "description": "The epic ID the task belongs to",
                     "type": "number"
                   },
                   "assignee_id": {
@@ -1791,7 +1756,6 @@
                 },
                 "required": [
                   "title",
-                  "project_id",
                   "status"
                 ]
               }
@@ -1837,134 +1801,8 @@
                               "type": "string",
                               "description": "The task description"
                             },
-                            "project_id": {
-                              "description": "The ID of the project the task belongs to",
-                              "type": "number"
-                            },
                             "story_id": {
                               "description": "The ID of the story the task belongs to",
-                              "type": "number"
-                            },
-                            "epic_id": {
-                              "description": "The ID of the epic the task belongs to",
-                              "type": "number"
-                            },
-                            "assignee_id": {
-                              "description": "The ID of the user assigned to the task",
-                              "type": "string"
-                            },
-                            "estimation": {
-                              "type": "number",
-                              "description": "The estimated effort for the task"
-                            },
-                            "status": {
-                              "type": "string",
-                              "description": "The status of the task"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Tasks"
-        ],
-        "summary": "Update task by ID",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "The task ID",
-                    "type": "number"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the task"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The task description"
-                  },
-                  "assignee_id": {
-                    "description": "The user ID the task is assigned to",
-                    "type": "string"
-                  },
-                  "estimation": {
-                    "type": "number",
-                    "description": "The estimated effort for the task"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the task"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Task updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "statusCode": {
-                          "type": "number"
-                        },
-                        "statusMessage": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      }
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the task",
-                              "type": "number"
-                            },
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the task"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The task description"
-                            },
-                            "project_id": {
-                              "description": "The ID of the project the task belongs to",
-                              "type": "number"
-                            },
-                            "story_id": {
-                              "description": "The ID of the story the task belongs to",
-                              "type": "number"
-                            },
-                            "epic_id": {
-                              "description": "The ID of the epic the task belongs to",
                               "type": "number"
                             },
                             "assignee_id": {
@@ -2047,16 +1885,8 @@
                               "type": "string",
                               "description": "The task description"
                             },
-                            "project_id": {
-                              "description": "The ID of the project the task belongs to",
-                              "type": "number"
-                            },
                             "story_id": {
                               "description": "The ID of the story the task belongs to",
-                              "type": "number"
-                            },
-                            "epic_id": {
-                              "description": "The ID of the epic the task belongs to",
                               "type": "number"
                             },
                             "assignee_id": {
@@ -2161,6 +1991,121 @@
                       "nullable": true
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The task ID",
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "assignee_id": {
+                    "description": "The user ID the task is assigned to",
+                    "type": "string"
+                  },
+                  "estimation": {
+                    "type": "number",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                },
+                "required": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the task",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the task"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The task description"
+                            },
+                            "story_id": {
+                              "description": "The ID of the story the task belongs to",
+                              "type": "number"
+                            },
+                            "assignee_id": {
+                              "description": "The ID of the user assigned to the task",
+                              "type": "string"
+                            },
+                            "estimation": {
+                              "type": "number",
+                              "description": "The estimated effort for the task"
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The status of the task"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -2550,16 +2495,8 @@
             "type": "string",
             "description": "The task description"
           },
-          "project_id": {
-            "description": "The ID of the project the task belongs to",
-            "type": "number"
-          },
           "story_id": {
             "description": "The ID of the story the task belongs to",
-            "type": "number"
-          },
-          "epic_id": {
-            "description": "The ID of the epic the task belongs to",
             "type": "number"
           },
           "assignee_id": {

@@ -117,11 +117,9 @@ export type Database = {
           assignee_id: string
           created_at: string
           description: string
-          epic_id: number
           estimation: number
           id: number
           owner_id: string
-          project_id: number
           status: string
           story_id: number
           title: string
@@ -131,11 +129,9 @@ export type Database = {
           assignee_id: string
           created_at?: string
           description: string
-          epic_id: number
           estimation: number
           id?: number
           owner_id: string
-          project_id: number
           status: string
           story_id: number
           title: string
@@ -145,31 +141,15 @@ export type Database = {
           assignee_id?: string
           created_at?: string
           description?: string
-          epic_id?: number
           estimation?: number
           id?: number
           owner_id?: string
-          project_id?: number
           status?: string
           story_id?: number
           title?: string
           updated_at?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "tasks_epicId_fkey"
-            columns: ["epic_id"]
-            isOneToOne: false
-            referencedRelation: "epics"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "tasks_projectId_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "tasks_storyId_fkey"
             columns: ["story_id"]

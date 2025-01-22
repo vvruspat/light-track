@@ -8,30 +8,12 @@
         "summary": "Get a list of tasks",
         "parameters": [
           {
-            "name": "project_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-              "description": "The ID of the project to filter by"
-            }
-          },
-          {
             "name": "story_id",
             "in": "query",
             "required": false,
             "schema": {
               "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
               "description": "The ID of the story to filter by"
-            }
-          },
-          {
-            "name": "epic_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
-              "description": "The ID of the epic to filter by"
             }
           },
           {
@@ -50,15 +32,6 @@
             "schema": {
               "$ref": "./atoms/userId.json#/components/schemas/UserId",
               "description": "The ID of the user who owns the task"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-              "description": "The ID of the group which the task belongs to"
             }
           },
           {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
@@ -109,17 +82,9 @@
                     "type": "string",
                     "description": "The task description"
                   },
-                  "project_id": {
-                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-                    "description": "The project ID the task belongs to"
-                  },
                   "story_id": {
                     "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
                     "description": "The story ID the task belongs to"
-                  },
-                  "epic_id": {
-                    "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
-                    "description": "The epic ID the task belongs to"
                   },
                   "assignee_id": {
                     "$ref": "./atoms/userId.json#/components/schemas/UserId",
@@ -136,7 +101,6 @@
                 },
                 "required": [
                   "title",
-                  "project_id",
                   "status"
                 ]
               }
@@ -146,77 +110,6 @@
         "responses": {
           "201": {
             "description": "Task created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Tasks"
-        ],
-        "summary": "Update task by ID",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
-                    "description": "The task ID"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the task"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The task description"
-                  },
-                  "assignee_id": {
-                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
-                    "description": "The user ID the task is assigned to"
-                  },
-                  "estimation": {
-                    "type": "number",
-                    "description": "The estimated effort for the task"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the task"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Task updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -329,6 +222,82 @@
               "application/json": {
                 "schema": {
                   "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update task by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/taskId.json#/components/schemas/TaskId",
+              "description": "The task ID"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The task description"
+                  },
+                  "assignee_id": {
+                    "$ref": "./atoms/userId.json#/components/schemas/UserId",
+                    "description": "The user ID the task is assigned to"
+                  },
+                  "estimation": {
+                    "type": "number",
+                    "description": "The estimated effort for the task"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the task"
+                  }
+                },
+                "required": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/task.json#/components/schemas/Task/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }

@@ -1,4 +1,4 @@
-import { defineEventHandler, createError, getRouterParam } from "h3";
+import { defineEventHandler, getRouterParam } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
 import type { Database } from "~/types/database.types";
 import type { ProjectGetByIdResponse } from "~/types/api";

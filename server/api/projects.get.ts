@@ -19,8 +19,18 @@ export default defineEventHandler(
     const client = await serverSupabaseClient<Database>(event);
     const user = await serverSupabaseUser(event);
 
+    if (!user) {
+      return {
+        statusCode: 401,
+        statusMessage: "Unauthorized",
+        message: "Authentication is required",
+      };
+    }
+
+    const ownerId = owner_id ?? user.id;
+
     // Ensure the user is authenticated
-    if (!group_id && !owner_id) {
+    if (!group_id && !ownerId) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -32,7 +42,7 @@ export default defineEventHandler(
       .from("projects")
       .select()
       .filter("group_id", "eq", group_id)
-      .filter("owner_id", "eq", owner_id)
+      .filter("owner_id", "eq", ownerId)
       .range(offset, limit + offset)
       .order(sort, { ascending: direction === "asc" });
 

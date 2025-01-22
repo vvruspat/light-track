@@ -60,7 +60,7 @@
             "schema": {
               "type": "number",
               "description": "Number of items to return",
-              "default": 10
+              "default": 50
             }
           },
           {
@@ -129,6 +129,10 @@
                           "group_id": {
                             "description": "The ID of the group the project belongs to",
                             "type": "number"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "The date and time the project was created"
                           }
                         },
                         "required": [
@@ -233,118 +237,10 @@
                             "group_id": {
                               "description": "The ID of the group the project belongs to",
                               "type": "number"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {
-                      "type": "number"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Projects"
-        ],
-        "summary": "Update project by ID",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "The ID of the project",
-                    "type": "number"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the project"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The project description"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Project updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "statusCode": {
-                          "type": "number"
-                        },
-                        "statusMessage": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      }
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the project",
-                              "type": "number"
                             },
-                            "title": {
+                            "created_at": {
                               "type": "string",
-                              "description": "The title of the project"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The project description"
-                            },
-                            "owner_id": {
-                              "description": "The ID of the project owner",
-                              "type": "string"
-                            },
-                            "group_id": {
-                              "description": "The ID of the group the project belongs to",
-                              "type": "number"
+                              "description": "The date and time the project was created"
                             }
                           }
                         }
@@ -443,6 +339,10 @@
                             "group_id": {
                               "description": "The ID of the group the project belongs to",
                               "type": "number"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "description": "The date and time the project was created"
                             }
                           }
                         }
@@ -565,6 +465,126 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Update project by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the project",
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the project"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The project description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the project",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the project"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The project description"
+                            },
+                            "owner_id": {
+                              "description": "The ID of the project owner",
+                              "type": "string"
+                            },
+                            "group_id": {
+                              "description": "The ID of the group the project belongs to",
+                              "type": "number"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "description": "The date and time the project was created"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/epics": {
@@ -607,7 +627,7 @@
             "schema": {
               "type": "number",
               "description": "Number of items to return",
-              "default": 10
+              "default": 50
             }
           },
           {
@@ -1144,7 +1164,7 @@
             "schema": {
               "type": "number",
               "description": "Number of items to return",
-              "default": 10
+              "default": 50
             }
           },
           {
@@ -1710,7 +1730,7 @@
             "schema": {
               "type": "number",
               "description": "Number of items to return",
-              "default": 10
+              "default": 50
             }
           },
           {
@@ -2410,7 +2430,7 @@
             "schema": {
               "type": "number",
               "description": "Number of items to return",
-              "default": 10
+              "default": 50
             }
           },
           "offset": {
@@ -2474,6 +2494,10 @@
           "group_id": {
             "description": "The ID of the group the project belongs to",
             "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time the project was created"
           }
         },
         "required": [
@@ -2636,7 +2660,7 @@
         "schema": {
           "type": "number",
           "description": "Number of items to return",
-          "default": 10
+          "default": 50
         }
       },
       "offset": {

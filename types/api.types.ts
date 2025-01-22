@@ -44,60 +44,7 @@ export interface paths {
                 };
             };
         };
-        /** Update project by ID */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The ID of the project */
-                        id: components["schemas"]["ProjectId"];
-                        /** @description The title of the project */
-                        title?: string;
-                        /** @description The project description */
-                        description?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description Project updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"] & {
-                            data?: {
-                                /** @description The unique identifier for the project */
-                                id?: components["schemas"]["ProjectId"];
-                                /** @description The title of the project */
-                                title?: string;
-                                /** @description The project description */
-                                description?: string;
-                                /** @description The ID of the project owner */
-                                owner_id?: components["schemas"]["UserId"];
-                                /** @description The ID of the group the project belongs to */
-                                group_id?: components["schemas"]["GroupId"];
-                            };
-                        };
-                    };
-                };
-                /** @description Bad request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"];
-                    };
-                };
-            };
-        };
+        put?: never;
         /** Create a new project */
         post: {
             parameters: {
@@ -137,6 +84,8 @@ export interface paths {
                                 owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the group the project belongs to */
                                 group_id?: components["schemas"]["GroupId"];
+                                /** @description The date and time the project was created */
+                                created_at?: string;
                             };
                         };
                     };
@@ -195,6 +144,8 @@ export interface paths {
                                 owner_id?: components["schemas"]["UserId"];
                                 /** @description The ID of the group the project belongs to */
                                 group_id?: components["schemas"]["GroupId"];
+                                /** @description The date and time the project was created */
+                                created_at?: string;
                             };
                         };
                     };
@@ -219,7 +170,62 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Update project by ID */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the project */
+                        title?: string;
+                        /** @description The project description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Project updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id?: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title?: string;
+                                /** @description The project description */
+                                description?: string;
+                                /** @description The ID of the project owner */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the group the project belongs to */
+                                group_id?: components["schemas"]["GroupId"];
+                                /** @description The date and time the project was created */
+                                created_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         post?: never;
         /** Delete project by ID */
         delete: {
@@ -1218,6 +1224,8 @@ export interface components {
             owner_id?: components["schemas"]["UserId"];
             /** @description The ID of the group the project belongs to */
             group_id: components["schemas"]["GroupId"];
+            /** @description The date and time the project was created */
+            created_at?: string;
         };
         Epic: {
             /** @description The unique identifier for the epic */

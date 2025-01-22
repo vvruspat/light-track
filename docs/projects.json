@@ -115,71 +115,6 @@
             }
           }
         }
-      },
-      "put": {
-        "tags": ["Projects"],
-        "summary": "Update project by ID",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-                    "description": "The ID of the project"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the project"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The project description"
-                  }
-                },
-                "required": ["id"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Project updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/project.json#/components/schemas/Project/properties"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/projects/{id}": {
@@ -275,6 +210,77 @@
           },
           "404": {
             "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Projects"],
+        "summary": "Update project by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the project"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The project description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/project.json#/components/schemas/Project/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {

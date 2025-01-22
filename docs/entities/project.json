@@ -23,6 +23,10 @@
           "group_id": {
             "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
             "description": "The ID of the group the project belongs to"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time the project was created"
           }
         },
         "required": [

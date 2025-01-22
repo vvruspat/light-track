@@ -16,10 +16,6 @@
             "type": "string",
             "description": "The story description"
           },
-          "project_id": {
-            "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
-            "description": "The ID of the project the story belongs to"
-          },
           "epic_id": {
             "$ref": "../atoms/epicId.json#/components/schemas/EpicId",
             "description": "The ID of the epic the story belongs to"
@@ -42,7 +38,6 @@
         "required": [
           "id",
           "title",
-          "project_id",
           "owner_id",
           "created_at",
           "updated_at"

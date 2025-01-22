@@ -1,15 +1,15 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
 import { Database } from "@/types/database.types";
-import { EpicPostRequest, EpicPostResponse } from "@/types/api";
+import { StoryPostRequest, StoryPostResponse } from "@/types/api";
 import { paths } from "@/public/_openapi.json";
 import Ajv from "ajv";
 
 export default defineEventHandler(
-  async (event): Promise<EpicPostResponse> => {
-    const body = await readValidatedBody<EpicPostRequest>(event, (b) => {
+  async (event): Promise<StoryPostResponse> => {
+    const body = await readValidatedBody<StoryPostRequest>(event, (b) => {
       const ajv = new Ajv();
-      const schema = paths["/epics"]["post"]["requestBody"]["content"]["application/json"].schema;
+      const schema = paths["/stories"]["post"]["requestBody"]["content"]["application/json"].schema;
       const valid = ajv.validate(schema, b);
 
       if (!valid) {
@@ -30,7 +30,7 @@ export default defineEventHandler(
       };
     }
 
-    if (!body.project_id) {
+    if (!body.epic_id) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -39,14 +39,15 @@ export default defineEventHandler(
     }
 
     // Create the epic (this is a placeholder, replace with actual logic)
-    const newEpic: Database["public"]["Tables"]["epics"]["Insert"] = {
+    const newEpic: Database["public"]["Tables"]["stories"]["Insert"] = {
       owner_id: user.id,
       ...body,
+      epic_id: body.epic_id,
       description: body.description ?? "",
     };
 
     const { data, error } = await client
-      .from("epics")
+      .from("stories")
       .insert([newEpic])
       .select()
       .single();

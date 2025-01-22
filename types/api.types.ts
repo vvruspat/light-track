@@ -549,10 +549,7 @@ export interface paths {
         get: {
             parameters: {
                 query?: {
-                    group_id?: components["schemas"]["GroupId"];
-                    project_id?: components["schemas"]["ProjectId"];
                     epic_id?: components["schemas"]["EpicId"];
-                    owner_id?: components["schemas"]["UserId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -580,72 +577,7 @@ export interface paths {
                 };
             };
         };
-        /** Update story */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The ID of the story */
-                        id: components["schemas"]["StoryId"];
-                        /** @description The title of the story */
-                        title?: string;
-                        /** @description The story description */
-                        description?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description Story updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"] & {
-                            data?: {
-                                /** @description The unique identifier for the story */
-                                id?: components["schemas"]["GroupId"];
-                                /** @description The title of the story */
-                                title?: string;
-                                /** @description The story description */
-                                description?: string;
-                                /** @description The ID of the project the story belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
-                                /** @description The ID of the epic the story belongs to */
-                                epic_id?: components["schemas"]["EpicId"];
-                                /** @description The ID of the user who owns the story */
-                                owner_id?: components["schemas"]["UserId"];
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time when the story was created
-                                 */
-                                created_at?: string;
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time when the story was last updated
-                                 */
-                                updated_at?: string;
-                            };
-                        };
-                    };
-                };
-                /** @description Invalid input */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"];
-                    };
-                };
-            };
-        };
+        put?: never;
         /** Create a new story */
         post: {
             parameters: {
@@ -661,8 +593,6 @@ export interface paths {
                         title: string;
                         /** @description The story description */
                         description?: string;
-                        /** @description The ID of the project the story belongs to */
-                        project_id: components["schemas"]["ProjectId"];
                         /** @description The ID of the epic the story belongs to */
                         epic_id?: components["schemas"]["EpicId"];
                     };
@@ -683,8 +613,6 @@ export interface paths {
                                 title?: string;
                                 /** @description The story description */
                                 description?: string;
-                                /** @description The ID of the project the story belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the epic the story belongs to */
                                 epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user who owns the story */
@@ -753,8 +681,6 @@ export interface paths {
                                 title?: string;
                                 /** @description The story description */
                                 description?: string;
-                                /** @description The ID of the project the story belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
                                 /** @description The ID of the epic the story belongs to */
                                 epic_id?: components["schemas"]["EpicId"];
                                 /** @description The ID of the user who owns the story */
@@ -784,7 +710,70 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Update story */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the story */
+                        title?: string;
+                        /** @description The story description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Story updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["GroupId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the epic the story belongs to */
+                                epic_id?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                owner_id?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Invalid input */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         post?: never;
         /** Delete story by ID */
         delete: {
@@ -1254,8 +1243,6 @@ export interface components {
             title: string;
             /** @description The story description */
             description?: string;
-            /** @description The ID of the project the story belongs to */
-            project_id: components["schemas"]["ProjectId"];
             /** @description The ID of the epic the story belongs to */
             epic_id?: components["schemas"]["EpicId"];
             /** @description The ID of the user who owns the story */

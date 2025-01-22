@@ -1109,39 +1109,12 @@
         "summary": "Get a list of stories",
         "parameters": [
           {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the group to filter by",
-              "type": "number"
-            }
-          },
-          {
-            "name": "project_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the project to filter by",
-              "type": "number"
-            }
-          },
-          {
             "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
               "description": "The ID of the epic to filter by",
               "type": "number"
-            }
-          },
-          {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the user who owns the project",
-              "type": "string"
             }
           },
           {
@@ -1238,18 +1211,13 @@
                     "type": "string",
                     "description": "The story description"
                   },
-                  "project_id": {
-                    "description": "The ID of the project the story belongs to",
-                    "type": "number"
-                  },
                   "epic_id": {
                     "description": "The ID of the epic the story belongs to",
                     "type": "number"
                   }
                 },
                 "required": [
-                  "title",
-                  "project_id"
+                  "title"
                 ]
               }
             }
@@ -1293,136 +1261,6 @@
                             "description": {
                               "type": "string",
                               "description": "The story description"
-                            },
-                            "project_id": {
-                              "description": "The ID of the project the story belongs to",
-                              "type": "number"
-                            },
-                            "epic_id": {
-                              "description": "The ID of the epic the story belongs to",
-                              "type": "number"
-                            },
-                            "owner_id": {
-                              "description": "The ID of the user who owns the story",
-                              "type": "string"
-                            },
-                            "created_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "The date and time when the story was created"
-                            },
-                            "updated_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "The date and time when the story was last updated"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {
-                      "type": "number"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Stories"
-        ],
-        "summary": "Update story",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "The ID of the story",
-                    "type": "number"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the story"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The story description"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Story updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "statusCode": {
-                          "type": "number"
-                        },
-                        "statusMessage": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      }
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the story",
-                              "type": "number"
-                            },
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the story"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The story description"
-                            },
-                            "project_id": {
-                              "description": "The ID of the project the story belongs to",
-                              "type": "number"
                             },
                             "epic_id": {
                               "description": "The ID of the epic the story belongs to",
@@ -1532,10 +1370,6 @@
                               "type": "string",
                               "description": "The story description"
                             },
-                            "project_id": {
-                              "description": "The ID of the project the story belongs to",
-                              "type": "number"
-                            },
                             "epic_id": {
                               "description": "The ID of the epic the story belongs to",
                               "type": "number"
@@ -1641,6 +1475,132 @@
                   "message": {
                     "type": "string",
                     "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Update story",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the story",
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the story"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The story description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Story updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the story",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the story"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The story description"
+                            },
+                            "epic_id": {
+                              "description": "The ID of the epic the story belongs to",
+                              "type": "number"
+                            },
+                            "owner_id": {
+                              "description": "The ID of the user who owns the story",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was created"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the story was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
                   }
                 }
               }
@@ -2548,10 +2508,6 @@
             "type": "string",
             "description": "The story description"
           },
-          "project_id": {
-            "description": "The ID of the project the story belongs to",
-            "type": "number"
-          },
           "epic_id": {
             "description": "The ID of the epic the story belongs to",
             "type": "number"
@@ -2574,7 +2530,6 @@
         "required": [
           "id",
           "title",
-          "project_id",
           "owner_id",
           "created_at",
           "updated_at"

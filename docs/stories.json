@@ -6,39 +6,12 @@
         "summary": "Get a list of stories",
         "parameters": [
           {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-              "description": "The ID of the group to filter by"
-            }
-          },
-          {
-            "name": "project_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-              "description": "The ID of the project to filter by"
-            }
-          },
-          {
             "name": "epic_id",
             "in": "query",
             "required": false,
             "schema": {
               "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
               "description": "The ID of the epic to filter by"
-            }
-          },
-          {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/userId.json#/components/schemas/UserId",
-              "description": "The ID of the user who owns the project"
             }
           },
           {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
@@ -89,18 +62,13 @@
                     "type": "string",
                     "description": "The story description"
                   },
-                  "project_id": {
-                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
-                    "description": "The ID of the project the story belongs to"
-                  },
                   "epic_id": {
                     "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
                     "description": "The ID of the epic the story belongs to"
                   }
                 },
                 "required": [
-                  "title",
-                  "project_id"
+                  "title"
                 ]
               }
             }
@@ -109,75 +77,6 @@
         "responses": {
           "201": {
             "description": "Story created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/story.json#/components/schemas/Story/properties"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Stories"
-        ],
-        "summary": "Update story",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
-                    "description": "The ID of the story"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the story"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The story description"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Story updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -304,6 +203,79 @@
               "application/json": {
                 "schema": {
                   "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse/properties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Update story",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/storyId.json#/components/schemas/StoryId",
+              "description": "The ID of the story"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the story"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The story description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Story updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/story.json#/components/schemas/Story/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
                 }
               }
             }

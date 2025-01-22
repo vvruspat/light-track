@@ -12,30 +12,30 @@ export type Database = {
       epics: {
         Row: {
           created_at: string
-          description: string | null
+          description: string
           id: number
-          owner_id: string | null
+          owner_id: string
           project_id: number
           title: string
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
           created_at?: string
-          description?: string | null
+          description: string
           id?: number
-          owner_id?: string | null
+          owner_id: string
           project_id: number
           title: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
           created_at?: string
-          description?: string | null
+          description?: string
           id?: number
-          owner_id?: string | null
+          owner_id?: string
           project_id?: number
           title?: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
@@ -77,30 +77,30 @@ export type Database = {
       stories: {
         Row: {
           created_at: string
-          description: string | null
+          description: string
           epic_id: number
           id: number
           owner_id: string
           title: string
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
           created_at?: string
-          description?: string | null
+          description: string
           epic_id: number
           id?: number
           owner_id: string
           title: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
           created_at?: string
-          description?: string | null
+          description?: string
           epic_id?: number
           id?: number
           owner_id?: string
           title?: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
@@ -114,46 +114,46 @@ export type Database = {
       }
       tasks: {
         Row: {
-          assignee_id: string | null
+          assignee_id: string
           created_at: string
-          description: string | null
-          epic_id: number | null
-          estimation: number | null
+          description: string
+          epic_id: number
+          estimation: number
           id: number
           owner_id: string
-          project_id: number | null
-          status: string | null
-          story_id: number | null
+          project_id: number
+          status: string
+          story_id: number
           title: string
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
-          assignee_id?: string | null
+          assignee_id: string
           created_at?: string
-          description?: string | null
-          epic_id?: number | null
-          estimation?: number | null
+          description: string
+          epic_id: number
+          estimation: number
           id?: number
           owner_id: string
-          project_id?: number | null
-          status?: string | null
-          story_id?: number | null
+          project_id: number
+          status: string
+          story_id: number
           title: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
-          assignee_id?: string | null
+          assignee_id?: string
           created_at?: string
-          description?: string | null
-          epic_id?: number | null
-          estimation?: number | null
+          description?: string
+          epic_id?: number
+          estimation?: number
           id?: number
           owner_id?: string
-          project_id?: number | null
-          status?: string | null
-          story_id?: number | null
+          project_id?: number
+          status?: string
+          story_id?: number
           title?: string
-          updated_at?: string | null
+          updated_at?: string
         }
         Relationships: [
           {

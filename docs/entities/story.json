@@ -28,12 +28,12 @@
             "$ref": "../atoms/userId.json#/components/schemas/UserId",
             "description": "The ID of the user who owns the story"
           },
-          "createdAt": {
+          "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the story was created"
           },
-          "updatedAt": {
+          "updated_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the story was last updated"
@@ -44,8 +44,8 @@
           "title",
           "project_id",
           "owner_id",
-          "createdAt",
-          "updatedAt"
+          "created_at",
+          "updated_at"
         ]
       }
     }

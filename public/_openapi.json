@@ -604,24 +604,6 @@
             }
           },
           {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the user who owns the epic",
-              "type": "string"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the group which the epic belongs to",
-              "type": "number"
-            }
-          },
-          {
             "name": "limit",
             "in": "query",
             "schema": {
@@ -774,134 +756,12 @@
                               "description": "The ID of the project the epic belongs to",
                               "type": "number"
                             },
-                            "createdAt": {
+                            "created_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the epic was created"
                             },
-                            "updatedAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "The date and time when the epic was last updated"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {
-                      "type": "number"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Epics"
-        ],
-        "summary": "Update epic by id",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "The ID of the epic to update",
-                    "type": "number"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the epic"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The epic description"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Epic updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "statusCode": {
-                          "type": "number"
-                        },
-                        "statusMessage": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      }
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the epic",
-                              "type": "number"
-                            },
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the epic"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The epic description"
-                            },
-                            "owner_id": {
-                              "description": "The ID of the user who owns the epic",
-                              "type": "string"
-                            },
-                            "project_id": {
-                              "description": "The ID of the project the epic belongs to",
-                              "type": "number"
-                            },
-                            "createdAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "The date and time when the epic was created"
-                            },
-                            "updatedAt": {
+                            "updated_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the epic was last updated"
@@ -1004,12 +864,12 @@
                               "description": "The ID of the project the epic belongs to",
                               "type": "number"
                             },
-                            "createdAt": {
+                            "created_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the epic was created"
                             },
-                            "updatedAt": {
+                            "updated_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the epic was last updated"
@@ -1092,6 +952,132 @@
           },
           "404": {
             "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Update epic by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the epic to update",
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Epic updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The unique identifier for the epic",
+                              "type": "number"
+                            },
+                            "title": {
+                              "type": "string",
+                              "description": "The title of the epic"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The epic description"
+                            },
+                            "owner_id": {
+                              "description": "The ID of the user who owns the epic",
+                              "type": "string"
+                            },
+                            "project_id": {
+                              "description": "The ID of the project the epic belongs to",
+                              "type": "number"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was created"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The date and time when the epic was last updated"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
@@ -1320,12 +1306,12 @@
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
-                            "createdAt": {
+                            "created_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was created"
                             },
-                            "updatedAt": {
+                            "updated_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was last updated"
@@ -1446,12 +1432,12 @@
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
-                            "createdAt": {
+                            "created_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was created"
                             },
-                            "updatedAt": {
+                            "updated_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was last updated"
@@ -1558,12 +1544,12 @@
                               "description": "The ID of the user who owns the story",
                               "type": "string"
                             },
-                            "createdAt": {
+                            "created_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was created"
                             },
-                            "updatedAt": {
+                            "updated_at": {
                               "type": "string",
                               "format": "date-time",
                               "description": "The date and time when the story was last updated"
@@ -2528,12 +2514,12 @@
             "description": "The ID of the project the epic belongs to",
             "type": "number"
           },
-          "createdAt": {
+          "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the epic was created"
           },
-          "updatedAt": {
+          "updated_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the epic was last updated"
@@ -2543,8 +2529,8 @@
           "id",
           "title",
           "project_id",
-          "createdAt",
-          "updatedAt"
+          "created_at",
+          "updated_at"
         ]
       },
       "Story": {
@@ -2574,12 +2560,12 @@
             "description": "The ID of the user who owns the story",
             "type": "string"
           },
-          "createdAt": {
+          "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the story was created"
           },
-          "updatedAt": {
+          "updated_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the story was last updated"
@@ -2590,8 +2576,8 @@
           "title",
           "project_id",
           "owner_id",
-          "createdAt",
-          "updatedAt"
+          "created_at",
+          "updated_at"
         ]
       },
       "Task": {

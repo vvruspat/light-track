@@ -24,18 +24,18 @@
             "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
             "description": "The ID of the project the epic belongs to"
           },
-          "createdAt": {
+          "created_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the epic was created"
           },
-          "updatedAt": {
+          "updated_at": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time when the epic was last updated"
           }
         },
-        "required": ["id", "title", "project_id", "createdAt", "updatedAt"]
+        "required": ["id", "title", "project_id", "created_at", "updated_at"]
       }
     }
   }

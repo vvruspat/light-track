@@ -276,8 +276,6 @@ export interface paths {
             parameters: {
                 query?: {
                     project_id?: components["schemas"]["ProjectId"];
-                    owner_id?: components["schemas"]["UserId"];
-                    group_id?: components["schemas"]["GroupId"];
                     limit?: components["parameters"]["limit"];
                     offset?: components["parameters"]["offset"];
                     sort?: components["parameters"]["sort"];
@@ -305,70 +303,7 @@ export interface paths {
                 };
             };
         };
-        /** Update epic by id */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The ID of the epic to update */
-                        id: components["schemas"]["EpicId"];
-                        /** @description The title of the epic */
-                        title?: string;
-                        /** @description The epic description */
-                        description?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description Epic updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"] & {
-                            data?: {
-                                /** @description The unique identifier for the epic */
-                                id?: components["schemas"]["EpicId"];
-                                /** @description The title of the epic */
-                                title?: string;
-                                /** @description The epic description */
-                                description?: string;
-                                /** @description The ID of the user who owns the epic */
-                                owner_id?: components["schemas"]["UserId"];
-                                /** @description The ID of the project the epic belongs to */
-                                project_id?: components["schemas"]["ProjectId"];
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time when the epic was created
-                                 */
-                                createdAt?: string;
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time when the epic was last updated
-                                 */
-                                updatedAt?: string;
-                            };
-                        };
-                    };
-                };
-                /** @description Bad request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericResponse"];
-                    };
-                };
-            };
-        };
+        put?: never;
         /** Create a new epic */
         post: {
             parameters: {
@@ -412,12 +347,12 @@ export interface paths {
                                  * Format: date-time
                                  * @description The date and time when the epic was created
                                  */
-                                createdAt?: string;
+                                created_at?: string;
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the epic was last updated
                                  */
-                                updatedAt?: string;
+                                updated_at?: string;
                             };
                         };
                     };
@@ -480,12 +415,12 @@ export interface paths {
                                  * Format: date-time
                                  * @description The date and time when the epic was created
                                  */
-                                createdAt?: string;
+                                created_at?: string;
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the epic was last updated
                                  */
-                                updatedAt?: string;
+                                updated_at?: string;
                             };
                         };
                     };
@@ -501,7 +436,70 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Update epic by id */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the epic */
+                        title?: string;
+                        /** @description The epic description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Epic updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                project_id?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
         post?: never;
         /** Delete an epic by ID */
         delete: {
@@ -627,12 +625,12 @@ export interface paths {
                                  * Format: date-time
                                  * @description The date and time when the story was created
                                  */
-                                createdAt?: string;
+                                created_at?: string;
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was last updated
                                  */
-                                updatedAt?: string;
+                                updated_at?: string;
                             };
                         };
                     };
@@ -695,12 +693,12 @@ export interface paths {
                                  * Format: date-time
                                  * @description The date and time when the story was created
                                  */
-                                createdAt?: string;
+                                created_at?: string;
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was last updated
                                  */
-                                updatedAt?: string;
+                                updated_at?: string;
                             };
                         };
                     };
@@ -765,12 +763,12 @@ export interface paths {
                                  * Format: date-time
                                  * @description The date and time when the story was created
                                  */
-                                createdAt?: string;
+                                created_at?: string;
                                 /**
                                  * Format: date-time
                                  * @description The date and time when the story was last updated
                                  */
-                                updatedAt?: string;
+                                updated_at?: string;
                             };
                         };
                     };
@@ -1242,12 +1240,12 @@ export interface components {
              * Format: date-time
              * @description The date and time when the epic was created
              */
-            createdAt: string;
+            created_at: string;
             /**
              * Format: date-time
              * @description The date and time when the epic was last updated
              */
-            updatedAt: string;
+            updated_at: string;
         };
         Story: {
             /** @description The unique identifier for the story */
@@ -1266,12 +1264,12 @@ export interface components {
              * Format: date-time
              * @description The date and time when the story was created
              */
-            createdAt: string;
+            created_at: string;
             /**
              * Format: date-time
              * @description The date and time when the story was last updated
              */
-            updatedAt: string;
+            updated_at: string;
         };
         Task: {
             /** @description The unique identifier for the task */

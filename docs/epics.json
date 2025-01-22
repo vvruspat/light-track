@@ -16,24 +16,6 @@
               "description": "The ID of the project to filter by"
             }
           },
-          {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/userId.json#/components/schemas/UserId",
-              "description": "The ID of the user who owns the epic"
-            }
-          },
-          {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-              "description": "The ID of the group which the epic belongs to"
-            }
-          },
 
           {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
           {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
@@ -98,75 +80,6 @@
         "responses": {
           "201": {
             "description": "Epic created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/epic.json#/components/schemas/Epic/properties"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Epics"
-        ],
-        "summary": "Update epic by id",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
-                    "description": "The ID of the epic to update"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the epic"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The epic description"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Epic updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -289,6 +202,79 @@
           },
           "404": {
             "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Epics"
+        ],
+        "summary": "Update epic by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/epicId.json#/components/schemas/EpicId",
+              "description": "The ID of the epic to update"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The title of the epic"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The epic description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Epic updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/epic.json#/components/schemas/Epic/properties"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {

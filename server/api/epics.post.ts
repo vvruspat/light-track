@@ -1,15 +1,15 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
 import { Database } from "@/types/database.types";
-import { ProjectPostRequest, ProjectPostResponse } from "@/types/api";
+import { EpicPostRequest, EpicPostResponse } from "@/types/api";
+import { paths } from "@/public/_openapi.json";
 import Ajv from "ajv";
-import { paths } from "~/public/_openapi.json";
 
 export default defineEventHandler(
-  async (event): Promise<ProjectPostResponse> => {
-    const body = await readValidatedBody<ProjectPostRequest>(event, (b) => {
+  async (event): Promise<EpicPostResponse> => {
+    const body = await readValidatedBody<EpicPostRequest>(event, (b) => {
       const ajv = new Ajv();
-      const schema = paths["/projects"]["post"]["requestBody"]["content"]["application/json"].schema;
+      const schema = paths["/projects/{id}"]["put"]["requestBody"]["content"]["application/json"].schema;
       const valid = ajv.validate(schema, b);
 
       if (!valid) {
@@ -30,34 +30,24 @@ export default defineEventHandler(
       };
     }
 
-    // Validate the request body
-    if (!body.title) {
+    if (!body.project_id) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
-        message: "Title is required",
+        message: "Project ID is required",
       };
     }
 
-    if (!body.group_id) {
-      return {
-        statusCode: 400,
-        statusMessage: "Bad Request",
-        message: "Group ID is required",
-      };
-    }
-
-    // Create the project (this is a placeholder, replace with actual logic)
-    const newProject: Database["public"]["Tables"]["projects"]["Insert"] = {
-      title: body.title,
-      description: body.description || "",
-      group_id: body.group_id,
+    // Create the epic (this is a placeholder, replace with actual logic)
+    const newEpic: Database["public"]["Tables"]["epics"]["Insert"] = {
       owner_id: user.id,
+      ...body,
+      description: body.description ?? "",
     };
 
     const { data, error } = await client
-      .from("projects")
-      .insert([newProject])
+      .from("epics")
+      .insert([newEpic])
       .select()
       .single();
 
@@ -65,7 +55,7 @@ export default defineEventHandler(
       throw createError({ statusMessage: error.message });
     }
 
-    // Return the created project
+    // Return the created epic
     return {
       statusCode: 201,
       statusMessage: "Created",

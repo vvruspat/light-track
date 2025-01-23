@@ -1,8 +1,8 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import { Database } from "@/types/database.types";
-import { EpicPostRequest, EpicPostResponse } from "@/types/api";
-import { paths } from "@/public/_openapi.json";
+import { Database } from "~/types/database.types";
+import { EpicPostRequest, EpicPostResponse } from "~/types/api";
+import { paths } from "~/public/_openapi.json";
 import Ajv from "ajv";
 
 export default defineEventHandler(

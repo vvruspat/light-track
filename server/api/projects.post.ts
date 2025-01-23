@@ -1,7 +1,7 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import { Database } from "@/types/database.types";
-import { ProjectPostRequest, ProjectPostResponse } from "@/types/api";
+import { Database } from "~/types/database.types";
+import { ProjectPostRequest, ProjectPostResponse } from "~/types/api";
 import Ajv from "ajv";
 import { paths } from "~/public/_openapi.json";
 

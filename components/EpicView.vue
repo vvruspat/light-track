@@ -1,55 +1,39 @@
 <script setup lang="ts">
-import StoryMenu from '~/components/StoryMenu.vue';
+import StoryView from "~/components/StoryView.vue";
+import EpicMenu from "~/components/EpicMenu.vue";
+const num =  Math.round(Math.random() * 10);
 </script>
 
 <template>
-    <Stack direction="column" class="w-full h-full">
-        <h2 class="py-4">Epic</h2>
+  <div class="w-full h-full max-h-full">
+    <Stack direction="column" justify="stretch">
+      <Stack
+        direction="row"
+        justify="between"
+        alignItems="center"
+        class="w-full"
+      >
+        <h2 class="px-3 py-4">Epic {{ Math.floor(Math.random() * 10000) }}</h2>
+        <EpicMenu />
+      </Stack>
 
-        <Stack direction="column" alignItems="stretch" class="w-full" spacing="4">
-            <UCard>
-                <template #header>
-                    <Stack direction="row" justify="between" class="w-full">
-                        <h3>Story 1</h3>
-                        <StoryMenu />
-                    </Stack>
-                </template>
+      <div class="mb-4">
+        <UAccordion
+          color="sky"
+          variant="link"
+          size="sm"
+          :items="[
+            {
+              label: 'Description',
+              content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+            },
+          ]"
+        />
+      </div>
 
-                <Stack direction="row" class="w-full" wrap="wrap">
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                </Stack>
-            </UCard>
-
-
-            <UCard>
-                <template #header>
-                    <Stack direction="row" justify="between" class="w-full">
-                        <h3>Story 2</h3>
-                        <StoryMenu />
-                    </Stack>
-                </template>
-
-                <Stack direction="row" class="w-full" wrap="wrap">
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                    <TaskView />
-                </Stack>
-            </UCard>
-
-        </Stack>
+      <Stack direction="column" alignItems="stretch" spacing="4">
+        <StoryView v-for="index in num" :key="index" />
+      </Stack>
     </Stack>
+  </div>
 </template>

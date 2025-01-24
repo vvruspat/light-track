@@ -24,7 +24,7 @@ const items = [
     </template>
 
     <template #prev="{ onClick, disabled }">
-        <UButton label="Prev" color="gray" :disabled="disabled" @click="onClick">
+        <UButton label="Prev" color="gray" :disabled="disabled" @click="onClick" >
             <template #leading>
                 <UIcon name="i-heroicons-arrow-left-20-solid" class="w-5 h-5" />
             </template>

@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import Stack from "~/components/Stack.vue";
 
 const links = [
   [
     {
-      label: "Edit story",
+      label: "Edit project",
       icon: "i-heroicons-question-mark-circle",
     },
     {
-      label: "Remove story",
+      label: "Remove project",
       icon: "i-heroicons-question-mark-circle",
     },
   ],
@@ -31,7 +32,7 @@ const isOpen = ref(false);
 
       <Stack direction="column">
         <UContainer class="p-4">
-          <UButton to="/project/3/epic/1/story/5/task/create">Create new task</UButton>
+          <UButton to="/project/3/epic/create">Create new epic</UButton>
         </UContainer>
         
         <UVerticalNavigation :links="links" />

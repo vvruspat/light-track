@@ -23,4 +23,5 @@ export default defineNuxtConfig({
       },
     ],
   },
+  ui: { safelistColors: ['green', 'yellow', 'red', 'gray'] }
 })

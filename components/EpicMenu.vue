@@ -4,11 +4,11 @@ import { ref } from "vue";
 const links = [
   [
     {
-      label: "Edit story",
+      label: "Edit epic",
       icon: "i-heroicons-question-mark-circle",
     },
     {
-      label: "Remove story",
+      label: "Remove epic",
       icon: "i-heroicons-question-mark-circle",
     },
   ],
@@ -24,14 +24,14 @@ const isOpen = ref(false);
       size="sm"
       color="gray"
       square
-      variant="ghost"
+      variant="solid"
       @click="isOpen = true"
     />
     <template #panel>
 
       <Stack direction="column">
         <UContainer class="p-4">
-          <UButton to="/project/3/epic/1/story/5/task/create">Create new task</UButton>
+          <UButton to="/project/3/epic/1/story/create">Create new story</UButton>
         </UContainer>
         
         <UVerticalNavigation :links="links" />

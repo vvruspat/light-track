@@ -4,7 +4,7 @@ import { computed, useAttrs } from 'vue'
 type StackProps = {
     direction?: 'row' | 'column';
     spacing?: '0' | '1' | '2' | '3' | '4';
-    justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
+    justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch';
     alignItems?: 'start' | 'end' | 'center' | 'baseline' | 'stretch';
     wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
 }
@@ -12,7 +12,7 @@ type StackProps = {
 const { direction, spacing, justify, alignItems, wrap } = defineProps<StackProps>();
 
 // Use other div attributes
-const { class: externalClasses, restAttributes } = useAttrs();
+const { class: externalClasses, ...restAttributes } = useAttrs();
 
 const classes = computed(() => {
     return [

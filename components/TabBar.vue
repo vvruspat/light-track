@@ -10,6 +10,7 @@ import Stack from './Stack.vue'
     <div class="px-4">
       <ProjectSelector />
     </div>
+    <div id="tabbar-center"></div>
     <div class="px-4">
       <MainMenu />
     </div>

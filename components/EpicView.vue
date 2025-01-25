@@ -1,26 +1,15 @@
 <script setup lang="ts">
 import StoryView from "~/components/StoryView.vue";
-import EpicMenu from "~/components/EpicMenu.vue";
-const num =  Math.round(Math.random() * 10);
+const num = Math.round(Math.random() * 10) + 1;
 </script>
 
 <template>
   <div class="w-full h-full max-h-full">
     <Stack direction="column" justify="stretch">
-      <Stack
-        direction="row"
-        justify="between"
-        alignItems="center"
-        class="w-full"
-      >
-        <h2 class="px-3 py-4">Epic {{ Math.floor(Math.random() * 10000) }}</h2>
-        <EpicMenu />
-      </Stack>
-
-      <div class="mb-4">
+      <div class="my-4 w-full">
         <UAccordion
-          color="sky"
-          variant="link"
+          color="gray"
+          variant="ghost"
           size="sm"
           :items="[
             {

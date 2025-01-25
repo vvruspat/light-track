@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data, status, error } = await useFetch('/api/projects', { headers: useRequestHeaders(['cookie']), query: { group_id: 1 } })
+const { data: response, status, error } = await useFetch('/api/projects', { headers: useRequestHeaders(['cookie']), query: { group_id: 1 } })
 
 </script>
 
@@ -8,12 +8,12 @@ const { data, status, error } = await useFetch('/api/projects', { headers: useRe
         <h1>Projects</h1>
     </div>
 
-    <div v-if="status === 'loading'">Loading...</div>
-    <div v-else-if="status === 'error'">{{ error.message }}</div>
+    <div v-if="status === 'pending'">Loading...</div>
+    <div v-else-if="status === 'error'">{{ error?.message }}</div>
     <div v-else-if="status === 'success'">
-        <ul>
-            <li v-for="project in data" :key="project.id">
-                <NuxtLink :to="`/project/${project.id}`">{{ project.name }}</NuxtLink>
+        <ul v-if="response?.data?.length">
+            <li v-for="project in response.data" :key="project.id">    
+                <NuxtLink :to="`/project/${project.id}`">{{ project.title }}</NuxtLink>
             </li>
         </ul>
     </div>

@@ -9,6 +9,7 @@ const statusColors = {
 
 const status = ref(statusColors[statuses[Math.floor(Math.random() * statuses.length)]]);
 const isOpen = ref(false);
+const src = "https://picsum.photos/600/800?random=" + Math.round(Math.random() * 100);
 
 </script>
 
@@ -17,7 +18,7 @@ const isOpen = ref(false);
         <Stack spacing="2">
             <UAvatar
                 size="2xs"
-                src="https://avatars.githubusercontent.com/u/739984?v=4"
+                :src="src"
                 alt="Avatar"
             />
             <div>Task View {{ Math.round(Math.random() * 100000000) }}</div>

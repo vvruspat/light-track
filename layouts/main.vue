@@ -5,8 +5,8 @@
 
 <template>
     <Stack direction="column" justify="stretch" alignItems="stretch" class="h-full w-full">
-        <UContainer class="p-4 flex-1 w-full max-h-fit overflow-scroll">
-            <NuxtPage />
+        <UContainer class="p-4 flex-1 box-border overflow-hidden">
+            <slot />
         </UContainer>
         <TabBar />
     </Stack>

@@ -12,7 +12,7 @@ const people = [
 
 const selected = ref([]);
 
-const onSelect = (value) => {
+const onSelect = (value: { id: number }) => {
   router.push(`/project/${value.id}`);
   isOpen.value = false;
 };

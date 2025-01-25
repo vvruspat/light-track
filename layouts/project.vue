@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type { TProject } from '~/types/entities'
 import HorizontalStatus from '~/components/HorizontalStatus.vue'
-import EpicsView from '~/components/EpicsView.vue'
 import ProjectMenu from '~/components/ProjectMenu.vue'
 
-type ProjectCardProps = TProject & { loading: boolean }
+const id = useRoute().params.projectId;
+const router = useRouter();
 
-// const { loading, ...project } = defineProps<ProjectCardProps>();
-
-const id = useRoute().params.id;
+if (!id) {
+  router.push('/project/create');
+}
 
 </script>
 
@@ -29,6 +28,6 @@ const id = useRoute().params.id;
       <HorizontalStatus />
     </header>
     <UDivider class="my-4" />
-    <EpicsView />
+    <slot />
   </section>
 </template>

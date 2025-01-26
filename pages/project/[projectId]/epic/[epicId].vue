@@ -9,4 +9,5 @@ import EpicView from '~/components/EpicView.vue'
     </Teleport>
     <EpicHeader />
     <EpicView />
+    <NuxtPage />
 </template>

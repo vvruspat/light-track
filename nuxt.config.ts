@@ -23,5 +23,8 @@ export default defineNuxtConfig({
       },
     ],
   },
-  ui: { safelistColors: ['green', 'yellow', 'red', 'gray'] }
+  ui: { safelistColors: ['green', 'yellow', 'red', 'gray'] },
+  experimental: {
+    renderJsonPayloads: false
+  },
 })

@@ -1,5 +1,5 @@
 <template>
   <EpicModal>
-    <EpicEditForm />
+    <EpicForm />
   </EpicModal>
 </template>

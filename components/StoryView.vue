@@ -1,6 +1,14 @@
 <script setup lang="ts">
 
-import TaskView from '~/components/TaskView.vue';
+import TaskButton from '@/components/TaskButton.vue';
+
+type StoryViewProps = {
+    storyId: number;
+    epicId: number;
+    projectId: number;
+};
+
+const { storyId, epicId, projectId } = defineProps<StoryViewProps>();
 
 const cardConfig = {
     header: {
@@ -23,7 +31,7 @@ const cardConfig = {
         class="w-full"
       >
         <h3>Story</h3>
-        <StoryMenu />
+        <StoryMenu :storyId="storyId" :projectId="projectId" :epicId="epicId" />
       </Stack>
     </template>
 
@@ -34,15 +42,15 @@ const cardConfig = {
       justify="stretch"
       spacing="1"
     >
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
-      <TaskView />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
+      <TaskButton :storyId="storyId" />
     </Stack>
 
     <template v-if="Boolean(Math.round(Math.random()))" #footer>

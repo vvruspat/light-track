@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import EpicsNavigation from '~/components/EpicsNavigation.vue'
-import EpicView from '~/components/EpicView.vue'
+import EpicsNavigation from '@/components/EpicsNavigation.vue'
+import EpicView from '@/components/EpicView.vue'
 </script>
 
 <template>

@@ -2,13 +2,14 @@
 import { ref } from "vue";
 
 type StoryMenuProps = {
-  projectId: string;
-  epicId: string;
-  storyId: string;
+  projectId: number;
+  epicId: number;
+  storyId: number;
 };
 
 const { storyId, projectId, epicId } = defineProps<StoryMenuProps>();
 const isRemoveAlertOpen = ref(false);
+const isOpen = ref(false);
 
 const links = [
   [
@@ -28,8 +29,6 @@ const links = [
 ];
 
 const createTaskUrl = `/project/${projectId}/epic/${epicId}/story/${storyId}/task/create`;
-
-const isOpen = ref(false);
 
 const onRemoveDialogClose = (isConfirmed: boolean) => {
   if (isConfirmed) {

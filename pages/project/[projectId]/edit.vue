@@ -3,6 +3,6 @@
 
 <template>
     <ProjectModal>
-        <ProjectEditForm />
+        <ProjectForm />
     </ProjectModal>
 </template>

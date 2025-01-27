@@ -1,20 +1,40 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+type EpicMenuProps = {
+  projectId: number;
+  epicId: number;
+};
+
+const { projectId, epicId } = defineProps<EpicMenuProps>();
 const links = [
   [
     {
       label: "Edit epic",
       icon: "i-heroicons-question-mark-circle",
+      to: `/project/${projectId}/epic/${epicId}/edit`,
     },
     {
       label: "Remove epic",
       icon: "i-heroicons-question-mark-circle",
+      click: () => {
+        isRemoveAlertOpen.value = true;
+      },
     },
   ],
 ];
 
+const createStoryUrl = `/project/${projectId}/epic/${epicId}/story/create`;
+
 const isOpen = ref(false);
+const isRemoveAlertOpen = ref(false);
+
+const onRemoveDialogClose = (isConfirmed: boolean) => {
+  if (isConfirmed) {
+    console.log("Epic removed");
+  }
+  isRemoveAlertOpen.value = false;
+};
 </script>
 
 <template>
@@ -28,14 +48,21 @@ const isOpen = ref(false);
       @click="isOpen = true"
     />
     <template #panel>
-
       <Stack direction="column">
         <UContainer class="p-4">
-          <UButton to="/project/3/epic/1/story/create">Create new story</UButton>
+          <UButton :to="createStoryUrl"
+            >Create new story</UButton
+          >
         </UContainer>
-        
+
         <UVerticalNavigation :links="links" />
       </Stack>
     </template>
-</UPopover>
+  </UPopover>
+  <RemoveDialog
+    v-model="isRemoveAlertOpen"
+    title="Delete confirmation."
+    description="Are you sure you want to delete this epic?"
+    @close="onRemoveDialogClose"
+  />
 </template>

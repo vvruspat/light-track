@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import StoryView from "~/components/StoryView.vue";
+import StoryView from "@/components/StoryView.vue";
 const num = Math.round(Math.random() * 10) + 1;
+
+const { projectId, epicId } = useRoute().params;
 </script>
 
 <template>
@@ -21,7 +23,7 @@ const num = Math.round(Math.random() * 10) + 1;
       </div>
         <div class="w-full h-full">
           <Stack direction="column" alignItems="stretch" spacing="4">
-              <StoryView v-for="index in num" :key="index" />
+              <StoryView v-for="index in num" :key="index" :storyId="index" :projectId="Number(projectId)" :epicId="Number(epicId)" />
           </Stack>
         </div>
     </Stack>

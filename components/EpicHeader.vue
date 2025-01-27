@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
-interface UCarouselInstance {
-  next: () => void;
-  prev: () => void;
-  select: (index: number) => void;
-  page: number;
-}
-
 const items = [
   {
     id: "1",
@@ -58,16 +51,6 @@ const currentIndex = computed(() =>
   epicId ? items.findIndex((item) => item.id === epicId) : 0
 );
 
-const disabledPrev = computed(() => currentIndex.value === 0);
-const disabledNext = computed(() => currentIndex.value === items.length - 1);
-
-const nextUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`
-);
-const prevUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`
-);
-
 const item = computed(() => items[currentIndex.value]);
 </script>
 
@@ -86,6 +69,6 @@ const item = computed(() => items[currentIndex.value]);
       <EpicsSelector />
     </Stack>
 
-    <EpicMenu />
+    <EpicMenu :projectId="Number(projectId)" :epicId="Number(epicId)" />
   </Stack>
 </template>

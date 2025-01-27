@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ProjectForm from '@/components/ProjectForm.vue';
+</script>
 
 <template>
-  <div>
+  <UContainer class="p-4">
     <h1>Create Project</h1>
-  </div>
+    <UDivider class="my-4" />
+    <ProjectForm />
+  </UContainer>
 </template>

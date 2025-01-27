@@ -1,3 +1,3 @@
 <template>
-    <TaskModal />
+    <div>Task View</div>
 </template>

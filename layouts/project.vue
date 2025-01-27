@@ -12,8 +12,8 @@ if (!id) {
 </script>
 
 <template>
-  <section class="flex flex-col h-full">
-    <header>
+  <div class="flex flex-col h-full max-h-full gap-4">
+    <header class="p-4">
       <UContainer class="py-4 px-0 w-full align-middle">
         <Stack
           direction="row"
@@ -27,7 +27,12 @@ if (!id) {
       </UContainer>
       <HorizontalStatus />
     </header>
-    <UDivider class="my-4" />
-    <slot />
-  </section>
+    <UDivider class="m-0" />
+    <main class="grow shrink overflow-scroll px-4 snap-mandatory">
+      <slot />
+    </main>
+    <footer>
+      <TabBar />
+    </footer>
+  </div>
 </template>

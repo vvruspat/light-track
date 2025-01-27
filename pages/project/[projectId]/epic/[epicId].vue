@@ -4,10 +4,10 @@ import EpicView from '~/components/EpicView.vue'
 </script>
 
 <template>
-    <Teleport to="#tabbar-center">
-        <EpicsNavigation />
-    </Teleport>
-    <EpicHeader />
-    <EpicView />
-    <NuxtPage />
+  <Teleport to="#tabbar-center">
+    <EpicsNavigation />
+  </Teleport>
+  <EpicHeader />
+  <EpicView />
+  <NuxtPage />
 </template>

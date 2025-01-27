@@ -14,7 +14,7 @@ const cardConfig = {
 </script>
 
 <template>
-  <UCard :ui="cardConfig">
+  <UCard :ui="cardConfig" class="snap-center">
     <template #header>
       <Stack
         direction="row"

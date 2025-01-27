@@ -2,11 +2,11 @@
 import { ref, watch } from 'vue';
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { taskId, epicId, projectId } = useRoute().params; 
+const { projectId } = useRoute().params; 
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
-    router.push(`/project/${projectId}/epic/${epicId}`);
+    router.push(`/project/${projectId}`);
   }
 });
 
@@ -29,7 +29,7 @@ watch(isOpen, (isOpenNew) => {
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Task View {{ taskId }}
+            Project {{ projectId }}
           </h3>
           <UButton
             color="gray"

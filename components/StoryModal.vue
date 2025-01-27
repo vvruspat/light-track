@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { taskId, epicId, projectId } = useRoute().params; 
+const { storyId, epicId, projectId } = useRoute().params; 
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
@@ -29,7 +29,7 @@ watch(isOpen, (isOpenNew) => {
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Task View {{ taskId }}
+            Story View {{ storyId }}
           </h3>
           <UButton
             color="gray"

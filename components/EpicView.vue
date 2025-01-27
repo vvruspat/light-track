@@ -5,7 +5,7 @@ const num = Math.round(Math.random() * 10) + 1;
 
 <template>
   <div class="w-full h-full max-h-full">
-    <Stack direction="column" justify="stretch">
+    <Stack direction="column" justify="stretch" class="w-full h-full max-h-full">
       <div class="my-4 w-full">
         <UAccordion
           color="gray"
@@ -19,10 +19,11 @@ const num = Math.round(Math.random() * 10) + 1;
           ]"
         />
       </div>
-
-      <Stack direction="column" alignItems="stretch" spacing="4">
-        <StoryView v-for="index in num" :key="index" />
-      </Stack>
+        <div class="w-full h-full">
+          <Stack direction="column" alignItems="stretch" spacing="4">
+              <StoryView v-for="index in num" :key="index" />
+          </Stack>
+        </div>
     </Stack>
   </div>
 </template>

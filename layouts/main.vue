@@ -4,12 +4,13 @@
 </script>
 
 <template>
-    <Stack direction="column" justify="stretch" alignItems="stretch" class="h-full w-full">
+    <!-- <Stack direction="column" justify="stretch" alignItems="stretch" class="h-full w-full">
         <UContainer class="p-4 flex-1 box-border overflow-hidden">
             <slot />
         </UContainer>
         <TabBar />
-    </Stack>
+    </Stack> -->
+    <NuxtPage />
 </template>
 
 <style>

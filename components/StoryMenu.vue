@@ -1,20 +1,43 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+type StoryMenuProps = {
+  projectId: string;
+  epicId: string;
+  storyId: string;
+};
+
+const { storyId, projectId, epicId } = defineProps<StoryMenuProps>();
+const isRemoveAlertOpen = ref(false);
+
 const links = [
   [
     {
       label: "Edit story",
       icon: "i-heroicons-question-mark-circle",
+      to: `/project/${projectId}/epic/${epicId}/story/${storyId}/edit`,
     },
     {
       label: "Remove story",
       icon: "i-heroicons-question-mark-circle",
+      click: () => {
+        isRemoveAlertOpen.value = true;
+      },
     },
   ],
 ];
 
+const createTaskUrl = `/project/${projectId}/epic/${epicId}/story/${storyId}/task/create`;
+
 const isOpen = ref(false);
+
+const onRemoveDialogClose = (isConfirmed: boolean) => {
+  if (isConfirmed) {
+    console.log("Story removed");
+  }
+  isRemoveAlertOpen.value = false;
+};
+
 </script>
 
 <template>
@@ -28,14 +51,19 @@ const isOpen = ref(false);
       @click="isOpen = true"
     />
     <template #panel>
+      <UContainer class="p-4">
+        <Stack direction="column">
+          <UButton :to="createTaskUrl">Create new task</UButton>
 
-      <Stack direction="column">
-        <UContainer class="p-4">
-          <UButton to="/project/3/epic/1/story/5/task/create">Create new task</UButton>
-        </UContainer>
-        
-        <UVerticalNavigation :links="links" />
-      </Stack>
+          <UVerticalNavigation :links="links" />
+        </Stack>
+      </UContainer>
     </template>
-</UPopover>
+  </UPopover>
+  <RemoveDialog
+    v-model="isRemoveAlertOpen"
+    title="Delete confirmation."
+    description="Are you sure you want to delete this story?"
+    @close="onRemoveDialogClose"
+  />
 </template>

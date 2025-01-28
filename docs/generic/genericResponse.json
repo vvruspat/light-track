@@ -1,21 +1,21 @@
 {
-    "components": {
-        "schemas": {
-            "GenericResponse": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number"
-                    },
-                    "statusMessage": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                }
-            }
+  "components": {
+    "schemas": {
+      "GenericResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number"
+          },
+          "statusMessage": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
         }
+      }
     }
+  }
 }

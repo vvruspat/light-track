@@ -1,19 +1,25 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import { Database } from "~/types/database.types";
-import { ProjectPostRequest, ProjectPostResponse } from "~/types/api";
+import type { Database } from "@/types/database.types";
+import type { ProjectPostRequest, ProjectPostResponse } from "@/types/api";
 import Ajv from "ajv";
-import { paths } from "~/public/_openapi.json";
+import { paths } from "@/public/_openapi.json";
 
 export default defineEventHandler(
   async (event): Promise<ProjectPostResponse> => {
     const body = await readValidatedBody<ProjectPostRequest>(event, (b) => {
       const ajv = new Ajv();
-      const schema = paths["/projects"]["post"]["requestBody"]["content"]["application/json"].schema;
+      const schema =
+        paths["/projects"]["post"]["requestBody"]["content"]["application/json"]
+          .schema;
       const valid = ajv.validate(schema, b);
 
       if (!valid) {
-        throw createError({ statusCode: 400, statusMessage: "Invalid request body", message: ajv.errorsText() });
+        throw createError({
+          statusCode: 400,
+          statusMessage: "Invalid request body",
+          message: ajv.errorsText(),
+        });
       } else {
         return true;
       }
@@ -71,5 +77,5 @@ export default defineEventHandler(
       statusMessage: "Created",
       data: data,
     };
-  }
+  },
 );

@@ -1,7 +1,7 @@
 import { defineEventHandler, getRouterParam } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { Database } from "~/types/database.types";
-import type { TaskGetByIdResponse } from "~/types/api";
+import type { Database } from "@/types/database.types";
+import type { TaskGetByIdResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<TaskGetByIdResponse> => {
@@ -25,11 +25,7 @@ export default defineEventHandler(
       };
     }
 
-    const { data } = await client
-      .from("tasks")
-      .select()
-      .eq("id", id)
-      .single();
+    const { data } = await client.from("tasks").select().eq("id", id).single();
 
     if (!data) {
       return {
@@ -45,5 +41,5 @@ export default defineEventHandler(
       statusMessage: "Success",
       data,
     };
-  }
+  },
 );

@@ -1,10 +1,10 @@
 {
-    "components": {
-        "schemas": {
-            "EpicId": {
-                "type": "number",
-                "description": "The unique identifier for the epic"
-            }
-        }
+  "components": {
+    "schemas": {
+      "EpicId": {
+        "type": "number",
+        "description": "The unique identifier for the epic"
+      }
     }
+  }
 }

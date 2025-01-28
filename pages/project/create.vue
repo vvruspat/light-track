@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProjectForm from '@/components/ProjectForm.vue';
+import ProjectForm from "@/components/ProjectForm.vue";
 </script>
 
 <template>

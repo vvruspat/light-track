@@ -1,8 +1,7 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-    <ProjectModal>
-        <ProjectForm />
-    </ProjectModal>
+  <ProjectModal>
+    <ProjectForm />
+  </ProjectModal>
 </template>

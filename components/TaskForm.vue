@@ -68,24 +68,24 @@ const state = reactive({
 });
 
 const assigneeSelected = ref<(typeof users)[number]>(
-  users.find((user) => user.value === state.assignee) ?? users[0]
+  users.find((user) => user.value === state.assignee) ?? users[0],
 );
 const statusSelected = ref<(typeof statuses)[number]>(
-  statuses.find((status) => status.value === state.status) ?? statuses[0]
+  statuses.find((status) => status.value === state.status) ?? statuses[0],
 );
 
 watch(
   () => assigneeSelected.value,
   (value) => {
     state.assignee = value.value;
-  }
+  },
 );
 
 watch(
   () => statusSelected.value,
   (value) => {
     state.status = value.value;
-  }
+  },
 );
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -119,10 +119,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         :search-attributes="['name', 'value']"
       >
         <template #option="{ option: user }">
-          <Stack spacing="2">
+          <StackContainer spacing="2">
             <UAvatar size="2xs" :src="user.url" alt="Avatar" />
             <span class="truncate">{{ user.name }}</span>
-          </Stack>
+          </StackContainer>
         </template>
       </USelectMenu>
     </UFormGroup>
@@ -133,20 +133,20 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         :options="statuses"
         option-attribute="name"
       >
-        <template #option="{ option: status }">
+        <template #option="{ option: opt }">
           <span
             class="h-2 w-2 rounded-full"
-            :class="`bg-${status.color}-500 dark:bg-${status.color}-400`"
+            :class="`bg-${opt.color}-500 dark:bg-${opt.color}-400`"
           />
-          <span class="truncate">{{ status.name }}</span>
+          <span class="truncate">{{ opt.name }}</span>
         </template>
       </USelectMenu>
     </UFormGroup>
 
-    <input v-if="taskId" type="hidden" name="taskId" :value="taskId" />
-    <input type="hidden" name="storyId" :value="storyId" />
+    <UInput v-if="taskId" type="hidden" name="taskId" :value="taskId" />
+    <UInput type="hidden" name="storyId" :value="storyId" />
 
-    <Stack direction="row" spacing="4">
+    <StackContainer direction="row" spacing="4">
       <UButton type="submit">
         <span v-if="epicId">Update task</span>
         <span v-else>Create task</span>
@@ -162,6 +162,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UButton v-else variant="ghost" :to="`/project/${projectId}/epic`">
         Cancel
       </UButton>
-    </Stack>
+    </StackContainer>
   </UForm>
 </template>

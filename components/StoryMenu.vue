@@ -36,7 +36,6 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
   }
   isRemoveAlertOpen.value = false;
 };
-
 </script>
 
 <template>
@@ -51,11 +50,11 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
     />
     <template #panel>
       <UContainer class="p-4">
-        <Stack direction="column">
+        <StackContainer direction="column">
           <UButton :to="createTaskUrl">Create new task</UButton>
 
           <UVerticalNavigation :links="links" />
-        </Stack>
+        </StackContainer>
       </UContainer>
     </template>
   </UPopover>

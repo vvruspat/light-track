@@ -2,9 +2,7 @@
   "paths": {
     "/tasks": {
       "get": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Get a list of tasks",
         "parameters": [
           {
@@ -34,10 +32,18 @@
               "description": "The ID of the user who owns the task"
             }
           },
-          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
-          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
-          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
-          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
+          {
+            "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"
+          },
+          {
+            "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"
+          },
+          {
+            "$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"
+          },
+          {
+            "$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"
+          }
         ],
         "responses": {
           "200": {
@@ -63,9 +69,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Create a new task",
         "requestBody": {
           "required": true,
@@ -99,10 +103,7 @@
                     "description": "The status of the task"
                   }
                 },
-                "required": [
-                  "title",
-                  "status"
-                ]
+                "required": ["title", "status"]
               }
             }
           }
@@ -137,9 +138,7 @@
     },
     "/tasks/{id}": {
       "get": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Get a task by ID",
         "parameters": [
           {
@@ -190,9 +189,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Delete a task by ID",
         "parameters": [
           {
@@ -229,9 +226,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Update task by ID",
         "parameters": [
           {

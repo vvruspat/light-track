@@ -38,9 +38,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UTextarea v-model="state.description" autoresize />
     </UFormGroup>
 
-    <input type="hidden" name="epicId" :value="epicId" />
+    <UInput type="hidden" name="epicId" :value="epicId" />
 
-    <Stack direction="row" spacing="4">
+    <StackContainer direction="row" spacing="4">
       <UButton type="submit">
         <span v-if="epicId">Update epic</span>
         <span v-else>Create epic</span>
@@ -56,6 +56,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UButton v-else variant="ghost" :to="`/project/${projectId}/epic`">
         Cancel
       </UButton>
-    </Stack>
+    </StackContainer>
   </UForm>
 </template>

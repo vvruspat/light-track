@@ -2,9 +2,7 @@
   "paths": {
     "/taskwatchers": {
       "post": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Add a task watcher",
         "requestBody": {
           "required": true,
@@ -22,10 +20,7 @@
                     "description": "The ID of the user who will be watching the task"
                   }
                 },
-                "required": [
-                  "task_id",
-                  "userId"
-                ]
+                "required": ["task_id", "userId"]
               }
             }
           }
@@ -54,9 +49,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Remove a task watcher",
         "parameters": [
           {

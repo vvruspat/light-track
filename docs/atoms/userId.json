@@ -1,10 +1,10 @@
 {
-    "components": {
-        "schemas": {
-            "UserId": {
-                "type": "string",
-                "description": "The unique identifier for the User"
-            }
-        }
+  "components": {
+    "schemas": {
+      "UserId": {
+        "type": "string",
+        "description": "The unique identifier for the User"
+      }
     }
+  }
 }

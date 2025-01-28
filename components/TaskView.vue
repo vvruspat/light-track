@@ -11,7 +11,6 @@ type TaskFormProps = {
 
 const { title, description, estimation, assignee, status } =
   defineProps<TaskFormProps>();
-const { taskId, storyId, epicId, projectId } = useRoute().params;
 
 const titleEditMode = ref(false);
 const descriptionEditMode = ref(false);
@@ -63,24 +62,25 @@ const state = reactive({
 });
 
 const assigneeSelected = ref<(typeof users)[number]>(
-  users.find((user) => user.value === state.assignee) ?? users[0]
+  users.find((user) => user.value === state.assignee) ?? users[0],
 );
 const statusSelected = ref<(typeof statuses)[number]>(
-  statuses.find((status) => status.value === state.status) ?? statuses[0]
+  statuses.find((statusItem) => statusItem.value === state.status) ??
+    statuses[0],
 );
 
 watch(
   () => assigneeSelected.value,
   (value) => {
     state.assignee = value.value;
-  }
+  },
 );
 
 watch(
   () => statusSelected.value,
   (value) => {
     state.status = value.value;
-  }
+  },
 );
 
 watch(state, () => {
@@ -110,16 +110,16 @@ function onDescriptionBlur() {
 </script>
 
 <template>
-  <Stack
+  <StackContainer
     spacing="4"
-    alignItems="start"
+    align-items="start"
     justify="stretch"
     class="flex-col md:flex-row"
   >
-    <Stack
+    <StackContainer
       direction="column"
       spacing="4"
-      alignItems="stretch"
+      align-items="stretch"
       justify="start"
       class="grow-1 w-full"
     >
@@ -128,26 +128,23 @@ function onDescriptionBlur() {
           <UInput
             v-if="titleEditMode"
             v-model="state.title"
-            @blur="onTitleBlur"
-            @keydown.enter="onTitleBlur"
             autofocus
             variant="none"
             :padded="false"
             size="xl"
             class="bg-gray-200 dark:bg-gray-800"
+            @blur="onTitleBlur"
+            @keydown.enter="onTitleBlur"
           />
           <div v-else @click="titleEditMode = true">
             {{ state.title }}
           </div>
         </div>
       </Teleport>
-      
 
       <UTextarea
         v-if="descriptionEditMode"
         v-model="state.description"
-        @blur="onDescriptionBlur"
-        @keydown.enter="onDescriptionBlur"
         autoresize
         autofocus
         variant="none"
@@ -155,18 +152,20 @@ function onDescriptionBlur() {
         :padded="false"
         :rows="descriptionLines"
         class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 relative block w-full"
+        @blur="onDescriptionBlur"
+        @keydown.enter="onDescriptionBlur"
       />
       <div
         v-else
-        @click="onDescriptionClick"
         class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200"
+        @click="onDescriptionClick"
       >
         {{ state.description }}
       </div>
-    </Stack>
+    </StackContainer>
 
     <UCard class="bg-gray-200 dark:bg-gray-800 w-full md:w-auto">
-      <Stack direction="column" spacing="4" alignItems="stretch">
+      <StackContainer direction="column" spacing="4" align-items="stretch">
         <UFormGroup label="Status" name="status">
           <USelectMenu
             v-model="statusSelected"
@@ -179,12 +178,12 @@ function onDescriptionBlur() {
                 :class="`bg-${statusSelected.color}-500 dark:bg-${statusSelected.color}-400`"
               />
             </template>
-            <template #option="{ option: status }">
+            <template #option="{ option }">
               <span
                 class="h-2 w-2 rounded-full"
-                :class="`bg-${status.color}-500 dark:bg-${status.color}-400`"
+                :class="`bg-${option.color}-500 dark:bg-${option.color}-400`"
               />
-              <span class="truncate">{{ status.name }}</span>
+              <span class="truncate">{{ option.name }}</span>
             </template>
           </USelectMenu>
         </UFormGroup>
@@ -203,10 +202,10 @@ function onDescriptionBlur() {
               <UAvatar size="2xs" :src="assigneeSelected.url" alt="Avatar" />
             </template>
             <template #option="{ option: user }">
-              <Stack spacing="2">
+              <StackContainer spacing="2">
                 <UAvatar size="2xs" :src="user.url" alt="Avatar" />
                 <span class="truncate">{{ user.name }}</span>
-              </Stack>
+              </StackContainer>
             </template>
           </USelectMenu>
         </UFormGroup>
@@ -214,7 +213,7 @@ function onDescriptionBlur() {
         <UFormGroup label="Estimation" name="estimation">
           <UInput v-model="state.estimation" type="number" />
         </UFormGroup>
-      </Stack>
+      </StackContainer>
     </UCard>
-  </Stack>
+  </StackContainer>
 </template>

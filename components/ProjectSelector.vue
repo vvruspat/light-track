@@ -23,8 +23,8 @@ const onSelect = (value: { id: number }) => {
     label="Projects"
     color="gray"
     variant="solid"
-    @click="isOpen = true"
     tabindex="1"
+    @click="isOpen = true"
   />
 
   <UModal v-model="isOpen">
@@ -34,13 +34,13 @@ const onSelect = (value: { id: number }) => {
       @update:model-value="onSelect"
     />
     <UContainer class="p-4 w-full">
-        <UButton
-            label="Create new project"
-            color="primary"
-            variant="solid"
-            to="/project/create"
-            @click="isOpen = false"
-        />
+      <UButton
+        label="Create new project"
+        color="primary"
+        variant="solid"
+        to="/project/create"
+        @click="isOpen = false"
+      />
     </UContainer>
   </UModal>
 </template>

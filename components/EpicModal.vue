@@ -40,7 +40,7 @@ watch(isOpen, (isOpenNew) => {
         </div>
       </template>
 
-      <slot></slot>
+      <slot />
     </UCard>
   </UModal>
 </template>

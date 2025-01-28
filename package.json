@@ -12,15 +12,24 @@
     "gen:openapi": "redocly bundle docs/index.json -o public/_openapi.json  --dereferenced",
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
     "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts",
-    "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes"
+    "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier . --check",
+    "lintfix": "eslint . --fix && prettier --write --list-different ."
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.7.5",
     "@nuxt/ui": "^2.21.0",
     "@nuxtjs/supabase": "^1.4.5",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@scalar/nuxt": "^0.2.183",
     "ajv": "^8.17.1",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "nuxt": "^3.15.2",
+    "prettier": "^3.4.2",
     "supabase": "^2.6.8",
     "vue": "latest",
     "vue-router": "latest"

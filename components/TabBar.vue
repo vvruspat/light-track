@@ -1,18 +1,22 @@
 <script setup lang="ts">
-
-import ProjectSelector from './ProjectSelector.vue'
-import Stack from './Stack.vue'
-
+import ProjectSelector from "./ProjectSelector.vue";
+import StackContainer from "./StackContainer.vue";
 </script>
 
 <template>
-  <Stack direction="row" spacing="4" justify="between" alignItems="center" class="py-4 bg-gray-900 border-gray-800">
+  <StackContainer
+    direction="row"
+    spacing="4"
+    justify="between"
+    align-items="center"
+    class="py-4 bg-gray-900 border-gray-800"
+  >
     <div class="px-4">
       <ProjectSelector />
     </div>
-    <div id="tabbar-center"></div>
+    <div id="tabbar-center" />
     <div class="px-4">
       <MainMenu />
     </div>
-  </Stack>
+  </StackContainer>
 </template>

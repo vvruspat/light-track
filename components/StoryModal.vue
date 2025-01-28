@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { storyId, epicId, projectId } = useRoute().params; 
+const { storyId, epicId, projectId } = useRoute().params;
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
     router.push(`/project/${projectId}/epic/${epicId}`);
   }
 });
-
 </script>
 
 <template>
@@ -41,7 +40,7 @@ watch(isOpen, (isOpenNew) => {
         </div>
       </template>
 
-      <slot></slot>
+      <slot />
     </UCard>
   </UModal>
 </template>

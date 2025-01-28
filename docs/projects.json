@@ -23,10 +23,18 @@
               "description": "The ID of the user who owns the project"
             }
           },
-          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"},
-          {"$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"},
-          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"},
-          {"$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"}
+          {
+            "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/limit"
+          },
+          {
+            "$ref": "./generic/genericListRequest.json#/components/schemas/GenericListRequest/properties/offset"
+          },
+          {
+            "$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/sort"
+          },
+          {
+            "$ref": "./generic/genericSortRequest.json#/components/schemas/GenericSortRequest/properties/direction"
+          }
         ],
         "responses": {
           "200": {

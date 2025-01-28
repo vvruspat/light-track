@@ -1,3 +1,3 @@
 <template>
-    <TaskView />
+  <TaskView />
 </template>

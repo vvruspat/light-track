@@ -35,13 +35,7 @@
             "description": "The date and time when the story was last updated"
           }
         },
-        "required": [
-          "id",
-          "title",
-          "owner_id",
-          "created_at",
-          "updated_at"
-        ]
+        "required": ["id", "title", "owner_id", "created_at", "updated_at"]
       }
     }
   }

@@ -29,10 +29,7 @@
             "description": "The date and time the project was created"
           }
         },
-        "required": [
-          "title",
-          "group_id"
-        ]
+        "required": ["title", "group_id"]
       }
     }
   }

@@ -1,39 +1,37 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const supabase = useSupabaseClient()
+const supabase = useSupabaseClient();
 
 const email = ref("");
 const password = ref("");
 const authError = ref("");
 
-const router = useRouter()
+const router = useRouter();
 
 const handleSubmit = async (event: Event) => {
-  event.preventDefault()
-  console.log('Form submitted')
+  event.preventDefault();
+  console.log("Form submitted");
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-  })
+  });
 
   if (error) {
-    authError.value = error.message
+    authError.value = error.message;
   } else {
-    router.push('/')
+    router.push("/");
   }
-
-}
-
+};
 </script>
 
 <template>
   <div>
     <h1>Login</h1>
     <form @submit.prevent="handleSubmit">
-      <input type="text" v-model="email" placeholder="Username" />
-      <input type="password" v-model="password" placeholder="Password" />
+      <UInput v-model="email" type="text" placeholder="Username" />
+      <UInput v-model="password" type="password" placeholder="Password" />
       <button type="submit">Login</button>
     </form>
   </div>

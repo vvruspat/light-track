@@ -1,12 +1,16 @@
 import { defineEventHandler, getQuery, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import { REQUEST_DEFAULT_LIMIT, REQUEST_DEFAULT_OFFSET, REQUEST_DEFAULT_SORT, REQUEST_DEFAULT_DIRECTION } from "~/constants/request";
-import type { Database } from "~/types/database.types";
-import type { ProjectGetRequest, ProjectGetResponse } from "~/types/api";
+import {
+  REQUEST_DEFAULT_LIMIT,
+  REQUEST_DEFAULT_OFFSET,
+  REQUEST_DEFAULT_SORT,
+  REQUEST_DEFAULT_DIRECTION,
+} from "@/constants/request";
+import type { Database } from "@/types/database.types";
+import type { ProjectGetRequest, ProjectGetResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<ProjectGetResponse> => {
-    
     const {
       group_id,
       owner_id,
@@ -56,5 +60,5 @@ export default defineEventHandler(
       statusMessage: "Success",
       data,
     };
-  }
+  },
 );

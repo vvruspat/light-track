@@ -1,11 +1,10 @@
 import { defineEventHandler, getRouterParam, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { Database } from "~/types/database.types";
-import type { EpicDeleteResponse } from "~/types/api";
+import type { Database } from "@/types/database.types";
+import type { EpicDeleteResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<EpicDeleteResponse> => {
-    
     const id = Number(getRouterParam(event, "id"));
 
     const client = await serverSupabaseClient<Database>(event);
@@ -28,10 +27,7 @@ export default defineEventHandler(
       };
     }
 
-    const { error } = await client
-      .from("epics")
-      .delete()
-      .eq("id", id)
+    const { error } = await client.from("epics").delete().eq("id", id);
 
     if (error) {
       throw createError({ statusMessage: error.message });
@@ -42,5 +38,5 @@ export default defineEventHandler(
       statusCode: 200,
       statusMessage: "Success",
     };
-  }
+  },
 );

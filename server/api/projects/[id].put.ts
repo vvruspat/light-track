@@ -1,19 +1,26 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import { Database } from "~/types/database.types";
-import { ProjectPutRequest, ProjectPutResponse } from "~/types/api";
-import { paths } from "~/public/_openapi.json";
+import type { Database } from "@/types/database.types";
+import type { ProjectPutRequest, ProjectPutResponse } from "@/types/api";
+import { paths } from "@/public/_openapi.json";
 import Ajv from "ajv";
 
 export default defineEventHandler(
   async (event): Promise<ProjectPutResponse> => {
     const body = await readValidatedBody<ProjectPutRequest>(event, (b) => {
       const ajv = new Ajv();
-      const schema = paths["/projects/{id}"]["put"]["requestBody"]["content"]["application/json"].schema;
+      const schema =
+        paths["/projects/{id}"]["put"]["requestBody"]["content"][
+          "application/json"
+        ].schema;
       const valid = ajv.validate(schema, b);
 
       if (!valid) {
-        throw createError({ statusCode: 400, statusMessage: "Invalid request body", message: ajv.errorsText() });
+        throw createError({
+          statusCode: 400,
+          statusMessage: "Invalid request body",
+          message: ajv.errorsText(),
+        });
       } else {
         return true;
       }
@@ -33,7 +40,11 @@ export default defineEventHandler(
 
     const id = Number(getRouterParam(event, "id"));
 
-    const { data: project, error: selectProjectError } = await client.from("projects").select().eq("id", id).single();
+    const { data: project, error: selectProjectError } = await client
+      .from("projects")
+      .select()
+      .eq("id", id)
+      .single();
 
     if (selectProjectError) {
       throw createError({ statusMessage: selectProjectError.message });
@@ -78,5 +89,5 @@ export default defineEventHandler(
       statusMessage: "Updated",
       data: data,
     };
-  }
+  },
 );

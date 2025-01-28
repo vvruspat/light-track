@@ -48,27 +48,32 @@ const router = useRoute();
 const { projectId, epicId } = router.params;
 
 const currentIndex = computed(() =>
-  epicId ? items.findIndex((item) => item.id === epicId) : 0
+  epicId ? items.findIndex((item) => item.id === epicId) : 0,
 );
 
 const item = computed(() => items[currentIndex.value]);
 </script>
 
 <template>
-  <Stack
+  <StackContainer
     direction="row"
     spacing="4"
     justify="between"
-    alignItems="center"
+    align-items="center"
     class="max-w-full"
   >
-    <Stack direction="row" justify="start" alignItems="center" class="w-full">
+    <StackContainer
+      direction="row"
+      justify="start"
+      align-items="center"
+      class="w-full"
+    >
       <h2 class="text-xl font-light">
         {{ item.title }}
       </h2>
       <EpicsSelector />
-    </Stack>
+    </StackContainer>
 
-    <EpicMenu :projectId="Number(projectId)" :epicId="Number(epicId)" />
-  </Stack>
+    <EpicMenu :project-id="Number(projectId)" :epic-id="Number(epicId)" />
+  </StackContainer>
 </template>

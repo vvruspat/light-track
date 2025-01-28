@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
-interface UCarouselInstance {
-  next: () => void;
-  prev: () => void;
-  select: (index: number) => void;
-  page: number;
-}
-
 const items = [
   {
     id: "1",
@@ -55,26 +48,26 @@ const router = useRoute();
 const { projectId, epicId } = router.params;
 
 const currentIndex = computed(() =>
-  epicId ? items.findIndex((item) => item.id === epicId) : 0
+  epicId ? items.findIndex((item) => item.id === epicId) : 0,
 );
 
 const disabledPrev = computed(() => currentIndex.value === 0);
 const disabledNext = computed(() => currentIndex.value === items.length - 1);
 
 const nextUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`
+  () => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`,
 );
 const prevUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`
+  () => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`,
 );
 </script>
 
 <template>
-  <Stack
+  <StackContainer
     direction="row"
     spacing="4"
     justify="center"
-    alignItems="center"
+    align-items="center"
     class="max-w-full"
   >
     <UButton color="gray" :disabled="disabledPrev" :to="prevUrl">
@@ -88,5 +81,5 @@ const prevUrl = computed(
         <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5" />
       </template>
     </UButton>
-  </Stack>
+  </StackContainer>
 </template>

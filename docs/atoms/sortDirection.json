@@ -1,13 +1,10 @@
 {
-    "components": {
-        "schemas": {
-            "SortDirection": {
-                "type": "string",
-                "enum": [
-                    "asc",
-                    "desc"
-                ]
-            }
-        }
+  "components": {
+    "schemas": {
+      "SortDirection": {
+        "type": "string",
+        "enum": ["asc", "desc"]
+      }
     }
+  }
 }

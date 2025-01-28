@@ -36,7 +36,7 @@ const isOpen = ref(false);
       @click="isOpen = true"
     />
     <template #panel>
-        <UVerticalNavigation :links="links" />
+      <UVerticalNavigation :links="links" />
     </template>
-</UPopover>
+  </UPopover>
 </template>

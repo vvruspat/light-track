@@ -54,14 +54,19 @@ const items = [
 const router = useRoute();
 const { projectId, epicId } = router.params;
 
-const currentIndex = computed(() => epicId ? items.findIndex((item) => item.id === epicId) : 0);
+const currentIndex = computed(() =>
+  epicId ? items.findIndex((item) => item.id === epicId) : 0
+);
 
 const disabledPrev = computed(() => currentIndex.value === 0);
 const disabledNext = computed(() => currentIndex.value === items.length - 1);
 
-const nextUrl = computed(() => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`);
-const prevUrl = computed(() => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`);
-
+const nextUrl = computed(
+  () => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`
+);
+const prevUrl = computed(
+  () => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`
+);
 </script>
 
 <template>

@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { epicId, projectId } = useRoute().params; 
+const { epicId, projectId } = useRoute().params;
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
     router.push(`/project/${projectId}/epic/${epicId}`);
   }
 });
-
 </script>
 
 <template>

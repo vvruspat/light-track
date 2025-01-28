@@ -25,12 +25,9 @@ watch(isOpen, (isOpenNew) => {
       }"
     >
       <template #header>
-        <div class="flex items-center justify-between">
-          <h3
-            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-          >
-            Task View {{ taskId }}
-          </h3>
+        <Stack justify="between" alignItems="center">
+          <!-- <h2 class="text-lg font-semibold">Project: {{ projectId }}</h2> -->
+          <div id="tabbar-header-title"></div>
           <UButton
             color="gray"
             variant="ghost"
@@ -38,7 +35,7 @@ watch(isOpen, (isOpenNew) => {
             class="-my-1"
             @click="isOpen = false"
           />
-        </div>
+        </Stack>
       </template>
 
       <slot></slot>

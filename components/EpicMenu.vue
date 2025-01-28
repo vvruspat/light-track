@@ -50,9 +50,7 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
     <template #panel>
       <Stack direction="column">
         <UContainer class="p-4">
-          <UButton :to="createStoryUrl"
-            >Create new story</UButton
-          >
+          <UButton :to="createStoryUrl">Create new story</UButton>
         </UContainer>
 
         <UVerticalNavigation :links="links" />

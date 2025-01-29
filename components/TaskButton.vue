@@ -39,11 +39,11 @@ const url = computed(
     variant="soft"
     :to="url"
     :ui="{ rounded: 'rounded-none' }"
-    class="flex-none"
+    class="flex-1"
   >
     <StackContainer spacing="2">
       <UAvatar size="2xs" :src="src" alt="Avatar" />
-      <div>Task View {{ taskId }}</div>
+      <div class="whitespace-nowrap">Task View {{ taskId }}</div>
     </StackContainer>
   </UButton>
 </template>

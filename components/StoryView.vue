@@ -41,7 +41,6 @@ const cardConfig = {
       direction="row"
       class="w-full"
       wrap="wrap"
-      justify="stretch"
       spacing="1"
     >
       <TaskButton :story-id="storyId" />

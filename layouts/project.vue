@@ -21,13 +21,13 @@ if (!id) {
           class="w-full"
         >
           <h1 class="uppercase">Project title {{ id }}</h1>
-          <ProjectMenu />
+          <ProjectMenu :project-id="Number(id)" />
         </StackContainer>
       </UContainer>
       <HorizontalStatus />
     </header>
     <UDivider class="m-0" />
-    <main class="grow shrink overflow-scroll px-4 snap-mandatory">
+    <main class="grow shrink overflow-scroll scroll-smooth px-4 snap-mandatory">
       <slot />
     </main>
     <footer>

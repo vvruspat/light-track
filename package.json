@@ -13,10 +13,12 @@
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
     "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts",
     "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes",
+    "test": "echo \"No test specified\" && exit 0",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
-    "lintfix": "eslint . --fix && prettier --write --list-different ."
+    "lintfix": "eslint . --fix && prettier --write --list-different .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.7.5",
@@ -37,8 +39,21 @@
   "devDependencies": {
     "@iconify-json/line-md": "^1.2.5",
     "@iconify-json/mdi": "^1.2.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.4.3",
     "openapi-typescript": "^7.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

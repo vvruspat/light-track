@@ -37,12 +37,7 @@ const cardConfig = {
       </StackContainer>
     </template>
 
-    <StackContainer
-      direction="row"
-      class="w-full"
-      wrap="wrap"
-      spacing="1"
-    >
+    <StackContainer direction="row" class="w-full" wrap="wrap" spacing="1">
       <TaskButton :story-id="storyId" />
       <TaskButton :story-id="storyId" />
       <TaskButton :story-id="storyId" />

@@ -13,7 +13,6 @@
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
     "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts",
     "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes",
-    "test": "echo \"No test specified\" && exit 0",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",

@@ -30,7 +30,7 @@ const { projectId, epicId } = useRoute().params;
           <StoryView
             v-for="index in num"
             :key="index"
-            :story-id="index"
+            :storyId="index"
             :project-id="Number(projectId)"
             :epic-id="Number(epicId)"
           />

@@ -1,9 +1,5 @@
 <template>
   <TaskModal>
-
-
-
-  <TaskForm />
-
+    <TaskForm />
   </TaskModal>
 </template>

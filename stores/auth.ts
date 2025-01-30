@@ -1,25 +1,30 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 type TUser = {
-  id: string,
-  email: string,
-  groupId: number,
-}
+  id: string;
+  email: string;
+  groupId: number;
+};
 
 type AuthState = {
-  currentUser: TUser | null,
-}
+  currentUser: TUser | null;
+};
 
 type AuthGetters = {
-  isAuthorized: (state: AuthState) => boolean,
-}
+  isAuthorized: (state: AuthState) => boolean;
+};
 
 type AuthActions = {
-  login: (email: string, password: string) => Promise<void>,
-  logout: () => void,
-}
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+};
 
-export const useAuthStore = defineStore<'auth', AuthState, AuthGetters, AuthActions>('auth', {
+export const useAuthStore = defineStore<
+  "auth",
+  AuthState,
+  AuthGetters,
+  AuthActions
+>("auth", {
   state: () => ({
     currentUser: {
       id: "1",
@@ -36,7 +41,6 @@ export const useAuthStore = defineStore<'auth', AuthState, AuthGetters, AuthActi
 
   actions: {
     async login(email: string, _password: string) {
-      
       // Login stuff
       this.currentUser = {
         id: "1",
@@ -48,5 +52,5 @@ export const useAuthStore = defineStore<'auth', AuthState, AuthGetters, AuthActi
     async logout() {
       this.currentUser = null;
     },
-  }
-})
+  },
+});

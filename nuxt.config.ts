@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     serveStatic: true,
   },
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ["./stores/**"],
   },
   scalar: {
     configurations: [

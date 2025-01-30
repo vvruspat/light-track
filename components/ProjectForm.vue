@@ -35,11 +35,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   }
 
   if (projectId) {
-    await projectsStore.updateProject(Number(projectId), state.title, state.description);
+    await projectsStore.updateProject(
+      Number(projectId),
+      state.title,
+      state.description,
+    );
   } else {
     await projectsStore.createProject(groupId, state.title, state.description);
   }
-
 }
 </script>
 

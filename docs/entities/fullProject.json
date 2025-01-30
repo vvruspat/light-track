@@ -18,7 +18,15 @@
             }
           }
         ],
-        "required": ["id", "title", "created_at", "group_id", "owner_id", "description", "epics"]
+        "required": [
+          "id",
+          "title",
+          "created_at",
+          "group_id",
+          "owner_id",
+          "description",
+          "epics"
+        ]
       }
     }
   }

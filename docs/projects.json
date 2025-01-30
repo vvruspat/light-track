@@ -49,9 +49,18 @@
                       "type": "array",
                       "items": {
                         "allOf": [
-                          { "$ref": "./entities/project.json#/components/schemas/Project" }
+                          {
+                            "$ref": "./entities/project.json#/components/schemas/Project"
+                          }
                         ],
-                        "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
+                        "required": [
+                          "id",
+                          "title",
+                          "created_at",
+                          "group_id",
+                          "owner_id",
+                          "description"
+                        ]
                       }
                     }
                   }
@@ -106,7 +115,14 @@
                           "properties": {
                             "$ref": "./entities/project.json#/components/schemas/Project/properties"
                           },
-                          "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "group_id",
+                            "owner_id",
+                            "description"
+                          ]
                         }
                       }
                     }
@@ -279,7 +295,14 @@
                           "properties": {
                             "$ref": "./entities/project.json#/components/schemas/Project/properties"
                           },
-                          "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "group_id",
+                            "owner_id",
+                            "description"
+                          ]
                         }
                       }
                     }

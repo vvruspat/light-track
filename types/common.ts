@@ -1,1 +1,1 @@
-export type TLoadingState = 'idle' | 'pending' | 'error' | 'success';
+export type TLoadingState = "idle" | "pending" | "error" | "success";

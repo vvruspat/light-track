@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import type { TFullProject, TProject } from "@/types/entities";
-import type { ProjectGetByIdResponse, ProjectGetResponse, ProjectPostResponse } from "@/types/api";
+import type {
+  ProjectGetByIdResponse,
+  ProjectGetResponse,
+  ProjectPostResponse,
+} from "@/types/api";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
 import { useAuthStore } from "~/stores/auth";
@@ -21,12 +25,12 @@ type ProjectsActions = {
   createProject: (
     groupId: TProject["group_id"],
     title: TProject["title"],
-    description: TProject["description"]
+    description: TProject["description"],
   ) => Promise<TProject | null>;
   updateProject: (
     projectId: TProject["id"],
     title: TProject["title"],
-    description: TProject["description"]
+    description: TProject["description"],
   ) => Promise<TProject | null>;
   deleteProject: (projectId: TProject["id"]) => Promise<void>;
   getProjectById: (projectId: TProject["id"]) => Promise<TFullProject | null>;
@@ -53,7 +57,7 @@ export const useProjectsStore = defineStore<
       }
 
       return state.projects.filter(
-        (project) => project.owner_id === currentUser.id
+        (project) => project.owner_id === currentUser.id,
       );
     },
   },
@@ -72,7 +76,7 @@ export const useProjectsStore = defineStore<
             limit: this.limit,
             offset: this.offset,
           },
-        }
+        },
       );
       const { setError } = useErrorsStore();
 
@@ -101,7 +105,7 @@ export const useProjectsStore = defineStore<
     async createProject(
       groupId: TProject["group_id"],
       title: TProject["title"],
-      description: TProject["description"]
+      description: TProject["description"],
     ) {
       // create a new project
       this.loadingState = "pending";
@@ -115,7 +119,7 @@ export const useProjectsStore = defineStore<
             title,
             description,
           }),
-        }
+        },
       );
       const { setError } = useErrorsStore();
 
@@ -151,7 +155,7 @@ export const useProjectsStore = defineStore<
           query: {
             projectId,
           },
-        }
+        },
       );
       const { setError } = useErrorsStore();
 
@@ -170,7 +174,7 @@ export const useProjectsStore = defineStore<
       if (data.value?.data) {
         this.loadingState = "success";
         this.projects = this.projects.filter(
-          (project) => project.id !== projectId
+          (project) => project.id !== projectId,
         );
       }
     },
@@ -178,7 +182,7 @@ export const useProjectsStore = defineStore<
     async updateProject(
       projectId: TProject["id"],
       title: TProject["title"],
-      description: TProject["description"]
+      description: TProject["description"],
     ) {
       // create a new project
       this.loadingState = "pending";
@@ -192,7 +196,7 @@ export const useProjectsStore = defineStore<
             title,
             description,
           }),
-        }
+        },
       );
       const { setError } = useErrorsStore();
 
@@ -232,7 +236,7 @@ export const useProjectsStore = defineStore<
           query: {
             projectId,
           },
-        }
+        },
       );
       const { setError } = useErrorsStore();
 

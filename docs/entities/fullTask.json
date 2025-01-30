@@ -1,0 +1,13 @@
+{
+  "components": {
+    "schemas": {
+      "FullTask": {
+        "type": "object",
+        "properties": {
+          "$ref": "./task.json#/components/schemas/Task/properties"
+        },
+        "required": ["id", "title", "description", "owner_id", "story_id", "created_at", "updated_at", "estimation", "status", "assignee_id"]
+      }
+    }
+  }
+}

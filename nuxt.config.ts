@@ -8,12 +8,16 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@nuxtjs/tailwindcss",
     "@nuxt/eslint",
+    "@pinia/nuxt",
   ],
   nitro: {
     experimental: {
       openAPI: true,
     },
     serveStatic: true,
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
   scalar: {
     configurations: [

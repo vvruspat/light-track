@@ -31,7 +31,9 @@
   "paths": {
     "/projects": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a list of projects",
         "parameters": [
           {
@@ -87,7 +89,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -102,35 +107,49 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "description": "The project details",
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "description": "The unique identifier for the project",
-                            "type": "number"
-                          },
-                          "title": {
-                            "type": "string",
-                            "description": "The title of the project"
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "The project description"
-                          },
-                          "owner_id": {
-                            "description": "The ID of the project owner",
-                            "type": "string"
-                          },
-                          "group_id": {
-                            "description": "The ID of the group the project belongs to",
-                            "type": "number"
-                          },
-                          "created_at": {
-                            "type": "string",
-                            "description": "The date and time the project was created"
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "The unique identifier for the project",
+                                "type": "number"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "The title of the project"
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "The project description"
+                              },
+                              "owner_id": {
+                                "description": "The ID of the project owner",
+                                "type": "string"
+                              },
+                              "group_id": {
+                                "description": "The ID of the group the project belongs to",
+                                "type": "number"
+                              },
+                              "created_at": {
+                                "type": "string",
+                                "description": "The date and time the project was created"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "group_id"
+                            ]
                           }
-                        },
-                        "required": ["title", "group_id"]
+                        ],
+                        "required": [
+                          "id",
+                          "title",
+                          "created_at",
+                          "group_id",
+                          "owner_id",
+                          "description"
+                        ]
                       }
                     },
                     "statusCode": {
@@ -151,7 +170,9 @@
         }
       },
       "post": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Create a new project",
         "requestBody": {
           "required": true,
@@ -173,7 +194,10 @@
                     "type": "number"
                   }
                 },
-                "required": ["title", "group_id"]
+                "required": [
+                  "title",
+                  "group_id"
+                ]
               }
             }
           }
@@ -229,7 +253,15 @@
                               "type": "string",
                               "description": "The date and time the project was created"
                             }
-                          }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "group_id",
+                            "owner_id",
+                            "description"
+                          ]
                         }
                       }
                     }
@@ -265,7 +297,9 @@
     },
     "/projects/{id}": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a project by ID",
         "parameters": [
           {
@@ -303,33 +337,231 @@
                     {
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "description": "The unique identifier for the project",
-                              "type": "number"
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "description": "The unique identifier for the project",
+                                  "type": "number"
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "description": "The title of the project"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "The project description"
+                                },
+                                "owner_id": {
+                                  "description": "The ID of the project owner",
+                                  "type": "string"
+                                },
+                                "group_id": {
+                                  "description": "The ID of the group the project belongs to",
+                                  "type": "number"
+                                },
+                                "created_at": {
+                                  "type": "string",
+                                  "description": "The date and time the project was created"
+                                }
+                              },
+                              "required": [
+                                "title",
+                                "group_id"
+                              ]
                             },
-                            "title": {
-                              "type": "string",
-                              "description": "The title of the project"
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "The project description"
-                            },
-                            "owner_id": {
-                              "description": "The ID of the project owner",
-                              "type": "string"
-                            },
-                            "group_id": {
-                              "description": "The ID of the group the project belongs to",
-                              "type": "number"
-                            },
-                            "created_at": {
-                              "type": "string",
-                              "description": "The date and time the project was created"
+                            {
+                              "type": "object",
+                              "properties": {
+                                "epics": {
+                                  "type": "array",
+                                  "items": {
+                                    "allOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "description": "The unique identifier for the epic",
+                                            "type": "number"
+                                          },
+                                          "title": {
+                                            "type": "string",
+                                            "description": "The title of the epic"
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "description": "The epic description"
+                                          },
+                                          "owner_id": {
+                                            "description": "The ID of the user who owns the epic",
+                                            "type": "string"
+                                          },
+                                          "project_id": {
+                                            "description": "The ID of the project the epic belongs to",
+                                            "type": "number"
+                                          },
+                                          "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "The date and time when the epic was created"
+                                          },
+                                          "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "The date and time when the epic was last updated"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "project_id",
+                                          "created_at",
+                                          "updated_at"
+                                        ]
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "stories": {
+                                            "type": "array",
+                                            "items": {
+                                              "allOf": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "id": {
+                                                      "description": "The unique identifier for the story",
+                                                      "type": "number"
+                                                    },
+                                                    "title": {
+                                                      "type": "string",
+                                                      "description": "The title of the story"
+                                                    },
+                                                    "description": {
+                                                      "type": "string",
+                                                      "description": "The story description"
+                                                    },
+                                                    "epic_id": {
+                                                      "description": "The ID of the epic the story belongs to",
+                                                      "type": "number"
+                                                    },
+                                                    "owner_id": {
+                                                      "description": "The ID of the user who owns the story",
+                                                      "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                      "type": "string",
+                                                      "format": "date-time",
+                                                      "description": "The date and time when the story was created"
+                                                    },
+                                                    "updated_at": {
+                                                      "type": "string",
+                                                      "format": "date-time",
+                                                      "description": "The date and time when the story was last updated"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "id",
+                                                    "title",
+                                                    "owner_id",
+                                                    "created_at",
+                                                    "updated_at"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "tasks": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "description": "The unique identifier for the task",
+                                                            "type": "number"
+                                                          },
+                                                          "title": {
+                                                            "type": "string",
+                                                            "description": "The title of the task"
+                                                          },
+                                                          "description": {
+                                                            "type": "string",
+                                                            "description": "The task description"
+                                                          },
+                                                          "story_id": {
+                                                            "description": "The ID of the story the task belongs to",
+                                                            "type": "number"
+                                                          },
+                                                          "assignee_id": {
+                                                            "description": "The ID of the user assigned to the task",
+                                                            "type": "string"
+                                                          },
+                                                          "estimation": {
+                                                            "type": "number",
+                                                            "description": "The estimated effort for the task"
+                                                          },
+                                                          "status": {
+                                                            "type": "string",
+                                                            "description": "The status of the task"
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "id",
+                                                          "title",
+                                                          "description",
+                                                          "owner_id",
+                                                          "story_id",
+                                                          "created_at",
+                                                          "updated_at",
+                                                          "estimation",
+                                                          "status",
+                                                          "assignee_id"
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ],
+                                              "required": [
+                                                "id",
+                                                "title",
+                                                "description",
+                                                "owner_id",
+                                                "epic_id",
+                                                "created_at",
+                                                "updated_at",
+                                                "tasks"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "description",
+                                      "project_id",
+                                      "created_at",
+                                      "updated_at",
+                                      "stories",
+                                      "owner_id"
+                                    ]
+                                  }
+                                }
+                              }
                             }
-                          }
+                          ],
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "group_id",
+                            "owner_id",
+                            "description",
+                            "epics"
+                          ]
                         }
                       }
                     }
@@ -385,7 +617,9 @@
         }
       },
       "delete": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Delete project by ID",
         "parameters": [
           {
@@ -450,7 +684,9 @@
         }
       },
       "put": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Update project by ID",
         "parameters": [
           {
@@ -534,7 +770,15 @@
                               "type": "string",
                               "description": "The date and time the project was created"
                             }
-                          }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "group_id",
+                            "owner_id",
+                            "description"
+                          ]
                         }
                       }
                     }
@@ -570,7 +814,9 @@
     },
     "/epics": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get a list of epics",
         "parameters": [
           {
@@ -617,7 +863,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -653,7 +902,9 @@
         }
       },
       "post": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Create a new epic",
         "requestBody": {
           "required": true,
@@ -675,7 +926,10 @@
                     "type": "number"
                   }
                 },
-                "required": ["title", "project_id"]
+                "required": [
+                  "title",
+                  "project_id"
+                ]
               }
             }
           }
@@ -773,7 +1027,9 @@
     },
     "/epics/{id}": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get an epic by ID",
         "parameters": [
           {
@@ -877,7 +1133,9 @@
         }
       },
       "delete": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Delete an epic by ID",
         "parameters": [
           {
@@ -942,7 +1200,9 @@
         }
       },
       "put": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Update epic by id",
         "parameters": [
           {
@@ -1068,7 +1328,9 @@
     },
     "/stories": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get a list of stories",
         "parameters": [
           {
@@ -1115,7 +1377,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1152,7 +1417,9 @@
         }
       },
       "post": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Create a new story",
         "requestBody": {
           "required": true,
@@ -1174,7 +1441,9 @@
                     "type": "number"
                   }
                 },
-                "required": ["title"]
+                "required": [
+                  "title"
+                ]
               }
             }
           }
@@ -1272,7 +1541,9 @@
     },
     "/stories/{id}": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get an story by ID",
         "parameters": [
           {
@@ -1373,7 +1644,9 @@
         }
       },
       "delete": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Delete story by ID",
         "parameters": [
           {
@@ -1435,7 +1708,9 @@
         }
       },
       "put": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Update story",
         "parameters": [
           {
@@ -1561,7 +1836,9 @@
     },
     "/tasks": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a list of tasks",
         "parameters": [
           {
@@ -1626,7 +1903,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1663,7 +1943,9 @@
         }
       },
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Create a new task",
         "requestBody": {
           "required": true,
@@ -1697,7 +1979,10 @@
                     "description": "The status of the task"
                   }
                 },
-                "required": ["title", "status"]
+                "required": [
+                  "title",
+                  "status"
+                ]
               }
             }
           }
@@ -1771,7 +2056,9 @@
     },
     "/tasks/{id}": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a task by ID",
         "parameters": [
           {
@@ -1873,7 +2160,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Delete a task by ID",
         "parameters": [
           {
@@ -1934,7 +2223,9 @@
         }
       },
       "put": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Update task by ID",
         "parameters": [
           {
@@ -2049,7 +2340,9 @@
     },
     "/taskwatchers": {
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Add a task watcher",
         "requestBody": {
           "required": true,
@@ -2067,7 +2360,10 @@
                     "type": "string"
                   }
                 },
-                "required": ["task_id", "userId"]
+                "required": [
+                  "task_id",
+                  "userId"
+                ]
               }
             }
           }
@@ -2120,7 +2416,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Remove a task watcher",
         "parameters": [
           {
@@ -2219,7 +2517,10 @@
       },
       "SortDirection": {
         "type": "string",
-        "enum": ["asc", "desc"]
+        "enum": [
+          "asc",
+          "desc"
+        ]
       },
       "GenericResponse": {
         "type": "object",
@@ -2279,7 +2580,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         }
@@ -2312,7 +2616,10 @@
             "description": "The date and time the project was created"
           }
         },
-        "required": ["title", "group_id"]
+        "required": [
+          "title",
+          "group_id"
+        ]
       },
       "Epic": {
         "type": "object",
@@ -2348,7 +2655,13 @@
             "description": "The date and time when the epic was last updated"
           }
         },
-        "required": ["id", "title", "project_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "project_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Story": {
         "type": "object",
@@ -2384,7 +2697,13 @@
             "description": "The date and time when the story was last updated"
           }
         },
-        "required": ["id", "title", "owner_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "owner_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Task": {
         "type": "object",
@@ -2418,7 +2737,565 @@
             "description": "The status of the task"
           }
         },
-        "required": ["title", "project_id", "status"]
+        "required": [
+          "title",
+          "project_id",
+          "status"
+        ]
+      },
+      "FullProject": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The unique identifier for the project",
+                "type": "number"
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of the project"
+              },
+              "description": {
+                "type": "string",
+                "description": "The project description"
+              },
+              "owner_id": {
+                "description": "The ID of the project owner",
+                "type": "string"
+              },
+              "group_id": {
+                "description": "The ID of the group the project belongs to",
+                "type": "number"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "The date and time the project was created"
+              }
+            },
+            "required": [
+              "title",
+              "group_id"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "epics": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "description": "The unique identifier for the epic",
+                          "type": "number"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "The title of the epic"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The epic description"
+                        },
+                        "owner_id": {
+                          "description": "The ID of the user who owns the epic",
+                          "type": "string"
+                        },
+                        "project_id": {
+                          "description": "The ID of the project the epic belongs to",
+                          "type": "number"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The date and time when the epic was created"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The date and time when the epic was last updated"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "project_id",
+                        "created_at",
+                        "updated_at"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "stories": {
+                          "type": "array",
+                          "items": {
+                            "allOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "description": "The unique identifier for the story",
+                                    "type": "number"
+                                  },
+                                  "title": {
+                                    "type": "string",
+                                    "description": "The title of the story"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "The story description"
+                                  },
+                                  "epic_id": {
+                                    "description": "The ID of the epic the story belongs to",
+                                    "type": "number"
+                                  },
+                                  "owner_id": {
+                                    "description": "The ID of the user who owns the story",
+                                    "type": "string"
+                                  },
+                                  "created_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The date and time when the story was created"
+                                  },
+                                  "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The date and time when the story was last updated"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "title",
+                                  "owner_id",
+                                  "created_at",
+                                  "updated_at"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "tasks": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "description": "The unique identifier for the task",
+                                          "type": "number"
+                                        },
+                                        "title": {
+                                          "type": "string",
+                                          "description": "The title of the task"
+                                        },
+                                        "description": {
+                                          "type": "string",
+                                          "description": "The task description"
+                                        },
+                                        "story_id": {
+                                          "description": "The ID of the story the task belongs to",
+                                          "type": "number"
+                                        },
+                                        "assignee_id": {
+                                          "description": "The ID of the user assigned to the task",
+                                          "type": "string"
+                                        },
+                                        "estimation": {
+                                          "type": "number",
+                                          "description": "The estimated effort for the task"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "description": "The status of the task"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "title",
+                                        "description",
+                                        "owner_id",
+                                        "story_id",
+                                        "created_at",
+                                        "updated_at",
+                                        "estimation",
+                                        "status",
+                                        "assignee_id"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "required": [
+                              "id",
+                              "title",
+                              "description",
+                              "owner_id",
+                              "epic_id",
+                              "created_at",
+                              "updated_at",
+                              "tasks"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "project_id",
+                    "created_at",
+                    "updated_at",
+                    "stories",
+                    "owner_id"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "title",
+          "created_at",
+          "group_id",
+          "owner_id",
+          "description",
+          "epics"
+        ]
+      },
+      "FullEpic": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The unique identifier for the epic",
+                "type": "number"
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of the epic"
+              },
+              "description": {
+                "type": "string",
+                "description": "The epic description"
+              },
+              "owner_id": {
+                "description": "The ID of the user who owns the epic",
+                "type": "string"
+              },
+              "project_id": {
+                "description": "The ID of the project the epic belongs to",
+                "type": "number"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The date and time when the epic was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The date and time when the epic was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "project_id",
+              "created_at",
+              "updated_at"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "stories": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "description": "The unique identifier for the story",
+                          "type": "number"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "The title of the story"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The story description"
+                        },
+                        "epic_id": {
+                          "description": "The ID of the epic the story belongs to",
+                          "type": "number"
+                        },
+                        "owner_id": {
+                          "description": "The ID of the user who owns the story",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The date and time when the story was created"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The date and time when the story was last updated"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "owner_id",
+                        "created_at",
+                        "updated_at"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "tasks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "The unique identifier for the task",
+                                "type": "number"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "The title of the task"
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "The task description"
+                              },
+                              "story_id": {
+                                "description": "The ID of the story the task belongs to",
+                                "type": "number"
+                              },
+                              "assignee_id": {
+                                "description": "The ID of the user assigned to the task",
+                                "type": "string"
+                              },
+                              "estimation": {
+                                "type": "number",
+                                "description": "The estimated effort for the task"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "The status of the task"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "description",
+                              "owner_id",
+                              "story_id",
+                              "created_at",
+                              "updated_at",
+                              "estimation",
+                              "status",
+                              "assignee_id"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "owner_id",
+                    "epic_id",
+                    "created_at",
+                    "updated_at",
+                    "tasks"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "title",
+          "description",
+          "project_id",
+          "created_at",
+          "updated_at",
+          "stories",
+          "owner_id"
+        ]
+      },
+      "FullStory": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The unique identifier for the story",
+                "type": "number"
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of the story"
+              },
+              "description": {
+                "type": "string",
+                "description": "The story description"
+              },
+              "epic_id": {
+                "description": "The ID of the epic the story belongs to",
+                "type": "number"
+              },
+              "owner_id": {
+                "description": "The ID of the user who owns the story",
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The date and time when the story was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The date and time when the story was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "owner_id",
+              "created_at",
+              "updated_at"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tasks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The unique identifier for the task",
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the task"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The task description"
+                    },
+                    "story_id": {
+                      "description": "The ID of the story the task belongs to",
+                      "type": "number"
+                    },
+                    "assignee_id": {
+                      "description": "The ID of the user assigned to the task",
+                      "type": "string"
+                    },
+                    "estimation": {
+                      "type": "number",
+                      "description": "The estimated effort for the task"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the task"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "owner_id",
+                    "story_id",
+                    "created_at",
+                    "updated_at",
+                    "estimation",
+                    "status",
+                    "assignee_id"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "title",
+          "description",
+          "owner_id",
+          "epic_id",
+          "created_at",
+          "updated_at",
+          "tasks"
+        ]
+      },
+      "FullTask": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the task",
+            "type": "number"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the task"
+          },
+          "description": {
+            "type": "string",
+            "description": "The task description"
+          },
+          "story_id": {
+            "description": "The ID of the story the task belongs to",
+            "type": "number"
+          },
+          "assignee_id": {
+            "description": "The ID of the user assigned to the task",
+            "type": "string"
+          },
+          "estimation": {
+            "type": "number",
+            "description": "The estimated effort for the task"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the task"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "owner_id",
+          "story_id",
+          "created_at",
+          "updated_at",
+          "estimation",
+          "status",
+          "assignee_id"
+        ]
       },
       "properties": {
         "statusCode": {
@@ -2469,7 +3346,10 @@
           "description": "The direction to sort by",
           "default": "asc",
           "type": "string",
-          "enum": ["asc", "desc"]
+          "enum": [
+            "asc",
+            "desc"
+          ]
         }
       }
     }

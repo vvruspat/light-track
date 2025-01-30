@@ -1,0 +1,25 @@
+{
+  "components": {
+    "schemas": {
+      "FullProject": {
+        "allOf": [
+          {
+            "$ref": "./project.json#/components/schemas/Project"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "epics": {
+                "type": "array",
+                "items": {
+                  "$ref": "./fullEpic.json#/components/schemas/FullEpic"
+                }
+              }
+            }
+          }
+        ],
+        "required": ["id", "title", "created_at", "group_id", "owner_id", "description", "epics"]
+      }
+    }
+  }
+}

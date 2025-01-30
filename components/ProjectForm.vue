@@ -9,6 +9,8 @@ type ProjectEditFormProps = {
 
 const { title, description } = defineProps<ProjectEditFormProps>();
 const { projectId } = useRoute().params;
+const projectsStore = useProjectsStore();
+const authStore = useAuthStore();
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -25,6 +27,19 @@ const state = reactive({
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data);
+
+  const groupId = authStore.currentUser?.groupId;
+
+  if (!groupId) {
+    throw new Error("User is not in a group");
+  }
+
+  if (projectId) {
+    await projectsStore.updateProject(Number(projectId), state.title, state.description);
+  } else {
+    await projectsStore.createProject(groupId, state.title, state.description);
+  }
+
 }
 </script>
 

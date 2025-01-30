@@ -48,8 +48,10 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "./entities/project.json#/components/schemas/Project",
-                        "description": "The project details"
+                        "allOf": [
+                          { "$ref": "./entities/project.json#/components/schemas/Project" }
+                        ],
+                        "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
                       }
                     }
                   }
@@ -103,7 +105,8 @@
                           "type": "object",
                           "properties": {
                             "$ref": "./entities/project.json#/components/schemas/Project/properties"
-                          }
+                          },
+                          "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
                         }
                       }
                     }
@@ -153,10 +156,7 @@
                     {
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "$ref": "./entities/project.json#/components/schemas/Project/properties"
-                          }
+                          "$ref": "./entities/fullProject.json#/components/schemas/FullProject"
                         }
                       }
                     }
@@ -278,7 +278,8 @@
                           "type": "object",
                           "properties": {
                             "$ref": "./entities/project.json#/components/schemas/Project/properties"
-                          }
+                          },
+                          "required": ["id", "title", "created_at", "group_id", "owner_id", "description"]
                         }
                       }
                     }

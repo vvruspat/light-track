@@ -1,0 +1,25 @@
+{
+  "components": {
+    "schemas": {
+      "FullEpic": {
+        "allOf": [
+          {
+            "$ref": "./epic.json#/components/schemas/Epic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "stories": {
+                "type": "array",
+                "items": {
+                  "$ref": "./fullStory.json#/components/schemas/FullStory"
+                }
+              }
+            }
+          }
+        ],
+        "required": ["id", "title", "description", "project_id", "created_at", "updated_at", "stories", "owner_id"]
+      }
+    }
+  }
+}

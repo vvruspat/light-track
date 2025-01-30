@@ -1,0 +1,25 @@
+{
+  "components": {
+    "schemas": {
+      "FullStory": {
+        "allOf": [
+          {
+            "$ref": "./story.json#/components/schemas/Story"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tasks": {
+                "type": "array",
+                "items": {
+                  "$ref": "./fullTask.json#/components/schemas/FullTask"
+                }
+              }
+            }
+          }
+        ],
+        "required": ["id", "title", "description", "owner_id", "epic_id", "created_at", "updated_at", "tasks"]
+      }
+    }
+  }
+}

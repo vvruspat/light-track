@@ -71,6 +71,18 @@
       },
       "Task": {
         "$ref": "./entities/task.json#/components/schemas/Task"
+      },
+      "FullProject": {
+        "$ref": "./entities/fullProject.json#/components/schemas/FullProject"
+      },
+      "FullEpic": {
+        "$ref": "./entities/fullEpic.json#/components/schemas/FullEpic"
+      },
+      "FullStory": {
+        "$ref": "./entities/fullStory.json#/components/schemas/FullStory"
+      },
+      "FullTask": {
+        "$ref": "./entities/fullTask.json#/components/schemas/FullTask"
       }
     }
   },

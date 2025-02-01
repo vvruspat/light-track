@@ -29,9 +29,17 @@ const state = reactive({
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   let id = epicId ? Number(epicId) : null;
   if (epicId) {
-    id = await epicsStore.updateEpic(Number(epicId), event.data.title, event.data.description ?? "");
+    id = await epicsStore.updateEpic(
+      Number(epicId),
+      event.data.title,
+      event.data.description ?? "",
+    );
   } else {
-    id = await epicsStore.createEpic(Number(projectId), event.data.title, event.data.description ?? "");
+    id = await epicsStore.createEpic(
+      Number(projectId),
+      event.data.title,
+      event.data.description ?? "",
+    );
   }
 
   await currentProjectStore.getProjectById(Number(projectId));

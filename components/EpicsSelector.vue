@@ -7,7 +7,13 @@ const { currentProject } = storeToRefs(currentProjectStore);
 const router = useRoute();
 const { projectId } = router.params;
 
-const links = computed(() => currentProject.value?.epics.map((epic) => ({ to: `/project/${projectId}/epic/${epic.id}`, label: epic.title })) ?? []);
+const links = computed(
+  () =>
+    currentProject.value?.epics.map((epic) => ({
+      to: `/project/${projectId}/epic/${epic.id}`,
+      label: epic.title,
+    })) ?? [],
+);
 
 const isOpen = ref(false);
 </script>

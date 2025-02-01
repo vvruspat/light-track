@@ -24,10 +24,9 @@ try {
       navigateTo(createProjectUrl);
     }
   }
-
 } catch (error) {
   errorsStore.setError(error as Error);
-  navigateTo('/error');
+  navigateTo("/error");
 }
 </script>
 
@@ -46,7 +45,13 @@ try {
           <ProjectMenu :project-id="Number(projectId)" />
         </StackContainer>
       </UContainer>
-      <HorizontalStatus :total="statistics.project.total" :todo="statistics.project.todo" :in-progress="statistics.project.inProgress" :done="statistics.project.done" :rejected="statistics.project.rejected" />
+      <HorizontalStatus
+        :total="statistics.project.total"
+        :todo="statistics.project.todo"
+        :in-progress="statistics.project.inProgress"
+        :done="statistics.project.done"
+        :rejected="statistics.project.rejected"
+      />
     </header>
     <UDivider class="m-0" />
     <main class="grow shrink overflow-scroll scroll-smooth px-4 snap-mandatory">

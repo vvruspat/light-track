@@ -7,8 +7,9 @@ const { projectId, epicId } = router.params;
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject } = storeToRefs(currentProjectStore);
 
-const epic = computed(() => currentProject.value?.epics.find((epic) => epic.id === Number(epicId)));
-
+const epic = computed(() =>
+  currentProject.value?.epics.find((epic) => epic.id === Number(epicId)),
+);
 </script>
 
 <template>

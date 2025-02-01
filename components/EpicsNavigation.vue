@@ -4,8 +4,13 @@ import { useRoute } from "vue-router";
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject } = storeToRefs(currentProjectStore);
 
-
-const items = computed(() => currentProject.value?.epics.map((epic) => ({ id: epic.id, title: epic.title })) ?? []);
+const items = computed(
+  () =>
+    currentProject.value?.epics.map((epic) => ({
+      id: epic.id,
+      title: epic.title,
+    })) ?? [],
+);
 
 const router = useRoute();
 const { projectId, epicId } = router.params;
@@ -15,7 +20,9 @@ const currentIndex = computed(() =>
 );
 
 const disabledPrev = computed(() => currentIndex.value === 0);
-const disabledNext = computed(() => currentIndex.value === items.value.length - 1);
+const disabledNext = computed(
+  () => currentIndex.value === items.value.length - 1,
+);
 
 const nextUrl = computed(
   () => `/project/${projectId}/epic/${items.value[currentIndex.value + 1]?.id}`,

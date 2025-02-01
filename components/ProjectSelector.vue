@@ -6,7 +6,9 @@ const projectsStore = useProjectsStore();
 
 const { projects } = storeToRefs(projectsStore);
 
-const projectsItems = computed(() => projects.value.map((project) => ({ id: project.id, label: project.title })));
+const projectsItems = computed(() =>
+  projects.value.map((project) => ({ id: project.id, label: project.title })),
+);
 
 const selected = ref([]);
 

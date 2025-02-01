@@ -7,7 +7,11 @@ type TaskButtonProps = {
 };
 
 const statusColors: {
-  [key in "todo" | "inProgress" | "done" | "rejected"]: (typeof UButton)["color"];
+  [key in
+    | "todo"
+    | "inProgress"
+    | "done"
+    | "rejected"]: (typeof UButton)["color"];
 } = {
   todo: "gray",
   inProgress: "yellow",
@@ -23,7 +27,8 @@ const src =
 const { projectId, epicId } = useRoute().params;
 const { task } = defineProps<TaskButtonProps>();
 const url = computed(
-  () => `/project/${projectId}/epic/${epicId}/story/${task.story_id}/task/${task.id}`,
+  () =>
+    `/project/${projectId}/epic/${epicId}/story/${task.story_id}/task/${task.id}`,
 );
 </script>
 

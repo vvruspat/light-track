@@ -7,7 +7,8 @@ type HorizontalStatusProps = {
   rejected: number;
 };
 
-const { total, todo, inProgress, done, rejected } = defineProps<HorizontalStatusProps>();
+const { total, todo, inProgress, done, rejected } =
+  defineProps<HorizontalStatusProps>();
 </script>
 
 <template>

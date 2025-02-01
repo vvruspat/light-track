@@ -1,8 +1,6 @@
 import { defineStore } from "pinia";
 import type { TEpic } from "@/types/entities";
-import type {
-  EpicPostResponse,
-} from "@/types/api";
+import type { EpicPostResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
 
@@ -55,17 +53,14 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>(
-          "/api/epics",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              project_id: projectId,
-              title,
-              description,
-            }),
-          },
-        );
+        const data = await $fetch<EpicPostResponse>("/api/epics", {
+          method: "POST",
+          body: JSON.stringify({
+            project_id: projectId,
+            title,
+            description,
+          }),
+        });
 
         if (data.statusCode !== 201) {
           this.loadingState = "error";
@@ -78,9 +73,7 @@ export const useEpicsStore = defineStore<
           console.log("data: ", data);
           return data.data.id!;
         }
-
       } catch (error) {
-
         if (error) {
           this.loadingState = "error";
           setError(error as Error);
@@ -96,15 +89,12 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>(
-          "/api/epics",
-          {
-            method: "DELETE",
-            query: {
-              epicId,
-            },
+        const data = await $fetch<EpicPostResponse>("/api/epics", {
+          method: "DELETE",
+          query: {
+            epicId,
           },
-        );
+        });
 
         if (data.statusCode !== 200) {
           this.loadingState = "error";
@@ -120,7 +110,6 @@ export const useEpicsStore = defineStore<
         setError(error as Error);
         return;
       }
-
     },
 
     async updateEpic(
@@ -134,30 +123,26 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>(
-          "/api/epics",
-          {
-            method: "PUT",
-            body: JSON.stringify({
-              epic_id: epicId,
-              title,
-              description,
-            }),
-          },
-        );
+        const data = await $fetch<EpicPostResponse>("/api/epics", {
+          method: "PUT",
+          body: JSON.stringify({
+            epic_id: epicId,
+            title,
+            description,
+          }),
+        });
 
         if (data.statusCode !== 201) {
           this.loadingState = "error";
           setError(new Error(data.statusMessage));
           return null;
         }
-  
+
         if (data.data) {
           this.loadingState = "success";
           console.log("data: ", data);
           return data.data.id!;
         }
-
       } catch (error) {
         this.loadingState = "error";
         setError(error as Error);

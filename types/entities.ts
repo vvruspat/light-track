@@ -20,7 +20,7 @@ export type TStatistics = {
   inProgress: number;
   done: number;
   rejected: number;
-}
+};
 
 export type TProjectStatistics = {
   project: TStatistics;

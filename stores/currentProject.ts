@@ -1,14 +1,23 @@
-import { defineStore } from 'pinia'
-import type { TEpic, TFullEpic, TFullProject, TFullStory, TProject, TProjectStatistics, TStory, TTask } from '@/types/entities';
-import type { ProjectGetByIdResponse } from '@/types/api';
+import { defineStore } from "pinia";
+import type {
+  TEpic,
+  TFullEpic,
+  TFullProject,
+  TFullStory,
+  TProject,
+  TProjectStatistics,
+  TStory,
+  TTask,
+} from "@/types/entities";
+import type { ProjectGetByIdResponse } from "@/types/api";
 
 type ProjectState = {
   currentProject: TFullProject | null;
-}
+};
 
 type ProjectGetters = {
   statistics: (state: ProjectState) => TProjectStatistics;
-}
+};
 
 type ProjectActions = {
   getProjectById: (projectId: TProject["id"]) => Promise<TFullProject | null>;
@@ -16,24 +25,48 @@ type ProjectActions = {
   updateEpicData: (epic: Partial<TEpic>) => void;
   updateStoryData: (story: Partial<TStory>) => void;
   updateTaskData: (task: Partial<TTask>) => void;
-}
+};
 
-const filterProjectTasks = (currentProject: TFullProject, status: TTask["status"]) => {
-  return currentProject.epics.reduce((acc, epic) => acc + epic.stories.reduce((acc, story) => acc + story.tasks.filter((task) => task.status === status).length, 0), 0);
-}
+const filterProjectTasks = (
+  currentProject: TFullProject,
+  status: TTask["status"],
+) => {
+  return currentProject.epics.reduce(
+    (acc, epic) =>
+      acc +
+      epic.stories.reduce(
+        (acc, story) =>
+          acc + story.tasks.filter((task) => task.status === status).length,
+        0,
+      ),
+    0,
+  );
+};
 
 const filterEpicTasks = (currentEpic: TFullEpic, status: TTask["status"]) => {
-  return currentEpic.stories.reduce((acc, story) => acc + story.tasks.filter((task) => task.status === status).length, 0);
-}
+  return currentEpic.stories.reduce(
+    (acc, story) =>
+      acc + story.tasks.filter((task) => task.status === status).length,
+    0,
+  );
+};
 
-const filterStoryTasks = (currentStory: TFullStory, status: TTask["status"]) => {
+const filterStoryTasks = (
+  currentStory: TFullStory,
+  status: TTask["status"],
+) => {
   return currentStory.tasks.filter((task) => task.status === status).length;
-}
+};
 
-export const useCurrentProjectStore = defineStore<'currentProject', ProjectState, ProjectGetters, ProjectActions>('currentProject', {
+export const useCurrentProjectStore = defineStore<
+  "currentProject",
+  ProjectState,
+  ProjectGetters,
+  ProjectActions
+>("currentProject", {
   state: () => ({
     currentProject: null,
-    loadingState: 'idle',
+    loadingState: "idle",
     error: null,
   }),
 
@@ -67,33 +100,51 @@ export const useCurrentProjectStore = defineStore<'currentProject', ProjectState
 
       return {
         project: {
-          total: state.currentProject.epics.reduce((acc, epic) => acc + epic.stories.reduce((acc, story) => acc + story.tasks.length, 0), 0),
-          done: filterProjectTasks(state.currentProject, 'done'),
-          inProgress: filterProjectTasks(state.currentProject, 'in_progress'),
-          todo: filterProjectTasks(state.currentProject, 'todo'),
-          rejected: filterProjectTasks(state.currentProject, 'rejected'),
+          total: state.currentProject.epics.reduce(
+            (acc, epic) =>
+              acc +
+              epic.stories.reduce((acc, story) => acc + story.tasks.length, 0),
+            0,
+          ),
+          done: filterProjectTasks(state.currentProject, "done"),
+          inProgress: filterProjectTasks(state.currentProject, "in_progress"),
+          todo: filterProjectTasks(state.currentProject, "todo"),
+          rejected: filterProjectTasks(state.currentProject, "rejected"),
         },
-        epics: state.currentProject.epics.reduce((acc, epic) => ({
-          ...acc,
-          [epic.id]: {
-            total: epic.stories.reduce((acc, story) => acc + story.tasks.length, 0),
-            done: filterEpicTasks(epic, 'done'),
-            inProgress: filterEpicTasks(epic, 'in_progress'),
-            todo: filterEpicTasks(epic, 'todo'),
-            rejected: filterEpicTasks(epic, 'rejected'),
-          }
-        }), {}),
-          
-        stories: state.currentProject.epics.reduce((acc, epic) => epic.stories.reduce((acc, story) => ({
-          ...acc,
-          [story.id]: {
-            total: story.tasks.length,
-            done: filterStoryTasks(story, 'done'),
-            inProgress: filterStoryTasks(story, 'in_progress'),
-            todo: filterStoryTasks(story, 'todo'),
-            rejected: filterStoryTasks(story, 'rejected'),
-          }
-        }), {}), {}),
+        epics: state.currentProject.epics.reduce(
+          (acc, epic) => ({
+            ...acc,
+            [epic.id]: {
+              total: epic.stories.reduce(
+                (acc, story) => acc + story.tasks.length,
+                0,
+              ),
+              done: filterEpicTasks(epic, "done"),
+              inProgress: filterEpicTasks(epic, "in_progress"),
+              todo: filterEpicTasks(epic, "todo"),
+              rejected: filterEpicTasks(epic, "rejected"),
+            },
+          }),
+          {},
+        ),
+
+        stories: state.currentProject.epics.reduce(
+          (acc, epic) =>
+            epic.stories.reduce(
+              (acc, story) => ({
+                ...acc,
+                [story.id]: {
+                  total: story.tasks.length,
+                  done: filterStoryTasks(story, "done"),
+                  inProgress: filterStoryTasks(story, "in_progress"),
+                  todo: filterStoryTasks(story, "todo"),
+                  rejected: filterStoryTasks(story, "rejected"),
+                },
+              }),
+              {},
+            ),
+          {},
+        ),
       };
     },
   },
@@ -179,9 +230,12 @@ export const useCurrentProjectStore = defineStore<'currentProject', ProjectState
       }
 
       try {
-        const data = await $fetch<ProjectGetByIdResponse>(`/api/projects/${projectId}`, {
-          headers: useRequestHeaders(['cookie'])
-        });
+        const data = await $fetch<ProjectGetByIdResponse>(
+          `/api/projects/${projectId}`,
+          {
+            headers: useRequestHeaders(["cookie"]),
+          },
+        );
 
         if (data.statusCode !== 200) {
           throw Error(data.statusMessage);
@@ -191,7 +245,6 @@ export const useCurrentProjectStore = defineStore<'currentProject', ProjectState
           this.currentProject = data.data;
           return data.data;
         }
-
       } catch (error) {
         console.error(error);
         throw Error((error as Error).message);
@@ -199,5 +252,5 @@ export const useCurrentProjectStore = defineStore<'currentProject', ProjectState
 
       return null;
     },
-  }
-})
+  },
+});

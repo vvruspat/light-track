@@ -27,7 +27,8 @@ export default defineEventHandler(
 
     const { data, error } = await client
       .from("projects")
-      .select(`
+      .select(
+        `
         *,
         epics (
           *,
@@ -38,7 +39,8 @@ export default defineEventHandler(
             )
           )
         )
-      `)
+      `,
+      )
       .eq("id", id)
       .single();
 

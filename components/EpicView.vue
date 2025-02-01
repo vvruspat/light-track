@@ -4,7 +4,6 @@ import StoryView from "@/components/StoryView.vue";
 const { projectId, epicId } = useRoute().params;
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject } = storeToRefs(currentProjectStore);
-
 </script>
 
 <template>
@@ -28,7 +27,13 @@ const { currentProject } = storeToRefs(currentProjectStore);
           ]"
         />
       </div>
-      <div v-if="currentProject?.epics[Number(epicId)]?.stories && currentProject?.epics[Number(epicId)].stories.length > 0" class="w-full h-full">
+      <div
+        v-if="
+          currentProject?.epics[Number(epicId)]?.stories &&
+          currentProject?.epics[Number(epicId)].stories.length > 0
+        "
+        class="w-full h-full"
+      >
         <StackContainer direction="column" align-items="stretch" spacing="4">
           <StoryView
             v-for="story in currentProject?.epics[Number(epicId)].stories"
@@ -39,9 +44,17 @@ const { currentProject } = storeToRefs(currentProjectStore);
         </StackContainer>
       </div>
       <UCard v-else class="w-full h-full">
-        <StackContainer direction="column" align-items="center" justify="center" spacing="4" class="w-full h-full">
+        <StackContainer
+          direction="column"
+          align-items="center"
+          justify="center"
+          spacing="4"
+          class="w-full h-full"
+        >
           <div>You haven't made any story yet for this epic.</div>
-          <UButton :to="`/project/${projectId}/epic/${epicId}/story/create`">Create story</UButton>
+          <UButton :to="`/project/${projectId}/epic/${epicId}/story/create`"
+            >Create story</UButton
+          >
         </StackContainer>
       </UCard>
     </StackContainer>

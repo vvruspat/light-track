@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import StoryView from "@/components/StoryView.vue";
-const num = Math.round(Math.random() * 10) + 1;
 
 const { projectId, epicId } = useRoute().params;
+const currentProjectStore = useCurrentProjectStore();
+const { currentProject } = storeToRefs(currentProjectStore);
+
 </script>
 
 <template>
@@ -14,28 +16,34 @@ const { projectId, epicId } = useRoute().params;
     >
       <div class="my-4 w-full">
         <UAccordion
+          v-if="currentProject?.epics[Number(epicId)]?.description"
           color="gray"
           variant="ghost"
           size="sm"
           :items="[
             {
               label: 'Description',
-              content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+              content: currentProject?.epics[Number(epicId)].description,
             },
           ]"
         />
       </div>
-      <div class="w-full h-full">
+      <div v-if="currentProject?.epics[Number(epicId)]?.stories && currentProject?.epics[Number(epicId)].stories.length > 0" class="w-full h-full">
         <StackContainer direction="column" align-items="stretch" spacing="4">
           <StoryView
-            v-for="index in num"
-            :key="index"
-            :story-id="index"
+            v-for="story in currentProject?.epics[Number(epicId)].stories"
+            :key="story.id"
+            :story="story"
             :project-id="Number(projectId)"
-            :epic-id="Number(epicId)"
           />
         </StackContainer>
       </div>
+      <UCard v-else class="w-full h-full">
+        <StackContainer direction="column" align-items="center" justify="center" spacing="4" class="w-full h-full">
+          <div>You haven't made any story yet for this epic.</div>
+          <UButton :to="`/project/${projectId}/epic/${epicId}/story/create`">Create story</UButton>
+        </StackContainer>
+      </UCard>
     </StackContainer>
   </div>
 </template>

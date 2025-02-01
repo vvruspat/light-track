@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import type { TFullProject, TProject } from "@/types/entities";
+import type { TProject } from "@/types/entities";
 import type {
-  ProjectGetByIdResponse,
   ProjectGetResponse,
   ProjectPostResponse,
 } from "@/types/api";
@@ -33,7 +32,6 @@ type ProjectsActions = {
     description: TProject["description"],
   ) => Promise<TProject | null>;
   deleteProject: (projectId: TProject["id"]) => Promise<void>;
-  getProjectById: (projectId: TProject["id"]) => Promise<TFullProject | null>;
 };
 
 export const useProjectsStore = defineStore<
@@ -223,40 +221,6 @@ export const useProjectsStore = defineStore<
           return project;
         });
       }
-      return null;
-    },
-
-    async getProjectById(projectId: TProject["id"]) {
-      this.loadingState = "pending";
-
-      const { data, error } = await useFetch<ProjectGetByIdResponse>(
-        "/api/projects",
-        {
-          method: "GET",
-          query: {
-            projectId,
-          },
-        },
-      );
-      const { setError } = useErrorsStore();
-
-      if (error) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage ?? error.value?.message));
-        return null;
-      }
-
-      if (data.value?.statusCode !== 200) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage));
-        return null;
-      }
-
-      if (data.value?.data) {
-        this.loadingState = "success";
-        return data.value.data;
-      }
-
       return null;
     },
   },

@@ -25,11 +25,30 @@ export default defineEventHandler(
       };
     }
 
-    const { data } = await client
+    const { data, error } = await client
       .from("projects")
-      .select()
+      .select(`
+        *,
+        epics (
+          *,
+          stories (
+            *,
+            tasks (
+              *
+            )
+          )
+        )
+      `)
       .eq("id", id)
       .single();
+
+    if (error) {
+      return {
+        statusCode: 500,
+        statusMessage: "Internal Server Error",
+        message: error.message,
+      };
+    }
 
     if (!data) {
       return {

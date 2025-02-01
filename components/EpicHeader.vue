@@ -1,57 +1,14 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
-const items = [
-  {
-    id: "1",
-    title: "Epic 1",
-  },
-  {
-    id: "2",
-    title: "Epic 2",
-  },
-  {
-    id: "3",
-    title: "Epic 3",
-  },
-  {
-    id: "4",
-    title: "Epic 4 hklhjhlglkhkjgjhjg",
-  },
-  {
-    id: "5",
-    title: "Epic 5",
-  },
-  {
-    id: "6",
-    title: "Epic 6",
-  },
-  {
-    id: "7",
-    title: "Epic 7",
-  },
-  {
-    id: "8",
-    title: "Epic 8",
-  },
-  {
-    id: "9",
-    title: "Epic 9",
-  },
-  {
-    id: "10",
-    title: "Epic 10",
-  },
-];
-
 const router = useRoute();
 const { projectId, epicId } = router.params;
 
-const currentIndex = computed(() =>
-  epicId ? items.findIndex((item) => item.id === epicId) : 0,
-);
+const currentProjectStore = useCurrentProjectStore();
+const { currentProject } = storeToRefs(currentProjectStore);
 
-const item = computed(() => items[currentIndex.value]);
+const epic = computed(() => currentProject.value?.epics.find((epic) => epic.id === Number(epicId)));
+
 </script>
 
 <template>
@@ -69,7 +26,7 @@ const item = computed(() => items[currentIndex.value]);
       class="w-full"
     >
       <h2 class="text-xl font-light">
-        {{ item.title }}
+        {{ epic?.title }}
       </h2>
       <EpicsSelector />
     </StackContainer>

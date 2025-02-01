@@ -1,64 +1,27 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
-const items = [
-  {
-    id: "1",
-    title: "Epic 1",
-  },
-  {
-    id: "2",
-    title: "Epic 2",
-  },
-  {
-    id: "3",
-    title: "Epic 3",
-  },
-  {
-    id: "4",
-    title: "Epic 4 hklhjhlglkhkjgjhjg",
-  },
-  {
-    id: "5",
-    title: "Epic 5",
-  },
-  {
-    id: "6",
-    title: "Epic 6",
-  },
-  {
-    id: "7",
-    title: "Epic 7",
-  },
-  {
-    id: "8",
-    title: "Epic 8",
-  },
-  {
-    id: "9",
-    title: "Epic 9",
-  },
-  {
-    id: "10",
-    title: "Epic 10",
-  },
-];
+const currentProjectStore = useCurrentProjectStore();
+const { currentProject } = storeToRefs(currentProjectStore);
+
+
+const items = computed(() => currentProject.value?.epics.map((epic) => ({ id: epic.id, title: epic.title })) ?? []);
 
 const router = useRoute();
 const { projectId, epicId } = router.params;
 
 const currentIndex = computed(() =>
-  epicId ? items.findIndex((item) => item.id === epicId) : 0,
+  epicId ? items.value.findIndex((item) => item.id === Number(epicId)) : 0,
 );
 
 const disabledPrev = computed(() => currentIndex.value === 0);
-const disabledNext = computed(() => currentIndex.value === items.length - 1);
+const disabledNext = computed(() => currentIndex.value === items.value.length - 1);
 
 const nextUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value + 1]?.id}`,
+  () => `/project/${projectId}/epic/${items.value[currentIndex.value + 1]?.id}`,
 );
 const prevUrl = computed(
-  () => `/project/${projectId}/epic/${items[currentIndex.value - 1]?.id}`,
+  () => `/project/${projectId}/epic/${items.value[currentIndex.value - 1]?.id}`,
 );
 </script>
 

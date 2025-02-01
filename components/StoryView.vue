@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import TaskButton from "@/components/TaskButton.vue";
+import type { TFullStory } from "~/types/entities";
 
 type StoryViewProps = {
-  storyId: number;
-  epicId: number;
+  story: TFullStory;
   projectId: number;
 };
 
-const { storyId, epicId, projectId } = defineProps<StoryViewProps>();
+const { story, projectId } = defineProps<StoryViewProps>();
 
 const cardConfig = {
   header: {
@@ -28,25 +28,17 @@ const cardConfig = {
         align-items="center"
         class="w-full"
       >
-        <h3>Story</h3>
+        <h3>{{ story.title }}</h3>
         <StoryMenu
-          :story-id="storyId"
+          :story-id="story.id"
           :project-id="projectId"
-          :epic-id="epicId"
+          :epic-id="story.epic_id"
         />
       </StackContainer>
     </template>
 
     <StackContainer direction="row" class="w-full" wrap="wrap" spacing="1">
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
-      <TaskButton :story-id="storyId" />
+      <TaskButton v-for="task in story.tasks" :key="task.id" :task="task" />
     </StackContainer>
 
     <template v-if="Boolean(Math.round(Math.random()))" #footer>

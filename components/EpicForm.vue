@@ -9,6 +9,10 @@ type ProjectEditFormProps = {
 
 const { title, description } = defineProps<ProjectEditFormProps>();
 const { epicId, projectId } = useRoute().params;
+const router = useRouter();
+
+const epicsStore = useEpicsStore();
+const currentProjectStore = useCurrentProjectStore();
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -23,8 +27,16 @@ const state = reactive({
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with data
-  console.log(event.data);
+  let id = epicId ? Number(epicId) : null;
+  if (epicId) {
+    id = await epicsStore.updateEpic(Number(epicId), event.data.title, event.data.description ?? "");
+  } else {
+    id = await epicsStore.createEpic(Number(projectId), event.data.title, event.data.description ?? "");
+  }
+
+  await currentProjectStore.getProjectById(Number(projectId));
+
+  router.push(`/project/${projectId}/epic/${id}`);
 }
 </script>
 

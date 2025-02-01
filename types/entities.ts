@@ -13,3 +13,21 @@ export type TFullEpic = Required<TEpic> & {
 export type TFullProject = Required<TProject> & {
   epics: TFullEpic[];
 };
+
+export type TStatistics = {
+  total: number;
+  todo: number;
+  inProgress: number;
+  done: number;
+  rejected: number;
+}
+
+export type TProjectStatistics = {
+  project: TStatistics;
+  epics: {
+    [key: number]: TStatistics;
+  };
+  stories: {
+    [key: number]: TStatistics;
+  };
+};

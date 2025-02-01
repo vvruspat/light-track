@@ -1,35 +1,29 @@
 <script setup lang="ts">
 import type { UButton } from "#components";
+import type { TTask } from "~/types/entities";
 
 type TaskButtonProps = {
-  storyId: number;
+  task: TTask;
 };
 
-const statuses: Array<keyof typeof statusColors> = [
-  "open",
-  "progress",
-  "done",
-  "rejected",
-];
 const statusColors: {
-  [key in "open" | "progress" | "done" | "rejected"]: (typeof UButton)["color"];
+  [key in "todo" | "inProgress" | "done" | "rejected"]: (typeof UButton)["color"];
 } = {
-  open: "gray",
-  progress: "yellow",
+  todo: "gray",
+  inProgress: "yellow",
   done: "green",
   rejected: "red",
 };
 
-const status = ref(
-  statusColors[statuses[Math.floor(Math.random() * statuses.length)]],
+const status = computed(
+  () => statusColors[task.status as keyof typeof statusColors],
 );
 const src =
   "https://picsum.photos/600/800?random=" + Math.round(Math.random() * 100);
 const { projectId, epicId } = useRoute().params;
-const { storyId } = defineProps<TaskButtonProps>();
-const taskId = Math.round(Math.random() * 100000000);
+const { task } = defineProps<TaskButtonProps>();
 const url = computed(
-  () => `/project/${projectId}/epic/${epicId}/story/${storyId}/task/${taskId}`,
+  () => `/project/${projectId}/epic/${epicId}/story/${task.story_id}/task/${task.id}`,
 );
 </script>
 
@@ -43,7 +37,7 @@ const url = computed(
   >
     <StackContainer spacing="2">
       <UAvatar size="2xs" :src="src" alt="Avatar" />
-      <div class="whitespace-nowrap">Task View {{ taskId }}</div>
+      <div class="whitespace-nowrap">{{ task.title }}</div>
     </StackContainer>
   </UButton>
 </template>

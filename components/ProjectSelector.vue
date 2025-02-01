@@ -2,13 +2,11 @@
 const isOpen = ref(false);
 const router = useRouter();
 
-const people = [
-  { id: 1, label: "First project" },
-  { id: 2, label: "Second project" },
-  { id: 3, label: "Third project" },
-  { id: 4, label: "Fourth project" },
-  { id: 5, label: "Fifth project" },
-];
+const projectsStore = useProjectsStore();
+
+const { projects } = storeToRefs(projectsStore);
+
+const projectsItems = computed(() => projects.value.map((project) => ({ id: project.id, label: project.title })));
 
 const selected = ref([]);
 
@@ -30,7 +28,7 @@ const onSelect = (value: { id: number }) => {
   <UModal v-model="isOpen">
     <UCommandPalette
       v-model="selected"
-      :groups="[{ key: 'people', commands: people }]"
+      :groups="[{ key: 'projectsItems', commands: projectsItems }]"
       @update:model-value="onSelect"
     />
     <UContainer class="p-4 w-full">

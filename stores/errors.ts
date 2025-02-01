@@ -5,7 +5,7 @@ type ErrorsState = {
 };
 
 type ErrorsGetters<S> = {
-  getError: (state: S) => Error | null;
+  currentError: (state: S) => Error | null;
 };
 
 type ErrorsActions = {
@@ -23,7 +23,7 @@ export const useErrorsStore = defineStore<
   }),
 
   getters: {
-    getError(state) {
+    currentError(state) {
       return state.error;
     },
   },

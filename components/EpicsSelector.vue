@@ -1,26 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const links = [
-  [
-    {
-      label: "Epic 1",
-      to: "/project/3/epic/1",
-    },
-    {
-      label: "Epic 2",
-      to: "/project/3/epic/2",
-    },
-    {
-      label: "Epic 3",
-      to: "/project/3/epic/3",
-    },
-    {
-      label: "Epic 4",
-      to: "/project/3/epic/4",
-    },
-  ],
-];
+const currentProjectStore = useCurrentProjectStore();
+const { currentProject } = storeToRefs(currentProjectStore);
+
+const router = useRoute();
+const { projectId } = router.params;
+
+const links = computed(() => currentProject.value?.epics.map((epic) => ({ to: `/project/${projectId}/epic/${epic.id}`, label: epic.title })) ?? []);
 
 const isOpen = ref(false);
 </script>

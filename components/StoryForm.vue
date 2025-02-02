@@ -7,9 +7,11 @@ const { storyId, projectId, epicId } = useRoute().params;
 const storiesStore = useStoriesStore();
 const currentProjectStore = useCurrentProjectStore();
 
-const story = storyId ? currentProjectStore.currentProject?.epics
-  .find((epic) => epic.id === Number(epicId))
-  ?.stories.find((story) => story.id === Number(storyId)) : null;
+const story = storyId
+  ? currentProjectStore.currentProject?.epics
+      .find((epic) => epic.id === Number(epicId))
+      ?.stories.find((story) => story.id === Number(storyId))
+  : null;
 
 const router = useRouter();
 
@@ -62,10 +64,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <span v-else>Create story</span>
       </UButton>
 
-      <UButton
-        variant="ghost"
-        :to="`/project/${projectId}/epic/${epicId}`"
-      >
+      <UButton variant="ghost" :to="`/project/${projectId}/epic/${epicId}`">
         Cancel
       </UButton>
     </StackContainer>

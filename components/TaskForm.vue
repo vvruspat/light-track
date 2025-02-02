@@ -2,17 +2,23 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
-type TaskFormProps = {
-  title?: string;
-  description?: string;
-  estimation?: number;
-  assignee?: string;
-  status?: string;
-};
-
-const { title, description, estimation, assignee, status } =
-  defineProps<TaskFormProps>();
 const { taskId, storyId, epicId, projectId } = useRoute().params;
+
+const currentProjectStore = useCurrentProjectStore();
+const tasksStore = useTasksStore();
+
+const router = useRouter();
+
+const task = computed(() => {
+  if (taskId) {
+    return currentProjectStore.currentProject?.epics
+      .find((epic) => epic.id === Number(epicId))
+      ?.stories.find((story) => story.id === Number(storyId))
+      ?.tasks.find((task) => task.id === Number(taskId));
+  }
+
+  return null;
+});
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -60,11 +66,11 @@ const statuses = [
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: title ?? "Untitled task",
-  description: description ?? "",
-  estimation: estimation ?? 0,
-  assignee: assignee ?? "",
-  status: status ?? "todo",
+  title: task.value?.title ?? "Untitled task",
+  description: task.value?.description ?? "",
+  estimation: task.value?.estimation ?? 0,
+  assignee: task.value?.assignee_id ?? "",
+  status: task.value?.status ?? "todo",
 });
 
 const assigneeSelected = ref<(typeof users)[number]>(
@@ -89,8 +95,27 @@ watch(
 );
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with data
-  console.log(event.data);
+  if (taskId) {
+    await tasksStore.updateTask(
+      Number(taskId),
+      event.data.title,
+      event.data.description ?? "",
+      event.data.estimation,
+      event.data.assignee,
+      event.data.status,
+    );
+  } else {
+    await tasksStore.createTask(
+      Number(storyId),
+      event.data.title,
+      event.data.description ?? "",
+      event.data.estimation,
+      event.data.assignee,
+      event.data.status,
+    );
+  }
+
+  router.push(`/project/${projectId}/epic/${epicId}`);
 }
 </script>
 
@@ -104,7 +129,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UTextarea v-model="state.description" autoresize />
     </UFormGroup>
 
-    <UFormGroup label="Description" name="description">
+    <UFormGroup label="Estimation" name="description">
       <UInput v-model="state.estimation" type="number" />
     </UFormGroup>
 

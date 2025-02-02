@@ -9,7 +9,6 @@ const stories = computed(() => {
   return currentProject.value?.epics.find((epic) => epic.id === Number(epicId))
     ?.stories;
 });
-
 </script>
 
 <template>
@@ -33,10 +32,7 @@ const stories = computed(() => {
           ]"
         />
       </div>
-      <div
-        v-if="stories && stories.length > 0"
-        class="w-full h-full"
-      >
+      <div v-if="stories && stories.length > 0" class="w-full h-full">
         <StackContainer direction="column" align-items="stretch" spacing="4">
           <StoryView
             v-for="story in stories"

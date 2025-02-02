@@ -57,8 +57,13 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
         <div class="flex justify-between lg:justify-start gap-4">
           <UButton icon="mdi:arrow-left-thin" @click="isOpen = false">
             Back
-          </UButton >
-          <UButton v-if="taskId" color="red" variant="outline" @click="onRemoveClick">
+          </UButton>
+          <UButton
+            v-if="taskId"
+            color="red"
+            variant="outline"
+            @click="onRemoveClick"
+          >
             Delete task
           </UButton>
         </div>

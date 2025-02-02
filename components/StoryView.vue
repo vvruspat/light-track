@@ -37,13 +37,28 @@ const cardConfig = {
       </StackContainer>
     </template>
 
-    <StackContainer v-if="story.tasks.length > 0" direction="row" class="w-full" wrap="wrap" spacing="1">
+    <StackContainer
+      v-if="story.tasks.length > 0"
+      direction="row"
+      class="w-full"
+      wrap="wrap"
+      spacing="1"
+    >
       <TaskButton v-for="task in story.tasks" :key="task.id" :task="task" />
     </StackContainer>
 
-    <StackContainer v-else direction="row" align-items="center" class="w-full" wrap="wrap" spacing="4">
+    <StackContainer
+      v-else
+      direction="row"
+      align-items="center"
+      class="w-full"
+      wrap="wrap"
+      spacing="4"
+    >
       <div>You haven't made any task yet for this story.</div>
-      <UButton :to="`/project/${projectId}/epic/${story.epic_id}/story/${story.id}/task/create`">
+      <UButton
+        :to="`/project/${projectId}/epic/${story.epic_id}/story/${story.id}/task/create`"
+      >
         Create task
       </UButton>
     </StackContainer>

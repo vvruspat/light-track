@@ -2,13 +2,16 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
-type ProjectEditFormProps = {
-  title?: string;
-  description?: string;
-};
-
-const { title, description } = defineProps<ProjectEditFormProps>();
 const { storyId, projectId, epicId } = useRoute().params;
+
+const storiesStore = useStoriesStore();
+const currentProjectStore = useCurrentProjectStore();
+
+const story = storyId ? currentProjectStore.currentProject?.epics
+  .find((epic) => epic.id === Number(epicId))
+  ?.stories.find((story) => story.id === Number(storyId)) : null;
+
+const router = useRouter();
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -18,13 +21,26 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: title ?? "Untitled Project",
-  description: description ?? "",
+  title: story?.title ?? "Untitled Project",
+  description: story?.description ?? "",
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with data
-  console.log(event.data);
+  if (storyId) {
+    await storiesStore.updateStory(
+      Number(storyId),
+      event.data.title,
+      event.data.description ?? "",
+    );
+  } else {
+    await storiesStore.createStory(
+      Number(epicId),
+      event.data.title,
+      event.data.description ?? "",
+    );
+  }
+
+  router.push(`/project/${projectId}/epic/${epicId}`);
 }
 </script>
 
@@ -47,16 +63,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </UButton>
 
       <UButton
-        v-if="storyId"
         variant="ghost"
-        :to="`/project/${projectId}/epic/${epicId}/story/${storyId}`"
-      >
-        Cancel
-      </UButton>
-      <UButton
-        v-else
-        variant="ghost"
-        :to="`/project/${projectId}/epic/${epicId}/story`"
+        :to="`/project/${projectId}/epic/${epicId}`"
       >
         Cancel
       </UButton>

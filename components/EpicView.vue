@@ -4,6 +4,12 @@ import StoryView from "@/components/StoryView.vue";
 const { projectId, epicId } = useRoute().params;
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject } = storeToRefs(currentProjectStore);
+
+const stories = computed(() => {
+  return currentProject.value?.epics.find((epic) => epic.id === Number(epicId))
+    ?.stories;
+});
+
 </script>
 
 <template>
@@ -28,15 +34,12 @@ const { currentProject } = storeToRefs(currentProjectStore);
         />
       </div>
       <div
-        v-if="
-          currentProject?.epics[Number(epicId)]?.stories &&
-          currentProject?.epics[Number(epicId)].stories.length > 0
-        "
+        v-if="stories && stories.length > 0"
         class="w-full h-full"
       >
         <StackContainer direction="column" align-items="stretch" spacing="4">
           <StoryView
-            v-for="story in currentProject?.epics[Number(epicId)].stories"
+            v-for="story in stories"
             :key="story.id"
             :story="story"
             :project-id="Number(projectId)"

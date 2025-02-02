@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { epicId, projectId } = useRoute().params;
+const { taskId, epicId, projectId } = useRoute().params;
 
 const epicUrl = computed(() => `/project/${projectId}/epic/${epicId}`);
 
@@ -55,12 +55,12 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
 
       <template #footer>
         <div class="flex justify-between lg:justify-start gap-4">
-          <UButton icon="mdi:arrow-left-thin" @click="isOpen = false"
-            >Back</UButton
-          >
-          <UButton color="red" variant="outline" @click="onRemoveClick"
-            >Delete task</UButton
-          >
+          <UButton icon="mdi:arrow-left-thin" @click="isOpen = false">
+            Back
+          </UButton >
+          <UButton v-if="taskId" color="red" variant="outline" @click="onRemoveClick">
+            Delete task
+          </UButton>
         </div>
       </template>
 

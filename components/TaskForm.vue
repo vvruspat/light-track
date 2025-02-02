@@ -60,7 +60,7 @@ const statuses = [
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: title ?? "Untitled Epic",
+  title: title ?? "Untitled task",
   description: description ?? "",
   estimation: estimation ?? 0,
   assignee: assignee ?? "",

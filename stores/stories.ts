@@ -89,11 +89,8 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>("/api/stories", {
+        const data = await $fetch<StoryPostResponse>(`/api/stories/${storyId}`, {
           method: "DELETE",
-          query: {
-            storyId,
-          },
         });
 
         if (data.statusCode !== 200) {
@@ -123,10 +120,9 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>("/api/stories", {
+        const data = await $fetch<StoryPostResponse>(`/api/stories/${storyId}`, {
           method: "PUT",
           body: JSON.stringify({
-            story_id: storyId,
             title,
             description,
           }),

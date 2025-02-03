@@ -144,12 +144,9 @@ export const useProjectsStore = defineStore<
       this.loadingState = "pending";
 
       const { data, error } = await useFetch<ProjectPostResponse>(
-        "/api/projects",
+        `/api/projects/${projectId}`,
         {
           method: "DELETE",
-          query: {
-            projectId,
-          },
         },
       );
       const { setError } = useErrorsStore();
@@ -183,11 +180,10 @@ export const useProjectsStore = defineStore<
       this.loadingState = "pending";
 
       const { data, error } = await useFetch<ProjectPostResponse>(
-        "/api/projects",
+        `/api/projects/${projectId}`,
         {
           method: "PUT",
           body: JSON.stringify({
-            project_id: projectId,
             title,
             description,
           }),

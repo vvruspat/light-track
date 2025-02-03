@@ -4,13 +4,9 @@ const isOpen = ref<boolean>(true);
 const router = useRouter();
 const { taskId, epicId, projectId } = useRoute().params;
 
-const epicUrl = computed(() => `/project/${projectId}/epic/${epicId}`);
+const currentProjectStore = useCurrentProjectStore();
 
-watch(isOpen, (isOpenNew) => {
-  if (!isOpenNew) {
-    router.push(epicUrl.value);
-  }
-});
+const epicUrl = computed(() => `/project/${projectId}/epic/${epicId}`);
 
 const isRemoveAlertOpen = ref(false);
 
@@ -27,6 +23,18 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
     isRemoveAlertOpen.value = false;
   }
 };
+
+const onModalClose = async () => {
+  await currentProjectStore.getProjectById(Number(projectId), true);
+};
+
+watch(isOpen, (isOpenNew) => {
+  if (!isOpenNew) {
+    onModalClose();
+    router.push(epicUrl.value);
+  }
+});
+
 </script>
 
 <template>

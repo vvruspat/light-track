@@ -89,11 +89,8 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>("/api/epics", {
+        const data = await $fetch<EpicPostResponse>(`/api/epics/${epicId}`, {
           method: "DELETE",
-          query: {
-            epicId,
-          },
         });
 
         if (data.statusCode !== 200) {
@@ -123,7 +120,7 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>("/api/epics", {
+        const data = await $fetch<EpicPostResponse>(`/api/epics/${epicId}`, {
           method: "PUT",
           body: JSON.stringify({
             epic_id: epicId,

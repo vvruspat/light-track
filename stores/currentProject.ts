@@ -20,7 +20,7 @@ type ProjectGetters = {
 };
 
 type ProjectActions = {
-  getProjectById: (projectId: TProject["id"]) => Promise<TFullProject | null>;
+  getProjectById: (projectId: TProject["id"], force: boolean) => Promise<TFullProject | null>;
   updateProjectData: (project: Partial<TProject>) => void;
   updateEpicData: (epic: Partial<TEpic>) => void;
   updateStoryData: (story: Partial<TStory>) => void;

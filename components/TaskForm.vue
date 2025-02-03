@@ -115,6 +115,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     );
   }
 
+  await currentProjectStore.getProjectById(Number(projectId), true);
+
   router.push(`/project/${projectId}/epic/${epicId}`);
 }
 </script>

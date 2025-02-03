@@ -57,7 +57,9 @@ const statusSelected = ref<(typeof statuses)[number]>(
 );
 
 function updateTask() {
-  taskStore.updateTask(taskId, state.title,
+  taskStore.updateTask(
+    taskId,
+    state.title,
     state.description,
     state.estimation,
     state.assignee,
@@ -104,7 +106,6 @@ watch(
 watch(state, () => {
   debouncedUpdateTask();
 });
-
 </script>
 
 <template>

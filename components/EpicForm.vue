@@ -2,17 +2,17 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
-type ProjectEditFormProps = {
-  title?: string;
-  description?: string;
-};
-
-const { title, description } = defineProps<ProjectEditFormProps>();
 const { epicId, projectId } = useRoute().params;
 const router = useRouter();
 
 const epicsStore = useEpicsStore();
 const currentProjectStore = useCurrentProjectStore();
+
+const epic = computed(() =>
+  currentProjectStore.currentProject?.epics.find(
+    (epic) => epic.id === Number(epicId),
+  ),
+);
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -22,20 +22,20 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: title ?? "Untitled Epic",
-  description: description ?? "",
+  title: epic.value?.title ?? "Untitled Epic",
+  description: epic.value?.description ?? "",
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  let id = epicId ? Number(epicId) : null;
+  const id = epicId ? Number(epicId) : null;
   if (epicId) {
-    id = await epicsStore.updateEpic(
+    await epicsStore.updateEpic(
       Number(epicId),
       event.data.title,
       event.data.description ?? "",
     );
   } else {
-    id = await epicsStore.createEpic(
+    await epicsStore.createEpic(
       Number(projectId),
       event.data.title,
       event.data.description ?? "",

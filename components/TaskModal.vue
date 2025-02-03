@@ -34,7 +34,6 @@ watch(isOpen, (isOpenNew) => {
     router.push(epicUrl.value);
   }
 });
-
 </script>
 
 <template>

@@ -123,7 +123,6 @@ export const useEpicsStore = defineStore<
         const data = await $fetch<EpicPostResponse>(`/api/epics/${epicId}`, {
           method: "PUT",
           body: JSON.stringify({
-            epic_id: epicId,
             title,
             description,
           }),

@@ -89,9 +89,12 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>(`/api/stories/${storyId}`, {
-          method: "DELETE",
-        });
+        const data = await $fetch<StoryPostResponse>(
+          `/api/stories/${storyId}`,
+          {
+            method: "DELETE",
+          },
+        );
 
         if (data.statusCode !== 200) {
           this.loadingState = "error";
@@ -120,13 +123,16 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>(`/api/stories/${storyId}`, {
-          method: "PUT",
-          body: JSON.stringify({
-            title,
-            description,
-          }),
-        });
+        const data = await $fetch<StoryPostResponse>(
+          `/api/stories/${storyId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              title,
+              description,
+            }),
+          },
+        );
 
         if (data.statusCode !== 201) {
           this.loadingState = "error";

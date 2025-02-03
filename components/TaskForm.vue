@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
+import { statuses } from "@/constants/statuses";
 
 const { taskId, storyId, epicId, projectId } = useRoute().params;
 
@@ -54,13 +55,6 @@ const users = [
     value: "34565433334",
     url: "https://picsum.photos/600/800?random=5",
   },
-];
-
-const statuses = [
-  { name: "To Do", value: "todo", color: "gray" },
-  { name: "In Progress", value: "in-progress", color: "yellow" },
-  { name: "Done", value: "done", color: "green" },
-  { name: "Rejected", value: "rejected", color: "red" },
 ];
 
 type Schema = z.output<typeof schema>;

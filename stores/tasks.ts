@@ -9,7 +9,7 @@ type TasksState = {
 };
 
 type TasksGetters = {
-  myTasks: (state: TasksState) => TTask[];
+  currentProjectTasks: (state: TasksState) => TTask[];
 };
 
 type TasksActions = {
@@ -43,8 +43,23 @@ export const useTasksStore = defineStore<
   }),
 
   getters: {
-    myTasks() {
-      return [];
+    currentProjectTasks() {
+      const currentProjectStore = useCurrentProjectStore();
+
+      if (!currentProjectStore.currentProject) {
+        return [];
+      }
+
+      return currentProjectStore.currentProject.epics.reduce(
+        (acc, epic) =>
+          acc.concat(
+            epic.stories.reduce(
+              (acc, story) => acc.concat(story.tasks),
+              [] as TTask[],
+            ),
+          ),
+        [] as TTask[],
+      );
     },
   },
 
@@ -101,11 +116,8 @@ export const useTasksStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<TaskPostResponse>("/api/tasks", {
+        const data = await $fetch<TaskPostResponse>(`/api/tasks/${taskId}`, {
           method: "DELETE",
-          query: {
-            taskId,
-          },
         });
 
         if (data.statusCode !== 200) {
@@ -138,10 +150,9 @@ export const useTasksStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<TaskPostResponse>("/api/tasks", {
+        const data = await $fetch<TaskPostResponse>(`/api/tasks/${taskId}`, {
           method: "PUT",
           body: JSON.stringify({
-            task_id: taskId,
             title,
             description,
             estimation,

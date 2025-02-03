@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import calculateNumberOfLines from "@/utils/getLinesNumber";
+import { statuses } from "@/constants/statuses";
 
-type TaskFormProps = {
-  title?: string;
-  description?: string;
-  estimation?: number;
-  assignee?: string;
-  status?: string;
-};
+const route = useRoute();
+const taskId = Number(route.params.taskId);
+const taskStore = useTasksStore();
 
-const { title, description, estimation, assignee, status } =
-  defineProps<TaskFormProps>();
+const task = taskStore.currentProjectTasks.find((task) => task.id === taskId);
 
 const titleEditMode = ref(false);
 const descriptionEditMode = ref(false);
@@ -44,21 +40,12 @@ const users = [
   },
 ];
 
-const statuses = [
-  { name: "To Do", value: "todo", color: "gray" },
-  { name: "In Progress", value: "in-progress", color: "yellow" },
-  { name: "Done", value: "done", color: "green" },
-  { name: "Rejected", value: "rejected", color: "red" },
-];
-
 const state = reactive({
-  title: title ?? "Untitled Task",
-  description:
-    description ??
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-  estimation: estimation ?? 8,
-  assignee: assignee ?? "",
-  status: status ?? "todo",
+  title: task?.title || "Untitled Task",
+  description: task?.description || "No description",
+  estimation: task?.estimation ?? 8,
+  assignee: task?.assignee_id ?? "",
+  status: task?.status ?? "todo",
 });
 
 const assigneeSelected = ref<(typeof users)[number]>(
@@ -69,24 +56,16 @@ const statusSelected = ref<(typeof statuses)[number]>(
     statuses[0],
 );
 
-watch(
-  () => assigneeSelected.value,
-  (value) => {
-    state.assignee = value.value;
-  },
-);
+function updateTask() {
+  taskStore.updateTask(taskId, state.title,
+    state.description,
+    state.estimation,
+    state.assignee,
+    state.status,
+  );
+}
 
-watch(
-  () => statusSelected.value,
-  (value) => {
-    state.status = value.value;
-  },
-);
-
-watch(state, () => {
-  console.log("State changed", state);
-  // TODO: call API to update task
-});
+const debouncedUpdateTask = useDebounce(updateTask, 500);
 
 function onTitleBlur() {
   titleEditMode.value = false;
@@ -107,6 +86,25 @@ function onDescriptionClick(event: MouseEvent) {
 function onDescriptionBlur() {
   descriptionEditMode.value = false;
 }
+
+watch(
+  () => assigneeSelected.value,
+  (value) => {
+    state.assignee = value.value;
+  },
+);
+
+watch(
+  () => statusSelected.value,
+  (value) => {
+    state.status = value.value;
+  },
+);
+
+watch(state, () => {
+  debouncedUpdateTask();
+});
+
 </script>
 
 <template>

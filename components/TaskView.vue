@@ -224,7 +224,11 @@ watch(state, () => {
         </UFormGroup>
 
         <UFormGroup label="Estimation" name="estimation">
-          <UInput v-model="state.estimation" type="number" @focus="onEstimationFocus" />
+          <UInput
+            v-model="state.estimation"
+            type="number"
+            @focus="onEstimationFocus"
+          />
         </UFormGroup>
       </StackContainer>
     </UCard>

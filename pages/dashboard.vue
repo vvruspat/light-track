@@ -1,14 +1,15 @@
 <script setup lang="ts">
-
 const projectsStore = useProjectsStore();
 const { projects } = storeToRefs(projectsStore);
 
 const projectsLinks = computed(() => {
-  return projects.value.map((project) => ({ to: `/project/${project.id}`, label: project.title }));
+  return projects.value.map((project) => ({
+    to: `/project/${project.id}`,
+    label: project.title,
+  }));
 });
 
 projectsStore.fetchProjects(1);
-
 </script>
 
 <template>

@@ -11,7 +11,7 @@ const { story, projectId } = defineProps<StoryViewProps>();
 
 const tasks = computed(() => {
   const t = story.tasks;
-  
+
   t.sort((a, b) => a.id - b.id);
 
   return t;

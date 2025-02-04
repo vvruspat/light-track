@@ -51,6 +51,7 @@ watch(isOpen, (isOpenNew) => {
       <template #header>
         <StackContainer justify="between" align-items="center">
           <div id="tabbar-header-title" />
+          
           <UButton
             color="gray"
             variant="ghost"

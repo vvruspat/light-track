@@ -9,12 +9,12 @@ type TaskButtonProps = {
 const statusColors: {
   [key in
     | "todo"
-    | "inProgress"
+    | "progress"
     | "done"
     | "rejected"]: (typeof UButton)["color"];
 } = {
   todo: "gray",
-  inProgress: "yellow",
+  "progress": "yellow",
   done: "green",
   rejected: "red",
 };

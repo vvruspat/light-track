@@ -17,7 +17,7 @@ export type TFullProject = Required<TProject> & {
 export type TStatistics = {
   total: number;
   todo: number;
-  inProgress: number;
+  progress: number;
   done: number;
   rejected: number;
 };

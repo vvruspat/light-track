@@ -2,14 +2,10 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
-type ProjectEditFormProps = {
-  title?: string;
-  description?: string;
-};
-
-const { title, description } = defineProps<ProjectEditFormProps>();
 const { projectId } = useRoute().params;
 const projectsStore = useProjectsStore();
+const currentProjectStore = useCurrentProjectStore();
+const { currentProject: project } = storeToRefs(currentProjectStore);
 const authStore = useAuthStore();
 
 const schema = z.object({
@@ -20,14 +16,12 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: title ?? "Untitled Project",
-  description: description ?? "",
+  title: project.value?.title ?? "Untitled Project",
+  description: project.value?.description ?? "",
 });
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit(_event: FormSubmitEvent<Schema>) {
   // Do something with data
-  console.log(event.data);
-
   const groupId = authStore.currentUser?.groupId;
 
   if (!groupId) {
@@ -43,6 +37,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   } else {
     await projectsStore.createProject(groupId, state.title, state.description);
   }
+
+  await currentProjectStore.getProjectById(Number(projectId), true);
 }
 </script>
 

@@ -48,7 +48,7 @@ try {
       <HorizontalStatus
         :total="statistics.project.total"
         :todo="statistics.project.todo"
-        :in-progress="statistics.project.inProgress"
+        :progress="statistics.project.progress"
         :done="statistics.project.done"
         :rejected="statistics.project.rejected"
       />

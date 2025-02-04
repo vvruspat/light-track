@@ -21,12 +21,12 @@ type ProjectsActions = {
   createProject: (
     groupId: TProject["group_id"],
     title: TProject["title"],
-    description: TProject["description"],
+    description: TProject["description"]
   ) => Promise<TProject | null>;
   updateProject: (
     projectId: TProject["id"],
     title: TProject["title"],
-    description: TProject["description"],
+    description: TProject["description"]
   ) => Promise<TProject | null>;
   deleteProject: (projectId: TProject["id"]) => Promise<void>;
 };
@@ -52,7 +52,7 @@ export const useProjectsStore = defineStore<
       }
 
       return state.projects.filter(
-        (project) => project.owner_id === currentUser.id,
+        (project) => project.owner_id === currentUser.id
       );
     },
   },
@@ -62,36 +62,34 @@ export const useProjectsStore = defineStore<
       // fetch all projects
       this.loadingState = "pending";
 
-      const { data, error } = await useFetch<ProjectGetResponse>(
-        "/api/projects",
-        {
+      const { setError } = useErrorsStore();
+
+      try {
+        const data = await $fetch<ProjectGetResponse>("/api/projects", {
           method: "GET",
           query: {
-            groupId,
+            group_id: groupId,
             limit: this.limit,
             offset: this.offset,
           },
-        },
-      );
-      const { setError } = useErrorsStore();
+        });
 
-      if (error) {
+        if (data.statusCode !== 200) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return [];
+        }
+
+        if (data.data) {
+          this.loadingState = "success";
+          this.projects = data.data;
+
+          return data.data;
+        }
+      } catch (error) {
         this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage ?? error.value?.message));
+        setError(error as Error);
         return [];
-      }
-
-      if (data.value?.statusCode !== 200) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage));
-        return [];
-      }
-
-      if (data.value?.data) {
-        this.loadingState = "success";
-        this.projects = data.value.data;
-
-        return data.value.data;
       }
 
       return [];
@@ -100,41 +98,43 @@ export const useProjectsStore = defineStore<
     async createProject(
       groupId: TProject["group_id"],
       title: TProject["title"],
-      description: TProject["description"],
+      description: TProject["description"]
     ) {
       // create a new project
       this.loadingState = "pending";
 
-      const { data, error } = await useFetch<ProjectPostResponse>(
-        "/api/projects",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            group_id: groupId,
-            title,
-            description,
-          }),
-        },
-      );
       const { setError } = useErrorsStore();
 
-      if (error) {
+      try {
+        const data = await $fetch<ProjectPostResponse>(
+          "/api/projects",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              group_id: groupId,
+              title,
+              description,
+            }),
+          }
+        );
+
+        if (data.statusCode !== 201) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return null;
+        }
+  
+        if (data.data) {
+          this.loadingState = "success";
+          this.projects = [...this.projects, data.data];
+  
+          return data.data;
+        }
+  
+      } catch (error) {
         this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage ?? error.value?.message));
+        setError(error as Error);
         return null;
-      }
-
-      if (data.value?.statusCode !== 201) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage));
-        return null;
-      }
-
-      if (data.value?.data) {
-        this.loadingState = "success";
-        this.projects = [...this.projects, data.value.data];
-
-        return data.value.data;
       }
 
       return null;
@@ -143,77 +143,82 @@ export const useProjectsStore = defineStore<
     async deleteProject(projectId: TProject["id"]) {
       this.loadingState = "pending";
 
-      const { data, error } = await useFetch<ProjectPostResponse>(
-        `/api/projects/${projectId}`,
-        {
-          method: "DELETE",
-        },
-      );
       const { setError } = useErrorsStore();
 
-      if (error) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage ?? error.value?.message));
-        return;
-      }
-
-      if (data.value?.statusCode !== 200) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage));
-        return;
-      }
-
-      if (data.value?.data) {
-        this.loadingState = "success";
-        this.projects = this.projects.filter(
-          (project) => project.id !== projectId,
+      try {
+        const data = await $fetch<ProjectPostResponse>(
+          `/api/projects/${projectId}`,
+          {
+            method: "DELETE",
+          }
         );
+
+        if (data.statusCode !== 200) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return;
+        }
+  
+        if (data.data) {
+          this.loadingState = "success";
+          this.projects = this.projects.filter(
+            (project) => project.id !== projectId
+          );
+        }
+
+      } catch (error) {
+        this.loadingState = "error";
+        setError(error as Error);
+        return;
       }
+
     },
 
     async updateProject(
       projectId: TProject["id"],
       title: TProject["title"],
-      description: TProject["description"],
+      description: TProject["description"]
     ) {
       // create a new project
       this.loadingState = "pending";
 
-      const { data, error } = await useFetch<ProjectPostResponse>(
-        `/api/projects/${projectId}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            title,
-            description,
-          }),
-        },
-      );
       const { setError } = useErrorsStore();
-
-      if (error) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage ?? error.value?.message));
-        return null;
-      }
-
-      if (data.value?.statusCode !== 201) {
-        this.loadingState = "error";
-        setError(new Error(data.value?.statusMessage));
-        return null;
-      }
-
-      if (data.value?.data) {
-        const updatedProject = data.value.data;
-
-        this.loadingState = "success";
-        this.projects = this.projects.map((project) => {
-          if (project.id === projectId) {
-            return updatedProject;
+      try {
+        const data = await $fetch<ProjectPostResponse>(
+          `/api/projects/${projectId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              title,
+              description,
+            }),
           }
-          return project;
-        });
+        );
+
+        if (data.statusCode !== 201) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return null;
+        }
+
+        if (data.data) {
+          const updatedProject = data.data;
+
+          this.loadingState = "success";
+          this.projects = this.projects.map((project) => {
+            if (project.id === projectId) {
+              return updatedProject;
+            }
+            return project;
+          });
+        }
+
+      } catch (error) {
+        this.loadingState = "error";
+        setError(error as Error);
+        return null;
       }
+
       return null;
     },
   },

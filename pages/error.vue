@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 const errorsStore = useErrorsStore();
-console.log(errorsStore.currentError);
 const error = errorsStore.currentError?.message ?? "Unknown Error";
 </script>
 

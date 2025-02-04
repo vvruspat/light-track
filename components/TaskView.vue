@@ -89,6 +89,18 @@ function onDescriptionBlur() {
   descriptionEditMode.value = false;
 }
 
+function onEstimationFocus(event: FocusEvent) {
+  (event.target as HTMLInputElement).select();
+}
+
+function onTitleFocus(event: FocusEvent) {
+  (event.target as HTMLInputElement).select();
+}
+
+function onDescriptionFocus(event: FocusEvent) {
+  (event.target as HTMLInputElement).select();
+}
+
 watch(
   () => assigneeSelected.value,
   (value) => {
@@ -132,6 +144,7 @@ watch(state, () => {
             :padded="false"
             size="xl"
             class="bg-gray-200 dark:bg-gray-800"
+            @focus="onTitleFocus"
             @blur="onTitleBlur"
             @keydown.enter="onTitleBlur"
           />
@@ -151,6 +164,7 @@ watch(state, () => {
         :padded="false"
         :rows="descriptionLines"
         class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 relative block w-full"
+        @focus="onDescriptionFocus"
         @blur="onDescriptionBlur"
         @keydown.enter="onDescriptionBlur"
       />
@@ -210,7 +224,7 @@ watch(state, () => {
         </UFormGroup>
 
         <UFormGroup label="Estimation" name="estimation">
-          <UInput v-model="state.estimation" type="number" />
+          <UInput v-model="state.estimation" type="number" @focus="onEstimationFocus" />
         </UFormGroup>
       </StackContainer>
     </UCard>

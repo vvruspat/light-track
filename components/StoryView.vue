@@ -9,6 +9,14 @@ type StoryViewProps = {
 
 const { story, projectId } = defineProps<StoryViewProps>();
 
+const tasks = computed(() => {
+  const t = story.tasks;
+  
+  t.sort((a, b) => a.id - b.id);
+
+  return t;
+});
+
 const cardConfig = {
   header: {
     padding: "py-2",
@@ -44,7 +52,7 @@ const cardConfig = {
       wrap="wrap"
       spacing="1"
     >
-      <TaskButton v-for="task in story.tasks" :key="task.id" :task="task" />
+      <TaskButton v-for="task in tasks" :key="task.id" :task="task" />
     </StackContainer>
 
     <StackContainer

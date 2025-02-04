@@ -22,7 +22,7 @@ type ProjectGetters = {
 type ProjectActions = {
   getProjectById: (
     projectId: TProject["id"],
-    force: boolean,
+    force?: boolean,
   ) => Promise<TFullProject | null>;
   updateProjectData: (project: Partial<TProject>) => void;
   updateEpicData: (epic: Partial<TEpic>) => void;
@@ -80,21 +80,21 @@ export const useCurrentProjectStore = defineStore<
           project: {
             total: 0,
             done: 0,
-            inProgress: 0,
+            progress: 0,
             todo: 0,
             rejected: 0,
           },
           epics: {
             total: 0,
             done: 0,
-            inProgress: 0,
+            progress: 0,
             todo: 0,
             rejected: 0,
           },
           stories: {
             total: 0,
             done: 0,
-            inProgress: 0,
+            progress: 0,
             todo: 0,
             rejected: 0,
           },
@@ -110,7 +110,7 @@ export const useCurrentProjectStore = defineStore<
             0,
           ),
           done: filterProjectTasks(state.currentProject, "done"),
-          inProgress: filterProjectTasks(state.currentProject, "in_progress"),
+          progress: filterProjectTasks(state.currentProject, "progress"),
           todo: filterProjectTasks(state.currentProject, "todo"),
           rejected: filterProjectTasks(state.currentProject, "rejected"),
         },
@@ -123,7 +123,7 @@ export const useCurrentProjectStore = defineStore<
                 0,
               ),
               done: filterEpicTasks(epic, "done"),
-              inProgress: filterEpicTasks(epic, "in_progress"),
+              progress: filterEpicTasks(epic, "progress"),
               todo: filterEpicTasks(epic, "todo"),
               rejected: filterEpicTasks(epic, "rejected"),
             },
@@ -139,7 +139,7 @@ export const useCurrentProjectStore = defineStore<
                 [story.id]: {
                   total: story.tasks.length,
                   done: filterStoryTasks(story, "done"),
-                  inProgress: filterStoryTasks(story, "in_progress"),
+                  progress: filterStoryTasks(story, "progress"),
                   todo: filterStoryTasks(story, "todo"),
                   rejected: filterStoryTasks(story, "rejected"),
                 },

@@ -4,19 +4,18 @@ import { ref } from "vue";
 const links = [
   [
     {
-      label: "Profile",
-      avatar: {
-        src: "https://avatars.githubusercontent.com/u/739984?v=4",
-      },
+      label: "Dashboard",
+      icon: "mdi:apps",
+      to: "/dashboard",
     },
     {
       label: "Settings",
-      icon: "i-heroicons-home",
+      icon: "mdi:cog",
       to: "/settings",
     },
     {
       label: "Logout",
-      icon: "i-heroicons-chart-bar",
+      icon: "mdi:logout",
       to: "/logout",
     },
   ],

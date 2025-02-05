@@ -17,7 +17,7 @@ bot.command("help", (ctx) => {
     "Available commands:\n" +
       "/start - Start the bot\n" +
       "/help - Show this help message\n" +
-      "/app - Open the Mini App"
+      "/app - Open the Mini App",
   );
 });
 

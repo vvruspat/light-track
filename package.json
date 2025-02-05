@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "bot:dev": "tsx bot/index.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -26,7 +27,9 @@
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@pinia/nuxt": "^0.9.0",
     "@scalar/nuxt": "^0.2.183",
+    "@telegram-apps/sdk-vue": "^2.0.7",
     "ajv": "^8.17.1",
+    "dotenv": "^16.4.7",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
@@ -34,12 +37,15 @@
     "pinia": "^2.3.1",
     "prettier": "^3.4.2",
     "supabase": "^2.6.8",
+    "telegraf": "^4.16.3",
+    "tsx": "^4.19.2",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
     "@iconify-json/line-md": "^1.2.5",
     "@iconify-json/mdi": "^1.2.3",
+    "@types/node": "^22.13.1",
     "husky": "^8.0.0",
     "lint-staged": "^15.4.3",
     "openapi-typescript": "^7.5.2",

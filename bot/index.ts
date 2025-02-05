@@ -7,32 +7,22 @@ if (!BOT_TOKEN) {
 
 const bot = new Telegraf(BOT_TOKEN);
 
-// Basic commands
-bot.command("start", (ctx) => {
-  ctx.reply("Welcome to Light Track! 🚀\nUse /help to see available commands.");
-});
-
 bot.command("help", (ctx) => {
   ctx.reply(
     "Available commands:\n" +
-      "/start - Start the bot\n" +
-      "/help - Show this help message\n" +
-      "/app - Open the Mini App",
+      "/start - Open Light Track App\n"
   );
 });
 
-bot.command("webapp", (ctx) => {
+bot.command("start", (ctx) => {
   const chatId = ctx.chat.id;
   // Encode le chatId en base64
   const encodedGroupId = Buffer.from(chatId.toString()).toString("base64");
 
-  console.log("Chat ID:", chatId);
-  console.log("Encoded Group ID:", encodedGroupId);
-
-  ctx.reply("Open Web App", {
+  ctx.reply("Light Track - simple task tracking app", {
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Open App", url: `${WEBAPP_URL}?startapp=${encodedGroupId}` }],
+        [{ text: "Launch", url: `${WEBAPP_URL}?startapp=${encodedGroupId}` }],
       ],
     },
   });

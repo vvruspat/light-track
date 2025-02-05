@@ -8,10 +8,7 @@ if (!BOT_TOKEN) {
 const bot = new Telegraf(BOT_TOKEN);
 
 bot.command("help", (ctx) => {
-  ctx.reply(
-    "Available commands:\n" +
-      "/start - Open Light Track App\n"
-  );
+  ctx.reply("Available commands:\n" + "/start - Open Light Track App\n");
 });
 
 bot.command("start", (ctx) => {

@@ -1,4 +1,10 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "Dashboard",
+  description: "Select a project",
+  middleware: ["auth"],
+});
+
 const projectsStore = useProjectsStore();
 const { projects } = storeToRefs(projectsStore);
 

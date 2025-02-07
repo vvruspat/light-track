@@ -9,20 +9,23 @@ const bot = new Telegraf(BOT_TOKEN);
 
 bot.command("start", async (ctx) => {
   const chatId = ctx.chat.id;
-  const userData = ctx.from;
   const authData = {
     chatId,
-    ...userData,
   };
   const encodedData = Buffer.from(JSON.stringify(authData)).toString("base64");
 
   return await ctx.reply(
-    "Lighgt Track - simple task tracking app",
+    "Light Track - simple task tracking app",
     Markup.inlineKeyboard([
-      [{ text: "Launch", url: `${WEBAPP_URL}?token=${encodedData}` }],
+      [
+        { 
+            text: "Launch", 
+            url: `${WEBAPP_URL}?token=${encodedData}`,
+        }
+      ],
     ]),
   );
-});
+});    
 
 bot.launch().then(() => {
   console.log("Bot is running...");

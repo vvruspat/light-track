@@ -18,14 +18,14 @@ bot.command("start", async (ctx) => {
     "Light Track - simple task tracking app",
     Markup.inlineKeyboard([
       [
-        { 
-            text: "Launch", 
-            url: `${WEBAPP_URL}?token=${encodedData}`,
-        }
+        {
+          text: "Launch",
+          url: `${WEBAPP_URL}?token=${encodedData}`,
+        },
       ],
     ]),
   );
-});    
+});
 
 bot.launch().then(() => {
   console.log("Bot is running...");

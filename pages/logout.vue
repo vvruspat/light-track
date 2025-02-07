@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-
 const router = useRouter();
 const client = useSupabaseClient();
 
 await client.auth.signOut();
 
 router.replace("/login");
-
 </script>
 
 <template>

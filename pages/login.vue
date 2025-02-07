@@ -1,9 +1,5 @@
-<script lang="ts" setup>
-import TgAuth from "~/components/TgAuth.vue";
-</script>
-
 <template>
-  <ClientOnly>
-    <TgAuth />
-  </ClientOnly>
+  <UCard class="h-full py-8 flex items-center justify-center">
+    Authentication
+  </UCard>
 </template>

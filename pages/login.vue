@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import TgAuth from '~/components/TgAuth.vue';
+import TgAuth from "~/components/TgAuth.vue";
 </script>
 
 <template>

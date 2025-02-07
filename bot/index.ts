@@ -1,4 +1,4 @@
-import { Telegraf } from "telegraf";
+import { Markup, Telegraf } from "telegraf";
 import { BOT_TOKEN, WEBAPP_URL } from "./config";
 
 if (!BOT_TOKEN) {
@@ -7,22 +7,21 @@ if (!BOT_TOKEN) {
 
 const bot = new Telegraf(BOT_TOKEN);
 
-bot.command("help", (ctx) => {
-  ctx.reply("Available commands:\n" + "/start - Open Light Track App\n");
-});
-
-bot.command("start", (ctx) => {
+bot.command("start", async (ctx) => {
   const chatId = ctx.chat.id;
-  // Encode le chatId en base64
-  const encodedGroupId = Buffer.from(chatId.toString()).toString("base64");
+  const userData = ctx.from;
+  const authData = {
+    chatId,
+    ...userData,
+  };
+  const encodedData = Buffer.from(JSON.stringify(authData)).toString("base64");
 
-  ctx.reply("Light Track - simple task tracking app", {
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: "Launch", url: `${WEBAPP_URL}?startapp=${encodedGroupId}` }],
-      ],
-    },
-  });
+  return await ctx.reply(
+    "Lighgt Track - simple task tracking app",
+    Markup.inlineKeyboard([
+      [{ text: "Launch", url: `${WEBAPP_URL}?token=${encodedData}` }],
+    ]),
+  );
 });
 
 bot.launch().then(() => {

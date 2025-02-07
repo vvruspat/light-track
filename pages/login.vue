@@ -1,6 +1,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
+definePageMeta({
+  title: "Login",
+  description: "Login to your account",
+  middleware: ["auth"],
+});
+
+const { initDataRaw, initData } = retrieveLaunchParams();
+
+console.log("initDataRaw: ", initDataRaw);
+console.log("initData: ", initData);
 // const supabase = useSupabaseClient();
 
 // const email = ref("");

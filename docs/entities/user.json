@@ -1,0 +1,34 @@
+{
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "allows_write_to_pm": {
+                        "type": "boolean"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "$ref": "../atoms/userId.json#/components/schemas/UserId",
+                        "description": "The ID of the project owner"
+                    },
+                    "language_code": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    },
+                    "photo_url": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "required": ["allows_write_to_pm", "first_name", "id", "language_code", "last_name", "photo_url", "username"]
+            }
+        }
+    }
+}

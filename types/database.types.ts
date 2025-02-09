@@ -4,178 +4,178 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[];
+  | Json[]
 
 export type Database = {
   public: {
     Tables: {
       epics: {
         Row: {
-          created_at: string;
-          description: string;
-          id: number;
-          owner_id: string;
-          project_id: number;
-          title: string;
-          updated_at: string;
-        };
+          created_at: string
+          description: string
+          id: number
+          owner_id: string
+          project_id: number
+          title: string
+          updated_at: string
+        }
         Insert: {
-          created_at?: string;
-          description: string;
-          id?: number;
-          owner_id: string;
-          project_id: number;
-          title: string;
-          updated_at?: string;
-        };
+          created_at?: string
+          description: string
+          id?: number
+          owner_id: string
+          project_id: number
+          title: string
+          updated_at?: string
+        }
         Update: {
-          created_at?: string;
-          description?: string;
-          id?: number;
-          owner_id?: string;
-          project_id?: number;
-          title?: string;
-          updated_at?: string;
-        };
+          created_at?: string
+          description?: string
+          id?: number
+          owner_id?: string
+          project_id?: number
+          title?: string
+          updated_at?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "epics_projectId_fkey";
-            columns: ["project_id"];
-            isOneToOne: false;
-            referencedRelation: "projects";
-            referencedColumns: ["id"];
+            foreignKeyName: "epics_projectId_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
           },
-        ];
-      };
+        ]
+      }
       projects: {
         Row: {
-          created_at: string;
-          description: string;
-          group_id: number;
-          id: number;
-          owner_id: string;
-          title: string;
-        };
+          created_at: string
+          description: string
+          group_id: number
+          id: number
+          owner_id: string
+          title: string
+        }
         Insert: {
-          created_at?: string;
-          description?: string;
-          group_id: number;
-          id?: number;
-          owner_id: string;
-          title: string;
-        };
+          created_at?: string
+          description?: string
+          group_id: number
+          id?: number
+          owner_id: string
+          title: string
+        }
         Update: {
-          created_at?: string;
-          description?: string;
-          group_id?: number;
-          id?: number;
-          owner_id?: string;
-          title?: string;
-        };
-        Relationships: [];
-      };
+          created_at?: string
+          description?: string
+          group_id?: number
+          id?: number
+          owner_id?: string
+          title?: string
+        }
+        Relationships: []
+      }
       stories: {
         Row: {
-          created_at: string;
-          description: string;
-          epic_id: number;
-          id: number;
-          owner_id: string;
-          title: string;
-          updated_at: string;
-        };
+          created_at: string
+          description: string
+          epic_id: number
+          id: number
+          owner_id: string
+          title: string
+          updated_at: string
+        }
         Insert: {
-          created_at?: string;
-          description: string;
-          epic_id: number;
-          id?: number;
-          owner_id: string;
-          title: string;
-          updated_at?: string;
-        };
+          created_at?: string
+          description: string
+          epic_id: number
+          id?: number
+          owner_id: string
+          title: string
+          updated_at?: string
+        }
         Update: {
-          created_at?: string;
-          description?: string;
-          epic_id?: number;
-          id?: number;
-          owner_id?: string;
-          title?: string;
-          updated_at?: string;
-        };
+          created_at?: string
+          description?: string
+          epic_id?: number
+          id?: number
+          owner_id?: string
+          title?: string
+          updated_at?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "stories_epicId_fkey";
-            columns: ["epic_id"];
-            isOneToOne: false;
-            referencedRelation: "epics";
-            referencedColumns: ["id"];
+            foreignKeyName: "stories_epicId_fkey"
+            columns: ["epic_id"]
+            isOneToOne: false
+            referencedRelation: "epics"
+            referencedColumns: ["id"]
           },
-        ];
-      };
+        ]
+      }
       tasks: {
         Row: {
-          assignee_id: string;
-          created_at: string;
-          description: string;
-          estimation: number;
-          id: number;
-          owner_id: string;
-          status: string;
-          story_id: number;
-          title: string;
-          updated_at: string;
-        };
+          assignee_id: string
+          created_at: string
+          description: string
+          estimation: number
+          id: number
+          owner_id: string
+          status: string
+          story_id: number
+          title: string
+          updated_at: string
+        }
         Insert: {
-          assignee_id: string;
-          created_at?: string;
-          description: string;
-          estimation: number;
-          id?: number;
-          owner_id: string;
-          status: string;
-          story_id: number;
-          title: string;
-          updated_at?: string;
-        };
+          assignee_id: string
+          created_at?: string
+          description: string
+          estimation: number
+          id?: number
+          owner_id: string
+          status: string
+          story_id: number
+          title: string
+          updated_at?: string
+        }
         Update: {
-          assignee_id?: string;
-          created_at?: string;
-          description?: string;
-          estimation?: number;
-          id?: number;
-          owner_id?: string;
-          status?: string;
-          story_id?: number;
-          title?: string;
-          updated_at?: string;
-        };
+          assignee_id?: string
+          created_at?: string
+          description?: string
+          estimation?: number
+          id?: number
+          owner_id?: string
+          status?: string
+          story_id?: number
+          title?: string
+          updated_at?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "tasks_storyId_fkey";
-            columns: ["story_id"];
-            isOneToOne: false;
-            referencedRelation: "stories";
-            referencedColumns: ["id"];
+            foreignKeyName: "tasks_storyId_fkey"
+            columns: ["story_id"]
+            isOneToOne: false
+            referencedRelation: "stories"
+            referencedColumns: ["id"]
           },
-        ];
-      };
-    };
+        ]
+      }
+    }
     Views: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
-};
+      [_ in never]: never
+    }
+  }
+}
 
-type PublicSchema = Database[Extract<keyof Database, "public">];
+type PublicSchema = Database[Extract<keyof Database, "public">]
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -188,7 +188,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R;
+      Row: infer R
     }
     ? R
     : never
@@ -196,11 +196,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R;
+        Row: infer R
       }
       ? R
       : never
-    : never;
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -211,17 +211,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I;
+      Insert: infer I
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I;
+        Insert: infer I
       }
       ? I
       : never
-    : never;
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -232,17 +232,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U;
+      Update: infer U
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U;
+        Update: infer U
       }
       ? U
       : never
-    : never;
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -255,14 +255,14 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never;
+    : never
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof PublicSchema["CompositeTypes"]
     | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof Database
   }
     ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
@@ -270,4 +270,4 @@ export type CompositeTypes<
   ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never;
+    : never

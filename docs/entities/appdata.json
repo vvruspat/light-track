@@ -1,0 +1,37 @@
+{
+  "components": {
+    "schemas": {
+      "AppData": {
+        "type": "object",
+        "properties": {
+          "auth_date": {
+            "type": "string"
+          },
+          "chat_instance": {
+            "type": "string"
+          },
+          "chat_type": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "./user.json#/components/schemas/User"
+          }
+        },
+        "required": [
+          "auth_date",
+          "chat_instance",
+          "chat_type",
+          "hash",
+          "signature",
+          "user"
+        ]
+      }
+    }
+  }
+}

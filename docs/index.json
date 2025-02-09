@@ -72,6 +72,12 @@
       "Task": {
         "$ref": "./entities/task.json#/components/schemas/Task"
       },
+      "User": {
+        "$ref": "./entities/user.json#/components/schemas/User"
+      },
+      "AppData":{
+        "$ref": "./entities/appdata.json#/components/schemas/AppData"
+      },
       "FullProject": {
         "$ref": "./entities/fullProject.json#/components/schemas/FullProject"
       },
@@ -113,6 +119,9 @@
     },
     "/taskwatchers": {
       "$ref": "./taskwatchers.json#/paths/~1taskwatchers"
+    },
+    "/login": {
+      "$ref": "./login.json#/paths/~1login"
     }
   }
 }

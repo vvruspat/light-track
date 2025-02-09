@@ -1,13 +1,52 @@
 import { defineStore } from "pinia";
 
+type TAppTheme = {
+  accent_text_color: string;
+  bg_color: string;
+  bottom_bar_bg_color: string;
+  button_color: string;
+  button_text_color: string;
+  destructive_text_color: string;
+  header_bg_color: string;
+  hint_color: string;
+  link_color: string;
+  secondary_bg_color: string;
+  section_bg_color: string;
+  section_header_text_color: string;
+  section_separator_color: string;
+  subtitle_text_color: string;
+  text_color: string;
+};
+
 type TUser = {
+  allows_write_to_pm: boolean;
+  first_name: string;
   id: string;
-  email: string;
-  groupId: number;
+  language_code: string;
+  last_name: string;
+  photo_url: string;
+  username:  string;
+};
+
+type TAppData = {
+  auth_date: string;
+  chat_instance: string;
+  chat_type: string
+  hash: string;
+  signature: string;
+  user: TUser;
+}
+
+type TMiniAppInit = {
+  tgWebAppBotInline: boolean;
+  tgWebAppData: TAppData;
+  tgWebAppPlatform: string;
+  tgWebAppThemeParams: TAppTheme;
+  tgWebAppVersion: string;
 };
 
 type AuthState = {
-  currentUser: TUser | null;
+  currentUser: (TUser & { chatId: TAppData["chat_instance"] }) | null;
 };
 
 type AuthGetters = {
@@ -15,7 +54,7 @@ type AuthGetters = {
 };
 
 type AuthActions = {
-  login: (email: string, password: string) => Promise<void>;
+  login: (appInitData: TMiniAppInit) => Promise<void>;
   logout: () => void;
 };
 
@@ -27,9 +66,14 @@ export const useAuthStore = defineStore<
 >("auth", {
   state: () => ({
     currentUser: {
-      id: "1",
-      email: "",
-      groupId: 1,
+      id: "",
+      username: "",
+      first_name: "",
+      last_name: "",
+      language_code: "en",
+      photo_url: "",
+      allows_write_to_pm: true,
+      chatId: "",
     },
   }),
 
@@ -40,13 +84,23 @@ export const useAuthStore = defineStore<
   },
 
   actions: {
-    async login(email: string, _password: string) {
-      // Login stuff
-      this.currentUser = {
-        id: "1",
-        email,
-        groupId: 1,
-      };
+    async login(appInitData: TMiniAppInit) {
+      try {
+        await $fetch("/api/login", {
+          method: "POST",
+          body: JSON.stringify(appInitData.tgWebAppData),
+        });
+
+        this.currentUser = {
+          ...appInitData.tgWebAppData.user,
+          chatId: appInitData.tgWebAppData.chat_instance,
+        };
+
+        navigateTo("/dashboard");
+      } catch (error) {
+        console.error(error);
+        navigateTo("/error");
+      }
     },
 
     async logout() {

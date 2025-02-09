@@ -4,8 +4,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      botId: ''
-    }
+      botId: "",
+    },
   },
   devtools: { enabled: true },
   modules: [
@@ -38,13 +38,11 @@ export default defineNuxtConfig({
   experimental: {
     renderJsonPayloads: false,
   },
-  supabase : {
-    redirectOptions : {
-      login: '/login',
-      callback: '/confirm',
-      exclude : [
-        '/docs',
-     ]
-    }
+  supabase: {
+    redirectOptions: {
+      login: "/login",
+      callback: "/confirm",
+      exclude: ["/docs"],
+    },
   },
 });

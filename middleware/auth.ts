@@ -6,7 +6,5 @@ export default defineNuxtRouteMiddleware((to, _from) => {
     const launchParams = retrieveLaunchParams();
 
     console.log("launchParams", launchParams);
-
-
   }
 });

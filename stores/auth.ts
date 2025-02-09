@@ -25,17 +25,17 @@ type TUser = {
   language_code: string;
   last_name: string;
   photo_url: string;
-  username:  string;
+  username: string;
 };
 
 type TAppData = {
   auth_date: string;
   chat_instance: string;
-  chat_type: string
+  chat_type: string;
   hash: string;
   signature: string;
   user: TUser;
-}
+};
 
 type TMiniAppInit = {
   tgWebAppBotInline: boolean;

@@ -75,7 +75,7 @@
       "User": {
         "$ref": "./entities/user.json#/components/schemas/User"
       },
-      "AppData":{
+      "AppData": {
         "$ref": "./entities/appdata.json#/components/schemas/AppData"
       },
       "FullProject": {

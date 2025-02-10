@@ -89,7 +89,7 @@ export const useAuthStore = defineStore<
       try {
         const data = await $fetch("/api/login", {
           method: "POST",
-          body: JSON.stringify(appInitData),
+          body: JSON.stringify(appInitData.tgWebAppData),
         });
 
         console.log("data: ", data);

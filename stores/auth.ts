@@ -89,7 +89,10 @@ export const useAuthStore = defineStore<
       try {
         const authData = {
           ...appInitData.tgWebAppData,
-          auth_date: new Date(appInitData.tgWebAppData?.auth_date ?? Date.now()).getTime() / 1000,
+          auth_date:
+            new Date(
+              appInitData.tgWebAppData?.auth_date ?? Date.now(),
+            ).getTime() / 1000,
         };
 
         console.log("authData: ", authData);

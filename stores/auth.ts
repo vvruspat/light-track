@@ -87,9 +87,16 @@ export const useAuthStore = defineStore<
   actions: {
     async login(appInitData: RetrieveLPResult) {
       try {
+        const authData = {
+          ...appInitData.tgWebAppData,
+          auth_date: new Date(appInitData.tgWebAppData?.auth_date ?? Date.now()).getTime() / 1000,
+        };
+
+        console.log("authData: ", authData);
+
         const data = await $fetch("/api/login", {
           method: "POST",
-          body: JSON.stringify(appInitData.tgWebAppData),
+          body: JSON.stringify(authData),
         });
 
         console.log("data: ", data);

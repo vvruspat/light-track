@@ -11,6 +11,8 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
       user: JSON.stringify(body.user),
     };
 
+    throw Error("data: " + JSON.stringify(data));
+
     validate3rd(new URLSearchParams(data), Number(botId));
   } catch (e) {
     throw createError({

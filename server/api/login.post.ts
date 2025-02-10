@@ -10,8 +10,8 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
       ...body,
       user: JSON.stringify(body.user),
     };
-    
-    validate3rd((new URLSearchParams(data)).toString(), Number(botId));
+
+    validate3rd(new URLSearchParams(data).toString(), Number(botId));
   } catch (e) {
     throw createError({
       statusCode: 400,

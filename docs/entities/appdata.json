@@ -8,7 +8,7 @@
             "type": "string"
           },
           "chat_instance": {
-            "type": "string"
+            "type": "number"
           },
           "chat_type": {
             "type": "string"

@@ -20,16 +20,16 @@
             "$ref": "../atoms/userId.json#/components/schemas/UserId",
             "description": "The ID of the project owner"
           },
-          "group_id": {
-            "$ref": "../atoms/groupId.json#/components/schemas/GroupId",
-            "description": "The ID of the group the project belongs to"
+          "chat_id": {
+            "$ref": "../atoms/chatId.json#/components/schemas/ChatId",
+            "description": "The ID of the chat the project belongs to"
           },
           "created_at": {
             "type": "string",
             "description": "The date and time the project was created"
           }
         },
-        "required": ["title", "group_id"]
+        "required": ["title", "chat_id"]
       }
     }
   }

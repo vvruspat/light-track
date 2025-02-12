@@ -11,8 +11,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "$ref": "./entities/appdata.json#/components/schemas/AppData/properties"
-                }
+                  "params": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "params"
+                ]
               }
             }
           }
@@ -26,6 +31,43 @@
                   "allOf": [
                     {
                       "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "token": {
+                              "type": "string",
+                              "description": "The token for the project"
+                            },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "$ref": "./entities/user.json#/components/schemas/User/properties"
+                              },
+                              "required": [
+                                "id",
+                                "username",
+                                "first_name",
+                                "last_name",
+                                "photo_url",
+                                "language_code",
+                                "allows_write_to_pm"
+                              ]
+                            },
+                            "chat_id": {
+                              "$ref": "./atoms/chatId.json#/components/schemas/ChatId",
+                              "description": "The ID of the chat the user opened the app in"
+                            }
+                          },
+                          "required": [
+                            "token",
+                            "user",
+                            "chat_id"
+                          ]
+                        }
+                      }
                     }
                   ]
                 }

@@ -1,33 +1,6 @@
 import { defineStore } from "pinia";
-import type { RetrieveLPResult } from "@telegram-apps/bridge";
-
-// type TAppTheme = {
-//   accent_text_color: string;
-//   bg_color: string;
-//   bottom_bar_bg_color: string;
-//   button_color: string;
-//   button_text_color: string;
-//   destructive_text_color: string;
-//   header_bg_color: string;
-//   hint_color: string;
-//   link_color: string;
-//   secondary_bg_color: string;
-//   section_bg_color: string;
-//   section_header_text_color: string;
-//   section_separator_color: string;
-//   subtitle_text_color: string;
-//   text_color: string;
-// };
-
-type TUser = {
-  allows_write_to_pm: boolean;
-  first_name: string;
-  id: string;
-  language_code: string;
-  last_name: string;
-  photo_url: string;
-  username: string;
-};
+import type { TUser } from "@/types/entities";
+import type { LoginPostResponse } from "~/types/api";
 
 export type TAppData = {
   auth_date: string;
@@ -38,16 +11,10 @@ export type TAppData = {
   user: TUser;
 };
 
-// type TMiniAppInit = {
-//   tgWebAppBotInline: boolean;
-//   tgWebAppData: TAppData;
-//   tgWebAppPlatform: string;
-//   tgWebAppThemeParams: TAppTheme;
-//   tgWebAppVersion: string;
-// };
-
 type AuthState = {
-  currentUser: (TUser & { chatId: TAppData["chat_instance"] }) | null;
+  currentUser: TUser | null;
+  chatId: number;
+  token: string | null;
 };
 
 type AuthGetters = {
@@ -55,7 +22,7 @@ type AuthGetters = {
 };
 
 type AuthActions = {
-  login: (appInitData: RetrieveLPResult) => Promise<void>;
+  login: (appInitData: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -66,16 +33,9 @@ export const useAuthStore = defineStore<
   AuthActions
 >("auth", {
   state: () => ({
-    currentUser: {
-      id: "",
-      username: "",
-      first_name: "",
-      last_name: "",
-      language_code: "en",
-      photo_url: "",
-      allows_write_to_pm: true,
-      chatId: "",
-    },
+    currentUser: null,
+    chatId: 0,
+    token: null,
   }),
 
   getters: {
@@ -85,43 +45,36 @@ export const useAuthStore = defineStore<
   },
 
   actions: {
-    async login(appInitData: RetrieveLPResult) {
+    async login(appInitData: string) {
       try {
-        const authData = {
-          ...appInitData.tgWebAppData,
-          auth_date:
-            new Date(
-              appInitData.tgWebAppData?.auth_date ?? Date.now(),
-            ).getTime() / 1000,
-        };
+        const params = new URLSearchParams(appInitData);
 
-        console.log("authData: ", authData);
-
-        const data = await $fetch("/api/login", {
+        const data = await $fetch<LoginPostResponse>("/api/login", {
           method: "POST",
-          body: JSON.stringify(authData),
+          body: JSON.stringify({
+            params: params.get("tgWebAppData"),
+          }),
         });
 
         console.log("data: ", data);
 
-        if (appInitData.tgWebAppData) {
-          // this.currentUser = {
-          //   ...appInitData.tgWebAppData.user,
-          //   chatId: appInitData.tgWebAppData.chat_instance ?? "0",
-          // };
+        if (data.data) {
+          this.currentUser = data.data.user;
 
           console.log("this.currentUser: ", this.currentUser);
 
-          navigateTo("/dashboard");
+          await navigateTo("/dashboard");
         }
       } catch (error) {
         console.error(error);
-        navigateTo("/error");
+        await navigateTo("/error");
       }
     },
 
     async logout() {
       this.currentUser = null;
+      this.token = null;
+      this.chatId = 0;
     },
   },
 });

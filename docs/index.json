@@ -36,8 +36,8 @@
       "UserId": {
         "$ref": "./atoms/userId.json#/components/schemas/UserId"
       },
-      "GroupId": {
-        "$ref": "./atoms/groupId.json#/components/schemas/GroupId"
+      "ChatId": {
+        "$ref": "./atoms/chatId.json#/components/schemas/ChatId"
       },
       "EpicId": {
         "$ref": "./atoms/epicId.json#/components/schemas/EpicId"

@@ -31,15 +31,17 @@
   "paths": {
     "/projects": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "group_id",
+            "name": "chat_id",
             "in": "query",
             "required": false,
             "schema": {
-              "description": "The ID of the group to filter by",
+              "description": "The ID of the chat to filter by",
               "type": "number"
             }
           },
@@ -49,7 +51,7 @@
             "required": false,
             "schema": {
               "description": "The ID of the user who owns the project",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -87,7 +89,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -120,10 +125,10 @@
                               },
                               "owner_id": {
                                 "description": "The ID of the project owner",
-                                "type": "string"
+                                "type": "number"
                               },
-                              "group_id": {
-                                "description": "The ID of the group the project belongs to",
+                              "chat_id": {
+                                "description": "The ID of the chat the project belongs to",
                                 "type": "number"
                               },
                               "created_at": {
@@ -131,14 +136,17 @@
                                 "description": "The date and time the project was created"
                               }
                             },
-                            "required": ["title", "group_id"]
+                            "required": [
+                              "title",
+                              "chat_id"
+                            ]
                           }
                         ],
                         "required": [
                           "id",
                           "title",
                           "created_at",
-                          "group_id",
+                          "chat_id",
                           "owner_id",
                           "description"
                         ]
@@ -162,7 +170,9 @@
         }
       },
       "post": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Create a new project",
         "requestBody": {
           "required": true,
@@ -179,12 +189,15 @@
                     "type": "string",
                     "description": "The project description"
                   },
-                  "group_id": {
-                    "description": "The ID of the group the project belongs to",
+                  "chat_id": {
+                    "description": "The ID of the chat the project belongs to",
                     "type": "number"
                   }
                 },
-                "required": ["title", "group_id"]
+                "required": [
+                  "title",
+                  "chat_id"
+                ]
               }
             }
           }
@@ -230,10 +243,10 @@
                             },
                             "owner_id": {
                               "description": "The ID of the project owner",
-                              "type": "string"
+                              "type": "number"
                             },
-                            "group_id": {
-                              "description": "The ID of the group the project belongs to",
+                            "chat_id": {
+                              "description": "The ID of the chat the project belongs to",
                               "type": "number"
                             },
                             "created_at": {
@@ -245,7 +258,7 @@
                             "id",
                             "title",
                             "created_at",
-                            "group_id",
+                            "chat_id",
                             "owner_id",
                             "description"
                           ]
@@ -284,7 +297,9 @@
     },
     "/projects/{id}": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a project by ID",
         "parameters": [
           {
@@ -340,10 +355,10 @@
                                 },
                                 "owner_id": {
                                   "description": "The ID of the project owner",
-                                  "type": "string"
+                                  "type": "number"
                                 },
-                                "group_id": {
-                                  "description": "The ID of the group the project belongs to",
+                                "chat_id": {
+                                  "description": "The ID of the chat the project belongs to",
                                   "type": "number"
                                 },
                                 "created_at": {
@@ -351,7 +366,10 @@
                                   "description": "The date and time the project was created"
                                 }
                               },
-                              "required": ["title", "group_id"]
+                              "required": [
+                                "title",
+                                "chat_id"
+                              ]
                             },
                             {
                               "type": "object",
@@ -377,7 +395,7 @@
                                           },
                                           "owner_id": {
                                             "description": "The ID of the user who owns the epic",
-                                            "type": "string"
+                                            "type": "number"
                                           },
                                           "project_id": {
                                             "description": "The ID of the project the epic belongs to",
@@ -430,7 +448,7 @@
                                                     },
                                                     "owner_id": {
                                                       "description": "The ID of the user who owns the story",
-                                                      "type": "string"
+                                                      "type": "number"
                                                     },
                                                     "created_at": {
                                                       "type": "string",
@@ -477,7 +495,7 @@
                                                           },
                                                           "assignee_id": {
                                                             "description": "The ID of the user assigned to the task",
-                                                            "type": "string"
+                                                            "type": "number"
                                                           },
                                                           "estimation": {
                                                             "type": "number",
@@ -539,7 +557,7 @@
                             "id",
                             "title",
                             "created_at",
-                            "group_id",
+                            "chat_id",
                             "owner_id",
                             "description",
                             "epics"
@@ -599,7 +617,9 @@
         }
       },
       "delete": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Delete project by ID",
         "parameters": [
           {
@@ -664,7 +684,9 @@
         }
       },
       "put": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Update project by ID",
         "parameters": [
           {
@@ -738,10 +760,10 @@
                             },
                             "owner_id": {
                               "description": "The ID of the project owner",
-                              "type": "string"
+                              "type": "number"
                             },
-                            "group_id": {
-                              "description": "The ID of the group the project belongs to",
+                            "chat_id": {
+                              "description": "The ID of the chat the project belongs to",
                               "type": "number"
                             },
                             "created_at": {
@@ -753,7 +775,7 @@
                             "id",
                             "title",
                             "created_at",
-                            "group_id",
+                            "chat_id",
                             "owner_id",
                             "description"
                           ]
@@ -792,7 +814,9 @@
     },
     "/epics": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get a list of epics",
         "parameters": [
           {
@@ -839,7 +863,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -875,7 +902,9 @@
         }
       },
       "post": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Create a new epic",
         "requestBody": {
           "required": true,
@@ -897,7 +926,10 @@
                     "type": "number"
                   }
                 },
-                "required": ["title", "project_id"]
+                "required": [
+                  "title",
+                  "project_id"
+                ]
               }
             }
           }
@@ -943,7 +975,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the epic",
-                              "type": "string"
+                              "type": "number"
                             },
                             "project_id": {
                               "description": "The ID of the project the epic belongs to",
@@ -995,7 +1027,9 @@
     },
     "/epics/{id}": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get an epic by ID",
         "parameters": [
           {
@@ -1049,7 +1083,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the epic",
-                              "type": "string"
+                              "type": "number"
                             },
                             "project_id": {
                               "description": "The ID of the project the epic belongs to",
@@ -1099,7 +1133,9 @@
         }
       },
       "delete": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Delete an epic by ID",
         "parameters": [
           {
@@ -1164,7 +1200,9 @@
         }
       },
       "put": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Update epic by id",
         "parameters": [
           {
@@ -1238,7 +1276,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the epic",
-                              "type": "string"
+                              "type": "number"
                             },
                             "project_id": {
                               "description": "The ID of the project the epic belongs to",
@@ -1290,7 +1328,9 @@
     },
     "/stories": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get a list of stories",
         "parameters": [
           {
@@ -1337,7 +1377,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1374,7 +1417,9 @@
         }
       },
       "post": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Create a new story",
         "requestBody": {
           "required": true,
@@ -1396,7 +1441,9 @@
                     "type": "number"
                   }
                 },
-                "required": ["title"]
+                "required": [
+                  "title"
+                ]
               }
             }
           }
@@ -1446,7 +1493,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the story",
-                              "type": "string"
+                              "type": "number"
                             },
                             "created_at": {
                               "type": "string",
@@ -1494,7 +1541,9 @@
     },
     "/stories/{id}": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get an story by ID",
         "parameters": [
           {
@@ -1552,7 +1601,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the story",
-                              "type": "string"
+                              "type": "number"
                             },
                             "created_at": {
                               "type": "string",
@@ -1595,7 +1644,9 @@
         }
       },
       "delete": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Delete story by ID",
         "parameters": [
           {
@@ -1657,7 +1708,9 @@
         }
       },
       "put": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Update story",
         "parameters": [
           {
@@ -1735,7 +1788,7 @@
                             },
                             "owner_id": {
                               "description": "The ID of the user who owns the story",
-                              "type": "string"
+                              "type": "number"
                             },
                             "created_at": {
                               "type": "string",
@@ -1783,7 +1836,9 @@
     },
     "/tasks": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a list of tasks",
         "parameters": [
           {
@@ -1801,7 +1856,7 @@
             "required": false,
             "schema": {
               "description": "The ID of the user the task is assigned to",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -1810,7 +1865,7 @@
             "required": false,
             "schema": {
               "description": "The ID of the user who owns the task",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -1848,7 +1903,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1885,7 +1943,9 @@
         }
       },
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Create a new task",
         "requestBody": {
           "required": true,
@@ -1908,7 +1968,7 @@
                   },
                   "assignee_id": {
                     "description": "The user ID the task is assigned to",
-                    "type": "string"
+                    "type": "number"
                   },
                   "estimation": {
                     "type": "number",
@@ -1919,7 +1979,10 @@
                     "description": "The status of the task"
                   }
                 },
-                "required": ["title", "status"]
+                "required": [
+                  "title",
+                  "status"
+                ]
               }
             }
           }
@@ -1969,7 +2032,7 @@
                             },
                             "assignee_id": {
                               "description": "The ID of the user assigned to the task",
-                              "type": "string"
+                              "type": "number"
                             },
                             "estimation": {
                               "type": "number",
@@ -1993,7 +2056,9 @@
     },
     "/tasks/{id}": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a task by ID",
         "parameters": [
           {
@@ -2051,7 +2116,7 @@
                             },
                             "assignee_id": {
                               "description": "The ID of the user assigned to the task",
-                              "type": "string"
+                              "type": "number"
                             },
                             "estimation": {
                               "type": "number",
@@ -2095,7 +2160,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Delete a task by ID",
         "parameters": [
           {
@@ -2156,7 +2223,9 @@
         }
       },
       "put": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Update task by ID",
         "parameters": [
           {
@@ -2186,7 +2255,7 @@
                   },
                   "assignee_id": {
                     "description": "The user ID the task is assigned to",
-                    "type": "string"
+                    "type": "number"
                   },
                   "estimation": {
                     "type": "number",
@@ -2247,7 +2316,7 @@
                             },
                             "assignee_id": {
                               "description": "The ID of the user assigned to the task",
-                              "type": "string"
+                              "type": "number"
                             },
                             "estimation": {
                               "type": "number",
@@ -2271,7 +2340,9 @@
     },
     "/taskwatchers": {
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Add a task watcher",
         "requestBody": {
           "required": true,
@@ -2286,10 +2357,13 @@
                   },
                   "userId": {
                     "description": "The ID of the user who will be watching the task",
-                    "type": "string"
+                    "type": "number"
                   }
                 },
-                "required": ["task_id", "userId"]
+                "required": [
+                  "task_id",
+                  "userId"
+                ]
               }
             }
           }
@@ -2342,7 +2416,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Remove a task watcher",
         "parameters": [
           {
@@ -2360,7 +2436,7 @@
             "required": false,
             "schema": {
               "description": "The ID of the user to be removed from the task watcher list",
-              "type": "string"
+              "type": "number"
             }
           }
         ],
@@ -2414,7 +2490,9 @@
     },
     "/login": {
       "post": {
-        "tags": ["login"],
+        "tags": [
+          "login"
+        ],
         "summary": "Login user with miniapp data",
         "requestBody": {
           "required": true,
@@ -2423,58 +2501,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "auth_date": {
+                  "params": {
                     "type": "string"
-                  },
-                  "chat_instance": {
-                    "type": "string"
-                  },
-                  "chat_type": {
-                    "type": "string"
-                  },
-                  "hash": {
-                    "type": "string"
-                  },
-                  "signature": {
-                    "type": "string"
-                  },
-                  "user": {
-                    "type": "object",
-                    "properties": {
-                      "allows_write_to_pm": {
-                        "type": "boolean"
-                      },
-                      "first_name": {
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "The ID of the project owner",
-                        "type": "string"
-                      },
-                      "language_code": {
-                        "type": "string"
-                      },
-                      "last_name": {
-                        "type": "string"
-                      },
-                      "photo_url": {
-                        "type": "string"
-                      },
-                      "username": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "allows_write_to_pm",
-                      "first_name",
-                      "id",
-                      "language_code",
-                      "last_name",
-                      "photo_url",
-                      "username"
-                    ]
                   }
-                }
+                },
+                "required": [
+                  "params"
+                ]
               }
             }
           }
@@ -2498,6 +2531,64 @@
                         "message": {
                           "type": "string",
                           "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "token": {
+                              "type": "string",
+                              "description": "The token for the project"
+                            },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "allows_write_to_pm": {
+                                  "type": "boolean"
+                                },
+                                "first_name": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "The ID of the project owner",
+                                  "type": "number"
+                                },
+                                "language_code": {
+                                  "type": "string"
+                                },
+                                "last_name": {
+                                  "type": "string"
+                                },
+                                "photo_url": {
+                                  "type": "string"
+                                },
+                                "username": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "username",
+                                "first_name",
+                                "last_name",
+                                "photo_url",
+                                "language_code",
+                                "allows_write_to_pm"
+                              ]
+                            },
+                            "chat_id": {
+                              "description": "The ID of the chat the user opened the app in",
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "token",
+                            "user",
+                            "chat_id"
+                          ]
                         }
                       }
                     }
@@ -2539,12 +2630,12 @@
         "description": "The unique identifier for the project"
       },
       "UserId": {
-        "type": "string",
+        "type": "number",
         "description": "The unique identifier for the User"
       },
-      "GroupId": {
+      "ChatId": {
         "type": "number",
-        "description": "The unique identifier for the group"
+        "description": "The unique identifier for the chat"
       },
       "EpicId": {
         "type": "number",
@@ -2560,7 +2651,10 @@
       },
       "SortDirection": {
         "type": "string",
-        "enum": ["asc", "desc"]
+        "enum": [
+          "asc",
+          "desc"
+        ]
       },
       "GenericResponse": {
         "type": "object",
@@ -2620,7 +2714,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         }
@@ -2642,10 +2739,10 @@
           },
           "owner_id": {
             "description": "The ID of the project owner",
-            "type": "string"
+            "type": "number"
           },
-          "group_id": {
-            "description": "The ID of the group the project belongs to",
+          "chat_id": {
+            "description": "The ID of the chat the project belongs to",
             "type": "number"
           },
           "created_at": {
@@ -2653,7 +2750,10 @@
             "description": "The date and time the project was created"
           }
         },
-        "required": ["title", "group_id"]
+        "required": [
+          "title",
+          "chat_id"
+        ]
       },
       "Epic": {
         "type": "object",
@@ -2672,7 +2772,7 @@
           },
           "owner_id": {
             "description": "The ID of the user who owns the epic",
-            "type": "string"
+            "type": "number"
           },
           "project_id": {
             "description": "The ID of the project the epic belongs to",
@@ -2689,7 +2789,13 @@
             "description": "The date and time when the epic was last updated"
           }
         },
-        "required": ["id", "title", "project_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "project_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Story": {
         "type": "object",
@@ -2712,7 +2818,7 @@
           },
           "owner_id": {
             "description": "The ID of the user who owns the story",
-            "type": "string"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2725,7 +2831,13 @@
             "description": "The date and time when the story was last updated"
           }
         },
-        "required": ["id", "title", "owner_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "owner_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Task": {
         "type": "object",
@@ -2748,7 +2860,7 @@
           },
           "assignee_id": {
             "description": "The ID of the user assigned to the task",
-            "type": "string"
+            "type": "number"
           },
           "estimation": {
             "type": "number",
@@ -2759,7 +2871,11 @@
             "description": "The status of the task"
           }
         },
-        "required": ["title", "project_id", "status"]
+        "required": [
+          "title",
+          "project_id",
+          "status"
+        ]
       },
       "User": {
         "type": "object",
@@ -2772,7 +2888,7 @@
           },
           "id": {
             "description": "The ID of the project owner",
-            "type": "string"
+            "type": "number"
           },
           "language_code": {
             "type": "string"
@@ -2804,7 +2920,7 @@
             "type": "string"
           },
           "chat_instance": {
-            "type": "string"
+            "type": "number"
           },
           "chat_type": {
             "type": "string"
@@ -2826,7 +2942,7 @@
               },
               "id": {
                 "description": "The ID of the project owner",
-                "type": "string"
+                "type": "number"
               },
               "language_code": {
                 "type": "string"
@@ -2880,10 +2996,10 @@
               },
               "owner_id": {
                 "description": "The ID of the project owner",
-                "type": "string"
+                "type": "number"
               },
-              "group_id": {
-                "description": "The ID of the group the project belongs to",
+              "chat_id": {
+                "description": "The ID of the chat the project belongs to",
                 "type": "number"
               },
               "created_at": {
@@ -2891,7 +3007,10 @@
                 "description": "The date and time the project was created"
               }
             },
-            "required": ["title", "group_id"]
+            "required": [
+              "title",
+              "chat_id"
+            ]
           },
           {
             "type": "object",
@@ -2917,7 +3036,7 @@
                         },
                         "owner_id": {
                           "description": "The ID of the user who owns the epic",
-                          "type": "string"
+                          "type": "number"
                         },
                         "project_id": {
                           "description": "The ID of the project the epic belongs to",
@@ -2970,7 +3089,7 @@
                                   },
                                   "owner_id": {
                                     "description": "The ID of the user who owns the story",
-                                    "type": "string"
+                                    "type": "number"
                                   },
                                   "created_at": {
                                     "type": "string",
@@ -3017,7 +3136,7 @@
                                         },
                                         "assignee_id": {
                                           "description": "The ID of the user assigned to the task",
-                                          "type": "string"
+                                          "type": "number"
                                         },
                                         "estimation": {
                                           "type": "number",
@@ -3079,7 +3198,7 @@
           "id",
           "title",
           "created_at",
-          "group_id",
+          "chat_id",
           "owner_id",
           "description",
           "epics"
@@ -3104,7 +3223,7 @@
               },
               "owner_id": {
                 "description": "The ID of the user who owns the epic",
-                "type": "string"
+                "type": "number"
               },
               "project_id": {
                 "description": "The ID of the project the epic belongs to",
@@ -3157,7 +3276,7 @@
                         },
                         "owner_id": {
                           "description": "The ID of the user who owns the story",
-                          "type": "string"
+                          "type": "number"
                         },
                         "created_at": {
                           "type": "string",
@@ -3204,7 +3323,7 @@
                               },
                               "assignee_id": {
                                 "description": "The ID of the user assigned to the task",
-                                "type": "string"
+                                "type": "number"
                               },
                               "estimation": {
                                 "type": "number",
@@ -3281,7 +3400,7 @@
               },
               "owner_id": {
                 "description": "The ID of the user who owns the story",
-                "type": "string"
+                "type": "number"
               },
               "created_at": {
                 "type": "string",
@@ -3294,7 +3413,13 @@
                 "description": "The date and time when the story was last updated"
               }
             },
-            "required": ["id", "title", "owner_id", "created_at", "updated_at"]
+            "required": [
+              "id",
+              "title",
+              "owner_id",
+              "created_at",
+              "updated_at"
+            ]
           },
           {
             "type": "object",
@@ -3322,7 +3447,7 @@
                     },
                     "assignee_id": {
                       "description": "The ID of the user assigned to the task",
-                      "type": "string"
+                      "type": "number"
                     },
                     "estimation": {
                       "type": "number",
@@ -3382,7 +3507,7 @@
           },
           "assignee_id": {
             "description": "The ID of the user assigned to the task",
-            "type": "string"
+            "type": "number"
           },
           "estimation": {
             "type": "number",
@@ -3455,7 +3580,10 @@
           "description": "The direction to sort by",
           "default": "asc",
           "type": "string",
-          "enum": ["asc", "desc"]
+          "enum": [
+            "asc",
+            "desc"
+          ]
         }
       }
     }

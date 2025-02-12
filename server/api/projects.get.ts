@@ -12,7 +12,7 @@ import type { ProjectGetRequest, ProjectGetResponse } from "@/types/api";
 export default defineEventHandler(
   async (event): Promise<ProjectGetResponse> => {
     const {
-      group_id,
+      chat_id,
       owner_id,
       limit = REQUEST_DEFAULT_LIMIT,
       offset = REQUEST_DEFAULT_OFFSET,
@@ -34,18 +34,18 @@ export default defineEventHandler(
     const ownerId = owner_id ?? user.id;
 
     // Ensure the user is authenticated
-    if (!group_id && !ownerId) {
+    if (!chat_id && !ownerId) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
-        message: "Provide either a group_id or owner_id",
+        message: "Provide either a chat_id or owner_id",
       };
     }
 
     const { data, error } = await client
       .from("projects")
       .select()
-      .filter("group_id", "eq", group_id)
+      .filter("chat_id", "eq", chat_id)
       .filter("owner_id", "eq", ownerId)
       .range(offset, limit + offset)
       .order(sort, { ascending: direction === "asc" });

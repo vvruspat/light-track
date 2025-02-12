@@ -17,9 +17,9 @@ type ProjectsGetters = {
 };
 
 type ProjectsActions = {
-  fetchProjects: (groupId: TProject["group_id"]) => Promise<TProject[]>;
+  fetchProjects: (chatId: TProject["chat_id"]) => Promise<TProject[]>;
   createProject: (
-    groupId: TProject["group_id"],
+    chatId: TProject["chat_id"],
     title: TProject["title"],
     description: TProject["description"],
   ) => Promise<TProject | null>;
@@ -58,7 +58,7 @@ export const useProjectsStore = defineStore<
   },
 
   actions: {
-    async fetchProjects(groupId: number) {
+    async fetchProjects(chatId: number) {
       // fetch all projects
       this.loadingState = "pending";
 
@@ -68,7 +68,7 @@ export const useProjectsStore = defineStore<
         const data = await $fetch<ProjectGetResponse>("/api/projects", {
           method: "GET",
           query: {
-            group_id: groupId,
+            chat_id: chatId,
             limit: this.limit,
             offset: this.offset,
           },
@@ -96,7 +96,7 @@ export const useProjectsStore = defineStore<
     },
 
     async createProject(
-      groupId: TProject["group_id"],
+      chatId: TProject["chat_id"],
       title: TProject["title"],
       description: TProject["description"],
     ) {
@@ -109,7 +109,7 @@ export const useProjectsStore = defineStore<
         const data = await $fetch<ProjectPostResponse>("/api/projects", {
           method: "POST",
           body: JSON.stringify({
-            group_id: groupId,
+            chat_id: chatId,
             title,
             description,
           }),

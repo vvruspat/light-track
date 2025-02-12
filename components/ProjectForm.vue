@@ -22,10 +22,10 @@ const state = reactive({
 
 async function onSubmit(_event: FormSubmitEvent<Schema>) {
   // Do something with data
-  const groupId = authStore.currentUser?.groupId;
+  const chatId = authStore.currentUser?.chatId;
 
-  if (!groupId) {
-    throw new Error("User is not in a group");
+  if (!chatId) {
+    throw new Error("User is not in a chat");
   }
 
   if (projectId) {
@@ -35,7 +35,7 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
       state.description,
     );
   } else {
-    await projectsStore.createProject(groupId, state.title, state.description);
+    await projectsStore.createProject(chatId, state.title, state.description);
   }
 
   await currentProjectStore.getProjectById(Number(projectId), true);

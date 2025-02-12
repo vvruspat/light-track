@@ -32,7 +32,7 @@ const onSelect = (value: { id: number }) => {
   <UModal v-model="isOpen">
     <UCommandPalette
       v-model="selected"
-      :groups="[{ key: 'projectsItems', commands: projectsItems }]"
+      :chats="[{ key: 'projectsItems', commands: projectsItems }]"
       @update:model-value="onSelect"
     />
     <UContainer class="p-4 w-full">

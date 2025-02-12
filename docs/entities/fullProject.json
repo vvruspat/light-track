@@ -22,7 +22,7 @@
           "id",
           "title",
           "created_at",
-          "group_id",
+          "chat_id",
           "owner_id",
           "description",
           "epics"

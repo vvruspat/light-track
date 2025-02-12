@@ -34,7 +34,7 @@ export default defineEventHandler(async (event): Promise<EpicGetResponse> => {
     return {
       statusCode: 400,
       statusMessage: "Bad Request",
-      message: "Provide either a group_id or owner_id",
+      message: "Provide either a chat_id or owner_id",
     };
   }
 

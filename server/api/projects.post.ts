@@ -1,9 +1,10 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { ProjectPostRequest, ProjectPostResponse } from "@/types/api";
 import Ajv from "ajv";
 import { paths } from "@/public/_openapi.json";
+import useLightTrackSession from "@/utils/useLightTrackSession";
 
 export default defineEventHandler(
   async (event): Promise<ProjectPostResponse> => {
@@ -25,7 +26,8 @@ export default defineEventHandler(
       }
     });
     const client = await serverSupabaseClient<Database>(event);
-    const user = await serverSupabaseUser(event);
+
+    const { chatId, ...user } = useLightTrackSession(event);
 
     // Ensure the user is authenticated
     if (!user) {
@@ -45,7 +47,7 @@ export default defineEventHandler(
       };
     }
 
-    if (!body.group_id) {
+    if (!body.chat_id) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -57,7 +59,7 @@ export default defineEventHandler(
     const newProject: Database["public"]["Tables"]["projects"]["Insert"] = {
       title: body.title,
       description: body.description || "",
-      group_id: body.group_id,
+      chat_id: Number(body.chat_id),
       owner_id: user.id,
     };
 

@@ -6,12 +6,12 @@
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "group_id",
+            "name": "chat_id",
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-              "description": "The ID of the group to filter by"
+              "$ref": "./atoms/chatId.json#/components/schemas/ChatId",
+              "description": "The ID of the chat to filter by"
             }
           },
           {
@@ -57,7 +57,7 @@
                           "id",
                           "title",
                           "created_at",
-                          "group_id",
+                          "chat_id",
                           "owner_id",
                           "description"
                         ]
@@ -88,12 +88,12 @@
                     "type": "string",
                     "description": "The project description"
                   },
-                  "group_id": {
-                    "$ref": "./atoms/groupId.json#/components/schemas/GroupId",
-                    "description": "The ID of the group the project belongs to"
+                  "chat_id": {
+                    "$ref": "./atoms/chatId.json#/components/schemas/ChatId",
+                    "description": "The ID of the chat the project belongs to"
                   }
                 },
-                "required": ["title", "group_id"]
+                "required": ["title", "chat_id"]
               }
             }
           }
@@ -119,7 +119,7 @@
                             "id",
                             "title",
                             "created_at",
-                            "group_id",
+                            "chat_id",
                             "owner_id",
                             "description"
                           ]
@@ -299,7 +299,7 @@
                             "id",
                             "title",
                             "created_at",
-                            "group_id",
+                            "chat_id",
                             "owner_id",
                             "description"
                           ]

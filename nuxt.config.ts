@@ -1,3 +1,5 @@
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
@@ -5,6 +7,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       botId: "",
+      jwtSecret: "",
     },
   },
   devtools: { enabled: true },
@@ -38,11 +41,15 @@ export default defineNuxtConfig({
   experimental: {
     renderJsonPayloads: false,
   },
-  supabase: {
-    redirectOptions: {
-      login: "/login",
-      callback: "/confirm",
-      exclude: ["/docs"],
+  vite: {
+    server: {
+      allowedHosts: ['7cfa-77-251-156-81.ngrok-free.app']
     },
+    plugins: [
+      nodePolyfills(),
+    ],
+  },
+  supabase: {
+    redirect: false
   },
 });

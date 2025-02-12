@@ -1,9 +1,9 @@
 {
   "components": {
     "schemas": {
-      "GroupId": {
+      "ChatId": {
         "type": "number",
-        "description": "The unique identifier for the group"
+        "description": "The unique identifier for the chat"
       }
     }
   }

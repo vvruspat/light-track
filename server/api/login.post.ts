@@ -6,7 +6,9 @@ import createJWT from "@/utils/createJWT";
 
 export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
   const { params: data } = await readBody<LoginPostRequest>(event);
-  const { public: { botId } } = useRuntimeConfig();
+  const {
+    public: { botId },
+  } = useRuntimeConfig();
   const client = await serverSupabaseClient<Database>(event);
 
   const searchParams = new URLSearchParams(data);
@@ -23,20 +25,20 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
     let errorMessage = "Failed to login";
 
     switch (error.message) {
-      case 'ERR_AUTH_DATE_INVALID':
-        errorMessage = 'Authentication date is invalid or missing.';
+      case "ERR_AUTH_DATE_INVALID":
+        errorMessage = "Authentication date is invalid or missing.";
         break;
-      case 'ERR_SIGNATURE_MISSING':
-        errorMessage = 'Signature is missing or empty.';
+      case "ERR_SIGNATURE_MISSING":
+        errorMessage = "Signature is missing or empty.";
         break;
-      case 'ERR_SIGN_INVALID':
-        errorMessage = 'Signature is invalid.';
+      case "ERR_SIGN_INVALID":
+        errorMessage = "Signature is invalid.";
         break;
-      case 'ERR_EXPIRED':
-        errorMessage = 'The initialization data has expired.';
+      case "ERR_EXPIRED":
+        errorMessage = "The initialization data has expired.";
         break;
       default:
-        errorMessage = 'An unknown error occurred:' + error.message;
+        errorMessage = "An unknown error occurred:" + error.message;
     }
 
     throw createError({
@@ -68,7 +70,11 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
         allows_write_to_pm: user.allows_write_to_pm,
       };
 
-      const upsertUser = await client.from("users").upsert([newUser]).select().single();
+      const upsertUser = await client
+        .from("users")
+        .upsert([newUser])
+        .select()
+        .single();
 
       if (upsertUser.error) {
         throw new Error(upsertUser.error.message);
@@ -87,7 +93,6 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
       if (upsertChatUser.error) {
         throw new Error(upsertChatUser.error.message);
       }
-
     } else {
       throw createError({
         statusCode: 400,
@@ -95,7 +100,6 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
         message: "User ID is required",
       });
     }
-    
   } catch (e) {
     throw createError({
       statusCode: 500,
@@ -105,7 +109,6 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
   }
 
   try {
-
     if (user && chatId) {
       const token = createJWT(user, chatId);
 
@@ -116,7 +119,7 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
           token,
           user,
           chat_id: chatId,
-        }
+        },
       };
     } else {
       return {
@@ -132,5 +135,4 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
       message: (e as Error).message,
     });
   }
-
 });

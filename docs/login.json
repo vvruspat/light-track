@@ -15,9 +15,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "params"
-                ]
+                "required": ["params"]
               }
             }
           }
@@ -61,11 +59,7 @@
                               "description": "The ID of the chat the user opened the app in"
                             }
                           },
-                          "required": [
-                            "token",
-                            "user",
-                            "chat_id"
-                          ]
+                          "required": ["token", "user", "chat_id"]
                         }
                       }
                     }

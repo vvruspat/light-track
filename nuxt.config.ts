@@ -1,4 +1,4 @@
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -43,13 +43,11 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ['7cfa-77-251-156-81.ngrok-free.app']
+      allowedHosts: ["7cfa-77-251-156-81.ngrok-free.app"],
     },
-    plugins: [
-      nodePolyfills(),
-    ],
+    plugins: [nodePolyfills()],
   },
   supabase: {
-    redirect: false
+    redirect: false,
   },
 });

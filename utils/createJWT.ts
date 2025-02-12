@@ -1,17 +1,14 @@
-import jwt from 'jsonwebtoken';
-import type { TUser } from '@/types/entities';
+import jwt from "jsonwebtoken";
+import type { TUser } from "@/types/entities";
 
 const createToken = (user: TUser, chatId: number) => {
+  const {
+    public: { jwtSecret },
+  } = useRuntimeConfig();
 
-  const { public: { jwtSecret } } = useRuntimeConfig();
-
-  const token = jwt.sign(
-    { ...user, chatId },
-    jwtSecret,
-    { expiresIn: '24h' }
-  )
+  const token = jwt.sign({ ...user, chatId }, jwtSecret, { expiresIn: "24h" });
 
   return token;
-}
+};
 
 export default createToken;

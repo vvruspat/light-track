@@ -1,5 +1,5 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { StoryPostRequest, StoryPostResponse } from "@/types/api";
 import { paths } from "@/public/_openapi.json";
@@ -24,16 +24,7 @@ export default defineEventHandler(async (event): Promise<StoryPostResponse> => {
     }
   });
   const client = await serverSupabaseClient<Database>(event);
-  const user = await serverSupabaseUser(event);
-
-  // Ensure the user is authenticated
-  if (!user) {
-    return {
-      statusCode: 401,
-      statusMessage: "Unauthorized",
-      message: "Authentication is required",
-    };
-  }
+  const { user } = event.context;
 
   if (!body.epic_id) {
     return {

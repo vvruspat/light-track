@@ -1,5 +1,5 @@
 import { defineEventHandler, readValidatedBody, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { EpicPutRequest, EpicPutResponse } from "@/types/api";
 import { paths } from "@/public/_openapi.json";
@@ -25,16 +25,7 @@ export default defineEventHandler(async (event): Promise<EpicPutResponse> => {
   });
 
   const client = await serverSupabaseClient<Database>(event);
-  const user = await serverSupabaseUser(event);
-
-  // Ensure the user is authenticated
-  if (!user) {
-    return {
-      statusCode: 401,
-      statusMessage: "Unauthorized",
-      message: "Authentication is required",
-    };
-  }
+  const { user } = event.context;
 
   const id = Number(getRouterParam(event, "id"));
 

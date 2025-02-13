@@ -1,5 +1,5 @@
 import { defineEventHandler, getQuery, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import {
   REQUEST_DEFAULT_LIMIT,
   REQUEST_DEFAULT_OFFSET,
@@ -19,22 +19,13 @@ export default defineEventHandler(async (event): Promise<EpicGetResponse> => {
   } = getQuery<EpicGetRequest>(event);
 
   const client = await serverSupabaseClient<Database>(event);
-  const user = await serverSupabaseUser(event);
-
-  if (!user) {
-    return {
-      statusCode: 401,
-      statusMessage: "Unauthorized",
-      message: "Authentication is required",
-    };
-  }
 
   // Ensure the user is authenticated
   if (!project_id) {
     return {
       statusCode: 400,
       statusMessage: "Bad Request",
-      message: "Provide either a chat_id or owner_id",
+      message: "Provide project_id",
     };
   }
 

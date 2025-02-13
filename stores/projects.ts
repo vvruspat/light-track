@@ -17,9 +17,8 @@ type ProjectsGetters = {
 };
 
 type ProjectsActions = {
-  fetchProjects: (chatId: TProject["chat_id"]) => Promise<TProject[]>;
+  fetchProjects: () => Promise<TProject[]>;
   createProject: (
-    chatId: TProject["chat_id"],
     title: TProject["title"],
     description: TProject["description"],
   ) => Promise<TProject | null>;
@@ -58,17 +57,16 @@ export const useProjectsStore = defineStore<
   },
 
   actions: {
-    async fetchProjects(chatId: number) {
+    async fetchProjects() {
       // fetch all projects
       this.loadingState = "pending";
 
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<ProjectGetResponse>("/api/projects", {
+        const data = await $api<ProjectGetResponse>("/api/projects", {
           method: "GET",
           query: {
-            chat_id: chatId,
             limit: this.limit,
             offset: this.offset,
           },
@@ -96,7 +94,6 @@ export const useProjectsStore = defineStore<
     },
 
     async createProject(
-      chatId: TProject["chat_id"],
       title: TProject["title"],
       description: TProject["description"],
     ) {
@@ -106,10 +103,9 @@ export const useProjectsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<ProjectPostResponse>("/api/projects", {
+        const data = await $api<ProjectPostResponse>("/api/projects", {
           method: "POST",
           body: JSON.stringify({
-            chat_id: chatId,
             title,
             description,
           }),
@@ -128,6 +124,7 @@ export const useProjectsStore = defineStore<
           return data.data;
         }
       } catch (error) {
+        console.error((error as Error).message ?? "Unkbown error");
         this.loadingState = "error";
         setError(error as Error);
         return null;
@@ -142,7 +139,7 @@ export const useProjectsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<ProjectPostResponse>(
+        const data = await $api<ProjectPostResponse>(
           `/api/projects/${projectId}`,
           {
             method: "DELETE",
@@ -178,7 +175,7 @@ export const useProjectsStore = defineStore<
 
       const { setError } = useErrorsStore();
       try {
-        const data = await $fetch<ProjectPostResponse>(
+        const data = await $api<ProjectPostResponse>(
           `/api/projects/${projectId}`,
           {
             method: "PUT",
@@ -189,7 +186,7 @@ export const useProjectsStore = defineStore<
           },
         );
 
-        if (data.statusCode !== 201) {
+        if (data.statusCode !== 200) {
           this.loadingState = "error";
           setError(new Error(data.statusMessage));
           return null;

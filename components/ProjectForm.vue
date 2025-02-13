@@ -6,7 +6,6 @@ const { projectId } = useRoute().params;
 const projectsStore = useProjectsStore();
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject: project } = storeToRefs(currentProjectStore);
-const authStore = useAuthStore();
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -21,13 +20,6 @@ const state = reactive({
 });
 
 async function onSubmit(_event: FormSubmitEvent<Schema>) {
-  // Do something with data
-  const chatId = authStore.currentUser?.chatId;
-
-  if (!chatId) {
-    throw new Error("User is not in a chat");
-  }
-
   if (projectId) {
     await projectsStore.updateProject(
       Number(projectId),
@@ -35,7 +27,7 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
       state.description,
     );
   } else {
-    await projectsStore.createProject(chatId, state.title, state.description);
+    await projectsStore.createProject(state.title, state.description);
   }
 
   await currentProjectStore.getProjectById(Number(projectId), true);

@@ -77,7 +77,7 @@ export const useTasksStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<TaskPostResponse>("/api/tasks", {
+        const data = await $api<TaskPostResponse>("/api/tasks", {
           method: "POST",
           body: JSON.stringify({
             story_id: storyId,
@@ -116,7 +116,7 @@ export const useTasksStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<TaskPostResponse>(`/api/tasks/${taskId}`, {
+        const data = await $api<TaskPostResponse>(`/api/tasks/${taskId}`, {
           method: "DELETE",
         });
 
@@ -150,7 +150,7 @@ export const useTasksStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<TaskPostResponse>(`/api/tasks/${taskId}`, {
+        const data = await $api<TaskPostResponse>(`/api/tasks/${taskId}`, {
           method: "PUT",
           body: JSON.stringify({
             title,

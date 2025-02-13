@@ -19,6 +19,7 @@ type AuthState = {
 
 type AuthGetters = {
   isAuthorized: (state: AuthState) => boolean;
+  jwtToken: (state: AuthState) => string | null;
 };
 
 type AuthActions = {
@@ -33,14 +34,17 @@ export const useAuthStore = defineStore<
   AuthActions
 >("auth", {
   state: () => ({
-    currentUser: null,
-    chatId: 0,
-    token: null,
+    currentUser: JSON.parse(localStorage.getItem("currentUser") ?? "null"),
+    chatId: Number(localStorage.getItem("chatId")),
+    token: localStorage.getItem("token"),
   }),
 
   getters: {
     isAuthorized(state) {
       return !!state.currentUser;
+    },
+    jwtToken(state) {
+      return state.token;
     },
   },
 
@@ -49,19 +53,21 @@ export const useAuthStore = defineStore<
       try {
         const params = new URLSearchParams(appInitData);
 
-        const data = await $fetch<LoginPostResponse>("/api/login", {
+        const data = await $api<LoginPostResponse>("/api/login", {
           method: "POST",
           body: JSON.stringify({
             params: params.get("tgWebAppData"),
           }),
         });
 
-        console.log("data: ", data);
-
         if (data.data) {
           this.currentUser = data.data.user;
+          this.token = data.data.token;
+          this.chatId = data.data.chat_id;
 
-          console.log("this.currentUser: ", this.currentUser);
+          localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+          localStorage.setItem("chatId", String(this.chatId));
+          localStorage.setItem("token", this.token);
 
           await navigateTo("/dashboard");
         }
@@ -75,6 +81,10 @@ export const useAuthStore = defineStore<
       this.currentUser = null;
       this.token = null;
       this.chatId = 0;
+
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("chatId");
+      localStorage.removeItem("token");
     },
   },
 });

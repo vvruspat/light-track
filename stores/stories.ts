@@ -53,7 +53,7 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>("/api/stories", {
+        const data = await $api<StoryPostResponse>("/api/stories", {
           method: "POST",
           body: JSON.stringify({
             epic_id: epicId,
@@ -89,12 +89,9 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>(
-          `/api/stories/${storyId}`,
-          {
-            method: "DELETE",
-          },
-        );
+        const data = await $api<StoryPostResponse>(`/api/stories/${storyId}`, {
+          method: "DELETE",
+        });
 
         if (data.statusCode !== 200) {
           this.loadingState = "error";
@@ -123,16 +120,13 @@ export const useStoriesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<StoryPostResponse>(
-          `/api/stories/${storyId}`,
-          {
-            method: "PUT",
-            body: JSON.stringify({
-              title,
-              description,
-            }),
-          },
-        );
+        const data = await $api<StoryPostResponse>(`/api/stories/${storyId}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            title,
+            description,
+          }),
+        });
 
         if (data.statusCode !== 201) {
           this.loadingState = "error";

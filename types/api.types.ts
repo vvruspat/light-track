@@ -15,7 +15,6 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          chat_id?: components["schemas"]["ChatId"];
           owner_id?: components["schemas"]["UserId"];
           limit?: components["parameters"]["limit"];
           offset?: components["parameters"]["offset"];
@@ -68,8 +67,6 @@ export interface paths {
             title: string;
             /** @description The project description */
             description?: string;
-            /** @description The ID of the chat the project belongs to */
-            chat_id: components["schemas"]["ChatId"];
           };
         };
       };

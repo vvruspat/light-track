@@ -1,21 +1,12 @@
 import { defineEventHandler, getRouterParam } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { TaskGetByIdResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<TaskGetByIdResponse> => {
     const client = await serverSupabaseClient<Database>(event);
-    const user = await serverSupabaseUser(event);
     const id = Number(getRouterParam(event, "id"));
-
-    if (!user) {
-      return {
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "Authentication is required",
-      };
-    }
 
     if (!id || Number.isNaN(id)) {
       return {

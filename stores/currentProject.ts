@@ -233,11 +233,9 @@ export const useCurrentProjectStore = defineStore<
       }
 
       try {
-        const data = await $fetch<ProjectGetByIdResponse>(
+        const data = await $api<ProjectGetByIdResponse>(
           `/api/projects/${projectId}`,
-          {
-            headers: useRequestHeaders(["cookie"]),
-          },
+          { method: "GET" },
         );
 
         if (data.statusCode !== 200) {

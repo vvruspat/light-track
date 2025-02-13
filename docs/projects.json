@@ -6,15 +6,6 @@
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "chat_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "./atoms/chatId.json#/components/schemas/ChatId",
-              "description": "The ID of the chat to filter by"
-            }
-          },
-          {
             "name": "owner_id",
             "in": "query",
             "required": false,
@@ -87,13 +78,9 @@
                   "description": {
                     "type": "string",
                     "description": "The project description"
-                  },
-                  "chat_id": {
-                    "$ref": "./atoms/chatId.json#/components/schemas/ChatId",
-                    "description": "The ID of the chat the project belongs to"
                   }
                 },
-                "required": ["title", "chat_id"]
+                "required": ["title"]
               }
             }
           }

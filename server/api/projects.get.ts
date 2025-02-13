@@ -1,5 +1,5 @@
 import { defineEventHandler, getQuery, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import {
   REQUEST_DEFAULT_LIMIT,
   REQUEST_DEFAULT_OFFSET,
@@ -12,7 +12,6 @@ import type { ProjectGetRequest, ProjectGetResponse } from "@/types/api";
 export default defineEventHandler(
   async (event): Promise<ProjectGetResponse> => {
     const {
-      chat_id,
       owner_id,
       limit = REQUEST_DEFAULT_LIMIT,
       offset = REQUEST_DEFAULT_OFFSET,
@@ -21,20 +20,12 @@ export default defineEventHandler(
     } = getQuery<ProjectGetRequest>(event);
 
     const client = await serverSupabaseClient<Database>(event);
-    const user = await serverSupabaseUser(event);
 
-    if (!user) {
-      return {
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "Authentication is required",
-      };
-    }
-
+    const { chatId, user } = event.context;
     const ownerId = owner_id ?? user.id;
 
     // Ensure the user is authenticated
-    if (!chat_id && !ownerId) {
+    if (!chatId && !ownerId) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -45,7 +36,7 @@ export default defineEventHandler(
     const { data, error } = await client
       .from("projects")
       .select()
-      .filter("chat_id", "eq", chat_id)
+      .filter("chat_id", "eq", chatId)
       .filter("owner_id", "eq", ownerId)
       .range(offset, limit + offset)
       .order(sort, { ascending: direction === "asc" });

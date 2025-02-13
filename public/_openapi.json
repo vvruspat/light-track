@@ -35,15 +35,6 @@
         "summary": "Get a list of projects",
         "parameters": [
           {
-            "name": "chat_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the chat to filter by",
-              "type": "number"
-            }
-          },
-          {
             "name": "owner_id",
             "in": "query",
             "required": false,
@@ -178,13 +169,9 @@
                   "description": {
                     "type": "string",
                     "description": "The project description"
-                  },
-                  "chat_id": {
-                    "description": "The ID of the chat the project belongs to",
-                    "type": "number"
                   }
                 },
-                "required": ["title", "chat_id"]
+                "required": ["title"]
               }
             }
           }

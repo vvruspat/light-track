@@ -29,15 +29,6 @@ export default defineEventHandler(
 
     const { chatId, ...user } = useLightTrackSession(event);
 
-    // Ensure the user is authenticated
-    if (!user) {
-      return {
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "Authentication is required",
-      };
-    }
-
     // Validate the request body
     if (!body.title) {
       return {
@@ -47,11 +38,11 @@ export default defineEventHandler(
       };
     }
 
-    if (!body.chat_id) {
+    if (!chatId) {
       return {
         statusCode: 400,
         statusMessage: "Bad Request",
-        message: "Group ID is required",
+        message: "Chat ID is required",
       };
     }
 
@@ -59,7 +50,7 @@ export default defineEventHandler(
     const newProject: Database["public"]["Tables"]["projects"]["Insert"] = {
       title: body.title,
       description: body.description || "",
-      chat_id: Number(body.chat_id),
+      chat_id: Number(chatId),
       owner_id: user.id,
     };
 

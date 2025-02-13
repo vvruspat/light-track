@@ -53,7 +53,7 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>("/api/epics", {
+        const data = await $api<EpicPostResponse>("/api/epics", {
           method: "POST",
           body: JSON.stringify({
             project_id: projectId,
@@ -89,7 +89,7 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>(`/api/epics/${epicId}`, {
+        const data = await $api<EpicPostResponse>(`/api/epics/${epicId}`, {
           method: "DELETE",
         });
 
@@ -120,7 +120,7 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $fetch<EpicPostResponse>(`/api/epics/${epicId}`, {
+        const data = await $api<EpicPostResponse>(`/api/epics/${epicId}`, {
           method: "PUT",
           body: JSON.stringify({
             title,

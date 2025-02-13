@@ -1,5 +1,5 @@
 import { defineEventHandler, getRouterParam, createError } from "h3";
-import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
+import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { TaskDeleteResponse } from "@/types/api";
 
@@ -8,7 +8,7 @@ export default defineEventHandler(
     const id = Number(getRouterParam(event, "id"));
 
     const client = await serverSupabaseClient<Database>(event);
-    const user = await serverSupabaseUser(event);
+    const { user } = event.context;
 
     // Ensure the user is authenticated
     if (!user?.id) {

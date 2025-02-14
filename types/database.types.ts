@@ -12,17 +12,14 @@ export type Database = {
       chat_users: {
         Row: {
           chat_id: number;
-          id: number;
           user_id: number;
         };
         Insert: {
           chat_id: number;
-          id?: number;
           user_id: number;
         };
         Update: {
           chat_id?: number;
-          id?: number;
           user_id?: number;
         };
         Relationships: [

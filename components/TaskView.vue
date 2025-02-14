@@ -5,6 +5,9 @@ import { statuses } from "@/constants/statuses";
 const route = useRoute();
 const taskId = Number(route.params.taskId);
 const taskStore = useTasksStore();
+const usersStore = useUsersStore();
+
+const { currentChatUsers } = storeToRefs(usersStore);
 
 const task = taskStore.currentProjectTasks.find((task) => task.id === taskId);
 
@@ -12,44 +15,24 @@ const titleEditMode = ref(false);
 const descriptionEditMode = ref(false);
 const descriptionLines = ref(5);
 
-const users = [
-  {
-    name: "Ivan Petrov",
-    value: "2134253452345",
-    url: "https://picsum.photos/600/800?random=1",
-  },
-  {
-    name: "John Doe",
-    value: "32452345",
-    url: "https://picsum.photos/600/800?random=2",
-  },
-  {
-    name: "Jane Doe",
-    value: "34534765475",
-    url: "https://picsum.photos/600/800?random=3",
-  },
-  {
-    name: "Alice",
-    value: "346346766547",
-    url: "https://picsum.photos/600/800?random=4",
-  },
-  {
-    name: "Bob",
-    value: "34565433334",
-    url: "https://picsum.photos/600/800?random=5",
-  },
-];
+const users = computed(() =>
+  currentChatUsers.value.map((user) => ({
+    name: `${user.first_name} ${user.last_name}`,
+    value: user.id,
+    url: user.photo_url,
+  })),
+);
 
 const state = reactive({
   title: task?.title || "Untitled Task",
   description: task?.description || "No description",
   estimation: task?.estimation ?? 8,
-  assignee: task?.assignee_id ?? "",
+  assignee: task?.assignee_id,
   status: task?.status ?? "todo",
 });
 
-const assigneeSelected = ref<(typeof users)[number]>(
-  users.find((user) => user.value === state.assignee) ?? users[0],
+const assigneeSelected = ref<(typeof users.value)[number] | undefined>(
+  users.value.find((user) => user.value === state.assignee),
 );
 const statusSelected = ref<(typeof statuses)[number]>(
   statuses.find((statusItem) => statusItem.value === state.status) ??
@@ -104,7 +87,7 @@ function onDescriptionFocus(event: FocusEvent) {
 watch(
   () => assigneeSelected.value,
   (value) => {
-    state.assignee = value.value;
+    state.assignee = value?.value;
   },
 );
 
@@ -116,8 +99,11 @@ watch(
 );
 
 watch(state, () => {
+  // autosave task data
   debouncedUpdateTask();
 });
+
+usersStore.fetchUsers();
 </script>
 
 <template>
@@ -212,7 +198,12 @@ watch(state, () => {
             :search-attributes="['name', 'value']"
           >
             <template #leading>
-              <UAvatar size="2xs" :src="assigneeSelected.url" alt="Avatar" />
+              <UAvatar
+                v-if="assigneeSelected?.url"
+                size="2xs"
+                :src="assigneeSelected.url"
+                alt="Avatar"
+              />
             </template>
             <template #option="{ option: user }">
               <StackContainer spacing="2">

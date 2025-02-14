@@ -7,6 +7,9 @@ const { taskId, storyId, epicId, projectId } = useRoute().params;
 
 const currentProjectStore = useCurrentProjectStore();
 const tasksStore = useTasksStore();
+const usersStore = useUsersStore();
+
+const { currentChatUsers } = storeToRefs(usersStore);
 
 const router = useRouter();
 
@@ -24,38 +27,18 @@ const task = computed(() => {
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
   description: z.string().optional(),
-  assignee: z.string().optional(),
+  assignee: z.number().optional(),
   estimation: z.number().optional(),
   status: z.string(),
 });
 
-const users = [
-  {
-    name: "Ivan Petrov",
-    value: "2134253452345",
-    url: "https://picsum.photos/600/800?random=1",
-  },
-  {
-    name: "John Doe",
-    value: "32452345",
-    url: "https://picsum.photos/600/800?random=2",
-  },
-  {
-    name: "Jane Doe",
-    value: "34534765475",
-    url: "https://picsum.photos/600/800?random=3",
-  },
-  {
-    name: "Alice",
-    value: "346346766547",
-    url: "https://picsum.photos/600/800?random=4",
-  },
-  {
-    name: "Bob",
-    value: "34565433334",
-    url: "https://picsum.photos/600/800?random=5",
-  },
-];
+const users = computed(() =>
+  currentChatUsers.value.map((user) => ({
+    name: `${user.first_name} ${user.last_name}`,
+    value: user.id,
+    url: user.photo_url,
+  })),
+);
 
 type Schema = z.output<typeof schema>;
 
@@ -63,12 +46,12 @@ const state = reactive({
   title: task.value?.title ?? "Untitled task",
   description: task.value?.description ?? "",
   estimation: task.value?.estimation ?? 0,
-  assignee: task.value?.assignee_id ?? "",
+  assignee: task.value?.assignee_id,
   status: task.value?.status ?? "todo",
 });
 
-const assigneeSelected = ref<(typeof users)[number]>(
-  users.find((user) => user.value === state.assignee) ?? users[0],
+const assigneeSelected = ref<(typeof users.value)[number]>(
+  users.value.find((user) => user.value === state.assignee) ?? users.value[0],
 );
 const statusSelected = ref<(typeof statuses)[number]>(
   statuses.find((status) => status.value === state.status) ?? statuses[0],
@@ -87,6 +70,8 @@ watch(
     state.status = value.value;
   },
 );
+
+usersStore.fetchUsers();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (taskId) {

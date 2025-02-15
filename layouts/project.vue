@@ -18,7 +18,7 @@ try {
       navigateTo(`/project/${projectId}/epic/${project.epics[0].id}`);
     }
   } else {
-    const createProjectUrl = `/project/${projectId}/epic/create`;
+    const createProjectUrl = `/project/${projectId}/epic`;
 
     if (route.path !== createProjectUrl) {
       navigateTo(createProjectUrl);

@@ -5,7 +5,8 @@ import type { FormSubmitEvent } from "#ui/types";
 const { projectId } = useRoute().params;
 const projectsStore = useProjectsStore();
 const currentProjectStore = useCurrentProjectStore();
-const { currentProject: project } = storeToRefs(currentProjectStore);
+const { currentProject: project, loadingState } =
+  storeToRefs(currentProjectStore);
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -26,11 +27,21 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
       state.title,
       state.description,
     );
-  } else {
-    await projectsStore.createProject(state.title, state.description);
-  }
+    await currentProjectStore.getProjectById(Number(projectId), true);
 
-  await currentProjectStore.getProjectById(Number(projectId), true);
+    navigateTo(`/project/${projectId}`);
+  } else {
+    const newProject = await projectsStore.createProject(
+      state.title,
+      state.description,
+    );
+
+    if (newProject) {
+      await currentProjectStore.getProjectById(Number(newProject.id), true);
+
+      navigateTo(`/project/${newProject.id}`);
+    }
+  }
 }
 </script>
 
@@ -47,7 +58,11 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
     <UInput type="hidden" name="projectId" :value="projectId" />
 
     <StackContainer direction="row" spacing="4">
-      <UButton type="submit">
+      <UButton
+        type="submit"
+        :loading="loadingState === 'pending'"
+        :disabled="loadingState === 'pending'"
+      >
         <span v-if="projectId">Update project</span>
         <span v-else>Create project</span>
       </UButton>

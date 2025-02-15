@@ -10,9 +10,11 @@ import type {
   TTask,
 } from "@/types/entities";
 import type { ProjectGetByIdResponse } from "@/types/api";
+import type { TLoadingState } from "@/types/common";
 
 type ProjectState = {
   currentProject: TFullProject | null;
+  loadingState: TLoadingState;
 };
 
 type ProjectGetters = {
@@ -233,6 +235,8 @@ export const useCurrentProjectStore = defineStore<
       }
 
       try {
+        this.loadingState = "pending";
+
         const data = await $api<ProjectGetByIdResponse>(
           `/api/projects/${projectId}`,
           { method: "GET" },
@@ -243,10 +247,12 @@ export const useCurrentProjectStore = defineStore<
         }
 
         if (data.data) {
+          this.loadingState = "success";
           this.currentProject = data.data;
           return data.data;
         }
       } catch (error) {
+        this.loadingState = "error";
         console.error(error);
         throw Error((error as Error).message);
       }

@@ -34,9 +34,9 @@ export const useAuthStore = defineStore<
   AuthActions
 >("auth", {
   state: () => ({
-    currentUser: JSON.parse(localStorage.getItem("currentUser") ?? "null"),
-    chatId: Number(localStorage.getItem("chatId")),
-    token: localStorage.getItem("token"),
+    currentUser: JSON.parse(localStorage?.getItem("currentUser") ?? "null"),
+    chatId: Number(localStorage?.getItem("chatId")),
+    token: localStorage?.getItem("token"),
   }),
 
   getters: {
@@ -65,9 +65,12 @@ export const useAuthStore = defineStore<
           this.token = data.data.token;
           this.chatId = data.data.chat_id;
 
-          localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
-          localStorage.setItem("chatId", String(this.chatId));
-          localStorage.setItem("token", this.token);
+          localStorage?.setItem(
+            "currentUser",
+            JSON.stringify(this.currentUser),
+          );
+          localStorage?.setItem("chatId", String(this.chatId));
+          localStorage?.setItem("token", this.token);
 
           await navigateTo("/dashboard");
         }
@@ -82,9 +85,9 @@ export const useAuthStore = defineStore<
       this.token = null;
       this.chatId = 0;
 
-      localStorage.removeItem("currentUser");
-      localStorage.removeItem("chatId");
-      localStorage.removeItem("token");
+      localStorage?.removeItem("currentUser");
+      localStorage?.removeItem("chatId");
+      localStorage?.removeItem("token");
     },
   },
 });

@@ -3,13 +3,14 @@ import { retrieveRawLaunchParams } from "@telegram-apps/sdk";
 const launchParams = retrieveRawLaunchParams();
 const authStore = useAuthStore();
 
-console.log("launchParams", launchParams);
-
 if (launchParams) {
   authStore.login(launchParams);
 }
 </script>
 
 <template>
-  <div>Authenticating...</div>
+  <StackContainer direction="row" align-items="center" spacing="4">
+    <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
+    <div>Authenticating...</div>
+  </StackContainer>
 </template>

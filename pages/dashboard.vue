@@ -5,7 +5,7 @@ definePageMeta({
 });
 
 const projectsStore = useProjectsStore();
-const { projects } = storeToRefs(projectsStore);
+const { projects, loadingState } = storeToRefs(projectsStore);
 
 const projectsLinks = computed(() => {
   return projects.value.map((project) => ({
@@ -18,7 +18,7 @@ projectsStore.fetchProjects();
 </script>
 
 <template>
-  <div>
+  <div v-if="loadingState === 'success'">
     <UContainer class="py-4">
       <StackContainer
         v-if="projects.length > 0"
@@ -27,7 +27,25 @@ projectsStore.fetchProjects();
         align-items="stretch"
       >
         <UText variant="h1">Select a project</UText>
-        <UVerticalNavigation :links="projectsLinks" />
+        <UVerticalNavigation :links="projectsLinks" :ui="{ padding: 'px-0' }">
+          <template #default="{ link }">
+            <UButton
+              :to="link.to"
+              color="gray"
+              class="w-full"
+              trailing-icon="i-heroicons-arrow-right-20-solid"
+              :block="true"
+              :ui="{ block: 'w-full flex justify-between items-center' }"
+            >
+              {{ link.label }}
+            </UButton>
+          </template>
+        </UVerticalNavigation>
+        <div>
+          <UButton to="/project/create" variant="outline"
+            >Create new project</UButton
+          >
+        </div>
       </StackContainer>
       <UCard v-else>
         <StackContainer
@@ -42,4 +60,17 @@ projectsStore.fetchProjects();
       </UCard>
     </UContainer>
   </div>
+  <div v-else-if="loadingState === 'pending' || loadingState === 'idle'">
+    <StackContainer direction="row" align-items="center" spacing="4">
+      <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
+      <div>Loading projects...</div>
+    </StackContainer>
+  </div>
+  <div v-else-if="loadingState === 'error'">
+    <StackContainer direction="row" align-items="center" spacing="4">
+      <UIcon name="svg-regular:exclamation-triangle" class="w-8 h-8" />
+      <div>Error loading projects</div>
+    </StackContainer>
+  </div>
+  <div v-else><USkeleton class="h-4 w-full" /></div>
 </template>

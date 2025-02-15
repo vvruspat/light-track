@@ -10,8 +10,6 @@ const projectsItems = computed(() =>
   projects.value.map((project) => ({ id: project.id, label: project.title })),
 );
 
-console.log(projectsItems.value);
-
 const selected = ref([]);
 
 const onSelect = (value: { id: number }) => {

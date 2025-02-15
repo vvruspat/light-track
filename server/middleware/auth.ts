@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
     url.includes("/api/_nuxt") ||
     NON_PROTECTED_API.includes(url)
   ) {
-    console.log("Non-protected API");
     return;
   }
 

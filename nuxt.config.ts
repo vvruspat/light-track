@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["7cfa-77-251-156-81.ngrok-free.app"],
+      allowedHosts: ["short-planes-slide.loca.lt"],
     },
     plugins: [nodePolyfills()],
   },

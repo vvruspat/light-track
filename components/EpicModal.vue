@@ -2,7 +2,9 @@
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
 const router = useRouter();
-const { epicId, projectId } = useRoute().params;
+const route = useRoute();
+const { epicId, projectId } = route.params;
+const { emptyProject } = route.query;
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
@@ -26,9 +28,10 @@ watch(isOpen, (isOpenNew) => {
       <template #header>
         <div class="flex items-center justify-between">
           <h3
+            v-if="emptyProject"
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Epic {{ epicId }}
+            Create your first epic
           </h3>
           <UButton
             color="gray"
@@ -40,6 +43,16 @@ watch(isOpen, (isOpenNew) => {
         </div>
       </template>
 
+
+      <UAlert
+        v-if="emptyProject"
+        variant="outline"
+        color="yellow"
+        class="mb-4"
+        :ui="{ base: 'w-full' }"
+        description="This project is empty. Create your first epic to start working on it."
+      />
+        
       <slot />
     </UCard>
   </UModal>

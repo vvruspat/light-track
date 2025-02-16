@@ -43,7 +43,6 @@ watch(isOpen, (isOpenNew) => {
         </div>
       </template>
 
-
       <UAlert
         v-if="emptyProject"
         variant="outline"
@@ -52,7 +51,7 @@ watch(isOpen, (isOpenNew) => {
         :ui="{ base: 'w-full' }"
         description="This project is empty. Create your first epic to start working on it."
       />
-        
+
       <slot />
     </UCard>
   </UModal>

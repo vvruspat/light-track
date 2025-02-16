@@ -5,7 +5,8 @@ import ProjectMenu from "@/components/ProjectMenu.vue";
 const currentProjectStore = useCurrentProjectStore();
 const errorsStore = useErrorsStore();
 
-const { statistics, currentProject, loadingState } = storeToRefs(currentProjectStore);
+const { statistics, currentProject, loadingState } =
+  storeToRefs(currentProjectStore);
 
 const route = useRoute();
 const { projectId } = route.params;
@@ -31,7 +32,10 @@ try {
 </script>
 
 <template>
-  <div v-if="loadingState === 'success'" class="flex flex-col h-full max-h-full gap-4">
+  <div
+    v-if="loadingState === 'success'"
+    class="flex flex-col h-full max-h-full gap-4"
+  >
     <header class="p-4">
       <UContainer class="py-4 px-0 w-full align-middle">
         <StackContainer

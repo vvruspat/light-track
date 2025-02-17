@@ -158,10 +158,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <span v-else>Create task</span>
       </UButton>
 
-      <UButton
-        variant="ghost"
-        :to="`/project/${projectId}/epic/${epicId}`"
-      >
+      <UButton variant="ghost" :to="`/project/${projectId}/epic/${epicId}`">
         Cancel
       </UButton>
     </StackContainer>

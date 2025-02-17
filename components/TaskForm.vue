@@ -154,18 +154,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
     <StackContainer direction="row" spacing="4">
       <UButton type="submit">
-        <span v-if="epicId">Update task</span>
+        <span v-if="taskId">Update task</span>
         <span v-else>Create task</span>
       </UButton>
 
       <UButton
-        v-if="epicId"
         variant="ghost"
         :to="`/project/${projectId}/epic/${epicId}`"
       >
-        Cancel
-      </UButton>
-      <UButton v-else variant="ghost" :to="`/project/${projectId}/epic`">
         Cancel
       </UButton>
     </StackContainer>

@@ -33,10 +33,15 @@ export const useAuthStore = defineStore<
   AuthGetters,
   AuthActions
 >("auth", {
-  state: () => ({
+  state: () => import.meta.client ? ({
     currentUser: JSON.parse(localStorage?.getItem("currentUser") ?? "null"),
-    chatId: Number(localStorage?.getItem("chatId")),
-    token: localStorage?.getItem("token"),
+    chatId: Number(localStorage?.getItem("chatId") ?? 0),
+    token: localStorage?.getItem("token") ?? null,
+  }) : ({
+    // Server-side rendering
+    currentUser: null,
+    chatId: 0,
+    token: null,
   }),
 
   getters: {

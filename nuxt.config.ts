@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["short-planes-slide.loca.lt"],
+      allowedHosts: ["metal-boats-fetch.loca.lt"],
     },
     plugins: [nodePolyfills()],
   },

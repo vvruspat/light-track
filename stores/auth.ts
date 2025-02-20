@@ -28,10 +28,10 @@ type AuthActions = {
 };
 
 const getInitialAuthState = (): AuthState => {
-  const jwt = useCookie('jwt', { watch: false });
+  const jwt = useCookie("jwt", { watch: false });
 
   if (jwt.value) {
-    const jwtData = jwt ? JSON.parse(atob(jwt.value.split('.')[1])) : null;
+    const jwtData = jwt ? JSON.parse(atob(jwt.value.split(".")[1])) : null;
 
     if (jwtData) {
       return {
@@ -52,7 +52,7 @@ const getInitialAuthState = (): AuthState => {
     currentUser: null,
     chatId: 0,
     token: null,
-  }
+  };
 };
 
 export const useAuthStore = defineStore<

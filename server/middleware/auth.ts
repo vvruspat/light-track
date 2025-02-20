@@ -12,8 +12,6 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  console.log("auth url: ", url);
-
   try {
     const { chatId, ...user } = useLightTrackSession(event);
 

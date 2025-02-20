@@ -32,10 +32,7 @@ try {
 </script>
 
 <template>
-  <div
-    v-if="loadingState === 'success'"
-    class="flex flex-col h-full max-h-full gap-4"
-  >
+  <div class="flex flex-col h-full max-h-full gap-4">
     <header class="p-4">
       <UContainer class="py-4 px-0 w-full align-middle">
         <StackContainer
@@ -64,17 +61,20 @@ try {
     <footer>
       <TabBar />
     </footer>
-  </div>
-  <div v-else-if="loadingState === 'pending' || loadingState === 'idle'">
-    <StackContainer direction="row" align-items="center" spacing="4">
-      <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
-      <div>Loading project...</div>
-    </StackContainer>
-  </div>
-  <div v-else-if="loadingState === 'error'">
-    <StackContainer direction="row" align-items="center" spacing="4">
-      <UIcon name="svg-heroicons:exclamation-circle" class="w-8 h-8" />
-      <div>Failed to load project</div>
-    </StackContainer>
+
+    <UModal>
+      <div v-if="loadingState === 'pending' || loadingState === 'idle'">
+        <StackContainer direction="row" align-items="center" spacing="4">
+          <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
+          <div>Loading project...</div>
+        </StackContainer>
+      </div>
+      <div v-else-if="loadingState === 'error'">
+        <StackContainer direction="row" align-items="center" spacing="4">
+          <UIcon name="svg-heroicons:exclamation-circle" class="w-8 h-8" />
+          <div>Failed to load project</div>
+        </StackContainer>
+      </div>
+    </UModal>
   </div>
 </template>

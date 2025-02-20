@@ -4,8 +4,6 @@ export function $api<T>(
 ) {
   const auth = useAuthStore();
 
-  console.log("auth", auth.token);
-
   return $fetch<T>(request, {
     ...opts,
     headers: {

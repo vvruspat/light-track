@@ -74,7 +74,11 @@ watch(
 usersStore.fetchUsers();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  event.preventDefault();
+  event.stopPropagation();
+
   if (taskId) {
+    // Update task
     await tasksStore.updateTask(
       Number(taskId),
       event.data.title,
@@ -84,6 +88,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       event.data.status,
     );
   } else {
+    // Create task
     await tasksStore.createTask(
       Number(storyId),
       event.data.title,
@@ -94,6 +99,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     );
   }
 
+  // Redirect to epic page
   await currentProjectStore.getProjectById(Number(projectId), true);
 
   router.push(`/project/${projectId}/epic/${epicId}`);

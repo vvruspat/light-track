@@ -23,7 +23,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: story?.title ?? "Untitled Project",
+  title: story?.title ?? "Untitled Story",
   description: story?.description ?? "",
 });
 

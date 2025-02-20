@@ -97,7 +97,6 @@ export const useTasksStore = defineStore<
 
         if (data.data) {
           this.loadingState = "success";
-          console.log("data: ", data);
           return data.data.id!;
         }
       } catch (error) {
@@ -169,7 +168,6 @@ export const useTasksStore = defineStore<
 
         if (data.data) {
           this.loadingState = "success";
-          console.log("data: ", data);
           return data.data.id!;
         }
       } catch (error) {

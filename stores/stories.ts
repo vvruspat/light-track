@@ -70,7 +70,6 @@ export const useStoriesStore = defineStore<
 
         if (data.data) {
           this.loadingState = "success";
-          console.log("data: ", data);
           return data.data.id!;
         }
       } catch (error) {
@@ -136,7 +135,6 @@ export const useStoriesStore = defineStore<
 
         if (data.data) {
           this.loadingState = "success";
-          console.log("data: ", data);
           return data.data.id!;
         }
       } catch (error) {

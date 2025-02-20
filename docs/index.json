@@ -123,6 +123,9 @@
     "/login": {
       "$ref": "./login.json#/paths/~1login"
     },
+    "/logout": {
+      "$ref": "./logout.json#/paths/~1logout"
+    },
     "/users": {
       "$ref": "./users.json#/paths/~1users"
     }

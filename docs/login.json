@@ -2,7 +2,7 @@
   "paths": {
     "/login": {
       "post": {
-        "tags": ["login"],
+        "tags": ["auth"],
         "summary": "Login user with miniapp data",
         "requestBody": {
           "required": true,

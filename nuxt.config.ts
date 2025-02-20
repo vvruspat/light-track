@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["metal-boats-fetch.loca.lt"],
+      allowedHosts: ["6f61-208-127-179-91.ngrok-free.app"],
     },
     plugins: [nodePolyfills()],
   },

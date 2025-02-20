@@ -12,16 +12,26 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  const { chatId, ...user } = useLightTrackSession(event);
+  console.log("auth url: ", url);
 
-  if (!user) {
+  try {
+    const { chatId, ...user } = useLightTrackSession(event);
+
+    if (!user) {
+      return {
+        statusCode: 401,
+        statusMessage: "Unauthorized",
+        message: "Authentication is required",
+      };
+    } else {
+      event.context.user = user;
+      event.context.chatId = chatId;
+    }
+  } catch (e) {
     return {
       statusCode: 401,
       statusMessage: "Unauthorized",
-      message: "Authentication is required",
+      message: (e as Error).message,
     };
-  } else {
-    event.context.user = user;
-    event.context.chatId = chatId;
   }
 });

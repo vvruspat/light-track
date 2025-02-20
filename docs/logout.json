@@ -1,0 +1,27 @@
+{
+  "paths": {
+    "/logout": {
+      "delete": {
+        "tags": ["auth"],
+        "summary": "Logout user",
+        "requestBody": {},
+        "responses": {
+          "200": {
+            "description": "User loged out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

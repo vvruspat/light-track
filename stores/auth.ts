@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { TUser } from "@/types/entities";
-import type { LoginPostResponse } from "~/types/api";
+import type { LoginPostResponse } from "@/types/api";
 
 export type TAppData = {
   auth_date: string;
@@ -27,27 +27,41 @@ type AuthActions = {
   logout: () => void;
 };
 
+const getInitialAuthState = (): AuthState => {
+  const jwt = useCookie('jwt', { watch: false });
+
+  if (jwt.value) {
+    const jwtData = jwt ? JSON.parse(atob(jwt.value.split('.')[1])) : null;
+
+    if (jwtData) {
+      return {
+        currentUser: jwtData.user,
+        chatId: jwtData.chatId,
+        token: jwt.value,
+      };
+    }
+
+    return {
+      currentUser: null,
+      chatId: 0,
+      token: null,
+    };
+  }
+
+  return {
+    currentUser: null,
+    chatId: 0,
+    token: null,
+  }
+};
+
 export const useAuthStore = defineStore<
   "auth",
   AuthState,
   AuthGetters,
   AuthActions
 >("auth", {
-  state: () =>
-    import.meta.client
-      ? {
-          currentUser: JSON.parse(
-            localStorage?.getItem("currentUser") ?? "null",
-          ),
-          chatId: Number(localStorage?.getItem("chatId") ?? 0),
-          token: localStorage?.getItem("token") ?? null,
-        }
-      : {
-          // Server-side rendering
-          currentUser: null,
-          chatId: 0,
-          token: null,
-        },
+  state: () => getInitialAuthState(),
 
   getters: {
     isAuthorized(state) {
@@ -75,13 +89,6 @@ export const useAuthStore = defineStore<
           this.token = data.data.token;
           this.chatId = data.data.chat_id;
 
-          localStorage?.setItem(
-            "currentUser",
-            JSON.stringify(this.currentUser),
-          );
-          localStorage?.setItem("chatId", String(this.chatId));
-          localStorage?.setItem("token", this.token);
-
           await navigateTo("/dashboard");
         }
       } catch (error) {
@@ -95,9 +102,7 @@ export const useAuthStore = defineStore<
       this.token = null;
       this.chatId = 0;
 
-      localStorage?.removeItem("currentUser");
-      localStorage?.removeItem("chatId");
-      localStorage?.removeItem("token");
+      await $api<LoginPostResponse>("/api/logout");
     },
   },
 });

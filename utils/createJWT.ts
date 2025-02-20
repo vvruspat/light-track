@@ -6,7 +6,7 @@ const createToken = (user: TUser, chatId: number) => {
     public: { jwtSecret },
   } = useRuntimeConfig();
 
-  const token = jwt.sign({ ...user, chatId }, jwtSecret, { expiresIn: "24h" });
+  const token = jwt.sign({ ...user, chatId }, jwtSecret, { expiresIn: "48h" });
 
   return token;
 };

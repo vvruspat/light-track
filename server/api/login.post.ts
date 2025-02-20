@@ -112,6 +112,12 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
     if (user && chatId) {
       const token = createJWT(user, chatId);
 
+      setCookie(event, "jwt", token, {
+        httpOnly: false,
+        secure: true,
+        sameSite: "strict",
+      });
+
       return {
         statusCode: 200,
         statusMessage: "Logined",

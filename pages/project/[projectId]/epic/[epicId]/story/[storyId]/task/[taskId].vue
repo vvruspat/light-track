@@ -1,3 +1,5 @@
 <template>
-  <TaskView />
+  <TaskModal>
+    <TaskView />
+  </TaskModal>
 </template>

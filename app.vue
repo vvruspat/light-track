@@ -2,11 +2,13 @@
   <NuxtLoadingIndicator />
   <NuxtErrorBoundary>
     <template #error="{ error }">
-      <UAlert
-        variant="outline"
-        color="red"
-        :description="`An error occurred: ${error}`"
-      />
+      <UContainer class="p-8 h-full flex flex-col items-center justify-center">
+        <UAlert
+          variant="outline"
+          color="red"
+          :description="`An error occurred: ${error.value}`"
+        />
+      </UContainer>
     </template>
     <NuxtLayout name="main">
       <NuxtPage />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UButton } from "#components";
-import type { TTask } from "~/types/entities";
+import type { TTask } from "@/types/entities";
 
 type TaskButtonProps = {
   task: TTask;
@@ -15,13 +15,19 @@ const statusColors: {
   rejected: "red",
 };
 
+const { task } = defineProps<TaskButtonProps>();
+
+const usersStore = useUsersStore();
+const { users } = storeToRefs(usersStore);
+
 const status = computed(
   () => statusColors[task.status as keyof typeof statusColors],
 );
-const src =
-  "https://picsum.photos/600/800?random=" + Math.round(Math.random() * 100);
+const src = computed(
+  () =>
+    users.value.find((user) => user.id === task.assignee_id)?.photo_url ?? "",
+);
 const { projectId, epicId } = useRoute().params;
-const { task } = defineProps<TaskButtonProps>();
 const url = computed(
   () =>
     `/project/${projectId}/epic/${epicId}/story/${task.story_id}/task/${task.id}`,

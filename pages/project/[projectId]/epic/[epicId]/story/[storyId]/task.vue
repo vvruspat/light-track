@@ -3,7 +3,5 @@ import { NuxtPage } from "#components";
 </script>
 
 <template>
-  <TaskModal>
-    <NuxtPage />
-  </TaskModal>
+  <NuxtPage />
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
+console.log("TaskModal.vue", isOpen.value);
 const router = useRouter();
 const { taskId, epicId, projectId } = useRoute().params;
 

@@ -31,9 +31,14 @@ const state = reactive({
   status: task?.status ?? "todo",
 });
 
-const assigneeSelected = ref<(typeof users.value)[number] | undefined>(
-  users.value.find((user) => user.value === state.assignee),
-);
+const assigneeSelected = ref<(typeof users.value)[number] | undefined>();
+
+watch(users, () => {
+  assigneeSelected.value = users.value.find(
+    (user) => user.value === state.assignee,
+  );
+});
+
 const statusSelected = ref<(typeof statuses)[number]>(
   statuses.find((statusItem) => statusItem.value === state.status) ??
     statuses[0],
@@ -167,6 +172,7 @@ usersStore.fetchUsers();
       <StackContainer direction="column" spacing="4" align-items="stretch">
         <UFormGroup label="Status" name="status">
           <USelectMenu
+            v-if="statuses.length"
             v-model="statusSelected"
             :options="statuses"
             option-attribute="name"
@@ -185,10 +191,12 @@ usersStore.fetchUsers();
               <span class="truncate">{{ option.name }}</span>
             </template>
           </USelectMenu>
+          <USkeleton v-else class="h-8 w-full" />
         </UFormGroup>
 
         <UFormGroup label="Assignee" name="assignee">
           <USelectMenu
+            v-if="users.length"
             v-model="assigneeSelected"
             :options="users"
             option-attribute="name"
@@ -212,6 +220,7 @@ usersStore.fetchUsers();
               </StackContainer>
             </template>
           </USelectMenu>
+          <USkeleton v-else class="h-8 w-full" />
         </UFormGroup>
 
         <UFormGroup label="Estimation" name="estimation">

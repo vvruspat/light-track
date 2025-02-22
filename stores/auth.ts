@@ -34,9 +34,11 @@ const getInitialAuthState = (): AuthState => {
     const jwtData = jwt ? JSON.parse(atob(jwt.value.split(".")[1])) : null;
 
     if (jwtData) {
+      const { chatId, ...currentUser } = jwtData;
+
       return {
-        currentUser: jwtData.user,
-        chatId: jwtData.chatId,
+        currentUser,
+        chatId,
         token: jwt.value,
       };
     }

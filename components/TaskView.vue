@@ -16,11 +16,11 @@ const descriptionEditMode = ref(false);
 const descriptionLines = ref(5);
 
 const users = computed(() =>
-  currentChatUsers.value.map((user) => ({
+  currentChatUsers.value?.map((user) => ({
     name: `${user.first_name} ${user.last_name}`,
     value: user.id,
     url: user.photo_url,
-  })),
+  })) ?? [],
 );
 
 const state = reactive({
@@ -31,12 +31,12 @@ const state = reactive({
   status: task?.status ?? "todo",
 });
 
-const assigneeSelected = ref<(typeof users.value)[number] | undefined>();
+const assigneeSelected = ref<(typeof users.value)[number] | undefined>(users.value[0]);
 
 watch(users, () => {
   assigneeSelected.value = users.value.find(
     (user) => user.value === state.assignee,
-  );
+  ) ?? users.value[0];
 });
 
 const statusSelected = ref<(typeof statuses)[number]>(
@@ -109,6 +109,7 @@ watch(state, () => {
 });
 
 usersStore.fetchUsers();
+
 </script>
 
 <template>
@@ -196,7 +197,7 @@ usersStore.fetchUsers();
 
         <UFormGroup label="Assignee" name="assignee">
           <USelectMenu
-            v-if="users.length"
+            v-if="users.length > 0"
             v-model="assigneeSelected"
             :options="users"
             option-attribute="name"

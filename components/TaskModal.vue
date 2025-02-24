@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
-console.log("TaskModal.vue", isOpen.value);
 const router = useRouter();
 const { taskId, epicId, projectId } = useRoute().params;
 
@@ -27,18 +26,18 @@ const onRemoveDialogClose = (isConfirmed: boolean) => {
 
 const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
+  router.push(epicUrl.value);
 };
 
 watch(isOpen, (isOpenNew) => {
   if (!isOpenNew) {
     onModalClose();
-    router.push(epicUrl.value);
   }
 });
 </script>
 
 <template>
-  <UModal v-model="isOpen" fullscreen prevent-close>
+  <UModal v-model="isOpen" fullscreen>
     <UCard
       :ui="{
         base: 'h-full max-h-full flex flex-col',

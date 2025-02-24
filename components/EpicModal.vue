@@ -33,6 +33,17 @@ watch(isOpen, (isOpenNew) => {
           >
             Create your first epic
           </h3>
+          <h3
+            v-else-if="epicId"
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            Update epic
+          </h3>
+          <h3
+            v-else
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+          >
+            Create new epic
+          </h3>
           <UButton
             color="gray"
             variant="ghost"

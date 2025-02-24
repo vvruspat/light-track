@@ -28,7 +28,8 @@ watch(isOpen, (isOpenNew) => {
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Story View {{ storyId }}
+            <div v-if="storyId">Update story</div>
+            <div v-else>Create new story</div>
           </h3>
           <UButton
             color="gray"

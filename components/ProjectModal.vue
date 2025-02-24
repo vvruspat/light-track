@@ -26,9 +26,16 @@ watch(isOpen, (isOpenNew) => {
       <template #header>
         <div class="flex items-center justify-between">
           <h3
+            v-if="projectId"
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Project {{ projectId }}
+            Update project
+          </h3>
+          <h3
+            v-else
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+          >
+            Create new project
           </h3>
           <UButton
             color="gray"

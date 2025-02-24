@@ -6,6 +6,11 @@ type EpicMenuProps = {
   epicId: number;
 };
 
+const router = useRouter();
+
+const currentProjectStore = useCurrentProjectStore();
+const epicStore = useEpicsStore();
+
 const { projectId, epicId } = defineProps<EpicMenuProps>();
 const links = [
   [
@@ -29,9 +34,16 @@ const createStoryUrl = `/project/${projectId}/epic/${epicId}/story/create`;
 const isOpen = ref(false);
 const isRemoveAlertOpen = ref(false);
 
-const onRemoveDialogClose = (isConfirmed: boolean) => {
+const onRemoveDialogClose = async (isConfirmed: boolean) => {
   if (isConfirmed) {
-    console.log("Epic removed");
+    await epicStore.deleteEpic(epicId);
+    const project = await currentProjectStore.getProjectById(projectId, true);
+
+    if (project?.epics.length) {
+      router.push(`/project/${projectId}/epic/${project.epics[0].id}`);
+    } else {
+      router.push(`/project/${projectId}/epic/create?emptyProject=true`);
+    }
   }
   isRemoveAlertOpen.value = false;
 };

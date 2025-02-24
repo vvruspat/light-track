@@ -11,6 +11,9 @@ const { storyId, projectId, epicId } = defineProps<StoryMenuProps>();
 const isRemoveAlertOpen = ref(false);
 const isOpen = ref(false);
 
+const storiesStore = useStoriesStore();
+const currentProjectStore = useCurrentProjectStore();
+
 const links = [
   [
     {
@@ -30,9 +33,10 @@ const links = [
 
 const createTaskUrl = `/project/${projectId}/epic/${epicId}/story/${storyId}/task/create`;
 
-const onRemoveDialogClose = (isConfirmed: boolean) => {
+const onRemoveDialogClose = async (isConfirmed: boolean) => {
   if (isConfirmed) {
-    console.log("Story removed");
+    await storiesStore.deleteStory(storyId);
+    await currentProjectStore.getProjectById(projectId, true);
   }
   isRemoveAlertOpen.value = false;
 };

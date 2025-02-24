@@ -6,6 +6,10 @@ type ProjectMenuProps = {
 };
 const { projectId } = defineProps<ProjectMenuProps>();
 
+const router = useRouter();
+
+const projectStore = useProjectsStore();
+
 const links = [
   [
     {
@@ -28,9 +32,10 @@ const isRemoveAlertOpen = ref(false);
 
 const createEpicUrl = `/project/${projectId}/epic/create`;
 
-const onRemoveDialogClose = (isConfirmed: boolean) => {
+const onRemoveDialogClose = async (isConfirmed: boolean) => {
   if (isConfirmed) {
-    console.log("Project removed");
+    await projectStore.deleteProject(projectId);
+    router.push("/dashboard");
   }
   isRemoveAlertOpen.value = false;
 };

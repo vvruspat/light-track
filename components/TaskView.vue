@@ -15,12 +15,13 @@ const titleEditMode = ref(false);
 const descriptionEditMode = ref(false);
 const descriptionLines = ref(5);
 
-const users = computed(() =>
-  currentChatUsers.value?.map((user) => ({
-    name: `${user.first_name} ${user.last_name}`,
-    value: user.id,
-    url: user.photo_url,
-  })) ?? [],
+const users = computed(
+  () =>
+    currentChatUsers.value?.map((user) => ({
+      name: `${user.first_name} ${user.last_name}`,
+      value: user.id,
+      url: user.photo_url,
+    })) ?? [],
 );
 
 const state = reactive({
@@ -31,12 +32,13 @@ const state = reactive({
   status: task?.status ?? "todo",
 });
 
-const assigneeSelected = ref<(typeof users.value)[number] | undefined>(users.value[0]);
+const assigneeSelected = ref<(typeof users.value)[number] | undefined>(
+  users.value[0],
+);
 
 watch(users, () => {
-  assigneeSelected.value = users.value.find(
-    (user) => user.value === state.assignee,
-  ) ?? users.value[0];
+  assigneeSelected.value =
+    users.value.find((user) => user.value === state.assignee) ?? users.value[0];
 });
 
 const statusSelected = ref<(typeof statuses)[number]>(
@@ -109,7 +111,6 @@ watch(state, () => {
 });
 
 usersStore.fetchUsers();
-
 </script>
 
 <template>

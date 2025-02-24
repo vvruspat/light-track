@@ -5,6 +5,7 @@ const router = useRouter();
 const { taskId, epicId, projectId } = useRoute().params;
 
 const currentProjectStore = useCurrentProjectStore();
+const taskStore = useTasksStore();
 
 const epicUrl = computed(() => `/project/${projectId}/epic/${epicId}`);
 
@@ -14,9 +15,10 @@ const onRemoveClick = () => {
   isRemoveAlertOpen.value = true;
 };
 
-const onRemoveDialogClose = (isConfirmed: boolean) => {
+const onRemoveDialogClose = async (isConfirmed: boolean) => {
   if (isConfirmed === true) {
-    console.log("Epic removed");
+    await taskStore.deleteTask(Number(taskId));
+    await currentProjectStore.getProjectById(Number(projectId), true);
     isOpen.value = false;
     isRemoveAlertOpen.value = false;
   } else {

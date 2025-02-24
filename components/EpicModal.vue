@@ -35,7 +35,8 @@ watch(isOpen, (isOpenNew) => {
           </h3>
           <h3
             v-else-if="epicId"
-            class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+          >
             Update epic
           </h3>
           <h3

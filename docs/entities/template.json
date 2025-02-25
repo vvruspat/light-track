@@ -1,0 +1,31 @@
+{
+  "components": {
+    "schemas": {
+      "Template": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "../atoms/templateId.json#/components/schemas/TemplateId"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "owner_id": {
+            "$ref": "../atoms/userId.json#/components/schemas/UserId"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "template": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "title", "description", "owner_id", "template"]
+      }
+    }
+  }
+}

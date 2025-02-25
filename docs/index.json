@@ -89,11 +89,17 @@
       },
       "FullTask": {
         "$ref": "./entities/fullTask.json#/components/schemas/FullTask"
+      },
+      "Template": {
+        "$ref": "./entities/template.json#/components/schemas/Template"
       }
     }
   },
   "paths": {
     "/projects": {
+      "$ref": "./projects.json#/paths/~1projects"
+    },
+    "/projects/template": {
       "$ref": "./projects.json#/paths/~1projects"
     },
     "/projects/{id}": {

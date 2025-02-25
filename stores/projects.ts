@@ -17,6 +17,7 @@ type ProjectsGetters = {
 };
 
 type ProjectsActions = {
+  saveAsTemplate: (projectId: TProject["id"]) => Promise<void>;
   fetchProjects: () => Promise<TProject[]>;
   createProject: (
     title: TProject["title"],
@@ -57,6 +58,39 @@ export const useProjectsStore = defineStore<
   },
 
   actions: {
+    async saveAsTemplate(projectId: TProject["id"]) {
+      // save project as a template
+      this.loadingState = "pending";
+
+      const { setError } = useErrorsStore();
+
+      try {
+        const data = await $api<ProjectTemplatePostResponse>(
+          `/api/projects/template`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              project_id: projectId,
+            }),
+          },
+        );
+
+        if (data.statusCode !== 201) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return;
+        }
+
+        if (data.data) {
+          this.loadingState = "success";
+        }
+      } catch (error) {
+        this.loadingState = "error";
+        setError(error as Error);
+        return;
+      }
+    },
+
     async fetchProjects() {
       // fetch all projects
       this.loadingState = "pending";

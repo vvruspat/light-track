@@ -1,0 +1,10 @@
+{
+  "components": {
+    "schemas": {
+      "TemplateId": {
+        "type": "number",
+        "description": "The unique identifier of Template"
+      }
+    }
+  }
+}

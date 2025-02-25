@@ -18,6 +18,13 @@ const links = [
       to: `/project/${projectId}/edit`,
     },
     {
+      label: "Save project as template",
+      icon: "icon-park-solid:page-template",
+      click: async () => {
+        await projectStore.saveAsTemplate(projectId);
+      },
+    },
+    {
       label: "Remove project",
       icon: "i-heroicons-question-mark-circle",
       click: () => {

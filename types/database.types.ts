@@ -247,6 +247,41 @@ export type Database = {
           },
         ];
       };
+      templates: {
+        Row: {
+          created_at: string;
+          description: string;
+          id: number;
+          owner_id: number;
+          template: Json;
+          title: string;
+        };
+        Insert: {
+          created_at?: string;
+          description: string;
+          id?: number;
+          owner_id: number;
+          template: Json;
+          title: string;
+        };
+        Update: {
+          created_at?: string;
+          description?: string;
+          id?: number;
+          owner_id?: number;
+          template?: Json;
+          title?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "templates_owner_id_fkey";
+            columns: ["owner_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       users: {
         Row: {
           allows_write_to_pm: boolean;

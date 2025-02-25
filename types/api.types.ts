@@ -67,6 +67,116 @@ export interface paths {
             title: string;
             /** @description The project description */
             description?: string;
+            template_id?: components["schemas"]["TemplateId"];
+          };
+        };
+      };
+      responses: {
+        /** @description Project created */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"] & {
+              data?: {
+                /** @description The unique identifier for the project */
+                id: components["schemas"]["ProjectId"];
+                /** @description The title of the project */
+                title: string;
+                /** @description The project description */
+                description: string;
+                /** @description The ID of the project owner */
+                owner_id: components["schemas"]["UserId"];
+                /** @description The ID of the chat the project belongs to */
+                chat_id: components["schemas"]["ChatId"];
+                /** @description The date and time the project was created */
+                created_at: string;
+              };
+            };
+          };
+        };
+        /** @description Bad request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/projects/template": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get a list of projects */
+    get: {
+      parameters: {
+        query?: {
+          owner_id?: components["schemas"]["UserId"];
+          limit?: components["parameters"]["limit"];
+          offset?: components["parameters"]["offset"];
+          sort?: components["parameters"]["sort"];
+          direction?: components["parameters"]["direction"];
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description A list of projects */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              data?: WithRequired<
+                components["schemas"]["Project"],
+                | "id"
+                | "title"
+                | "created_at"
+                | "chat_id"
+                | "owner_id"
+                | "description"
+              >[];
+              statusCode?: number;
+              statusMessage?: string;
+              message?: string | null;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    /** Create a new project */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** @description The title of the project */
+            title: string;
+            /** @description The project description */
+            description?: string;
+            template_id?: components["schemas"]["TemplateId"];
           };
         };
       };
@@ -1460,6 +1570,17 @@ export interface components {
       /** @description The status of the task */
       status: string;
     };
+    Template: {
+      id: components["schemas"]["TemplateId"];
+      title: string;
+      description: string;
+      owner_id: components["schemas"]["UserId"];
+      /** Format: date-time */
+      created_at?: string;
+      template: string;
+    };
+    /** @description The unique identifier of Template */
+    TemplateId: number;
     properties: unknown;
   };
   responses: never;

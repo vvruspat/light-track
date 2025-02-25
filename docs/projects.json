@@ -78,6 +78,9 @@
                   "description": {
                     "type": "string",
                     "description": "The project description"
+                  },
+                  "template_id": {
+                    "$ref": "./atoms/templateId.json#/components/schemas/TemplateId"
                   }
                 },
                 "required": ["title"]
@@ -110,6 +113,207 @@
                             "owner_id",
                             "description"
                           ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/template": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "Get templates",
+        "responses": {
+          "200": {
+            "description": "Templates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "./entities/template.json#/components/schemas/Template"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Projects"],
+        "summary": "Delete project template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/templateId.json#/components/schemas/TemplateId",
+              "description": "The ID of the template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Template not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Projects"],
+        "summary": "Save project as template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project_id": {
+                    "$ref": "./atoms/projectId.json#/components/schemas/ProjectId"
+                  }
+                },
+                "required": ["project_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Template created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "$ref": "./entities/template.json#/components/schemas/Template/properties"
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "created_at",
+                            "chat_id",
+                            "owner_id",
+                            "description"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Projects"],
+        "summary": "Update template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./entities/template.json#/components/schemas/Template"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Template updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "./entities/template.json#/components/schemas/Template"
                         }
                       }
                     }

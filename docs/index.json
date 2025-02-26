@@ -100,7 +100,7 @@
       "$ref": "./projects.json#/paths/~1projects"
     },
     "/projects/template": {
-      "$ref": "./projects.json#/paths/~1projects"
+      "$ref": "./projects.json#/paths/~1projects~1template"
     },
     "/projects/{id}": {
       "$ref": "./projects.json#/paths/~1projects~1{id}"

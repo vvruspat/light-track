@@ -120,48 +120,84 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Get a list of projects */
+    /** Get templates */
     get: {
       parameters: {
-        query?: {
-          owner_id?: components["schemas"]["UserId"];
-          limit?: components["parameters"]["limit"];
-          offset?: components["parameters"]["offset"];
-          sort?: components["parameters"]["sort"];
-          direction?: components["parameters"]["direction"];
-        };
+        query?: never;
         header?: never;
         path?: never;
         cookie?: never;
       };
       requestBody?: never;
       responses: {
-        /** @description A list of projects */
+        /** @description Templates */
         200: {
           headers: {
             [name: string]: unknown;
           };
           content: {
-            "application/json": {
-              data?: WithRequired<
-                components["schemas"]["Project"],
-                | "id"
-                | "title"
-                | "created_at"
-                | "chat_id"
-                | "owner_id"
-                | "description"
-              >[];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
+            "application/json": components["schemas"]["GenericResponse"] & {
+              data?: components["schemas"]["Template"];
             };
+          };
+        };
+        /** @description Bad request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+        /** @description Project not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
           };
         };
       };
     };
-    put?: never;
-    /** Create a new project */
+    /** Update template */
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["Template"];
+        };
+      };
+      responses: {
+        /** @description Template updated */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"] & {
+              data?: components["schemas"]["Template"];
+            };
+          };
+        };
+        /** @description Bad request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+      };
+    };
+    /** Save project as template */
     post: {
       parameters: {
         query?: never;
@@ -172,16 +208,12 @@ export interface paths {
       requestBody: {
         content: {
           "application/json": {
-            /** @description The title of the project */
-            title: string;
-            /** @description The project description */
-            description?: string;
-            template_id?: components["schemas"]["TemplateId"];
+            project_id: components["schemas"]["ProjectId"];
           };
         };
       };
       responses: {
-        /** @description Project created */
+        /** @description Template created */
         201: {
           headers: {
             [name: string]: unknown;
@@ -189,18 +221,13 @@ export interface paths {
           content: {
             "application/json": components["schemas"]["GenericResponse"] & {
               data?: {
-                /** @description The unique identifier for the project */
-                id: components["schemas"]["ProjectId"];
-                /** @description The title of the project */
+                id: components["schemas"]["TemplateId"];
                 title: string;
-                /** @description The project description */
                 description: string;
-                /** @description The ID of the project owner */
                 owner_id: components["schemas"]["UserId"];
-                /** @description The ID of the chat the project belongs to */
-                chat_id: components["schemas"]["ChatId"];
-                /** @description The date and time the project was created */
+                /** Format: date-time */
                 created_at: string;
+                template?: string;
               };
             };
           };
@@ -216,7 +243,38 @@ export interface paths {
         };
       };
     };
-    delete?: never;
+    /** Delete project template by ID */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: components["schemas"]["TemplateId"];
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Template deleted */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+        /** @description Template not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+      };
+    };
     options?: never;
     head?: never;
     patch?: never;

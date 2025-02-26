@@ -276,157 +276,10 @@
     "/projects/template": {
       "get": {
         "tags": ["Projects"],
-        "summary": "Get a list of projects",
-        "parameters": [
-          {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The ID of the user who owns the project",
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "description": "Number of items to return",
-              "default": 50
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "description": "Number of items to skip",
-              "default": 0
-            }
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "The field to sort by"
-            }
-          },
-          {
-            "name": "direction",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "description": "The direction to sort by",
-              "default": "asc",
-              "type": "string",
-              "enum": ["asc", "desc"]
-            }
-          }
-        ],
+        "summary": "Get templates",
         "responses": {
           "200": {
-            "description": "A list of projects",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "The list of projects",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "allOf": [
-                          {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "description": "The unique identifier for the project",
-                                "type": "number"
-                              },
-                              "title": {
-                                "type": "string",
-                                "description": "The title of the project"
-                              },
-                              "description": {
-                                "type": "string",
-                                "description": "The project description"
-                              },
-                              "owner_id": {
-                                "description": "The ID of the project owner",
-                                "type": "number"
-                              },
-                              "chat_id": {
-                                "description": "The ID of the chat the project belongs to",
-                                "type": "number"
-                              },
-                              "created_at": {
-                                "type": "string",
-                                "description": "The date and time the project was created"
-                              }
-                            },
-                            "required": ["title", "chat_id"]
-                          }
-                        ],
-                        "required": [
-                          "id",
-                          "title",
-                          "created_at",
-                          "chat_id",
-                          "owner_id",
-                          "description"
-                        ]
-                      }
-                    },
-                    "statusCode": {
-                      "type": "number"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Projects"],
-        "summary": "Create a new project",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "The title of the project"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "The project description"
-                  },
-                  "template_id": {
-                    "type": "number",
-                    "description": "The unique identifier of Template"
-                  }
-                },
-                "required": ["title"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Project created",
+            "description": "Templates",
             "content": {
               "application/json": {
                 "schema": {
@@ -452,28 +305,220 @@
                           "type": "object",
                           "properties": {
                             "id": {
-                              "description": "The unique identifier for the project",
-                              "type": "number"
+                              "type": "number",
+                              "description": "The unique identifier of Template"
                             },
                             "title": {
-                              "type": "string",
-                              "description": "The title of the project"
+                              "type": "string"
                             },
                             "description": {
-                              "type": "string",
-                              "description": "The project description"
+                              "type": "string"
                             },
                             "owner_id": {
-                              "description": "The ID of the project owner",
-                              "type": "number"
-                            },
-                            "chat_id": {
-                              "description": "The ID of the chat the project belongs to",
-                              "type": "number"
+                              "type": "number",
+                              "description": "The unique identifier for the User"
                             },
                             "created_at": {
                               "type": "string",
-                              "description": "The date and time the project was created"
+                              "format": "date-time"
+                            },
+                            "template": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "description",
+                            "owner_id",
+                            "template"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Projects"],
+        "summary": "Delete project template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "The ID of the template",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Template not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Projects"],
+        "summary": "Save project as template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project_id": {
+                    "type": "number",
+                    "description": "The unique identifier for the project"
+                  }
+                },
+                "required": ["project_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Template created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "description": "The unique identifier of Template"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "owner_id": {
+                              "type": "number",
+                              "description": "The unique identifier for the User"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "template": {
+                              "type": "string"
                             }
                           },
                           "required": [
@@ -483,6 +528,137 @@
                             "chat_id",
                             "owner_id",
                             "description"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Projects"],
+        "summary": "Update template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "description": "The unique identifier of Template"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "owner_id": {
+                    "type": "number",
+                    "description": "The unique identifier for the User"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "template": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "description",
+                  "owner_id",
+                  "template"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Template updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number"
+                        },
+                        "statusMessage": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "description": "The unique identifier of Template"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "owner_id": {
+                              "type": "number",
+                              "description": "The unique identifier for the User"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "template": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "description",
+                            "owner_id",
+                            "template"
                           ]
                         }
                       }

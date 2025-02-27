@@ -7,7 +7,7 @@ import useLightTrackSession from "@/utils/useLightTrackSession";
 import type {
   ProjectTemplatePostRequest,
   ProjectTemplatePostResponse,
-} from "~/types/api/projects/template/post";
+} from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<ProjectTemplatePostResponse> => {

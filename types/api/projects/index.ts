@@ -3,3 +3,4 @@ export * from "./get";
 export * from "./getById";
 export * from "./put";
 export * from "./delete";
+export * from "./template";

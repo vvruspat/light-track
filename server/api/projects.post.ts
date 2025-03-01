@@ -5,6 +5,7 @@ import type { ProjectPostRequest, ProjectPostResponse } from "@/types/api";
 import Ajv from "ajv";
 import { paths } from "@/public/_openapi.json";
 import useLightTrackSession from "@/utils/useLightTrackSession";
+import type { TFullProject } from "@/types/entities";
 
 export default defineEventHandler(
   async (event): Promise<ProjectPostResponse> => {
@@ -62,6 +63,90 @@ export default defineEventHandler(
 
     if (error) {
       throw createError({ statusMessage: error.message });
+    }
+
+    if (body.template_id) {
+      const { data: template, error: templateError } = await client
+        .from("templates")
+        .select()
+        .eq("id", body.template_id)
+        .single();
+
+      if (templateError) {
+        throw createError({ statusMessage: templateError.message });
+      }
+
+      if (!template) {
+        return {
+          statusCode: 404,
+          statusMessage: "Not Found",
+          message: "Template not found",
+        };
+      }
+
+      const templateData: TFullProject = JSON.parse(
+        template.template as string,
+      );
+
+      // Create epics
+      const epics = templateData.epics.map((epic) => ({
+        title: epic.title,
+        description: epic.description,
+        owner_id: user.id,
+        project_id: data.id,
+      }));
+
+      const { data: epicsData, error: epicsError } = await client
+        .from("epics")
+        .insert(epics)
+        .select();
+
+      if (epicsError) {
+        throw createError({ statusMessage: epicsError.message });
+      }
+
+      // Create stories
+      const stories = templateData.epics.flatMap((epic, epicIndex) =>
+        epic.stories.map((story) => ({
+          title: story.title,
+          description: story.description,
+          owner_id: user.id,
+          epic_id: epicsData[epicIndex].id,
+        })),
+      );
+
+      const { data: storiesData, error: storiesError } = await client
+        .from("stories")
+        .insert(stories)
+        .select();
+
+      if (storiesError) {
+        throw createError({ statusMessage: storiesError.message });
+      }
+
+      // Create tasks
+      const tasks = templateData.epics.flatMap((epic) =>
+        epic.stories.flatMap((story, storyIndex) =>
+          story.tasks.map((task) => ({
+            title: task.title,
+            description: task.description,
+            owner_id: user.id,
+            story_id: storiesData[storyIndex].id,
+            assignee_id: user.id,
+            status: "todo",
+            estimation: task.estimation,
+          })),
+        ),
+      );
+
+      const { data: _tasksData, error: tasksError } = await client
+        .from("tasks")
+        .insert(tasks)
+        .select();
+
+      if (tasksError) {
+        throw createError({ statusMessage: tasksError.message });
+      }
     }
 
     // Return the created project

@@ -151,7 +151,20 @@
                     {
                       "properties": {
                         "data": {
-                          "$ref": "./entities/template.json#/components/schemas/Template"
+                          "type": "array",
+                          "items": {
+                            "allOf": [
+                              {
+                                "$ref": "./entities/template.json#/components/schemas/Template"
+                              }
+                            ],
+                            "required": [
+                              "id",
+                              "title",
+                              "owner_id",
+                              "description"
+                            ]
+                          }
                         }
                       }
                     }

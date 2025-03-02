@@ -137,7 +137,10 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["GenericResponse"] & {
-              data?: components["schemas"]["Template"];
+              data?: WithRequired<
+                components["schemas"]["Template"],
+                "id" | "title" | "owner_id" | "description"
+              >[];
             };
           };
         };

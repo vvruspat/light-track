@@ -302,37 +302,50 @@
                     {
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "number",
-                              "description": "The unique identifier of Template"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            },
-                            "owner_id": {
-                              "type": "number",
-                              "description": "The unique identifier for the User"
-                            },
-                            "created_at": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "template": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "title",
-                            "description",
-                            "owner_id",
-                            "template"
-                          ]
+                          "type": "array",
+                          "items": {
+                            "allOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "description": "The unique identifier of Template"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "owner_id": {
+                                    "type": "number",
+                                    "description": "The unique identifier for the User"
+                                  },
+                                  "created_at": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "template": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "title",
+                                  "description",
+                                  "owner_id",
+                                  "template"
+                                ]
+                              }
+                            ],
+                            "required": [
+                              "id",
+                              "title",
+                              "owner_id",
+                              "description"
+                            ]
+                          }
                         }
                       }
                     }

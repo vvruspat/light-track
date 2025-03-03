@@ -2,7 +2,10 @@ import { defineStore } from "pinia";
 import type { TTemplate } from "@/types/entities";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
-import type { ProjectTemplatePostResponse, ProjectTemplatePutResponse } from "~/types/api";
+import type {
+  ProjectTemplatePostResponse,
+  ProjectTemplatePutResponse,
+} from "~/types/api";
 
 type TemplatesState = {
   loadingState: TLoadingState;
@@ -43,9 +46,12 @@ export const useTemplatesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $api<ProjectTemplatePostResponse>(`/api/projects/templates/${templateId}`, {
-          method: "DELETE",
-        });
+        const data = await $api<ProjectTemplatePostResponse>(
+          `/api/projects/templates/${templateId}`,
+          {
+            method: "DELETE",
+          },
+        );
 
         if (data.statusCode !== 200) {
           this.loadingState = "error";
@@ -74,13 +80,16 @@ export const useTemplatesStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $api<ProjectTemplatePutResponse>(`/api/templates/${templateId}`, {
-          method: "PUT",
-          body: JSON.stringify({
-            title,
-            description,
-          }),
-        });
+        const data = await $api<ProjectTemplatePutResponse>(
+          `/api/templates/${templateId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              title,
+              description,
+            }),
+          },
+        );
 
         if (data.statusCode !== 200) {
           this.loadingState = "error";

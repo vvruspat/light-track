@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import type { TProject, TTemplate } from "@/types/entities";
-import type { ProjectGetResponse, ProjectPostResponse, ProjectTemplatePostResponse } from "@/types/api";
+import type {
+  ProjectGetResponse,
+  ProjectPostResponse,
+  ProjectTemplatePostResponse,
+} from "@/types/api";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
 import { useAuthStore } from "~/stores/auth";

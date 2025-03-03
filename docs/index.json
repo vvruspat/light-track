@@ -102,6 +102,9 @@
     "/projects/template": {
       "$ref": "./projects.json#/paths/~1projects~1template"
     },
+    "/projects/template/{id}": {
+      "$ref": "./projects.json#/paths/~1projects~1template~1{id}"
+    },
     "/projects/{id}": {
       "$ref": "./projects.json#/paths/~1projects~1{id}"
     },

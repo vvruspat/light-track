@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { TEpic } from "@/types/entities";
-import type { EpicPostResponse } from "@/types/api";
+import type { EpicPostResponse, EpicPutResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
 
@@ -119,7 +119,7 @@ export const useEpicsStore = defineStore<
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $api<EpicPostResponse>(`/api/epics/${epicId}`, {
+        const data = await $api<EpicPutResponse>(`/api/epics/${epicId}`, {
           method: "PUT",
           body: JSON.stringify({
             title,
@@ -127,7 +127,7 @@ export const useEpicsStore = defineStore<
           }),
         });
 
-        if (data.statusCode !== 201) {
+        if (data.statusCode !== 200) {
           this.loadingState = "error";
           setError(new Error(data.statusMessage));
           return null;

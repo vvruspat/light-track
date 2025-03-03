@@ -32,3 +32,5 @@ export type TProjectStatistics = {
     [key: number]: TStatistics;
   };
 };
+
+export type TTemplate = Database["public"]["Tables"]["templates"]["Row"];

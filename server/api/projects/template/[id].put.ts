@@ -15,7 +15,7 @@ export default defineEventHandler(
       (b) => {
         const ajv = new Ajv();
         const schema =
-          paths["/projects/template"]["put"]["requestBody"]["content"][
+          paths["/projects/template/{id}"]["put"]["requestBody"]["content"][
             "application/json"
           ].schema;
         const valid = ajv.validate(schema, b);

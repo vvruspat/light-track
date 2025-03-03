@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import type { TProject } from "@/types/entities";
-import type { ProjectGetResponse, ProjectPostResponse } from "@/types/api";
+import type { TProject, TTemplate } from "@/types/entities";
+import type { ProjectGetResponse, ProjectPostResponse, ProjectTemplatePostResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
 import { useAuthStore } from "~/stores/auth";
@@ -130,6 +130,7 @@ export const useProjectsStore = defineStore<
     async createProject(
       title: TProject["title"],
       description: TProject["description"],
+      templateId?: TTemplate["id"],
     ) {
       // create a new project
       this.loadingState = "pending";
@@ -142,6 +143,7 @@ export const useProjectsStore = defineStore<
           body: JSON.stringify({
             title,
             description,
+            templateId,
           }),
         });
 

@@ -195,47 +195,6 @@
           }
         }
       },
-      "delete": {
-        "tags": ["Projects"],
-        "summary": "Delete project template by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "./atoms/templateId.json#/components/schemas/TemplateId",
-              "description": "The ID of the template"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Template deleted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Template not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": ["Projects"],
         "summary": "Save project as template",
@@ -299,10 +258,64 @@
             }
           }
         }
+      }
+    },
+    "/projects/template/{id}": {
+      "delete": {
+        "tags": ["Projects"],
+        "summary": "Delete project template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/templateId.json#/components/schemas/TemplateId",
+              "description": "The ID of the template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Template not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
       },
       "put": {
         "tags": ["Projects"],
         "summary": "Update template",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/templateId.json#/components/schemas/TemplateId",
+              "description": "The ID of the template"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {

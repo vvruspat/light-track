@@ -4,9 +4,14 @@ import type { FormSubmitEvent } from "#ui/types";
 
 const { projectId } = useRoute().params;
 const projectsStore = useProjectsStore();
+
 const currentProjectStore = useCurrentProjectStore();
 const { currentProject: project, loadingState } =
   storeToRefs(currentProjectStore);
+
+const templatesStore = useTemplatesStore();
+const { loadingState: templatesStatus, templates } =
+  storeToRefs(templatesStore);
 
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
@@ -18,6 +23,7 @@ type Schema = z.output<typeof schema>;
 const state = reactive({
   title: project.value?.title ?? "Untitled Project",
   description: project.value?.description ?? "",
+  template: undefined as number | undefined,
 });
 
 async function onSubmit(_event: FormSubmitEvent<Schema>) {
@@ -34,6 +40,7 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
     const newProject = await projectsStore.createProject(
       state.title,
       state.description,
+      !state.template ? undefined : Number(state.template),
     );
 
     if (newProject) {
@@ -43,6 +50,8 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
     }
   }
 }
+
+templatesStore.fetchTemplates();
 </script>
 
 <template>
@@ -53,6 +62,18 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
 
     <UFormGroup label="Description" name="description">
       <UTextarea v-model="state.description" autoresize />
+    </UFormGroup>
+
+    <UFormGroup v-if="!projectId" label="Template" name="template">
+      <USelectMenu
+        v-if="templatesStatus === 'success'"
+        v-model="state.template"
+        label
+        :options="templates"
+        value-attribute="id"
+        option-attribute="title"
+      />
+      <USkeleton v-else class="h-8 w-full" />
     </UFormGroup>
 
     <UInput type="hidden" name="projectId" :value="projectId" />

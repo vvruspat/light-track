@@ -26,6 +26,7 @@ type ProjectsActions = {
   createProject: (
     title: TProject["title"],
     description: TProject["description"],
+    templateId?: TTemplate["id"],
   ) => Promise<TProject | null>;
   updateProject: (
     projectId: TProject["id"],
@@ -147,7 +148,7 @@ export const useProjectsStore = defineStore<
           body: JSON.stringify({
             title,
             description,
-            templateId,
+            template_id: templateId,
           }),
         });
 

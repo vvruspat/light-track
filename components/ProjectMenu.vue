@@ -9,30 +9,40 @@ const { projectId } = defineProps<ProjectMenuProps>();
 const router = useRouter();
 
 const projectStore = useProjectsStore();
+const { loadingState } = storeToRefs(projectStore);
 
-const links = [
+const saveTemplateIcon = computed(() => {
+  switch (loadingState.value) {
+    case "pending":
+      return "svg-spinners:pulse-multiple";
+    default:
+      return "icon-park-solid:page-template";
+  }
+});
+
+const links = computed(() => [
   [
     {
       label: "Edit project",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "mdi:pencil-outline",
       to: `/project/${projectId}/edit`,
     },
     {
       label: "Save project as template",
-      icon: "icon-park-solid:page-template",
+      icon: saveTemplateIcon.value,
       click: async () => {
         await projectStore.saveAsTemplate(projectId);
       },
     },
     {
       label: "Remove project",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "mdi:delete-forever",
       click: () => {
         isRemoveAlertOpen.value = true;
       },
     },
   ],
-];
+]);
 
 const isOpen = ref(false);
 const isRemoveAlertOpen = ref(false);

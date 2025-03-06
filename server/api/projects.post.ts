@@ -124,10 +124,13 @@ export default defineEventHandler(
         throw createError({ statusMessage: storiesError.message });
       }
 
+      let storyIndex = -1;
+
       // Create tasks
       const tasks = templateData.epics.flatMap((epic) =>
-        epic.stories.flatMap((story, storyIndex) =>
-          story.tasks.map((task) => ({
+        epic.stories.flatMap((story) => {
+          storyIndex++;
+          return story.tasks.map((task) => ({
             title: task.title,
             description: task.description,
             owner_id: user.id,
@@ -135,11 +138,11 @@ export default defineEventHandler(
             assignee_id: user.id,
             status: "todo",
             estimation: task.estimation,
-          })),
-        ),
+          }));
+        }),
       );
 
-      const { data: _tasksData, error: tasksError } = await client
+      const { error: tasksError } = await client
         .from("tasks")
         .insert(tasks)
         .select();

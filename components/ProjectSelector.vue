@@ -16,6 +16,8 @@ const onSelect = (value: { id: number }) => {
   router.push(`/project/${value.id}`);
   isOpen.value = false;
 };
+
+projectsStore.fetchProjects();
 </script>
 
 <template>
@@ -30,7 +32,7 @@ const onSelect = (value: { id: number }) => {
   <UModal v-model="isOpen">
     <UCommandPalette
       v-model="selected"
-      :chats="[{ key: 'projectsItems', commands: projectsItems }]"
+      :groups="[{ key: 'projectsItems', commands: projectsItems }]"
       @update:model-value="onSelect"
     />
     <UContainer class="p-4 w-full">

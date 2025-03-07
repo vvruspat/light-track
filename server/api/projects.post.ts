@@ -47,7 +47,6 @@ export default defineEventHandler(
       };
     }
 
-    // Create the project (this is a placeholder, replace with actual logic)
     const newProject: Database["public"]["Tables"]["projects"]["Insert"] = {
       title: body.title,
       description: body.description || "",

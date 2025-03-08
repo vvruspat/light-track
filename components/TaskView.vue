@@ -187,7 +187,7 @@ usersStore.fetchUsers();
         @click="onDescriptionClick"
       >
         {{ state.description }}
-    </div>
+      </div>
     </StackContainer>
 
     <UCard class="bg-gray-200 dark:bg-gray-800 w-full md:w-auto">

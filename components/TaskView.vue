@@ -161,13 +161,33 @@ usersStore.fetchUsers();
         @blur="onDescriptionBlur"
         @keydown.enter="onDescriptionBlur"
       />
-      <div
+      <!-- <div
         v-else
         class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200"
         @click="onDescriptionClick"
       >
         {{ state.description }}
-      </div>
+      </div> -->
+
+      <div
+        v-else
+        v-linkify:options="{
+          target: '_blank',
+          className: (href: string, type: string) => {
+            if (type === 'url') {
+              return 'text-blue-500 dark:text-blue-400 hover:underline';
+            }
+            return 'text-blue-500 dark:text-blue-400 underline';
+          },
+          attributes: {
+            onclick: 'event.stopPropagation()',
+          },
+        }"
+        class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200"
+        @click="onDescriptionClick"
+      >
+        {{ state.description }}
+    </div>
     </StackContainer>
 
     <UCard class="bg-gray-200 dark:bg-gray-800 w-full md:w-auto">

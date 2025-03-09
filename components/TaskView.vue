@@ -161,13 +161,6 @@ usersStore.fetchUsers();
         @blur="onDescriptionBlur"
         @keydown.enter="onDescriptionBlur"
       />
-      <!-- <div
-        v-else
-        class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200"
-        @click="onDescriptionClick"
-      >
-        {{ state.description }}
-      </div> -->
 
       <div
         v-else

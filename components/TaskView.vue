@@ -75,6 +75,12 @@ function onDescriptionClick(event: MouseEvent) {
   descriptionEditMode.value = true;
 }
 
+function onDescriptionKewdown(event: KeyboardEvent) {
+  if (event.key === "Enter" && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+    descriptionEditMode.value = false;
+  }
+}
+
 function onDescriptionBlur() {
   descriptionEditMode.value = false;
 }
@@ -159,7 +165,7 @@ usersStore.fetchUsers();
         class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 relative block w-full"
         @focus="onDescriptionFocus"
         @blur="onDescriptionBlur"
-        @keydown.enter="onDescriptionBlur"
+        @keydown="onDescriptionKewdown"
       />
 
       <div
@@ -176,7 +182,7 @@ usersStore.fetchUsers();
             onclick: 'event.stopPropagation()',
           },
         }"
-        class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200"
+        class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200 whitespace-pre-wrap"
         @click="onDescriptionClick"
       >
         {{ state.description }}

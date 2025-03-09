@@ -76,7 +76,13 @@ function onDescriptionClick(event: MouseEvent) {
 }
 
 function onDescriptionKewdown(event: KeyboardEvent) {
-  if (event.key === "Enter" && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+  if (
+    event.key === "Enter" &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
     descriptionEditMode.value = false;
   }
 }

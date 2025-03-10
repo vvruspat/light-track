@@ -28,6 +28,7 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
 
 const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
+  isOpen.value = false;
   router.push(epicUrl.value);
 };
 

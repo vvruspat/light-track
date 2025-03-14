@@ -3,7 +3,6 @@ import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
 const { epicId, projectId } = useRoute().params;
-const router = useRouter();
 
 const epicsStore = useEpicsStore();
 const currentProjectStore = useCurrentProjectStore();
@@ -50,7 +49,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   await currentProjectStore.getProjectById(Number(projectId), true);
 
-  router.push(`/project/${projectId}/epic/${id}`);
+  await navigateTo(`/project/${projectId}/epic/${id}`);
 }
 </script>
 

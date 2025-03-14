@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
-const router = useRouter();
 const { projectId } = useRoute().params;
 
-watch(isOpen, (isOpenNew) => {
+watch(isOpen, async (isOpenNew) => {
   if (!isOpenNew) {
-    router.push(`/project/${projectId}`);
+    await navigateTo(`/project/${projectId}`);
   }
 });
 </script>

@@ -11,8 +11,6 @@ const usersStore = useUsersStore();
 
 const { currentChatUsers } = storeToRefs(usersStore);
 
-const router = useRouter();
-
 const task = computed(() => {
   if (taskId) {
     return currentProjectStore.currentProject?.epics
@@ -102,7 +100,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Redirect to epic page
   await currentProjectStore.getProjectById(Number(projectId), true);
 
-  router.push(`/project/${projectId}/epic/${epicId}`);
+  await navigateTo(`/project/${projectId}/epic/${epicId}`);
 }
 </script>
 

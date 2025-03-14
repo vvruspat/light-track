@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
-const router = useRouter();
 const route = useRoute();
 const { epicId, projectId } = route.params;
 const { emptyProject } = route.query;
 
-watch(isOpen, (isOpenNew) => {
+watch(isOpen, async (isOpenNew) => {
   if (!isOpenNew) {
-    router.push(`/project/${projectId}/epic/${epicId}`);
+    await navigateTo(`/project/${projectId}/epic/${epicId}`);
   }
 });
 </script>

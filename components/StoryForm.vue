@@ -13,8 +13,6 @@ const story = storyId
       ?.stories.find((story) => story.id === Number(storyId))
   : null;
 
-const router = useRouter();
-
 const schema = z.object({
   title: z.string().nonempty("Title is required"),
   description: z.string().optional(),
@@ -44,7 +42,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   await currentProjectStore.getProjectById(Number(projectId), true);
 
-  router.push(`/project/${projectId}/epic/${epicId}`);
+  await navigateTo(`/project/${projectId}/epic/${epicId}`);
 }
 </script>
 

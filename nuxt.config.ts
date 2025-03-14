@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       jwtSecret: "",
     },
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     "@scalar/nuxt",
     "@nuxt/ui",

@@ -6,8 +6,6 @@ type EpicMenuProps = {
   epicId: number;
 };
 
-const router = useRouter();
-
 const currentProjectStore = useCurrentProjectStore();
 const epicStore = useEpicsStore();
 
@@ -40,9 +38,9 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     const project = await currentProjectStore.getProjectById(projectId, true);
 
     if (project?.epics.length) {
-      router.push(`/project/${projectId}/epic/${project.epics[0].id}`);
+      await navigateTo(`/project/${projectId}/epic/${project.epics[0].id}`);
     } else {
-      router.push(`/project/${projectId}/epic/create?emptyProject=true`);
+      await navigateTo(`/project/${projectId}/epic/create?emptyProject=true`);
     }
   }
   isRemoveAlertOpen.value = false;

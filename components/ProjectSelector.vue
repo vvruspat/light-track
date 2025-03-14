@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const isOpen = ref(false);
-const router = useRouter();
 
 const projectsStore = useProjectsStore();
 
@@ -12,12 +11,12 @@ const projectsItems = computed(() =>
 
 const selected = ref([]);
 
-const onSelect = (value: { id: number }) => {
-  router.push(`/project/${value.id}`);
+const onSelect = async (value: { id: number }) => {
   isOpen.value = false;
+  await navigateTo(`/project/${value.id}`);
 };
 
-projectsStore.fetchProjects();
+await projectsStore.fetchProjects();
 </script>
 
 <template>

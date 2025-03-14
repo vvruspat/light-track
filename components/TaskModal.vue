@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
-const router = useRouter();
 const { taskId, epicId, projectId } = useRoute().params;
 
 const currentProjectStore = useCurrentProjectStore();
@@ -29,7 +28,7 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
 const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
   isOpen.value = false;
-  router.push(epicUrl.value);
+  await navigateTo(epicUrl.value);
 };
 
 watch(isOpen, (isOpenNew) => {
@@ -43,7 +42,7 @@ watch(isOpen, (isOpenNew) => {
   <UModal v-model="isOpen" fullscreen>
     <UCard
       :ui="{
-        base: 'h-full max-h-full flex flex-col',
+        base: 'h-full flex flex-col overflow-scroll',
         rounded: '',
         divide: 'divide-y divide-gray-100 dark:divide-gray-800',
         body: {
@@ -81,7 +80,7 @@ watch(isOpen, (isOpenNew) => {
       </template>
 
       <div class="overflow-y-scroll">
-        <slot />
+        <TaskView />
       </div>
 
       <RemoveDialog

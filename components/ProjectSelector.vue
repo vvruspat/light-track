@@ -9,7 +9,7 @@ const projectsItems = computed(() =>
   projects.value.map((project) => ({ id: project.id, label: project.title })),
 );
 
-const selected = ref<{id: number, label: string}[]>([]);
+const selected = ref<{ id: number; label: string }[]>([]);
 
 const onSelect = async (value: { id: number }) => {
   isOpen.value = false;

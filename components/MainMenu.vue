@@ -8,16 +8,6 @@ const links = [
       icon: "mdi:apps",
       to: "/dashboard",
     },
-    // {
-    //   label: "Settings",
-    //   icon: "mdi:cog",
-    //   to: "/settings",
-    // },
-    {
-      label: "Logout",
-      icon: "mdi:logout",
-      to: "/logout",
-    },
   ],
 ];
 

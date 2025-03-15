@@ -14,7 +14,7 @@ const projectsLinks = computed(() => {
   }));
 });
 
-projectsStore.fetchProjects();
+await projectsStore.fetchProjects();
 </script>
 
 <template>
@@ -60,17 +60,25 @@ projectsStore.fetchProjects();
       </UCard>
     </UContainer>
   </div>
-  <div v-else-if="loadingState === 'pending' || loadingState === 'idle'">
-    <StackContainer direction="row" align-items="center" spacing="4">
-      <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
-      <div>Loading projects...</div>
-    </StackContainer>
-  </div>
-  <div v-else-if="loadingState === 'error'">
-    <StackContainer direction="row" align-items="center" spacing="4">
-      <UIcon name="svg-regular:exclamation-triangle" class="w-8 h-8" />
-      <div>Error loading projects</div>
-    </StackContainer>
-  </div>
+  <StackContainer
+    v-else-if="loadingState === 'pending' || loadingState === 'idle'"
+    direction="row"
+    align-items="center"
+    spacing="4"
+    class="h-full"
+  >
+    <UIcon name="svg-spinners:pulse-multiple" class="w-8 h-8" />
+    <div>Loading projects...</div>
+  </StackContainer>
+  <StackContainer
+    v-else-if="loadingState === 'error'"
+    direction="row"
+    align-items="center"
+    spacing="4"
+    class="h-full"
+  >
+    <UIcon name="svg-regular:exclamation-triangle" class="w-8 h-8" />
+    <div>Error loading projects</div>
+  </StackContainer>
   <div v-else><USkeleton class="h-4 w-full" /></div>
 </template>

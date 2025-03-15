@@ -118,11 +118,10 @@ watch(
 );
 
 watch(state, () => {
-  // autosave task data
   debouncedUpdateTask();
 });
 
-usersStore.fetchUsers();
+await usersStore.fetchUsers();
 </script>
 
 <template>

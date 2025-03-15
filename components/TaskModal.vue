@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 const isOpen = ref<boolean>(true);
-const { taskId, epicId, projectId } = useRoute().params;
+const { taskId, projectId } = useRoute().params;
 
 const currentProjectStore = useCurrentProjectStore();
 const taskStore = useTasksStore();
-
-const epicUrl = computed(() => `/project/${projectId}/epic/${epicId}`);
 
 const isRemoveAlertOpen = ref(false);
 
@@ -27,8 +25,6 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
 
 const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
-  isOpen.value = false;
-  await navigateTo(epicUrl.value);
 };
 
 watch(isOpen, (isOpenNew) => {
@@ -39,7 +35,7 @@ watch(isOpen, (isOpenNew) => {
 </script>
 
 <template>
-  <UModal v-model="isOpen" fullscreen>
+  <UModal v-model="isOpen" fullscreen :prevent-close="true">
     <UCard
       :ui="{
         base: 'h-full flex flex-col overflow-scroll',

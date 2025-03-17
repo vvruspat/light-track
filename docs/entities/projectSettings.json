@@ -15,11 +15,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "project_id",
-          "key",
-          "value"
-        ]
+        "required": ["project_id", "key", "value"]
       }
     }
   }

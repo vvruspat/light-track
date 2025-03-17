@@ -17,6 +17,4 @@ function onSubmit() {
   </UForm>
 </template>
 
-<style>
-
-</style>
+<style></style>

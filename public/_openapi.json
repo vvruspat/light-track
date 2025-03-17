@@ -31,7 +31,9 @@
   "paths": {
     "/projects": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a list of projects",
         "parameters": [
           {
@@ -78,7 +80,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -122,7 +127,10 @@
                                 "description": "The date and time the project was created"
                               }
                             },
-                            "required": ["title", "chat_id"]
+                            "required": [
+                              "title",
+                              "chat_id"
+                            ]
                           }
                         ],
                         "required": [
@@ -153,7 +161,9 @@
         }
       },
       "post": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Create a new project",
         "requestBody": {
           "required": true,
@@ -175,7 +185,9 @@
                     "description": "The unique identifier of Template"
                   }
                 },
-                "required": ["title"]
+                "required": [
+                  "title"
+                ]
               }
             }
           }
@@ -275,7 +287,9 @@
     },
     "/projects/template": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get templates",
         "responses": {
           "200": {
@@ -401,7 +415,9 @@
         }
       },
       "post": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Save project as template",
         "requestBody": {
           "required": true,
@@ -415,7 +431,9 @@
                     "description": "The unique identifier for the project"
                   }
                 },
-                "required": ["project_id"]
+                "required": [
+                  "project_id"
+                ]
               }
             }
           }
@@ -512,7 +530,9 @@
     },
     "/projects/template/{id}": {
       "delete": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Delete project template by ID",
         "parameters": [
           {
@@ -577,7 +597,9 @@
         }
       },
       "put": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Update template",
         "parameters": [
           {
@@ -721,7 +743,9 @@
     },
     "/projects/{id}": {
       "get": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Get a project by ID",
         "parameters": [
           {
@@ -788,7 +812,10 @@
                                   "description": "The date and time the project was created"
                                 }
                               },
-                              "required": ["title", "chat_id"]
+                              "required": [
+                                "title",
+                                "chat_id"
+                              ]
                             },
                             {
                               "type": "object",
@@ -1036,7 +1063,9 @@
         }
       },
       "delete": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Delete project by ID",
         "parameters": [
           {
@@ -1101,7 +1130,9 @@
         }
       },
       "put": {
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "summary": "Update project by ID",
         "parameters": [
           {
@@ -1229,7 +1260,9 @@
     },
     "/epics": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get a list of epics",
         "parameters": [
           {
@@ -1276,7 +1309,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1312,7 +1348,9 @@
         }
       },
       "post": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Create a new epic",
         "requestBody": {
           "required": true,
@@ -1334,7 +1372,10 @@
                     "type": "number"
                   }
                 },
-                "required": ["title", "project_id"]
+                "required": [
+                  "title",
+                  "project_id"
+                ]
               }
             }
           }
@@ -1432,7 +1473,9 @@
     },
     "/epics/{id}": {
       "get": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Get an epic by ID",
         "parameters": [
           {
@@ -1536,7 +1579,9 @@
         }
       },
       "delete": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Delete an epic by ID",
         "parameters": [
           {
@@ -1601,7 +1646,9 @@
         }
       },
       "put": {
-        "tags": ["Epics"],
+        "tags": [
+          "Epics"
+        ],
         "summary": "Update epic by id",
         "parameters": [
           {
@@ -1727,7 +1774,9 @@
     },
     "/stories": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get a list of stories",
         "parameters": [
           {
@@ -1774,7 +1823,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -1811,7 +1863,9 @@
         }
       },
       "post": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Create a new story",
         "requestBody": {
           "required": true,
@@ -1833,7 +1887,9 @@
                     "type": "number"
                   }
                 },
-                "required": ["title"]
+                "required": [
+                  "title"
+                ]
               }
             }
           }
@@ -1931,7 +1987,9 @@
     },
     "/stories/{id}": {
       "get": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Get an story by ID",
         "parameters": [
           {
@@ -2032,7 +2090,9 @@
         }
       },
       "delete": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Delete story by ID",
         "parameters": [
           {
@@ -2094,7 +2154,9 @@
         }
       },
       "put": {
-        "tags": ["Stories"],
+        "tags": [
+          "Stories"
+        ],
         "summary": "Update story",
         "parameters": [
           {
@@ -2220,7 +2282,9 @@
     },
     "/tasks": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a list of tasks",
         "parameters": [
           {
@@ -2285,7 +2349,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -2322,7 +2389,9 @@
         }
       },
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Create a new task",
         "requestBody": {
           "required": true,
@@ -2356,7 +2425,10 @@
                     "description": "The status of the task"
                   }
                 },
-                "required": ["title", "status"]
+                "required": [
+                  "title",
+                  "status"
+                ]
               }
             }
           }
@@ -2430,7 +2502,9 @@
     },
     "/tasks/{id}": {
       "get": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get a task by ID",
         "parameters": [
           {
@@ -2532,7 +2606,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Delete a task by ID",
         "parameters": [
           {
@@ -2593,7 +2669,9 @@
         }
       },
       "put": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Update task by ID",
         "parameters": [
           {
@@ -2708,7 +2786,9 @@
     },
     "/taskwatchers": {
       "post": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Add a task watcher",
         "requestBody": {
           "required": true,
@@ -2726,7 +2806,10 @@
                     "type": "number"
                   }
                 },
-                "required": ["task_id", "userId"]
+                "required": [
+                  "task_id",
+                  "userId"
+                ]
               }
             }
           }
@@ -2779,7 +2862,9 @@
         }
       },
       "delete": {
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Remove a task watcher",
         "parameters": [
           {
@@ -2851,7 +2936,9 @@
     },
     "/login": {
       "post": {
-        "tags": ["auth"],
+        "tags": [
+          "auth"
+        ],
         "summary": "Login user with miniapp data",
         "requestBody": {
           "required": true,
@@ -2864,7 +2951,9 @@
                     "type": "string"
                   }
                 },
-                "required": ["params"]
+                "required": [
+                  "params"
+                ]
               }
             }
           }
@@ -2941,7 +3030,11 @@
                               "type": "number"
                             }
                           },
-                          "required": ["token", "user", "chat_id"]
+                          "required": [
+                            "token",
+                            "user",
+                            "chat_id"
+                          ]
                         }
                       }
                     }
@@ -2977,7 +3070,9 @@
     },
     "/logout": {
       "delete": {
-        "tags": ["auth"],
+        "tags": [
+          "auth"
+        ],
         "summary": "Logout user",
         "requestBody": {},
         "responses": {
@@ -3012,7 +3107,9 @@
     },
     "/users": {
       "get": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Get a list of users in current chat",
         "parameters": [],
         "responses": {
@@ -3077,7 +3174,10 @@
       },
       "SortDirection": {
         "type": "string",
-        "enum": ["asc", "desc"]
+        "enum": [
+          "asc",
+          "desc"
+        ]
       },
       "GenericResponse": {
         "type": "object",
@@ -3137,7 +3237,10 @@
               "description": "The direction to sort by",
               "default": "asc",
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         }
@@ -3170,7 +3273,10 @@
             "description": "The date and time the project was created"
           }
         },
-        "required": ["title", "chat_id"]
+        "required": [
+          "title",
+          "chat_id"
+        ]
       },
       "Epic": {
         "type": "object",
@@ -3206,7 +3312,13 @@
             "description": "The date and time when the epic was last updated"
           }
         },
-        "required": ["id", "title", "project_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "project_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Story": {
         "type": "object",
@@ -3242,7 +3354,13 @@
             "description": "The date and time when the story was last updated"
           }
         },
-        "required": ["id", "title", "owner_id", "created_at", "updated_at"]
+        "required": [
+          "id",
+          "title",
+          "owner_id",
+          "created_at",
+          "updated_at"
+        ]
       },
       "Task": {
         "type": "object",
@@ -3276,7 +3394,11 @@
             "description": "The status of the task"
           }
         },
-        "required": ["title", "project_id", "status"]
+        "required": [
+          "title",
+          "project_id",
+          "status"
+        ]
       },
       "User": {
         "type": "object",
@@ -3408,7 +3530,10 @@
                 "description": "The date and time the project was created"
               }
             },
-            "required": ["title", "chat_id"]
+            "required": [
+              "title",
+              "chat_id"
+            ]
           },
           {
             "type": "object",
@@ -3811,7 +3936,13 @@
                 "description": "The date and time when the story was last updated"
               }
             },
-            "required": ["id", "title", "owner_id", "created_at", "updated_at"]
+            "required": [
+              "id",
+              "title",
+              "owner_id",
+              "created_at",
+              "updated_at"
+            ]
           },
           {
             "type": "object",
@@ -3948,7 +4079,13 @@
             "type": "string"
           }
         },
-        "required": ["id", "title", "description", "owner_id", "template"]
+        "required": [
+          "id",
+          "title",
+          "description",
+          "owner_id",
+          "template"
+        ]
       },
       "TemplateId": {
         "type": "number",
@@ -4003,7 +4140,10 @@
           "description": "The direction to sort by",
           "default": "asc",
           "type": "string",
-          "enum": ["asc", "desc"]
+          "enum": [
+            "asc",
+            "desc"
+          ]
         }
       }
     }

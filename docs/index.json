@@ -108,6 +108,9 @@
     "/projects/{id}": {
       "$ref": "./projects.json#/paths/~1projects~1{id}"
     },
+    "/projects/{id}/settings": {
+      "$ref": "./projects.json#/paths/~1projects~1{id}~1settings"
+    },
     "/epics": {
       "$ref": "./epics.json#/paths/~1epics"
     },

@@ -26,6 +26,11 @@ const links = computed(() => [
       to: `/project/${projectId}/edit`,
     },
     {
+      label: "Project settings",
+      icon: "mdi:cog-outline",
+      to: `/project/${projectId}/settings`,
+    },
+    {
       label: "Save project as template",
       icon: saveTemplateIcon.value,
       click: async () => {
@@ -64,6 +69,7 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
       color="gray"
       square
       variant="ghost"
+      class="w-full"
       @click="isOpen = true"
     />
     <template #panel>

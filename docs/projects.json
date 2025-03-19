@@ -361,6 +361,117 @@
         }
       }
     },
+    "/projects/{id}/settings": {
+      "get": {
+        "tags": ["Projects", "Settings"],
+        "summary": "Get project settings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "./entities/projectSettings.json#/components/schemas/ProjectSettings"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Projects", "Settings"],
+        "summary": "Update project settings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./atoms/projectId.json#/components/schemas/ProjectId",
+              "description": "The ID of the project"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./entities/projectSettings.json#/components/schemas/ProjectSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project settings updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "./generic/genericResponse.json#/components/schemas/GenericResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "./entities/projectSettings.json#/components/schemas/ProjectSettings"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/projects/{id}": {
       "get": {
         "tags": ["Projects"],

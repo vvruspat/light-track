@@ -1,0 +1,22 @@
+{
+  "components": {
+    "schemas": {
+      "ProjectSettings": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "$ref": "../atoms/projectId.json#/components/schemas/ProjectId",
+            "description": "The ID of the project"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["project_id", "key", "value"]
+      }
+    }
+  }
+}

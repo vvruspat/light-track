@@ -141,6 +141,32 @@ export type Database = {
           },
         ];
       };
+      settings: {
+        Row: {
+          key: string;
+          project_id: number;
+          value: Json;
+        };
+        Insert: {
+          key: string;
+          project_id: number;
+          value: Json;
+        };
+        Update: {
+          key?: string;
+          project_id?: number;
+          value?: Json;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "settings_project_id_fkey";
+            columns: ["project_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       stories: {
         Row: {
           created_at: string;

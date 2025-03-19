@@ -445,6 +445,92 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/projects/{id}/settings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get project settings */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: components["schemas"]["ProjectId"];
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Project settings */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"] & {
+              data?: components["schemas"]["ProjectSettings"][];
+            };
+          };
+        };
+        /** @description Bad request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+        /** @description Project not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"];
+          };
+        };
+      };
+    };
+    /** Update project settings */
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: components["schemas"]["ProjectId"];
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["ProjectSettings"];
+        };
+      };
+      responses: {
+        /** @description Project settings updated */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["GenericResponse"] & {
+              data?: components["schemas"]["ProjectSettings"];
+            };
+          };
+        };
+      };
+    };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/epics": {
     parameters: {
       query?: never;
@@ -1660,6 +1746,12 @@ export interface components {
     };
     /** @description The unique identifier of Template */
     TemplateId: number;
+    ProjectSettings: {
+      /** @description The ID of the project */
+      project_id: components["schemas"]["ProjectId"];
+      key: string;
+      value: string;
+    };
     properties: unknown;
   };
   responses: never;

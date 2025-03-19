@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["1943-77-251-156-81.ngrok-free.app"],
+      allowedHosts: ["32dc-77-251-156-81.ngrok-free.app"],
     },
     plugins: [nodePolyfills()],
   },

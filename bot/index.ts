@@ -12,7 +12,9 @@ export default function initTelegramBot(botToken: string, webAppUrl: string) {
     const authData = {
       chatId,
     };
-    const encodedData = Buffer.from(JSON.stringify(authData)).toString("base64");
+    const encodedData = Buffer.from(JSON.stringify(authData)).toString(
+      "base64",
+    );
 
     return await ctx.reply(
       "Light Track - simple task tracking app",
@@ -28,11 +30,14 @@ export default function initTelegramBot(botToken: string, webAppUrl: string) {
   });
 
   console.log("Bot is initialized...");
-  bot.launch().then(() => {
-    console.log("Bot is running...");
-  }).catch((err) => {
-    console.error("Bot failed to start", err);
-  });
+  bot
+    .launch()
+    .then(() => {
+      console.log("Bot is running...");
+    })
+    .catch((err) => {
+      console.error("Bot failed to start", err);
+    });
 
   // Enable graceful stop
   process.once("SIGINT", () => bot.stop("SIGINT"));

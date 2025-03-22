@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       botId: "",
+      botToken: "",
+      webappUrl: "",
       jwtSecret: "",
     },
   },
@@ -43,7 +45,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["1943-77-251-156-81.ngrok-free.app"],
+      allowedHosts: ["32dc-77-251-156-81.ngrok-free.app", "light-track.vercel.app"],
     },
     plugins: [nodePolyfills()],
   },

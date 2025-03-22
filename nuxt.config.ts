@@ -13,6 +13,9 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
+  future: {
+    typescriptBundlerResolution: false
+  },
   modules: [
     "@scalar/nuxt",
     "@nuxt/ui",

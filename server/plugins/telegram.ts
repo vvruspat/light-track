@@ -2,6 +2,10 @@ import initTelegramBot from "../../bot/index";
 
 export default defineNitroPlugin(() => {
   console.log("Telegram plugin is running...");
-  const { botToken, webappUrl } = useRuntimeConfig();
-  initTelegramBot(botToken, webappUrl);
+  if (process.env.NITRO_PRESET === "server") {
+    const { botToken, webappUrl } = useRuntimeConfig();
+    initTelegramBot(botToken, webappUrl);
+  } else {
+    console.log("Telegram bot skip in build");
+  }
 });

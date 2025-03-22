@@ -4,11 +4,11 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   runtimeConfig: {
+    botToken: "",
+    webappUrl: "",
     // Keys within public, will be also exposed to the client-side
     public: {
       botId: "",
-      botToken: "",
-      webappUrl: "",
       jwtSecret: "",
     },
   },

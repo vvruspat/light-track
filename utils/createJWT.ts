@@ -3,7 +3,7 @@ import type { TUser } from "@/types/entities";
 
 const createToken = (user: TUser, chatId: number) => {
   const {
-    public: { jwtSecret },
+    jwtSecret,
   } = useRuntimeConfig();
 
   const token = jwt.sign({ ...user, chatId }, jwtSecret, { expiresIn: "48h" });

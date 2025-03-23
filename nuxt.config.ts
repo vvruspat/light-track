@@ -6,15 +6,15 @@ export default defineNuxtConfig({
   runtimeConfig: {
     botToken: "",
     webappUrl: "",
+    jwtSecret: "",
     // Keys within public, will be also exposed to the client-side
     public: {
       botId: "",
-      jwtSecret: "",
     },
   },
   devtools: { enabled: false },
   future: {
-    typescriptBundlerResolution: false
+    typescriptBundlerResolution: false,
   },
   modules: [
     "@scalar/nuxt",

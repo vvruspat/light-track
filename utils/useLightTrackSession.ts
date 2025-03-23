@@ -4,9 +4,7 @@ import type { TUser } from "@/types/entities";
 
 export default function useLightTrackSession(event: H3Event) {
   const jwtToken = event.headers.get("Authorization");
-  const {
-    jwtSecret
-  } = useRuntimeConfig();
+  const { jwtSecret } = useRuntimeConfig();
 
   if (jwtToken) {
     if (jwt.verify(jwtToken, jwtSecret)) {

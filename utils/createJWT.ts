@@ -1,10 +1,14 @@
-import jwt from "jsonwebtoken";
+import { SignJWT } from 'jose';
 import type { TUser } from "@/types/entities";
 
-const createToken = (user: TUser, chatId: number) => {
+const createToken = async (user: TUser, chatId: number) => {
   const { jwtSecret } = useRuntimeConfig();
 
-  const token = jwt.sign({ ...user, chatId }, jwtSecret, { expiresIn: "48h" });
+  const token = await new SignJWT({ ...user, chatId })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('24h')
+    .sign(Buffer.from(jwtSecret));
 
   return token;
 };

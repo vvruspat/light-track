@@ -7,7 +7,7 @@ import useLightTrackSession from "~/utils/useLightTrackSession";
 export default defineEventHandler(async (event): Promise<UsersGetResponse> => {
   const client = await serverSupabaseClient<Database>(event);
 
-  const { chatId } = useLightTrackSession(event);
+  const { chatId } = await useLightTrackSession(event);
 
   const { data, error } = await client
     .from("chat_users")

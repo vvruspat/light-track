@@ -1,21 +1,19 @@
 import type { H3Event } from "h3";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 import type { TUser } from "@/types/entities";
 
-export default function useLightTrackSession(event: H3Event) {
+type SessionData = TUser & { chatId: number };
+
+export default async function useLightTrackSession(event: H3Event) {
   const jwtToken = event.headers.get("Authorization");
   const { jwtSecret } = useRuntimeConfig();
 
   if (jwtToken) {
-    if (jwt.verify(jwtToken, jwtSecret)) {
-      const sessionData = jwt.decode(jwtToken) as TUser & { chatId: number };
 
-      return {
-        ...sessionData,
-      };
-    } else {
-      throw new Error("Invalid JWT token");
-    }
+    const secret = Buffer.from(jwtSecret);
+    const { payload } = await jwtVerify(jwtToken, secret);
+
+    return payload as SessionData; 
   } else {
     throw new Error("JWT token is required");
   }

@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
-      const { chatId, ...user } = useLightTrackSession(event);
+      const { chatId, ...user } = await useLightTrackSession(event);
 
       if (!user) {
         return {

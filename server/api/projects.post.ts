@@ -28,7 +28,7 @@ export default defineEventHandler(
     });
     const client = await serverSupabaseClient<Database>(event);
 
-    const { chatId, ...user } = useLightTrackSession(event);
+    const { chatId, ...user } = await useLightTrackSession(event);
 
     // Validate the request body
     if (!body.title) {

@@ -7,7 +7,7 @@ import type { ProjectTemplateGetResponse } from "@/types/api";
 export default defineEventHandler(
   async (event): Promise<ProjectTemplateGetResponse> => {
     const client = await serverSupabaseClient<Database>(event);
-    const { chatId, ...user } = useLightTrackSession(event);
+    const { chatId, ...user } = await useLightTrackSession(event);
 
     const { data, error } = await client
       .from("templates")

@@ -1,4 +1,4 @@
-import useLightTrackSession from "@/utils/useLightTrackSession";
+import getLightTrackSession from "@/utils/getLightTrackSession";
 import { NON_PROTECTED_API } from "@/constants/non-protected-api";
 
 export default defineEventHandler(async (event) => {
@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
-      const { chatId, ...user } = await useLightTrackSession(event);
+      const { chatId, ...user } = await getLightTrackSession(event);
 
       if (!user) {
         return {

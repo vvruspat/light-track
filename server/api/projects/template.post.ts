@@ -3,7 +3,7 @@ import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import Ajv from "ajv";
 import { paths } from "@/public/_openapi.json";
-import useLightTrackSession from "@/utils/useLightTrackSession";
+import getLightTrackSession from "@/utils/getLightTrackSession";
 import type {
   ProjectTemplatePostRequest,
   ProjectTemplatePostResponse,
@@ -34,7 +34,7 @@ export default defineEventHandler(
     );
     const client = await serverSupabaseClient<Database>(event);
 
-    const { chatId, ...user } = await useLightTrackSession(event);
+    const { chatId, ...user } = await getLightTrackSession(event);
 
     // Validate the request body
     if (!body.project_id) {

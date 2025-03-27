@@ -2,12 +2,12 @@ import { defineEventHandler, createError } from "h3";
 import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import type { UsersGetResponse } from "@/types/api";
-import useLightTrackSession from "~/utils/useLightTrackSession";
+import getLightTrackSession from "~/utils/getLightTrackSession";
 
 export default defineEventHandler(async (event): Promise<UsersGetResponse> => {
   const client = await serverSupabaseClient<Database>(event);
 
-  const { chatId } = await useLightTrackSession(event);
+  const { chatId } = await getLightTrackSession(event);
 
   const { data, error } = await client
     .from("chat_users")

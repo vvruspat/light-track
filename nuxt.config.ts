@@ -28,7 +28,6 @@ export default defineNuxtConfig({
     experimental: {
       openAPI: true,
     },
-    serveStatic: true,
   },
   pinia: {
     storesDirs: ["./stores/**"],

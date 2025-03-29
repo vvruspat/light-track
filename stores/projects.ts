@@ -26,12 +26,12 @@ type ProjectsActions = {
   createProject: (
     title: TProject["title"],
     description: TProject["description"],
-    templateId?: TTemplate["id"]
+    templateId?: TTemplate["id"],
   ) => Promise<TProject | null>;
   updateProject: (
     projectId: TProject["id"],
     title: TProject["title"],
-    description: TProject["description"]
+    description: TProject["description"],
   ) => Promise<TProject | null>;
   deleteProject: (projectId: TProject["id"]) => Promise<void>;
 };
@@ -57,7 +57,7 @@ export const useProjectsStore = defineStore<
       }
 
       return state.projects.filter(
-        (project) => project.owner_id === currentUser.id
+        (project) => project.owner_id === currentUser.id,
       );
     },
   },
@@ -77,7 +77,7 @@ export const useProjectsStore = defineStore<
             body: JSON.stringify({
               project_id: projectId,
             }),
-          }
+          },
         );
 
         if (data.statusCode !== 201) {
@@ -135,7 +135,7 @@ export const useProjectsStore = defineStore<
     async createProject(
       title: TProject["title"],
       description: TProject["description"],
-      templateId?: TTemplate["id"]
+      templateId?: TTemplate["id"],
     ) {
       // create a new project
       this.loadingState = "pending";
@@ -184,7 +184,7 @@ export const useProjectsStore = defineStore<
           `/api/projects/${projectId}`,
           {
             method: "DELETE",
-          }
+          },
         );
 
         if (data.statusCode !== 200) {
@@ -196,7 +196,7 @@ export const useProjectsStore = defineStore<
         if (data.data) {
           this.loadingState = "success";
           this.projects = this.projects.filter(
-            (project) => project.id !== projectId
+            (project) => project.id !== projectId,
           );
         }
       } catch (error) {
@@ -209,7 +209,7 @@ export const useProjectsStore = defineStore<
     async updateProject(
       projectId: TProject["id"],
       title: TProject["title"],
-      description: TProject["description"]
+      description: TProject["description"],
     ) {
       // create a new project
       this.loadingState = "pending";
@@ -224,7 +224,7 @@ export const useProjectsStore = defineStore<
               title,
               description,
             }),
-          }
+          },
         );
 
         if (data.statusCode !== 200) {

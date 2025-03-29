@@ -111,8 +111,6 @@ export const useProjectsStore = defineStore<
           },
         });
 
-        console.log("RESPONSE!!", data);
-
         if (data.statusCode !== 200) {
           this.loadingState = "error";
           setError(new Error(data.statusMessage));
@@ -126,7 +124,6 @@ export const useProjectsStore = defineStore<
           return data.data;
         }
       } catch (error) {
-        console.log("ERROR!!", error);
         this.loadingState = "error";
         setError(error as Error);
         return [];

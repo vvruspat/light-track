@@ -26,7 +26,7 @@ await projectsStore.fetchProjects();
         spacing="4"
         align-items="stretch"
       >
-        <UText variant="h1">Select a project</UText>
+        <h1>Select a project</h1>
         <UVerticalNavigation :links="projectsLinks" :ui="{ padding: 'px-0' }">
           <template #default="{ link }">
             <UButton
@@ -54,7 +54,7 @@ await projectsStore.fetchProjects();
           justify="center"
           align-items="center"
         >
-          <UText variant="h1">No projects found</UText>
+          <h1>No projects found</h1>
           <UButton to="/project/create">Create a project</UButton>
         </StackContainer>
       </UCard>

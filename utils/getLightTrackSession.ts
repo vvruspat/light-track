@@ -12,8 +12,6 @@ export default async function getLightTrackSession(event: H3Event) {
     const secret = Buffer.from(jwtSecret);
     const { payload } = await jwtVerify(jwtToken, secret);
 
-    console.log("JWT payload", payload);
-
     return payload as SessionData;
   } else {
     throw new Error("JWT token is required");

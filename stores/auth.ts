@@ -31,7 +31,13 @@ const getInitialAuthState = (): AuthState => {
   const jwt = useCookie("jwt", { watch: false });
 
   if (jwt.value) {
-    const jwtData = jwt ? JSON.parse(atob(jwt.value.split(".")[1])) : null;
+    let jwtData = null;
+
+    try {
+      jwtData = jwt ? JSON.parse(atob(jwt.value.split(".")[1])) : null;
+    } catch (error) {
+      console.warn(error);
+    }
 
     if (jwtData) {
       const { chatId, ...currentUser } = jwtData;

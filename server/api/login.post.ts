@@ -110,7 +110,7 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
 
   try {
     if (user && chatId) {
-      const token = createJWT(user, chatId);
+      const token = await createJWT(user, chatId);
 
       setCookie(event, "jwt", token, {
         httpOnly: false,

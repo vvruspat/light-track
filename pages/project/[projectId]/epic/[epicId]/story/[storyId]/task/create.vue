@@ -1,5 +1,3 @@
 <template>
-  <TaskModal>
-    <TaskForm />
-  </TaskModal>
+  <TaskCreateModal />
 </template>

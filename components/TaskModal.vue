@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 const isOpen = ref<boolean>(true);
-const { taskId, projectId } = useRoute().params;
+const { taskId, projectId, epicId } = useRoute().params;
 
 const currentProjectStore = useCurrentProjectStore();
 const taskStore = useTasksStore();
@@ -16,8 +16,8 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
   if (isConfirmed === true) {
     await taskStore.deleteTask(Number(taskId));
     await currentProjectStore.getProjectById(Number(projectId), true);
-    isOpen.value = false;
     isRemoveAlertOpen.value = false;
+    onModalClose();
   } else {
     isRemoveAlertOpen.value = false;
   }
@@ -25,13 +25,8 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
 
 const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
+  await navigateTo(`/project/${projectId}/epic/${epicId}`);
 };
-
-watch(isOpen, (isOpenNew) => {
-  if (!isOpenNew) {
-    onModalClose();
-  }
-});
 </script>
 
 <template>
@@ -54,14 +49,14 @@ watch(isOpen, (isOpenNew) => {
             color="gray"
             variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
-            @click="isOpen = false"
+            @click="onModalClose"
           />
         </StackContainer>
       </template>
 
       <template #footer>
         <div class="flex justify-between lg:justify-start gap-4">
-          <UButton icon="mdi:arrow-left-thin" @click="isOpen = false">
+          <UButton icon="mdi:arrow-left-thin" @click="onModalClose">
             Back
           </UButton>
           <UButton

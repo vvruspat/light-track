@@ -13,12 +13,12 @@ const { currentChatUsers } = storeToRefs(usersStore);
 
 const task = computed(() => {
   if (taskId) {
+
     return currentProjectStore.currentProject?.epics
       .find((epic) => epic.id === Number(epicId))
       ?.stories.find((story) => story.id === Number(storyId))
       ?.tasks.find((task) => task.id === Number(taskId));
   }
-
   return null;
 });
 

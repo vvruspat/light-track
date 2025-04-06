@@ -242,7 +242,7 @@ export const useCurrentProjectStore = defineStore<
           { method: "GET" },
         );
 
-        if (data.statusCode !== 200) {
+        if (data.statusCode && data.statusCode >= 300) {
           throw Error(data.statusMessage);
         }
 
@@ -256,7 +256,6 @@ export const useCurrentProjectStore = defineStore<
         console.error(error);
         throw Error((error as Error).message);
       }
-
       return null;
     },
   },

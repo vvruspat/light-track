@@ -22,7 +22,7 @@ const links = computed(() => [
   [
     {
       label: "Edit project",
-      icon: "mdi:pencil-outline",
+      icon: "i-heroicons-pencil-square",
       to: `/project/${projectId}/edit`,
     },
     {
@@ -34,7 +34,7 @@ const links = computed(() => [
     },
     {
       label: "Remove project",
-      icon: "mdi:delete-forever",
+      icon: "i-heroicons-trash",
       click: () => {
         isRemoveAlertOpen.value = true;
       },
@@ -68,8 +68,8 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     />
     <template #panel>
       <StackContainer direction="column">
-        <UContainer class="p-4">
-          <UButton :to="createEpicUrl">Create new epic</UButton>
+        <UContainer class="p-4 w-full">
+          <UButton :to="createEpicUrl" class="w-full justify-center">Create new epic</UButton>
         </UContainer>
 
         <UVerticalNavigation :links="links" />

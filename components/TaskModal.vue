@@ -27,7 +27,6 @@ const onModalClose = async () => {
   await currentProjectStore.getProjectById(Number(projectId), true);
   await navigateTo(`/project/${projectId}/epic/${epicId}`);
 };
-
 </script>
 
 <template>

@@ -18,12 +18,12 @@ const links = [
   [
     {
       label: "Edit story",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "i-heroicons-pencil-square",
       to: `/project/${projectId}/epic/${epicId}/story/${storyId}/edit`,
     },
     {
       label: "Remove story",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "i-heroicons-trash",
       click: () => {
         isRemoveAlertOpen.value = true;
       },
@@ -53,13 +53,12 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
       @click="isOpen = true"
     />
     <template #panel>
-      <UContainer class="p-4">
-        <StackContainer direction="column">
-          <UButton :to="createTaskUrl">Create new task</UButton>
-
-          <UVerticalNavigation :links="links" />
-        </StackContainer>
-      </UContainer>
+      <StackContainer direction="column">
+        <UContainer class="p-4 w-full">
+          <UButton :to="createTaskUrl" class="w-full justify-center">Create new task</UButton>
+        </UContainer>
+        <UVerticalNavigation :links="links" />
+      </StackContainer>
     </template>
   </UPopover>
   <RemoveDialog

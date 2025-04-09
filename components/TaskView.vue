@@ -43,7 +43,7 @@ watch(users, () => {
 
 const statusSelected = ref<(typeof statuses)[number]>(
   statuses.find((statusItem) => statusItem.value === state.status) ??
-  statuses[0],
+    statuses[0],
 );
 
 function updateTask() {
@@ -59,7 +59,7 @@ function updateTask() {
 
 const debouncedUpdateTask = useDebounce(updateTask, 500);
 
-function onTitleBlur() {  
+function onTitleBlur() {
   titleEditMode.value = false;
 }
 
@@ -122,41 +122,74 @@ watch(state, () => {
 });
 
 await usersStore.fetchUsers();
-
 </script>
 
 <template>
-  <StackContainer spacing="4" align-items="start" justify="stretch" class="flex-col md:flex-row">
-    <StackContainer direction="column" spacing="4" align-items="stretch" justify="start" class="grow-1 w-full">
+  <StackContainer
+    spacing="4"
+    align-items="start"
+    justify="stretch"
+    class="flex-col md:flex-row"
+  >
+    <StackContainer
+      direction="column"
+      spacing="4"
+      align-items="stretch"
+      justify="start"
+      class="grow-1 w-full"
+    >
       <Teleport to="#tabbar-header-title" :defer="true">
         <div>
-          <UInput v-if="titleEditMode" v-model="state.title" autofocus variant="none" :padded="false" size="xl"
-            class="bg-gray-200 dark:bg-gray-800" @focus="onTitleFocus" @blur="onTitleBlur"
-            @keydown.enter="onTitleBlur" />
+          <UInput
+            v-if="titleEditMode"
+            v-model="state.title"
+            autofocus
+            variant="none"
+            :padded="false"
+            size="xl"
+            class="bg-gray-200 dark:bg-gray-800"
+            @focus="onTitleFocus"
+            @blur="onTitleBlur"
+            @keydown.enter="onTitleBlur"
+          />
           <div v-else @click="titleEditMode = true">
             {{ state.title }}
           </div>
         </div>
       </Teleport>
 
-      <UTextarea v-if="descriptionEditMode" v-model="state.description" autoresize autofocus variant="none" size="lg"
-        :padded="false" :rows="descriptionLines"
-        class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 relative block w-full" @focus="onDescriptionFocus"
-        @blur="onDescriptionBlur" @keydown="onDescriptionKewdown" />
+      <UTextarea
+        v-if="descriptionEditMode"
+        v-model="state.description"
+        autoresize
+        autofocus
+        variant="none"
+        size="lg"
+        :padded="false"
+        :rows="descriptionLines"
+        class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 relative block w-full"
+        @focus="onDescriptionFocus"
+        @blur="onDescriptionBlur"
+        @keydown="onDescriptionKewdown"
+      />
 
-      <div v-else v-linkify:options="{
-        target: '_blank',
-        className: (href: string, type: string) => {
-          if (type === 'url') {
-            return 'text-blue-500 dark:text-blue-400 hover:underline';
-          }
-          return 'text-blue-500 dark:text-blue-400 underline';
-        },
-        attributes: {
-          onclick: 'event.stopPropagation()',
-        },
-      }" class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200 whitespace-pre-wrap"
-        @click="onDescriptionClick">
+      <div
+        v-else
+        v-linkify:options="{
+          target: '_blank',
+          className: (href: string, type: string) => {
+            if (type === 'url') {
+              return 'text-blue-500 dark:text-blue-400 hover:underline';
+            }
+            return 'text-blue-500 dark:text-blue-400 underline';
+          },
+          attributes: {
+            onclick: 'event.stopPropagation()',
+          },
+        }"
+        class="relative block w-full text-sm px-0 text-gray-900 dark:text-gray-200 whitespace-pre-wrap"
+        @click="onDescriptionClick"
+      >
         {{ state.description }}
       </div>
     </StackContainer>
@@ -164,13 +197,23 @@ await usersStore.fetchUsers();
     <UCard class="bg-gray-200 dark:bg-gray-800 w-full md:w-auto">
       <StackContainer direction="column" spacing="4" align-items="stretch">
         <UFormGroup label="Status" name="status">
-          <USelectMenu v-if="statuses.length" v-model="statusSelected" :options="statuses" option-attribute="name">
+          <USelectMenu
+            v-if="statuses.length"
+            v-model="statusSelected"
+            :options="statuses"
+            option-attribute="name"
+          >
             <template #leading>
-              <span class="h-4 w-4 rounded-full"
-                :class="`bg-${statusSelected.color}-500 dark:bg-${statusSelected.color}-400`" />
+              <span
+                class="h-4 w-4 rounded-full"
+                :class="`bg-${statusSelected.color}-500 dark:bg-${statusSelected.color}-400`"
+              />
             </template>
             <template #option="{ option }">
-              <span class="h-2 w-2 rounded-full" :class="`bg-${option.color}-500 dark:bg-${option.color}-400`" />
+              <span
+                class="h-2 w-2 rounded-full"
+                :class="`bg-${option.color}-500 dark:bg-${option.color}-400`"
+              />
               <span class="truncate">{{ option.name }}</span>
             </template>
           </USelectMenu>
@@ -178,11 +221,23 @@ await usersStore.fetchUsers();
         </UFormGroup>
 
         <UFormGroup label="Assignee" name="assignee">
-          <USelectMenu v-if="users.length > 0" v-model="assigneeSelected" :options="users" option-attribute="name"
-            placeholder="Select a person" searchable searchable-placeholder="Search by name or id"
-            :search-attributes="['name', 'value']">
+          <USelectMenu
+            v-if="users.length > 0"
+            v-model="assigneeSelected"
+            :options="users"
+            option-attribute="name"
+            placeholder="Select a person"
+            searchable
+            searchable-placeholder="Search by name or id"
+            :search-attributes="['name', 'value']"
+          >
             <template #leading>
-              <UAvatar v-if="assigneeSelected?.url" size="2xs" :src="assigneeSelected.url" alt="Avatar" />
+              <UAvatar
+                v-if="assigneeSelected?.url"
+                size="2xs"
+                :src="assigneeSelected.url"
+                alt="Avatar"
+              />
             </template>
             <template #option="{ option: user }">
               <StackContainer spacing="2">
@@ -195,7 +250,11 @@ await usersStore.fetchUsers();
         </UFormGroup>
 
         <UFormGroup label="Estimation" name="estimation">
-          <UInput v-model="state.estimation" type="number" @focus="onEstimationFocus" />
+          <UInput
+            v-model="state.estimation"
+            type="number"
+            @focus="onEstimationFocus"
+          />
         </UFormGroup>
       </StackContainer>
     </UCard>

@@ -114,6 +114,9 @@
     "/epics/{id}": {
       "$ref": "./epics.json#/paths/~1epics~1{id}"
     },
+    "/epics/{id}/dublicate": {
+      "$ref": "./epics.json#/paths/~1epics~1{id}~1dublicate"
+    },
     "/stories": {
       "$ref": "./stories.json#/paths/~1stories"
     },

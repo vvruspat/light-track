@@ -13,13 +13,22 @@ const { projectId, epicId } = defineProps<EpicMenuProps>();
 const links = [
   [
     {
+      label: "Dublicate epic",
+      icon: "i-heroicons-document-duplicate",
+      click: async () => {
+        const newEpicId = await epicStore.dublicateEpic(epicId);
+        await currentProjectStore.getProjectById(projectId, true);
+        await navigateTo(`/project/${projectId}/epic/${newEpicId}`);
+      },
+    },
+    {
       label: "Edit epic",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "i-heroicons-pencil-square",
       to: `/project/${projectId}/epic/${epicId}/edit`,
     },
     {
       label: "Remove epic",
-      icon: "i-heroicons-question-mark-circle",
+      icon: "i-heroicons-trash",
       click: () => {
         isRemoveAlertOpen.value = true;
       },
@@ -59,8 +68,8 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     />
     <template #panel>
       <StackContainer direction="column">
-        <UContainer class="p-4">
-          <UButton :to="createStoryUrl">Create new story</UButton>
+        <UContainer class="p-4 w-full">
+          <UButton :to="createStoryUrl" class="w-full justify-center">Create new story</UButton>
         </UContainer>
 
         <UVerticalNavigation :links="links" />

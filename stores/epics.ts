@@ -23,6 +23,9 @@ type EpicsActions = {
     title: TEpic["title"],
     description: TEpic["description"],
   ) => Promise<TEpic["id"] | null>;
+  dublicateEpic: (
+    epicId: TEpic["id"],
+  ) => Promise<TEpic["id"] | null>;
   deleteEpic: (epicId: TEpic["id"]) => Promise<void>;
 };
 
@@ -128,6 +131,38 @@ export const useEpicsStore = defineStore<
         });
 
         if (data.statusCode !== 200) {
+          this.loadingState = "error";
+          setError(new Error(data.statusMessage));
+          return null;
+        }
+
+        if (data.data) {
+          this.loadingState = "success";
+          return data.data.id!;
+        }
+      } catch (error) {
+        this.loadingState = "error";
+        setError(error as Error);
+        return null;
+      }
+
+      return null;
+    },
+
+    async dublicateEpic(
+      epicId: TEpic["id"],
+    ) {
+      // create a new epic from existing one
+      this.loadingState = "pending";
+
+      const { setError } = useErrorsStore();
+
+      try {
+        const data = await $api<EpicPutResponse>(`/api/epics/${epicId}/dublicate`, {
+          method: "POST",
+        });
+
+        if (data.statusCode !== 201) {
           this.loadingState = "error";
           setError(new Error(data.statusMessage));
           return null;

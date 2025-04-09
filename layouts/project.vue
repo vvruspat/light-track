@@ -13,7 +13,7 @@ const { projectId } = route.params;
 
 try {
   const project = await currentProjectStore.getProjectById(Number(projectId));
-  
+
   if (project?.epics.length) {
     if (!route.params.epicId) {
       navigateTo(`/project/${projectId}/epic/${project.epics[0].id}`);

@@ -45,7 +45,7 @@
     "pinia": "^2.3.1",
     "prettier": "^3.4.2",
     "stream-browserify": "^3.0.0",
-    "supabase": "^2.19.7",
+    "supabase": "^2.20.12",
     "telegraf": "^4.16.3",
     "tsx": "^4.19.2",
     "vite-plugin-node-polyfills": "^0.23.0",

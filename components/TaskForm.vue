@@ -13,7 +13,6 @@ const { currentChatUsers } = storeToRefs(usersStore);
 
 const task = computed(() => {
   if (taskId) {
-
     return currentProjectStore.currentProject?.epics
       .find((epic) => epic.id === Number(epicId))
       ?.stories.find((story) => story.id === Number(storyId))

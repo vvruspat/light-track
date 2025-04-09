@@ -55,7 +55,9 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     <template #panel>
       <StackContainer direction="column">
         <UContainer class="p-4 w-full">
-          <UButton :to="createTaskUrl" class="w-full justify-center">Create new task</UButton>
+          <UButton :to="createTaskUrl" class="w-full justify-center"
+            >Create new task</UButton
+          >
         </UContainer>
         <UVerticalNavigation :links="links" />
       </StackContainer>

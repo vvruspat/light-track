@@ -69,7 +69,9 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     <template #panel>
       <StackContainer direction="column">
         <UContainer class="p-4 w-full">
-          <UButton :to="createEpicUrl" class="w-full justify-center">Create new epic</UButton>
+          <UButton :to="createEpicUrl" class="w-full justify-center"
+            >Create new epic</UButton
+          >
         </UContainer>
 
         <UVerticalNavigation :links="links" />

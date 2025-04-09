@@ -2,13 +2,10 @@ import { defineEventHandler, createError } from "h3";
 import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import getLightTrackSession from "@/utils/getLightTrackSession";
-import type {
-  EpicDublicatePostResponse,
-} from "@/types/api";
+import type { EpicDublicatePostResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<EpicDublicatePostResponse> => {
-
     const epicId = Number(event.context.params?.id);
     const client = await serverSupabaseClient<Database>(event);
 
@@ -73,13 +70,14 @@ export default defineEventHandler(
 
     const { data: epicsData, error: epicsError } = await client
       .from("epics")
-      .insert(
-        [
-          {
-            title: epicTemplate.title, description: epicTemplate.description, project_id: epicTemplate.project_id, owner_id: user.id
-          }
-        ],
-      )
+      .insert([
+        {
+          title: epicTemplate.title,
+          description: epicTemplate.description,
+          project_id: epicTemplate.project_id,
+          owner_id: user.id,
+        },
+      ])
       .select()
       .single();
 

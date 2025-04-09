@@ -23,9 +23,7 @@ type EpicsActions = {
     title: TEpic["title"],
     description: TEpic["description"],
   ) => Promise<TEpic["id"] | null>;
-  dublicateEpic: (
-    epicId: TEpic["id"],
-  ) => Promise<TEpic["id"] | null>;
+  dublicateEpic: (epicId: TEpic["id"]) => Promise<TEpic["id"] | null>;
   deleteEpic: (epicId: TEpic["id"]) => Promise<void>;
 };
 
@@ -149,18 +147,19 @@ export const useEpicsStore = defineStore<
       return null;
     },
 
-    async dublicateEpic(
-      epicId: TEpic["id"],
-    ) {
+    async dublicateEpic(epicId: TEpic["id"]) {
       // create a new epic from existing one
       this.loadingState = "pending";
 
       const { setError } = useErrorsStore();
 
       try {
-        const data = await $api<EpicPutResponse>(`/api/epics/${epicId}/dublicate`, {
-          method: "POST",
-        });
+        const data = await $api<EpicPutResponse>(
+          `/api/epics/${epicId}/dublicate`,
+          {
+            method: "POST",
+          },
+        );
 
         if (data.statusCode !== 201) {
           this.loadingState = "error";

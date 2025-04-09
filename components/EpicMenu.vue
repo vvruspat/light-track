@@ -69,7 +69,9 @@ const onRemoveDialogClose = async (isConfirmed: boolean) => {
     <template #panel>
       <StackContainer direction="column">
         <UContainer class="p-4 w-full">
-          <UButton :to="createStoryUrl" class="w-full justify-center">Create new story</UButton>
+          <UButton :to="createStoryUrl" class="w-full justify-center"
+            >Create new story</UButton
+          >
         </UContainer>
 
         <UVerticalNavigation :links="links" />

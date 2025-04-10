@@ -13,8 +13,8 @@
           "description": {
             "type": "string"
           },
-          "owner_id": {
-            "$ref": "../atoms/userId.json#/components/schemas/UserId"
+          "chat_id": {
+            "$ref": "../atoms/chatId.json#/components/schemas/ChatId"
           },
           "created_at": {
             "type": "string",
@@ -24,7 +24,7 @@
             "type": "string"
           }
         },
-        "required": ["id", "title", "description", "owner_id", "template"]
+        "required": ["id", "title", "description", "chat_id", "template"]
       }
     }
   }

@@ -4,1747 +4,1715 @@
  */
 
 export interface paths {
-  "/projects": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a list of projects */
-    get: {
-      parameters: {
-        query?: {
-          owner_id?: components["schemas"]["UserId"];
-          limit?: components["parameters"]["limit"];
-          offset?: components["parameters"]["offset"];
-          sort?: components["parameters"]["sort"];
-          direction?: components["parameters"]["direction"];
+    "/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description A list of projects */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              data?: WithRequired<
-                components["schemas"]["Project"],
-                | "id"
-                | "title"
-                | "created_at"
-                | "chat_id"
-                | "owner_id"
-                | "description"
-              >[];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
+        /** Get a list of projects */
+        get: {
+            parameters: {
+                query?: {
+                    owner_id?: components["schemas"]["UserId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
             };
-          };
+            requestBody?: never;
+            responses: {
+                /** @description A list of projects */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data?: WithRequired<components["schemas"]["Project"], "id" | "title" | "created_at" | "chat_id" | "owner_id" | "description">[];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
+                    };
+                };
+            };
         };
-      };
+        put?: never;
+        /** Create a new project */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the project */
+                        title: string;
+                        /** @description The project description */
+                        description?: string;
+                        template_id?: components["schemas"]["TemplateId"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Project created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title: string;
+                                /** @description The project description */
+                                description: string;
+                                /** @description The ID of the project owner */
+                                owner_id: components["schemas"]["UserId"];
+                                /** @description The ID of the chat the project belongs to */
+                                chat_id: components["schemas"]["ChatId"];
+                                /** @description The date and time the project was created */
+                                created_at: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    put?: never;
-    /** Create a new project */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
+    "/projects/template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get templates */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Templates */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: WithRequired<components["schemas"]["Template"], "id" | "title" | "description">[];
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Project not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Save project as template */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        project_id: components["schemas"]["ProjectId"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Template created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                id: components["schemas"]["TemplateId"];
+                                title: string;
+                                description: string;
+                                chat_id: components["schemas"]["ChatId"];
+                                /** Format: date-time */
+                                created_at: string;
+                                template?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/template/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Update template */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TemplateId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["Template"];
+                };
+            };
+            responses: {
+                /** @description Template updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: components["schemas"]["Template"];
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete project template by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TemplateId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Template deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Template not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a project by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Project details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: components["schemas"]["FullProject"];
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Project not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        /** Update project by ID */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the project */
+                        title?: string;
+                        /** @description The project description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Project updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the project */
+                                id: components["schemas"]["ProjectId"];
+                                /** @description The title of the project */
+                                title: string;
+                                /** @description The project description */
+                                description: string;
+                                /** @description The ID of the project owner */
+                                owner_id: components["schemas"]["UserId"];
+                                /** @description The ID of the chat the project belongs to */
+                                chat_id: components["schemas"]["ChatId"];
+                                /** @description The date and time the project was created */
+                                created_at: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete project by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Project deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Project not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/epics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a list of epics */
+        get: {
+            parameters: {
+                query?: {
+                    project_id?: components["schemas"]["ProjectId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A list of epics */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data?: components["schemas"]["Epic"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Create a new epic */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the epic */
+                        title: string;
+                        /** @description The epic description */
+                        description?: string;
+                        /** @description The ID of the project which the epic belongs to */
+                        project_id: components["schemas"]["ProjectId"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Epic created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                project_id?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/epics/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get an epic by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Epic details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                project_id?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        /** Update epic by id */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the epic */
+                        title?: string;
+                        /** @description The epic description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Epic updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                project_id?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete an epic by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Epic deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/epics/{id}/dublicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** dublicate an epic by ID */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["EpicId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Epic details */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the epic */
+                                id?: components["schemas"]["EpicId"];
+                                /** @description The title of the epic */
+                                title?: string;
+                                /** @description The epic description */
+                                description?: string;
+                                /** @description The ID of the user who owns the epic */
+                                owner_id?: components["schemas"]["UserId"];
+                                /** @description The ID of the project the epic belongs to */
+                                project_id?: components["schemas"]["ProjectId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the epic was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/stories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a list of stories */
+        get: {
+            parameters: {
+                query?: {
+                    epic_id?: components["schemas"]["EpicId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A list of stories successfully returned */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data?: components["schemas"]["Story"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Create a new story */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the story */
+                        title: string;
+                        /** @description The story description */
+                        description?: string;
+                        /** @description The ID of the epic the story belongs to */
+                        epic_id?: components["schemas"]["EpicId"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Story created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the epic the story belongs to */
+                                epic_id?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                owner_id?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Invalid input */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/stories/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get an story by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Story details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the epic the story belongs to */
+                                epic_id?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                owner_id?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description story not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["properties"];
+                    };
+                };
+            };
+        };
+        /** Update story */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the story */
+                        title?: string;
+                        /** @description The story description */
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Story updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the story */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the story */
+                                title?: string;
+                                /** @description The story description */
+                                description?: string;
+                                /** @description The ID of the epic the story belongs to */
+                                epic_id?: components["schemas"]["EpicId"];
+                                /** @description The ID of the user who owns the story */
+                                owner_id?: components["schemas"]["UserId"];
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was created
+                                 */
+                                created_at?: string;
+                                /**
+                                 * Format: date-time
+                                 * @description The date and time when the story was last updated
+                                 */
+                                updated_at?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Invalid input */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete story by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["StoryId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Story deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description story not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["properties"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a list of tasks */
+        get: {
+            parameters: {
+                query?: {
+                    story_id?: components["schemas"]["StoryId"];
+                    assignee_id?: components["schemas"]["UserId"];
+                    owner_id?: components["schemas"]["UserId"];
+                    limit?: components["parameters"]["limit"];
+                    offset?: components["parameters"]["offset"];
+                    sort?: components["parameters"]["sort"];
+                    direction?: components["parameters"]["direction"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A list of tasks */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data?: components["schemas"]["Task"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Create a new task */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the task */
+                        title: string;
+                        /** @description The task description */
+                        description?: string;
+                        /** @description The story ID the task belongs to */
+                        story_id?: components["schemas"]["StoryId"];
+                        /** @description The user ID the task is assigned to */
+                        assignee_id?: components["schemas"]["UserId"];
+                        /** @description The estimated effort for the task */
+                        estimation?: number;
+                        /** @description The status of the task */
+                        status: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Task created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the story the task belongs to */
+                                story_id?: components["schemas"]["StoryId"];
+                                /** @description The ID of the user assigned to the task */
+                                assignee_id?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tasks/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a task by ID */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TaskId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Task details */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the story the task belongs to */
+                                story_id?: components["schemas"]["StoryId"];
+                                /** @description The ID of the user assigned to the task */
+                                assignee_id?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
+                    };
+                };
+                /** @description Task not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        /** Update task by ID */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TaskId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The title of the task */
+                        title?: string;
+                        /** @description The task description */
+                        description?: string;
+                        /** @description The user ID the task is assigned to */
+                        assignee_id?: components["schemas"]["UserId"];
+                        /** @description The estimated effort for the task */
+                        estimation?: number;
+                        /** @description The status of the task */
+                        status?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Task updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The unique identifier for the task */
+                                id?: components["schemas"]["ChatId"];
+                                /** @description The title of the task */
+                                title?: string;
+                                /** @description The task description */
+                                description?: string;
+                                /** @description The ID of the story the task belongs to */
+                                story_id?: components["schemas"]["StoryId"];
+                                /** @description The ID of the user assigned to the task */
+                                assignee_id?: components["schemas"]["UserId"];
+                                /** @description The estimated effort for the task */
+                                estimation?: number;
+                                /** @description The status of the task */
+                                status?: string;
+                            };
+                        };
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete a task by ID */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: components["schemas"]["TaskId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Task deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Task not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/taskwatchers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a task watcher */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The ID of the task to watch */
+                        task_id: components["schemas"]["TaskId"];
+                        /** @description The ID of the user who will be watching the task */
+                        userId: components["schemas"]["UserId"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Task watcher add */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Task watcher not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        /** Remove a task watcher */
+        delete: {
+            parameters: {
+                query?: {
+                    task_id?: components["schemas"]["TaskId"];
+                    userId?: components["schemas"]["UserId"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Task watcher deleted */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+                /** @description Task watcher not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Login user with miniapp data */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        params: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description User logined */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"] & {
+                            data?: {
+                                /** @description The token for the project */
+                                token: string;
+                                user: {
+                                    allows_write_to_pm: boolean;
+                                    first_name: string;
+                                    /** @description The ID of the project owner */
+                                    id: components["schemas"]["UserId"];
+                                    language_code: string;
+                                    last_name: string;
+                                    photo_url: string;
+                                    username: string;
+                                };
+                                /** @description The ID of the chat the user opened the app in */
+                                chat_id: components["schemas"]["ChatId"];
+                            };
+                        };
+                    };
+                };
+                /** @description Bad request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Logout user */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "*/*"?: never;
+                };
+            };
+            responses: {
+                /** @description User loged out */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GenericResponse"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a list of users in current chat */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A list of users successfully returned */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data?: components["schemas"]["User"][];
+                            statusCode?: number;
+                            statusMessage?: string;
+                            message?: string | null;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+}
+export type webhooks = Record<string, never>;
+export interface components {
+    schemas: {
+        /** @description The unique identifier for the project */
+        ProjectId: number;
+        /** @description The unique identifier for the User */
+        UserId: number;
+        /** @description The unique identifier for the chat */
+        ChatId: number;
+        /** @description The unique identifier for the epic */
+        EpicId: number;
+        /** @description The unique identifier for the story */
+        StoryId: number;
+        /** @description The unique identifier for the task */
+        TaskId: number;
+        /** @enum {string} */
+        SortDirection: "asc" | "desc";
+        GenericResponse: {
+            statusCode?: number;
+            statusMessage?: string;
+            message?: string | null;
+        };
+        GenericListRequest: {
+            limit?: unknown;
+            offset?: unknown;
+        };
+        GenericSortRequest: {
+            sort?: unknown;
+            direction?: unknown;
+        };
+        Project: {
+            /** @description The unique identifier for the project */
+            id?: components["schemas"]["ProjectId"];
             /** @description The title of the project */
             title: string;
             /** @description The project description */
             description?: string;
-            template_id?: components["schemas"]["TemplateId"];
-          };
+            /** @description The ID of the project owner */
+            owner_id?: components["schemas"]["UserId"];
+            /** @description The ID of the chat the project belongs to */
+            chat_id: components["schemas"]["ChatId"];
+            /** @description The date and time the project was created */
+            created_at?: string;
         };
-      };
-      responses: {
-        /** @description Project created */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the project */
-                id: components["schemas"]["ProjectId"];
-                /** @description The title of the project */
-                title: string;
-                /** @description The project description */
-                description: string;
-                /** @description The ID of the project owner */
-                owner_id: components["schemas"]["UserId"];
-                /** @description The ID of the chat the project belongs to */
-                chat_id: components["schemas"]["ChatId"];
-                /** @description The date and time the project was created */
-                created_at: string;
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/template": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get templates */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Templates */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: WithRequired<
-                components["schemas"]["Template"],
-                "id" | "title" | "owner_id" | "description"
-              >[];
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Project not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    put?: never;
-    /** Save project as template */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            project_id: components["schemas"]["ProjectId"];
-          };
-        };
-      };
-      responses: {
-        /** @description Template created */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                id: components["schemas"]["TemplateId"];
-                title: string;
-                description: string;
-                owner_id: components["schemas"]["UserId"];
-                /** Format: date-time */
-                created_at: string;
-                template?: string;
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/template/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    /** Update template */
-    put: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["TemplateId"];
-        };
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": components["schemas"]["Template"];
-        };
-      };
-      responses: {
-        /** @description Template updated */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: components["schemas"]["Template"];
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    post?: never;
-    /** Delete project template by ID */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["TemplateId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Template deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Template not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a project by ID */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["ProjectId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Project details */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: components["schemas"]["FullProject"];
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Project not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    /** Update project by ID */
-    put: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["ProjectId"];
-        };
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** @description The title of the project */
-            title?: string;
-            /** @description The project description */
-            description?: string;
-          };
-        };
-      };
-      responses: {
-        /** @description Project updated */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the project */
-                id: components["schemas"]["ProjectId"];
-                /** @description The title of the project */
-                title: string;
-                /** @description The project description */
-                description: string;
-                /** @description The ID of the project owner */
-                owner_id: components["schemas"]["UserId"];
-                /** @description The ID of the chat the project belongs to */
-                chat_id: components["schemas"]["ChatId"];
-                /** @description The date and time the project was created */
-                created_at: string;
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    post?: never;
-    /** Delete project by ID */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["ProjectId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Project deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Project not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/epics": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a list of epics */
-    get: {
-      parameters: {
-        query?: {
-          project_id?: components["schemas"]["ProjectId"];
-          limit?: components["parameters"]["limit"];
-          offset?: components["parameters"]["offset"];
-          sort?: components["parameters"]["sort"];
-          direction?: components["parameters"]["direction"];
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description A list of epics */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              data?: components["schemas"]["Epic"][];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
-            };
-          };
-        };
-      };
-    };
-    put?: never;
-    /** Create a new epic */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
+        Epic: {
+            /** @description The unique identifier for the epic */
+            id: components["schemas"]["EpicId"];
             /** @description The title of the epic */
             title: string;
             /** @description The epic description */
             description?: string;
-            /** @description The ID of the project which the epic belongs to */
+            /** @description The ID of the user who owns the epic */
+            owner_id?: components["schemas"]["UserId"];
+            /** @description The ID of the project the epic belongs to */
             project_id: components["schemas"]["ProjectId"];
-          };
+            /**
+             * Format: date-time
+             * @description The date and time when the epic was created
+             */
+            created_at: string;
+            /**
+             * Format: date-time
+             * @description The date and time when the epic was last updated
+             */
+            updated_at: string;
         };
-      };
-      responses: {
-        /** @description Epic created */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the epic */
-                id?: components["schemas"]["EpicId"];
-                /** @description The title of the epic */
-                title?: string;
-                /** @description The epic description */
-                description?: string;
-                /** @description The ID of the user who owns the epic */
-                owner_id?: components["schemas"]["UserId"];
-                /** @description The ID of the project the epic belongs to */
-                project_id?: components["schemas"]["ProjectId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/epics/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get an epic by ID */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["EpicId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Epic details */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the epic */
-                id?: components["schemas"]["EpicId"];
-                /** @description The title of the epic */
-                title?: string;
-                /** @description The epic description */
-                description?: string;
-                /** @description The ID of the user who owns the epic */
-                owner_id?: components["schemas"]["UserId"];
-                /** @description The ID of the project the epic belongs to */
-                project_id?: components["schemas"]["ProjectId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    /** Update epic by id */
-    put: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["EpicId"];
-        };
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** @description The title of the epic */
-            title?: string;
-            /** @description The epic description */
-            description?: string;
-          };
-        };
-      };
-      responses: {
-        /** @description Epic updated */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the epic */
-                id?: components["schemas"]["EpicId"];
-                /** @description The title of the epic */
-                title?: string;
-                /** @description The epic description */
-                description?: string;
-                /** @description The ID of the user who owns the epic */
-                owner_id?: components["schemas"]["UserId"];
-                /** @description The ID of the project the epic belongs to */
-                project_id?: components["schemas"]["ProjectId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    post?: never;
-    /** Delete an epic by ID */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["EpicId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Epic deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/epics/{id}/dublicate": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** dublicate an epic by ID */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["EpicId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Epic details */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the epic */
-                id?: components["schemas"]["EpicId"];
-                /** @description The title of the epic */
-                title?: string;
-                /** @description The epic description */
-                description?: string;
-                /** @description The ID of the user who owns the epic */
-                owner_id?: components["schemas"]["UserId"];
-                /** @description The ID of the project the epic belongs to */
-                project_id?: components["schemas"]["ProjectId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the epic was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/stories": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a list of stories */
-    get: {
-      parameters: {
-        query?: {
-          epic_id?: components["schemas"]["EpicId"];
-          limit?: components["parameters"]["limit"];
-          offset?: components["parameters"]["offset"];
-          sort?: components["parameters"]["sort"];
-          direction?: components["parameters"]["direction"];
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description A list of stories successfully returned */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              data?: components["schemas"]["Story"][];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
-            };
-          };
-        };
-      };
-    };
-    put?: never;
-    /** Create a new story */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
+        Story: {
+            /** @description The unique identifier for the story */
+            id: components["schemas"]["ChatId"];
             /** @description The title of the story */
             title: string;
             /** @description The story description */
             description?: string;
             /** @description The ID of the epic the story belongs to */
             epic_id?: components["schemas"]["EpicId"];
-          };
+            /** @description The ID of the user who owns the story */
+            owner_id: components["schemas"]["UserId"];
+            /**
+             * Format: date-time
+             * @description The date and time when the story was created
+             */
+            created_at: string;
+            /**
+             * Format: date-time
+             * @description The date and time when the story was last updated
+             */
+            updated_at: string;
         };
-      };
-      responses: {
-        /** @description Story created */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the story */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the story */
-                title?: string;
-                /** @description The story description */
-                description?: string;
-                /** @description The ID of the epic the story belongs to */
-                epic_id?: components["schemas"]["EpicId"];
-                /** @description The ID of the user who owns the story */
-                owner_id?: components["schemas"]["UserId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Invalid input */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/stories/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get an story by ID */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["StoryId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Story details */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the story */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the story */
-                title?: string;
-                /** @description The story description */
-                description?: string;
-                /** @description The ID of the epic the story belongs to */
-                epic_id?: components["schemas"]["EpicId"];
-                /** @description The ID of the user who owns the story */
-                owner_id?: components["schemas"]["UserId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description story not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["properties"];
-          };
-        };
-      };
-    };
-    /** Update story */
-    put: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["StoryId"];
-        };
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** @description The title of the story */
-            title?: string;
-            /** @description The story description */
-            description?: string;
-          };
-        };
-      };
-      responses: {
-        /** @description Story updated */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the story */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the story */
-                title?: string;
-                /** @description The story description */
-                description?: string;
-                /** @description The ID of the epic the story belongs to */
-                epic_id?: components["schemas"]["EpicId"];
-                /** @description The ID of the user who owns the story */
-                owner_id?: components["schemas"]["UserId"];
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was created
-                 */
-                created_at?: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time when the story was last updated
-                 */
-                updated_at?: string;
-              };
-            };
-          };
-        };
-        /** @description Invalid input */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    post?: never;
-    /** Delete story by ID */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["StoryId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Story deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description story not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["properties"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/tasks": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a list of tasks */
-    get: {
-      parameters: {
-        query?: {
-          story_id?: components["schemas"]["StoryId"];
-          assignee_id?: components["schemas"]["UserId"];
-          owner_id?: components["schemas"]["UserId"];
-          limit?: components["parameters"]["limit"];
-          offset?: components["parameters"]["offset"];
-          sort?: components["parameters"]["sort"];
-          direction?: components["parameters"]["direction"];
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description A list of tasks */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              data?: components["schemas"]["Task"][];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
-            };
-          };
-        };
-      };
-    };
-    put?: never;
-    /** Create a new task */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
+        Task: {
+            /** @description The unique identifier for the task */
+            id?: components["schemas"]["ChatId"];
             /** @description The title of the task */
             title: string;
             /** @description The task description */
             description?: string;
-            /** @description The story ID the task belongs to */
+            /** @description The ID of the story the task belongs to */
             story_id?: components["schemas"]["StoryId"];
-            /** @description The user ID the task is assigned to */
+            /** @description The ID of the user assigned to the task */
             assignee_id?: components["schemas"]["UserId"];
             /** @description The estimated effort for the task */
             estimation?: number;
             /** @description The status of the task */
             status: string;
-          };
         };
-      };
-      responses: {
-        /** @description Task created */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the task */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the task */
-                title?: string;
-                /** @description The task description */
-                description?: string;
-                /** @description The ID of the story the task belongs to */
-                story_id?: components["schemas"]["StoryId"];
-                /** @description The ID of the user assigned to the task */
-                assignee_id?: components["schemas"]["UserId"];
-                /** @description The estimated effort for the task */
-                estimation?: number;
-                /** @description The status of the task */
-                status?: string;
-              };
-            };
-          };
+        User: {
+            allows_write_to_pm: boolean;
+            first_name: string;
+            /** @description The ID of the project owner */
+            id: components["schemas"]["UserId"];
+            language_code: string;
+            last_name: string;
+            photo_url: string;
+            username: string;
         };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/tasks/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a task by ID */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["TaskId"];
+        AppData: {
+            auth_date: string;
+            chat_instance: number;
+            chat_type: string;
+            hash: string;
+            signature: string;
+            user: components["schemas"]["User"];
         };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Task details */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the task */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the task */
-                title?: string;
-                /** @description The task description */
-                description?: string;
-                /** @description The ID of the story the task belongs to */
-                story_id?: components["schemas"]["StoryId"];
-                /** @description The ID of the user assigned to the task */
-                assignee_id?: components["schemas"]["UserId"];
-                /** @description The estimated effort for the task */
-                estimation?: number;
-                /** @description The status of the task */
-                status?: string;
-              };
-            };
-          };
+        FullProject: WithRequired<components["schemas"]["Project"], "id" | "title" | "created_at" | "chat_id" | "owner_id" | "description"> & {
+            epics: components["schemas"]["FullEpic"][];
         };
-        /** @description Task not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
+        FullEpic: WithRequired<components["schemas"]["Epic"], "id" | "title" | "description" | "project_id" | "created_at" | "updated_at" | "owner_id"> & {
+            stories: components["schemas"]["FullStory"][];
         };
-      };
-    };
-    /** Update task by ID */
-    put: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["TaskId"];
+        FullStory: WithRequired<components["schemas"]["Story"], "id" | "title" | "description" | "owner_id" | "epic_id" | "created_at" | "updated_at"> & {
+            tasks: components["schemas"]["FullTask"][];
         };
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
+        FullTask: {
+            /** @description The unique identifier for the task */
+            id: components["schemas"]["ChatId"];
             /** @description The title of the task */
-            title?: string;
+            title: string;
             /** @description The task description */
-            description?: string;
-            /** @description The user ID the task is assigned to */
-            assignee_id?: components["schemas"]["UserId"];
+            description: string;
+            /** @description The ID of the story the task belongs to */
+            story_id: components["schemas"]["StoryId"];
+            /** @description The ID of the user assigned to the task */
+            assignee_id: components["schemas"]["UserId"];
             /** @description The estimated effort for the task */
-            estimation?: number;
+            estimation: number;
             /** @description The status of the task */
-            status?: string;
-          };
+            status: string;
         };
-      };
-      responses: {
-        /** @description Task updated */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The unique identifier for the task */
-                id?: components["schemas"]["ChatId"];
-                /** @description The title of the task */
-                title?: string;
-                /** @description The task description */
-                description?: string;
-                /** @description The ID of the story the task belongs to */
-                story_id?: components["schemas"]["StoryId"];
-                /** @description The ID of the user assigned to the task */
-                assignee_id?: components["schemas"]["UserId"];
-                /** @description The estimated effort for the task */
-                estimation?: number;
-                /** @description The status of the task */
-                status?: string;
-              };
-            };
-          };
+        Template: {
+            id: components["schemas"]["TemplateId"];
+            title: string;
+            description: string;
+            chat_id: components["schemas"]["ChatId"];
+            /** Format: date-time */
+            created_at?: string;
+            template: string;
         };
-      };
+        /** @description The unique identifier of Template */
+        TemplateId: number;
+        properties: unknown;
     };
-    post?: never;
-    /** Delete a task by ID */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          id: components["schemas"]["TaskId"];
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Task deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Task not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/taskwatchers": {
+    responses: never;
     parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+        limit: number;
+        offset: number;
+        sort: string;
+        direction: components["schemas"]["SortDirection"];
     };
-    get?: never;
-    put?: never;
-    /** Add a task watcher */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** @description The ID of the task to watch */
-            task_id: components["schemas"]["TaskId"];
-            /** @description The ID of the user who will be watching the task */
-            userId: components["schemas"]["UserId"];
-          };
-        };
-      };
-      responses: {
-        /** @description Task watcher add */
-        201: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Task watcher not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    /** Remove a task watcher */
-    delete: {
-      parameters: {
-        query?: {
-          task_id?: components["schemas"]["TaskId"];
-          userId?: components["schemas"]["UserId"];
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Task watcher deleted */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-        /** @description Task watcher not found */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/login": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Login user with miniapp data */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            params: string;
-          };
-        };
-      };
-      responses: {
-        /** @description User logined */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"] & {
-              data?: {
-                /** @description The token for the project */
-                token: string;
-                user: {
-                  allows_write_to_pm: boolean;
-                  first_name: string;
-                  /** @description The ID of the project owner */
-                  id: components["schemas"]["UserId"];
-                  language_code: string;
-                  last_name: string;
-                  photo_url: string;
-                  username: string;
-                };
-                /** @description The ID of the chat the user opened the app in */
-                chat_id: components["schemas"]["ChatId"];
-              };
-            };
-          };
-        };
-        /** @description Bad request */
-        400: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/logout": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    /** Logout user */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: {
-        content: {
-          "*/*"?: never;
-        };
-      };
-      responses: {
-        /** @description User loged out */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": components["schemas"]["GenericResponse"];
-          };
-        };
-      };
-    };
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/users": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get a list of users in current chat */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description A list of users successfully returned */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              data?: components["schemas"]["User"][];
-              statusCode?: number;
-              statusMessage?: string;
-              message?: string | null;
-            };
-          };
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-}
-export type webhooks = Record<string, never>;
-export interface components {
-  schemas: {
-    /** @description The unique identifier for the project */
-    ProjectId: number;
-    /** @description The unique identifier for the User */
-    UserId: number;
-    /** @description The unique identifier for the chat */
-    ChatId: number;
-    /** @description The unique identifier for the epic */
-    EpicId: number;
-    /** @description The unique identifier for the story */
-    StoryId: number;
-    /** @description The unique identifier for the task */
-    TaskId: number;
-    /** @enum {string} */
-    SortDirection: "asc" | "desc";
-    GenericResponse: {
-      statusCode?: number;
-      statusMessage?: string;
-      message?: string | null;
-    };
-    GenericListRequest: {
-      limit?: unknown;
-      offset?: unknown;
-    };
-    GenericSortRequest: {
-      sort?: unknown;
-      direction?: unknown;
-    };
-    Project: {
-      /** @description The unique identifier for the project */
-      id?: components["schemas"]["ProjectId"];
-      /** @description The title of the project */
-      title: string;
-      /** @description The project description */
-      description?: string;
-      /** @description The ID of the project owner */
-      owner_id?: components["schemas"]["UserId"];
-      /** @description The ID of the chat the project belongs to */
-      chat_id: components["schemas"]["ChatId"];
-      /** @description The date and time the project was created */
-      created_at?: string;
-    };
-    Epic: {
-      /** @description The unique identifier for the epic */
-      id: components["schemas"]["EpicId"];
-      /** @description The title of the epic */
-      title: string;
-      /** @description The epic description */
-      description?: string;
-      /** @description The ID of the user who owns the epic */
-      owner_id?: components["schemas"]["UserId"];
-      /** @description The ID of the project the epic belongs to */
-      project_id: components["schemas"]["ProjectId"];
-      /**
-       * Format: date-time
-       * @description The date and time when the epic was created
-       */
-      created_at: string;
-      /**
-       * Format: date-time
-       * @description The date and time when the epic was last updated
-       */
-      updated_at: string;
-    };
-    Story: {
-      /** @description The unique identifier for the story */
-      id: components["schemas"]["ChatId"];
-      /** @description The title of the story */
-      title: string;
-      /** @description The story description */
-      description?: string;
-      /** @description The ID of the epic the story belongs to */
-      epic_id?: components["schemas"]["EpicId"];
-      /** @description The ID of the user who owns the story */
-      owner_id: components["schemas"]["UserId"];
-      /**
-       * Format: date-time
-       * @description The date and time when the story was created
-       */
-      created_at: string;
-      /**
-       * Format: date-time
-       * @description The date and time when the story was last updated
-       */
-      updated_at: string;
-    };
-    Task: {
-      /** @description The unique identifier for the task */
-      id?: components["schemas"]["ChatId"];
-      /** @description The title of the task */
-      title: string;
-      /** @description The task description */
-      description?: string;
-      /** @description The ID of the story the task belongs to */
-      story_id?: components["schemas"]["StoryId"];
-      /** @description The ID of the user assigned to the task */
-      assignee_id?: components["schemas"]["UserId"];
-      /** @description The estimated effort for the task */
-      estimation?: number;
-      /** @description The status of the task */
-      status: string;
-    };
-    User: {
-      allows_write_to_pm: boolean;
-      first_name: string;
-      /** @description The ID of the project owner */
-      id: components["schemas"]["UserId"];
-      language_code: string;
-      last_name: string;
-      photo_url: string;
-      username: string;
-    };
-    AppData: {
-      auth_date: string;
-      chat_instance: number;
-      chat_type: string;
-      hash: string;
-      signature: string;
-      user: components["schemas"]["User"];
-    };
-    FullProject: WithRequired<
-      components["schemas"]["Project"],
-      "id" | "title" | "created_at" | "chat_id" | "owner_id" | "description"
-    > & {
-      epics: components["schemas"]["FullEpic"][];
-    };
-    FullEpic: WithRequired<
-      components["schemas"]["Epic"],
-      | "id"
-      | "title"
-      | "description"
-      | "project_id"
-      | "created_at"
-      | "updated_at"
-      | "owner_id"
-    > & {
-      stories: components["schemas"]["FullStory"][];
-    };
-    FullStory: WithRequired<
-      components["schemas"]["Story"],
-      | "id"
-      | "title"
-      | "description"
-      | "owner_id"
-      | "epic_id"
-      | "created_at"
-      | "updated_at"
-    > & {
-      tasks: components["schemas"]["FullTask"][];
-    };
-    FullTask: {
-      /** @description The unique identifier for the task */
-      id: components["schemas"]["ChatId"];
-      /** @description The title of the task */
-      title: string;
-      /** @description The task description */
-      description: string;
-      /** @description The ID of the story the task belongs to */
-      story_id: components["schemas"]["StoryId"];
-      /** @description The ID of the user assigned to the task */
-      assignee_id: components["schemas"]["UserId"];
-      /** @description The estimated effort for the task */
-      estimation: number;
-      /** @description The status of the task */
-      status: string;
-    };
-    Template: {
-      id: components["schemas"]["TemplateId"];
-      title: string;
-      description: string;
-      owner_id: components["schemas"]["UserId"];
-      /** Format: date-time */
-      created_at?: string;
-      template: string;
-    };
-    /** @description The unique identifier of Template */
-    TemplateId: number;
-    properties: unknown;
-  };
-  responses: never;
-  parameters: {
-    limit: number;
-    offset: number;
-    sort: string;
-    direction: components["schemas"]["SortDirection"];
-  };
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 type WithRequired<T, K extends keyof T> = T & {
-  [P in K]-?: T[P];
+    [P in K]-?: T[P];
 };
 export type operations = Record<string, never>;

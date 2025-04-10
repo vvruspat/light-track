@@ -1,4 +1,4 @@
-import initTelegramBot from "../../bot/index";
+import initTelegramBot from "../../tg-bot";
 
 export default defineNitroPlugin(() => {
   console.log("Telegram plugin is running...");

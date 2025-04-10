@@ -7,12 +7,12 @@ import type { ProjectTemplateGetResponse } from "@/types/api";
 export default defineEventHandler(
   async (event): Promise<ProjectTemplateGetResponse> => {
     const client = await serverSupabaseClient<Database>(event);
-    const { chatId, ...user } = await getLightTrackSession(event);
+    const { chatId } = await getLightTrackSession(event);
 
     const { data, error } = await client
       .from("templates")
-      .select("id, title, description, owner_id")
-      .eq("owner_id", user.id)
+      .select("id, title, description, chat_id")
+      .eq("chat_id", chatId)
       .order("id", { ascending: false });
 
     if (error) {

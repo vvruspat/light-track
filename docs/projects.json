@@ -236,7 +236,6 @@
                             "title",
                             "created_at",
                             "chat_id",
-                            "owner_id",
                             "description"
                           ]
                         }

@@ -37,7 +37,6 @@ export default defineEventHandler(
       .from("projects")
       .select()
       .filter("chat_id", "eq", chatId)
-      .filter("owner_id", "eq", ownerId)
       .range(offset, limit + offset)
       .order(sort, { ascending: direction === "asc" });
 

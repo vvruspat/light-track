@@ -99,7 +99,7 @@ export default defineEventHandler(
     const newTemplate: Database["public"]["Tables"]["templates"]["Insert"] = {
       title: `Template: ${project.title}`,
       description: `This is a template based on the project: ${project.title}`,
-      owner_id: user.id,
+      chat_id: chatId,
       template: JSON.stringify(template),
     };
 

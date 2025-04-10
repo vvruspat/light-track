@@ -1,6 +1,6 @@
 import initTelegramBot from "./index";
 
-import { config } from 'dotenv';
+import { config } from "dotenv";
 
 config();
 

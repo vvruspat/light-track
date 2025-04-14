@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "build:bot": "tsc tg-bot/bot.ts",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --inspect",
     "dev:https": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert cert/localhost.pem --ssl-key cert/localhost-key.pem",
     "bot:dev": "tsx tg-bot/bot.ts",
     "generate": "nuxt generate",

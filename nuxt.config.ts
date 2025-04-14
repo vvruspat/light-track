@@ -12,6 +12,10 @@ export default defineNuxtConfig({
       botId: "",
     },
   },
+  sourcemap: {
+    server: true,
+    client: true
+  },
   devtools: { enabled: false },
   future: {
     typescriptBundlerResolution: false,

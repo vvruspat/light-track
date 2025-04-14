@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <EpicModal>
-    <EpicForm />
-  </EpicModal>
+  <div>
+    <EpicModal>
+      <EpicForm />
+    </EpicModal>
+  </div>
 </template>

@@ -1,3 +1,5 @@
 <template>
-  <TaskCreateModal />
+  <div>
+    <TaskCreateModal />
+  </div>
 </template>

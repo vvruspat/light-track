@@ -1,5 +1,7 @@
 <template>
-  <EpicModal>
-    <EpicForm />
-  </EpicModal>
+  <div>
+    <EpicModal>
+      <EpicForm />
+    </EpicModal>
+  </div>
 </template>

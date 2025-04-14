@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <ProjectModal>
-    <ProjectForm />
-  </ProjectModal>
+  <div>
+    <ProjectModal>
+      <ProjectForm />
+    </ProjectModal>
+  </div>
 </template>

@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <StoryModal>
-    <StoryForm />
-  </StoryModal>
+  <div>
+    <StoryModal>
+      <StoryForm />
+    </StoryModal>
+  </div>
 </template>

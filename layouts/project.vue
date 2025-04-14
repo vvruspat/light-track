@@ -4,6 +4,7 @@ import ProjectMenu from "@/components/ProjectMenu.vue";
 
 const currentProjectStore = useCurrentProjectStore();
 const errorsStore = useErrorsStore();
+const usersStore = useUsersStore();
 
 const { statistics, currentProject, loadingState } =
   storeToRefs(currentProjectStore);
@@ -13,6 +14,7 @@ const { projectId } = route.params;
 
 try {
   const project = await currentProjectStore.getProjectById(Number(projectId));
+  await usersStore.fetchUsers();
 
   if (project?.epics.length) {
     if (!route.params.epicId) {

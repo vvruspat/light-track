@@ -52,7 +52,9 @@ async function onSubmit(_event: FormSubmitEvent<Schema>) {
 }
 
 const projectUrl = computed(() => {
-  return project.value?.epics[0]?.id ? `/project/${projectId}/epic/${project.value?.epics[0]?.id}` : `/project/${projectId}/epic/create?emptyProject=true`;
+  return project.value?.epics[0]?.id
+    ? `/project/${projectId}/epic/${project.value?.epics[0]?.id}`
+    : `/project/${projectId}/epic/create?emptyProject=true`;
 });
 
 templatesStore.fetchTemplates();
@@ -92,7 +94,7 @@ templatesStore.fetchTemplates();
         <span v-else>Create project</span>
       </UButton>
 
-      <UButton type="button" v-if="projectId" variant="ghost" :to="projectUrl">
+      <UButton v-if="projectId" type="button" variant="ghost" :to="projectUrl">
         Cancel
       </UButton>
       <UButton v-else variant="ghost" to="/dashboard">Cancel</UButton>

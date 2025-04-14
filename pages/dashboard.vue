@@ -19,7 +19,6 @@ await projectsStore.fetchProjects();
 
 <template>
   <div>
-
     <div v-if="loadingState === 'success'">
       <UContainer class="py-4">
         <StackContainer
@@ -36,7 +35,7 @@ await projectsStore.fetchProjects();
             align-items="stretch"
           >
             <UButton
-              v-for="(link) in projectsLinks"
+              v-for="link in projectsLinks"
               :key="link.to"
               :to="link.to"
               color="gray"
@@ -50,7 +49,9 @@ await projectsStore.fetchProjects();
           </StackContainer>
 
           <div>
-            <UButton to="/project/create" variant="outline">Create new project</UButton>
+            <UButton to="/project/create" variant="outline"
+              >Create new project</UButton
+            >
           </div>
         </StackContainer>
 
@@ -91,6 +92,5 @@ await projectsStore.fetchProjects();
     </StackContainer>
 
     <div v-else><USkeleton class="h-4 w-full" /></div>
-
   </div>
 </template>

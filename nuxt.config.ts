@@ -51,7 +51,7 @@ export default defineNuxtConfig({
   vite: {
     server: {
       allowedHosts: [
-        "fca4-77-251-156-81.ngrok-free.app",
+        "8232-77-251-156-81.ngrok-free.app",
         "light-track.vercel.app",
       ],
     },

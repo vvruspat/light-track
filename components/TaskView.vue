@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import calculateNumberOfLines from "@/utils/getLinesNumber";
 import { statuses } from "@/constants/statuses";
+import calculateNumberOfLines from "@/utils/getLinesNumber";
 
 const route = useRoute();
 const taskId = Number(route.params.taskId);

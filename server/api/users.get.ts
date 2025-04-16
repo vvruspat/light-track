@@ -1,8 +1,8 @@
-import { defineEventHandler, createError } from "h3";
-import { serverSupabaseClient } from "#supabase/server";
-import type { Database } from "@/types/database.types";
 import type { UsersGetResponse } from "@/types/api";
+import type { Database } from "@/types/database.types";
+import { createError, defineEventHandler } from "h3";
 import getLightTrackSession from "~/utils/getLightTrackSession";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event): Promise<UsersGetResponse> => {
   const client = await serverSupabaseClient<Database>(event);

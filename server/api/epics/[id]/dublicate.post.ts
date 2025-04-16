@@ -1,8 +1,8 @@
-import { defineEventHandler, createError } from "h3";
-import { serverSupabaseClient } from "#supabase/server";
+import type { EpicDublicatePostResponse } from "@/types/api";
 import type { Database } from "@/types/database.types";
 import getLightTrackSession from "@/utils/getLightTrackSession";
-import type { EpicDublicatePostResponse } from "@/types/api";
+import { createError, defineEventHandler } from "h3";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(
   async (event): Promise<EpicDublicatePostResponse> => {

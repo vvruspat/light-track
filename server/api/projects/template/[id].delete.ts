@@ -1,7 +1,7 @@
-import { defineEventHandler, getRouterParam, createError } from "h3";
-import { serverSupabaseClient } from "#supabase/server";
-import type { Database } from "@/types/database.types";
 import type { ProjectTemplateDeleteResponse } from "@/types/api";
+import type { Database } from "@/types/database.types";
+import { createError, defineEventHandler, getRouterParam } from "h3";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(
   async (event): Promise<ProjectTemplateDeleteResponse> => {

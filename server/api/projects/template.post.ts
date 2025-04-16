@@ -1,13 +1,13 @@
-import { defineEventHandler, readValidatedBody, createError } from "h3";
-import { serverSupabaseClient } from "#supabase/server";
-import type { Database } from "@/types/database.types";
-import Ajv from "ajv";
 import { paths } from "@/public/_openapi.json";
-import getLightTrackSession from "@/utils/getLightTrackSession";
 import type {
   ProjectTemplatePostRequest,
   ProjectTemplatePostResponse,
 } from "@/types/api";
+import type { Database } from "@/types/database.types";
+import getLightTrackSession from "@/utils/getLightTrackSession";
+import Ajv from "ajv";
+import { createError, defineEventHandler, readValidatedBody } from "h3";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(
   async (event): Promise<ProjectTemplatePostResponse> => {
@@ -16,7 +16,7 @@ export default defineEventHandler(
       (b) => {
         const ajv = new Ajv();
         const schema =
-          paths["/projects/template"]["post"]["requestBody"]["content"][
+          paths["/projects/template"].post.requestBody.content[
             "application/json"
           ].schema;
         const valid = ajv.validate(schema, b);
@@ -27,9 +27,8 @@ export default defineEventHandler(
             statusMessage: "Invalid request body",
             message: ajv.errorsText(),
           });
-        } else {
-          return true;
         }
+        return true;
       },
     );
     const client = await serverSupabaseClient<Database>(event);

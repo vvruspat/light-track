@@ -1,6 +1,6 @@
-import { defineStore } from "pinia";
-import type { TUser } from "@/types/entities";
 import type { LoginPostResponse } from "@/types/api";
+import type { TUser } from "@/types/entities";
+import { defineStore } from "pinia";
 
 export type TAppData = {
   auth_date: string;

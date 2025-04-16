@@ -1,5 +1,5 @@
-import getLightTrackSession from "@/utils/getLightTrackSession";
 import { NON_PROTECTED_API } from "@/constants/non-protected-api";
+import getLightTrackSession from "@/utils/getLightTrackSession";
 
 export default defineEventHandler(async (event) => {
   if (import.meta.server) {
@@ -22,10 +22,9 @@ export default defineEventHandler(async (event) => {
           statusMessage: "Unauthorized",
           message: "Authentication is required",
         };
-      } else {
-        event.context.user = user;
-        event.context.chatId = chatId;
       }
+      event.context.user = user;
+      event.context.chatId = chatId;
     } catch (e) {
       return {
         statusCode: 401,

@@ -1,16 +1,15 @@
-import { defineEventHandler, readValidatedBody, createError } from "h3";
-import { serverSupabaseClient } from "#supabase/server";
-import type { Database } from "@/types/database.types";
-import type { EpicPostRequest, EpicPostResponse } from "@/types/api";
 import { paths } from "@/public/_openapi.json";
+import type { EpicPostRequest, EpicPostResponse } from "@/types/api";
+import type { Database } from "@/types/database.types";
 import Ajv from "ajv";
+import { createError, defineEventHandler, readValidatedBody } from "h3";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event): Promise<EpicPostResponse> => {
   const body = await readValidatedBody<EpicPostRequest>(event, (b) => {
     const ajv = new Ajv();
     const schema =
-      paths["/epics"]["post"]["requestBody"]["content"]["application/json"]
-        .schema;
+      paths["/epics"].post.requestBody.content["application/json"].schema;
     const valid = ajv.validate(schema, b);
 
     if (!valid) {
@@ -19,9 +18,8 @@ export default defineEventHandler(async (event): Promise<EpicPostResponse> => {
         statusMessage: "Invalid request body",
         message: ajv.errorsText(),
       });
-    } else {
-      return true;
     }
+    return true;
   });
   const client = await serverSupabaseClient<Database>(event);
   const user = event.context.user;

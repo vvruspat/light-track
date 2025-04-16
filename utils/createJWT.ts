@@ -1,5 +1,5 @@
-import { SignJWT } from "jose";
 import type { TUser } from "@/types/entities";
+import { SignJWT } from "jose";
 
 const createToken = async (user: TUser, chatId: number) => {
   const { jwtSecret } = useRuntimeConfig();

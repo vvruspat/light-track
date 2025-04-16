@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import type { TEpic } from "@/types/entities";
+import { useErrorsStore } from "@/stores/errors";
 import type { EpicPostResponse, EpicPutResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
-import { useErrorsStore } from "@/stores/errors";
+import type { TEpic } from "@/types/entities";
+import { defineStore } from "pinia";
 
 type EpicsState = {
   loadingState: TLoadingState;
@@ -69,9 +69,9 @@ export const useEpicsStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         if (error) {
@@ -134,9 +134,9 @@ export const useEpicsStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         this.loadingState = "error";
@@ -167,9 +167,9 @@ export const useEpicsStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         this.loadingState = "error";

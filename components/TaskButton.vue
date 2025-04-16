@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { UButton } from "#components";
 import type { TTask } from "@/types/entities";
+import type { UButton } from "#components";
 
 type TaskButtonProps = {
   task: TTask;

@@ -1,4 +1,5 @@
-import { defineStore } from "pinia";
+import type { ProjectGetByIdResponse } from "@/types/api";
+import type { TLoadingState } from "@/types/common";
 import type {
   TEpic,
   TFullEpic,
@@ -6,11 +7,11 @@ import type {
   TFullStory,
   TProject,
   TProjectStatistics,
+  TStatistics,
   TStory,
   TTask,
 } from "@/types/entities";
-import type { ProjectGetByIdResponse } from "@/types/api";
-import type { TLoadingState } from "@/types/common";
+import { defineStore } from "pinia";
 
 type ProjectState = {
   currentProject: TFullProject | null;
@@ -116,10 +117,9 @@ export const useCurrentProjectStore = defineStore<
           todo: filterProjectTasks(state.currentProject, "todo"),
           rejected: filterProjectTasks(state.currentProject, "rejected"),
         },
-        epics: state.currentProject.epics.reduce(
-          (acc, epic) => ({
-            ...acc,
-            [epic.id]: {
+        epics: state.currentProject.epics.reduce<Record<number, TStatistics>>(
+          (acc, epic) => {
+            const newEpicStat: TStatistics = {
               total: epic.stories.reduce(
                 (acc, story) => acc + story.tasks.length,
                 0,
@@ -128,26 +128,30 @@ export const useCurrentProjectStore = defineStore<
               progress: filterEpicTasks(epic, "progress"),
               todo: filterEpicTasks(epic, "todo"),
               rejected: filterEpicTasks(epic, "rejected"),
-            },
-          }),
+            };
+
+            acc[epic.id] = newEpicStat;
+
+            return acc;
+          },
           {},
         ),
 
         stories: state.currentProject.epics.reduce(
           (acc, epic) =>
-            epic.stories.reduce(
-              (acc, story) => ({
-                ...acc,
-                [story.id]: {
-                  total: story.tasks.length,
-                  done: filterStoryTasks(story, "done"),
-                  progress: filterStoryTasks(story, "progress"),
-                  todo: filterStoryTasks(story, "todo"),
-                  rejected: filterStoryTasks(story, "rejected"),
-                },
-              }),
-              {},
-            ),
+            epic.stories.reduce<Record<number, TStatistics>>((acc, story) => {
+              const newStoryStat: TStatistics = {
+                total: story.tasks.length,
+                done: filterStoryTasks(story, "done"),
+                progress: filterStoryTasks(story, "progress"),
+                todo: filterStoryTasks(story, "todo"),
+                rejected: filterStoryTasks(story, "rejected"),
+              };
+
+              acc[story.id] = newStoryStat;
+
+              return acc;
+            }, {}),
           {},
         ),
       };

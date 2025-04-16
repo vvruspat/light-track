@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import type { TUser } from "@/types/entities";
+import { useErrorsStore } from "@/stores/errors";
 import type { UsersGetResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
-import { useErrorsStore } from "@/stores/errors";
+import type { TUser } from "@/types/entities";
+import { defineStore } from "pinia";
 
 type UsersState = {
   loadingState: TLoadingState;

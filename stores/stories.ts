@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import type { TStory } from "@/types/entities";
+import { useErrorsStore } from "@/stores/errors";
 import type { StoryPostResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
-import { useErrorsStore } from "@/stores/errors";
+import type { TStory } from "@/types/entities";
+import { defineStore } from "pinia";
 
 type StoriesState = {
   loadingState: TLoadingState;
@@ -68,9 +68,9 @@ export const useStoriesStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         if (error) {
@@ -133,9 +133,9 @@ export const useStoriesStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         this.loadingState = "error";

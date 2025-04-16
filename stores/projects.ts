@@ -1,12 +1,12 @@
-import { defineStore } from "pinia";
-import type { TProject, TTemplate } from "@/types/entities";
+import { useErrorsStore } from "@/stores/errors";
 import type {
   ProjectGetResponse,
   ProjectPostResponse,
   ProjectTemplatePostResponse,
 } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
-import { useErrorsStore } from "@/stores/errors";
+import type { TProject, TTemplate } from "@/types/entities";
+import { defineStore } from "pinia";
 import { useAuthStore } from "~/stores/auth";
 
 type ProjectsState = {
@@ -71,7 +71,7 @@ export const useProjectsStore = defineStore<
 
       try {
         const data = await $api<ProjectTemplatePostResponse>(
-          `/api/projects/template`,
+          "/api/projects/template",
           {
             method: "POST",
             body: JSON.stringify({

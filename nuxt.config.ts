@@ -25,7 +25,6 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/supabase",
     "@nuxtjs/tailwindcss",
-    "@nuxt/eslint",
     "@pinia/nuxt",
   ],
   nitro: {

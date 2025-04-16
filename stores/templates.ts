@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import type { TTemplate } from "@/types/entities";
-import type { TLoadingState } from "@/types/common";
 import { useErrorsStore } from "@/stores/errors";
+import type { TLoadingState } from "@/types/common";
+import type { TTemplate } from "@/types/entities";
+import { defineStore } from "pinia";
 import type {
   ProjectTemplateGetResponse,
   ProjectTemplatePostResponse,
@@ -103,9 +103,9 @@ export const useTemplatesStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         this.loadingState = "error";

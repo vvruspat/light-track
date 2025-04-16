@@ -1,7 +1,7 @@
+import type { StoryGetByIdResponse } from "@/types/api";
+import type { Database } from "@/types/database.types";
 import { defineEventHandler, getRouterParam } from "h3";
 import { serverSupabaseClient } from "#supabase/server";
-import type { Database } from "@/types/database.types";
-import type { StoryGetByIdResponse } from "@/types/api";
 
 export default defineEventHandler(
   async (event): Promise<StoryGetByIdResponse> => {

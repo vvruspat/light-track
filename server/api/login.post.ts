@@ -1,8 +1,8 @@
-import { validate3rd } from "@telegram-apps/init-data-node";
 import type { LoginPostRequest, LoginPostResponse } from "@/types/api";
-import { serverSupabaseClient } from "#supabase/server";
 import type { Database } from "@/types/database.types";
 import createJWT from "@/utils/createJWT";
+import { validate3rd } from "@telegram-apps/init-data-node";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
   const { params: data } = await readBody<LoginPostRequest>(event);
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
         errorMessage = "The initialization data has expired.";
         break;
       default:
-        errorMessage = "An unknown error occurred:" + error.message;
+        errorMessage = `An unknown error occurred:${error.message}`;
     }
 
     throw createError({
@@ -127,13 +127,12 @@ export default defineEventHandler(async (event): Promise<LoginPostResponse> => {
           chat_id: chatId,
         },
       };
-    } else {
-      return {
-        statusCode: 404,
-        statusMessage: "Failed to login",
-        message: "User not found",
-      };
     }
+    return {
+      statusCode: 404,
+      statusMessage: "Failed to login",
+      message: "User not found",
+    };
   } catch (e) {
     throw createError({
       statusCode: 500,

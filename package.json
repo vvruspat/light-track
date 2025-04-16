@@ -16,14 +16,12 @@
     "gen:types": "openapi-typescript docs/index.json --output types/api.types.ts",
     "gen:dbtypes": "supabase gen types --lang=typescript --project-id ehykczftxtewmvlipmli > types/database.types.ts",
     "gen:all": "npm run gen:openapi && npm run cleanup:openapi && npm run gen:types && npm run gen:dbtypes",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
-    "lint:eslint": "eslint .",
-    "lint:prettier": "prettier . --check",
-    "lintfix": "eslint . --fix && prettier --write --list-different .",
+    "lint": "npm run lint:format && npm run lint:check",
+    "lint:check": "biome check .",
+    "lint:format": "biome format . --write",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.7.5",
     "@nuxt/ui": "^2.21.0",
     "@nuxtjs/supabase": "^1.5.0",
     "@nuxtjs/tailwindcss": "^6.13.1",
@@ -38,13 +36,11 @@
     "bcryptjs": "^2.4.3",
     "crypto-browserify": "^3.12.1",
     "dotenv": "^16.4.7",
-    "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "jose": "^6.0.10",
     "nuxt": "^3.16.1",
     "pinia": "^2.3.1",
-    "prettier": "^3.4.2",
     "stream-browserify": "^3.0.0",
     "supabase": "^2.20.12",
     "telegraf": "^4.16.3",
@@ -55,6 +51,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@iconify-json/line-md": "^1.2.5",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/svg-spinners": "^1.2.2",
@@ -72,8 +69,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,vue}": [
-      "lint"
-    ]
+    "*.{js,ts,vue}": ["lint"]
   }
 }

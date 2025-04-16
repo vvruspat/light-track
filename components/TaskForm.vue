@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { statuses } from "@/constants/statuses";
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { statuses } from "@/constants/statuses";
 
 const { taskId, storyId, epicId, projectId } = useRoute().params;
 

@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-type RemoveDialogEmits = {
-  (e: "close", isConfirmed: boolean): void;
-};
+type RemoveDialogEmits = (e: "close", isConfirmed: boolean) => void;
 
 type RemoveDialogProps = {
   title?: string;

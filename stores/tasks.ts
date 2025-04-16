@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import type { TTask } from "@/types/entities";
+import { useErrorsStore } from "@/stores/errors";
 import type { TaskPostResponse } from "@/types/api";
 import type { TLoadingState } from "@/types/common";
-import { useErrorsStore } from "@/stores/errors";
+import type { TTask } from "@/types/entities";
+import { defineStore } from "pinia";
 
 type TasksState = {
   loadingState: TLoadingState;
@@ -95,9 +95,9 @@ export const useTasksStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         if (error) {
@@ -166,9 +166,9 @@ export const useTasksStore = defineStore<
           return null;
         }
 
-        if (data.data) {
+        if (data.data?.id) {
           this.loadingState = "success";
-          return data.data.id!;
+          return data.data.id;
         }
       } catch (error) {
         this.loadingState = "error";

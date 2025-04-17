@@ -70,8 +70,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,vue}": [
-      "lint"
-    ]
+    "*.{js,ts,vue}": ["lint"]
   }
 }

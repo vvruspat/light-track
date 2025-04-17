@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import "core-js/actual";
+</script>
+
 <template>
   <NuxtLoadingIndicator />
   <NuxtErrorBoundary>

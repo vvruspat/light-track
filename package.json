@@ -26,7 +26,7 @@
     "@nuxtjs/supabase": "^1.5.0",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@pinia/nuxt": "^0.9.0",
-    "@scalar/nuxt": "^0.2.183",
+    "@scalar/nuxt": "^0.3.23",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.1",
     "@telegram-apps/init-data-node": "^2.0.2",

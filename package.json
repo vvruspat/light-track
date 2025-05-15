@@ -30,7 +30,7 @@
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.1",
     "@telegram-apps/init-data-node": "^2.0.2",
-    "@telegram-apps/sdk": "^3.3.0",
+    "@telegram-apps/sdk": "^3.7.1",
     "@telegram-apps/sdk-vue": "^2.0.19",
     "ajv": "^8.17.1",
     "bcryptjs": "^2.4.3",

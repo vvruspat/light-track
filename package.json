@@ -37,7 +37,7 @@
     "core-js": "^3.41.0",
     "crypto-browserify": "^3.12.1",
     "dotenv": "^16.4.7",
-    "eslint-config-prettier": "^10.0.1",
+    "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.3",
     "jose": "^6.0.10",
     "nuxt": "^3.16.1",

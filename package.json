@@ -28,7 +28,7 @@
     "@pinia/nuxt": "^0.9.0",
     "@scalar/nuxt": "^0.3.23",
     "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.50.0",
+    "@supabase/supabase-js": "^2.89.0",
     "@telegram-apps/init-data-node": "^2.0.7",
     "@telegram-apps/sdk": "^3.7.1",
     "@telegram-apps/sdk-vue": "^2.0.23",
